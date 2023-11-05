@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import {
@@ -37,9 +36,9 @@ type UserNavigationItem = {
 };
 
 const navigation: NavigationItem[] = [
-  { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
+  { name: "ホーム", href: "/", icon: HomeIcon, current: true },
   { name: "Team", href: "#", icon: UsersIcon, current: false },
-  { name: "Projects", href: "#", icon: FolderIcon, current: false },
+  { name: "業者", href: "/contractors", icon: FolderIcon, current: false },
   { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
   { name: "Documents", href: "#", icon: DocumentDuplicateIcon, current: false },
   { name: "Reports", href: "#", icon: ChartPieIcon, current: false },
