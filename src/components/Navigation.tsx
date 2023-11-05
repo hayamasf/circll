@@ -2,12 +2,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 
 import {
-  CalendarIcon,
-  ChartPieIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
@@ -25,20 +19,6 @@ type TeamItem = {
   initial: string;
   current: boolean;
 };
-
-const navigation: NavigationItem[] = [
-  { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-  { name: "Team", href: "#", icon: UsersIcon, current: false },
-  { name: "Projects", href: "#", icon: FolderIcon, current: false },
-  { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
-  { name: "Documents", href: "#", icon: DocumentDuplicateIcon, current: false },
-  { name: "Reports", href: "#", icon: ChartPieIcon, current: false },
-];
-const teams: TeamItem[] = [
-  { id: 1, name: "Heroicons", href: "#", initial: "H", current: false },
-  { id: 2, name: "Tailwind Labs", href: "#", initial: "T", current: false },
-  { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
-];
 
 function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
@@ -138,8 +118,8 @@ const Navigation: React.FC<NavigationProps> = ({
                                 <item.icon
                                   className={classNames(
                                     item.current
-                                      ? "text-indigo-600"
-                                      : "text-gray-400 group-hover:text-indigo-600",
+                                      ? "text-emerald-600"
+                                      : "text-gray-400 group-hover:text-emerald-600",
                                     "h-6 w-6 shrink-0",
                                   )}
                                   aria-hidden="true"
@@ -198,7 +178,7 @@ const Navigation: React.FC<NavigationProps> = ({
           <div className="flex h-16 shrink-0 items-center">
             <img
               className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+              src="https://tailwindui.com/img/logos/mark.svg?color=emerald&shade=200"
               alt="Your Company"
             />
           </div>
@@ -214,7 +194,7 @@ const Navigation: React.FC<NavigationProps> = ({
                           item.current
                             ? "bg-gray-50 text-indigo-600"
                             : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
-                          "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
+                          "group flex gap-x-3 rounded-md p-2 text-sm leading-6",
                         )}
                       >
                         <item.icon
@@ -243,16 +223,16 @@ const Navigation: React.FC<NavigationProps> = ({
                         href={team.href}
                         className={classNames(
                           team.current
-                            ? "bg-gray-50 text-indigo-600"
-                            : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
-                          "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
+                            ? "bg-gray-50 text-emerald-600"
+                            : "text-gray-700 hover:text-emerald-600 hover:bg-gray-50",
+                          "group flex gap-x-3 rounded-md p-2 text-sm leading-6",
                         )}
                       >
                         <span
                           className={classNames(
                             team.current
-                              ? "text-indigo-600 border-indigo-600"
-                              : "text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600",
+                              ? "text-emerald-600 border-emerald-600"
+                              : "text-gray-400 border-gray-200 group-hover:border-emerald-600 group-hover:text-emerald-600",
                             "flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white",
                           )}
                         >
