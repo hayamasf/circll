@@ -12,28 +12,12 @@ import {
   UsersIcon,
 } from "@heroicons/react/24/outline";
 
+import { NavigationItem } from "@/types/types";
+import { TeamItem } from "@/types/types";
+import { UserNavigationItem } from "@/types/types";
+
 import Navigation from "@/components/Navigation";
 import TopBar from "@/components/TopBar";
-
-type NavigationItem = {
-  name: string;
-  href: string;
-  icon: React.ElementType;
-  current: boolean;
-};
-
-type TeamItem = {
-  id: number;
-  name: string;
-  href: string;
-  initial: string;
-  current: boolean;
-};
-
-type UserNavigationItem = {
-  name: string;
-  href: string;
-};
 
 const navigation: NavigationItem[] = [
   { name: "ホーム", href: "/", icon: HomeIcon, current: true },

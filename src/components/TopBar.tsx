@@ -7,15 +7,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { Menu, Transition } from "@headlessui/react";
 
-type UserNavigationItem = {
-  name: string;
-  href: string;
-};
-
-type TopBarProps = {
-  userNavigation: UserNavigationItem[];
-  setSidebarOpen: (open: boolean) => void;
-};
+import { TopBarProps } from "@/types/types";
 
 function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
