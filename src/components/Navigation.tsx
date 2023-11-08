@@ -3,31 +3,11 @@ import React, { Fragment } from "react";
 
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-type NavigationItem = {
-  name: string;
-  href: string;
-  icon: React.ElementType;
-  current: boolean;
-};
-
-type TeamItem = {
-  id: number;
-  name: string;
-  href: string;
-  initial: string;
-  current: boolean;
-};
+import { NavigationProps } from "@/types/types";
 
 function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
 }
-
-type NavigationProps = {
-  navigation: NavigationItem[];
-  teams: TeamItem[];
-  sidebarOpen: boolean;
-  setSidebarOpen: (open: boolean) => void;
-};
 
 const Navigation: React.FC<NavigationProps> = ({
   navigation,
