@@ -1,10 +1,3 @@
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "circll - サークル",
-  description: "circll サークル アプリケーション",
-};
-
 export default function Home() {
   return (
     <div>

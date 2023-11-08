@@ -1,10 +1,3 @@
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "circll - サークル | 業者",
-  description: "circll サークル アプリケーション",
-};
-
 export default function Contractors() {
   return (
     <div>
