@@ -4,6 +4,7 @@ import React, { Fragment } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import { NavigationProps } from "@/types/types";
+import Link from "next/link";
 
 function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
@@ -84,8 +85,9 @@ const Navigation: React.FC<NavigationProps> = ({
                         <ul role="list" className="-mx-2 space-y-1">
                           {navigation.map((item) => (
                             <li key={item.name}>
-                              <a
+                              <Link
                                 href={item.href}
+                                onClick={() => setSidebarOpen(false)}
                                 className={classNames(
                                   item.current
                                     ? "bg-gray-50 text-indigo-600"
@@ -103,7 +105,7 @@ const Navigation: React.FC<NavigationProps> = ({
                                   aria-hidden="true"
                                 />
                                 {item.name}
-                              </a>
+                              </Link>
                             </li>
                           ))}
                         </ul>
@@ -115,8 +117,9 @@ const Navigation: React.FC<NavigationProps> = ({
                         <ul role="list" className="-mx-2 mt-2 space-y-1">
                           {teams.map((team) => (
                             <li key={team.name}>
-                              <a
+                              <Link
                                 href={team.href}
+                                onClick={() => setSidebarOpen(false)}
                                 className={classNames(
                                   team.current
                                     ? "bg-gray-50 text-indigo-600"
@@ -135,7 +138,7 @@ const Navigation: React.FC<NavigationProps> = ({
                                   {team.initial}
                                 </span>
                                 <span className="truncate">{team.name}</span>
-                              </a>
+                              </Link>
                             </li>
                           ))}
                         </ul>
