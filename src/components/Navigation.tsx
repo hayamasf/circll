@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import XMarkIcon from "@/app/icons/XMarkIcon";
 
 import { NavigationProps } from "@/types/types";
 import Link from "next/link";
