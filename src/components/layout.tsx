@@ -33,8 +33,8 @@ const teams: TeamItem[] = [
 ];
 
 const userNavigation: UserNavigationItem[] = [
-  { name: "Your profile", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "プロフィール", href: "#" },
+  { name: "ログアウト", href: "#" },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
