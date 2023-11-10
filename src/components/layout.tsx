@@ -34,7 +34,7 @@ const teams: TeamItem[] = [
 
 const userNavigation: UserNavigationItem[] = [
   { name: "プロフィール", href: "#" },
-  { name: "ログアウト", href: "#" },
+  { name: "ログアウト", href: "/api/auth/logout" },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
