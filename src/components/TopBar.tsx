@@ -1,6 +1,5 @@
 import React from "react";
 import { Fragment } from "react";
-import { BellIcon } from "@heroicons/react/24/outline";
 
 import {
   ChevronDownIcon,
@@ -9,6 +8,7 @@ import {
 import { Menu, Transition } from "@headlessui/react";
 
 import Bars3Icon from "@/app/icons/Bars3Icon";
+import BellIcon from "@/app/icons/BellIcon";
 
 import { TopBarProps } from "@/types/types";
 
@@ -55,7 +55,7 @@ const TopBar: React.FC<TopBarProps> = ({ userNavigation, setSidebarOpen }) => {
               className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500"
             >
               <span className="sr-only">View notifications</span>
-              <BellIcon className="h-6 w-6" aria-hidden="true" />
+              <BellIcon className="h-6 w-6" ariaHidden={true} />
             </button>
 
             {/* Separator */}
