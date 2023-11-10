@@ -1,11 +1,11 @@
 import React from "react";
 import { Fragment } from "react";
 
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Menu, Transition } from "@headlessui/react";
 
 import Bars3Icon from "@/app/icons/Bars3Icon";
 import BellIcon from "@/app/icons/BellIcon";
+import ChevronDownIcon from "@/app/icons/ChevronDownIcon";
 import MagnifyingGlassIcon from "@/app/icons/MagnifyingGlassIcon";
 
 import { TopBarProps } from "@/types/types";
@@ -80,7 +80,7 @@ const TopBar: React.FC<TopBarProps> = ({ userNavigation, setSidebarOpen }) => {
                   </span>
                   <ChevronDownIcon
                     className="ml-2 h-5 w-5 text-gray-400"
-                    aria-hidden="true"
+                    ariaHidden={true}
                   />
                 </span>
               </Menu.Button>
