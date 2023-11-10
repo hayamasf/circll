@@ -1,12 +1,17 @@
+"use client";
+
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import ChevronDownIcon from "@/app/icons/ChevronDownIcon";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 const ProfileDropdown = () => {
+  const { user } = useUser();
+
   return (
     <Menu as="div" className="relative">
       <Menu.Button className="-m-1.5 flex items-center p-1.5">
@@ -21,7 +26,7 @@ const ProfileDropdown = () => {
             className="ml-4 text-sm font-semibold leading-6 text-gray-900"
             aria-hidden="true"
           >
-            Tom Cook
+            {user?.nickname}
           </span>
           <ChevronDownIcon
             className="ml-2 h-5 w-5 text-gray-400"
