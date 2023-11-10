@@ -1,14 +1,12 @@
 import React from "react";
 import { Fragment } from "react";
 
-import {
-  ChevronDownIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/20/solid";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Menu, Transition } from "@headlessui/react";
 
 import Bars3Icon from "@/app/icons/Bars3Icon";
 import BellIcon from "@/app/icons/BellIcon";
+import MagnifyingGlassIcon from "@/app/icons/MagnifyingGlassIcon";
 
 import { TopBarProps } from "@/types/types";
 
@@ -39,7 +37,7 @@ const TopBar: React.FC<TopBarProps> = ({ userNavigation, setSidebarOpen }) => {
             </label>
             <MagnifyingGlassIcon
               className="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
-              aria-hidden="true"
+              ariaHidden={true}
             />
             <input
               id="search-field"
