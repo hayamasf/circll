@@ -169,7 +169,7 @@ const Navigation: React.FC<NavigationProps> = ({
                 <ul role="list" className="-mx-2 space-y-1">
                   {navigation.map((item) => (
                     <li key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
                         className={classNames(
                           item.current
@@ -188,7 +188,7 @@ const Navigation: React.FC<NavigationProps> = ({
                           aria-hidden="true"
                         />
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -200,7 +200,7 @@ const Navigation: React.FC<NavigationProps> = ({
                 <ul role="list" className="-mx-2 mt-2 space-y-1">
                   {teams.map((team) => (
                     <li key={team.name}>
-                      <a
+                      <Link
                         href={team.href}
                         className={classNames(
                           team.current
@@ -220,7 +220,7 @@ const Navigation: React.FC<NavigationProps> = ({
                           {team.initial}
                         </span>
                         <span className="truncate">{team.name}</span>
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
