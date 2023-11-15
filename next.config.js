@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['s.gravatar.com']
+        remotePatterns: [
+            {
+                hostname: 's.gravatar.com',
+                // その他のパターンを追加する場合はここに追加します
+            },
+        ]
     }
 };
 
