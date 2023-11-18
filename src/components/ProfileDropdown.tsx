@@ -19,13 +19,15 @@ const ProfileDropdown = () => {
       <Menu.Button className="-m-1.5 flex items-center p-1.5">
         <span className="sr-only">ユーザーメニューを開く</span>
         <div>
-          {user?.picture && (<Image
-            src={user.picture}
-            alt="プロフィールアバター"
-            className="rounded-full"
-            width={32}
-            height={32}
-          />)}
+          {user?.picture && (
+            <Image
+              src={user.picture}
+              alt="プロフィールアバター"
+              className="rounded-full"
+              width={32}
+              height={32}
+            />
+          )}
         </div>
         <span className="hidden lg:flex lg:items-center">
           <span
