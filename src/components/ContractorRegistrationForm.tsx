@@ -5,9 +5,15 @@ import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
 const ContractorRegistrationForm = () => {
+
   const onSubmit = async () => {
     console.log("test");
   };
+
+  const handleReset = () => {
+    console.log("キャンセル");
+  }
+
 
   return (
     <>
@@ -24,13 +30,13 @@ const ContractorRegistrationForm = () => {
           label="郵便番号"
           id="zipCode"
           name="zipCode"
-          width="w-28"
+          width="w-24"
           placeholder="111-2345"
         />
       </div>
-      <div className="mt-10 grid gap-y-5">
+      <div className="mt-14 grid gap-y-5">
         <SubmitButton label="登録" onClick={onSubmit} />
-        <CancelButton label="キャンセル" onClick={onSubmit} />
+        <CancelButton label="キャンセル" onClick={handleReset} />
       </div>
     </>
   );
