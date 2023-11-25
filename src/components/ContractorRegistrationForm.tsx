@@ -1,30 +1,38 @@
+"use client";
+
 import TextInput from "./TextInput";
+import SubmitButton from "./SubmitButton";
+import CancelButton from "./CancelButton";
 
 const ContractorRegistrationForm = () => {
+  const onSubmit = async () => {
+    console.log("test");
+  };
+
   return (
-    <div className="mt-10 grid gap-y-8">
-      <TextInput
-        label="業者名"
-        id="name"
-        name="name"
-        width="sm:w-32"
-        placeholder="業者名"
-      />
-      <TextInput
-        label="これ"
-        id="id"
-        name="id"
-        width="sm:w-32"
-        placeholder="これ"
-      />
-      <TextInput
-        label="郵便番号"
-        id="zipCode"
-        name="zipCode"
-        width="sm:w-32"
-        placeholder="111-2345"
-      />
-    </div>
+    <>
+      <div className="mt-10 grid gap-y-8">
+        <TextInput
+          label="業者名"
+          id="name"
+          name="name"
+          width=""
+          placeholder="業者名"
+        />
+        <TextInput label="これ" id="id" name="id" width="" placeholder="これ" />
+        <TextInput
+          label="郵便番号"
+          id="zipCode"
+          name="zipCode"
+          width="w-28"
+          placeholder="111-2345"
+        />
+      </div>
+      <div className="mt-10 grid gap-y-5">
+        <SubmitButton label="登録" onClick={onSubmit} />
+        <CancelButton label="キャンセル" onClick={onSubmit} />
+      </div>
+    </>
   );
 };
 
