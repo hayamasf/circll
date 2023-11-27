@@ -1,23 +1,15 @@
-"use client";
 
 import TextInput from "./TextInput";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
+import { onSubmit, handleReset } from "@/hooks/ContractorRegistrationForm";
+
 const ContractorRegistrationForm = () => {
 
-  const onSubmit = async () => {
-    console.log("登録");
-  };
-
-  const handleReset = () => {
-    console.log("キャンセル");
-  }
-
-
   return (
-    <>
-      <div className="mt-10 grid gap-y-8">
+    <form className="mt-10">
+      <div className="grid gap-y-8">
         <TextInput
           label="業者名"
           id="name"
@@ -25,10 +17,9 @@ const ContractorRegistrationForm = () => {
           width=""
           placeholder="業者名"
         />
-        <TextInput label="これ" id="id" name="id" width="" placeholder="これ" />
         <div className="grid grid-cols-2 gap-x-3">
           <TextInput
-            label="代表者役職"
+            label="代表者役職名"
             id="title"
             name="title"
             width=""
@@ -43,7 +34,7 @@ const ContractorRegistrationForm = () => {
           />
 
         </div>
-        <hr />
+        <hr className="my-2" />
         <div className="grid grid-cols-2 gap-x-3">
           <TextInput
             label="郵便番号"
@@ -94,11 +85,12 @@ const ContractorRegistrationForm = () => {
         />
 
       </div>
-      <div className="mt-14 grid gap-y-5">
+      <div className="mt-10 grid gap-y-5">
         <SubmitButton label="登録" onClick={onSubmit} />
         <CancelButton label="キャンセル" onClick={handleReset} />
       </div>
-    </>
+
+    </form>
   );
 };
 
