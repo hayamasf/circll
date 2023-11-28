@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import TextInput from "./TextInput";
 import SubmitButton from "./SubmitButton";
@@ -7,10 +7,9 @@ import CancelButton from "./CancelButton";
 import { onSubmit } from "@/hooks/ContractorRegistrationForm";
 
 const ContractorRegistrationForm = () => {
-
   const handleReset = () => {
-    console.log('リセット')
-  }
+    console.log("リセット");
+  };
 
   return (
     <form className="mt-10">
@@ -37,7 +36,6 @@ const ContractorRegistrationForm = () => {
             width=""
             placeholder="小松武司"
           />
-
         </div>
         <hr className="my-2" />
         <div className="grid grid-cols-2 gap-x-3">
@@ -55,7 +53,6 @@ const ContractorRegistrationForm = () => {
             width=""
             placeholder="東京都"
           />
-
         </div>
         <div className="grid grid-cols-2 gap-x-3">
           <TextInput
@@ -88,13 +85,11 @@ const ContractorRegistrationForm = () => {
           width=""
           placeholder="HF八丁堀ビル"
         />
-
       </div>
       <div className="mt-10 grid gap-y-5">
         <SubmitButton label="登録" onClick={onSubmit} />
         <CancelButton label="キャンセル" onClick={handleReset} />
       </div>
-
     </form>
   );
 };

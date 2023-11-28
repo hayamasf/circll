@@ -1,5 +1,5 @@
-"use client"
+"use client";
 
 export const onSubmit = async () => {
-    console.log("登録");
-  };
+  console.log("登録");
+};
