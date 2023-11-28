@@ -1,11 +1,16 @@
+"use client"
 
 import TextInput from "./TextInput";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
-import { onSubmit, handleReset } from "@/hooks/ContractorRegistrationForm";
+import { onSubmit } from "@/hooks/ContractorRegistrationForm";
 
 const ContractorRegistrationForm = () => {
+
+  const handleReset = () => {
+    console.log('リセット')
+  }
 
   return (
     <form className="mt-10">
