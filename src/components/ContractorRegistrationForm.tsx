@@ -1,94 +1,197 @@
 "use client";
 
+import { useForm } from "react-hook-form";
+
 import TextInput from "./TextInput";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
-import { onSubmit } from "@/hooks/ContractorRegistrationForm";
+import { ContractorRegistration } from "@/actions/ContractorRegistration";
+import { ContractorRegistrationInputs } from "@/types/types";
 
 const ContractorRegistrationForm = () => {
-  const handleReset = () => {
-    console.log("リセット");
-  };
+  const { register, handleSubmit, reset, formState: { errors }, } = useForm<ContractorRegistrationInputs>(
+    {
+      defaultValues: {
+        name: "",
+        title: "",
+        representative: "",
+        zipCode: "",
+        prefecture: "",
+        city: "",
+        town: "",
+        address: "",
+        address2: "",
+      },
+    }
+  )
+
+  const onSubmit = handleSubmit((formData) => { ContractorRegistration(formData) })
 
   return (
-    <form className="mt-10">
+    <form onSubmit={onSubmit} className="mt-10">
       <div className="grid gap-y-8">
-        <TextInput
+        <div className="relative">
+          <label
+            htmlFor="name"
+            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+          >
+            業者名
+          </label>
+          <input
+            type="text"
+            id="name"
+            {...register("name")}
+            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+            placeholder="株式会社サティスファクトリー"
+          />
+        </div>
+
+        {/* <TextInput
           label="業者名"
           id="name"
-          name="name"
+          {...register("name")}
+
           width=""
           placeholder="業者名"
-        />
+        /> */}
         <div className="grid grid-cols-2 gap-x-3">
-          <TextInput
-            label="代表者役職名"
-            id="title"
-            name="title"
-            width=""
-            placeholder="代表取締役"
-          />
-          <TextInput
-            label="代表者氏名"
-            id="name"
-            name="name"
-            width=""
-            placeholder="小松武司"
-          />
+          <div className="relative">
+            <label
+              htmlFor="title"
+              className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            >
+              代表者役職名
+            </label>
+            <input
+              type="text"
+              id="title"
+              {...register("title")}
+              className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+              placeholder="代表取締役"
+            />
+          </div>
+
+          <div className="relative">
+            <label
+              htmlFor="representative"
+              className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            >
+              代表者氏名
+            </label>
+            <input
+              type="text"
+              id="representative"
+              {...register("representative")}
+              className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+              placeholder="小松武司"
+            />
+          </div>
+
         </div>
         <hr className="my-2" />
         <div className="grid grid-cols-2 gap-x-3">
-          <TextInput
-            label="郵便番号"
-            id="zipCode"
-            name="zipCode"
-            width=""
-            placeholder="104-0032"
-          />
-          <TextInput
-            label="都道府県"
-            id="prefecture"
-            name="prefecture"
-            width=""
-            placeholder="東京都"
-          />
+          <div className="relative">
+            <label
+              htmlFor="zipCode"
+              className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            >
+              郵便番号
+            </label>
+            <input
+              type="text"
+              id="zipCode"
+              {...register("zipCode")}
+              className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+              placeholder="104-0032"
+            />
+          </div>
+
+          <div className="relative">
+            <label
+              htmlFor="prefecture"
+              className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            >
+              都道府県
+            </label>
+            <input
+              type="text"
+              id="prefecture"
+              {...register("prefecture")}
+              className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+              placeholder="東京都"
+            />
+          </div>
         </div>
         <div className="grid grid-cols-2 gap-x-3">
-          <TextInput
-            label="市区町村"
-            id="city"
-            name="city"
-            width=""
-            placeholder="中央区"
-          />
-          <TextInput
-            label="町域"
-            id="town"
-            name="town"
-            width=""
-            placeholder="八丁堀"
+          <div className="relative">
+            <label
+              htmlFor="city"
+              className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            >
+              市区町村
+            </label>
+            <input
+              type="text"
+              id="city"
+              {...register("city")}
+              className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+              placeholder="中央区"
+            />
+          </div>
+
+          <div className="relative">
+            <label
+              htmlFor="town"
+              className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            >
+              町域
+            </label>
+            <input
+              type="text"
+              id="town"
+              {...register("town")}
+              className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+              placeholder="八丁堀"
+            />
+          </div>
+        </div>
+        <div className="relative">
+          <label
+            htmlFor="address"
+            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+          >
+            丁目、番地以下
+          </label>
+          <input
+            type="text"
+            id="address"
+            {...register("address")}
+            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+            placeholder="三丁目12番8号"
           />
         </div>
-        <TextInput
-          label="丁目、番地以下"
-          id="address"
-          name="address"
-          width=""
-          placeholder="三丁目12番8号"
-        />
 
-        <TextInput
-          label="ビル名など"
-          id="address2"
-          name="address2"
-          width=""
-          placeholder="HF八丁堀ビル"
-        />
+        <div className="relative">
+          <label
+            htmlFor="address2"
+            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+          >
+            都道府県
+          </label>
+          <input
+            type="text"
+            id="address2"
+            {...register("address2")}
+            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+            placeholder="HF八丁堀ビル"
+          />
+        </div>
       </div>
       <div className="mt-10 grid gap-y-5">
-        <SubmitButton label="登録" onClick={onSubmit} />
-        <CancelButton label="キャンセル" onClick={handleReset} />
+        <SubmitButton label="登録" />
+        <CancelButton label="キャンセル"
+          onClick={() => reset()} />
       </div>
     </form>
   );
