@@ -29,3 +29,15 @@ export type TopBarProps = {
   userNavigation: UserNavigationItem[];
   setSidebarOpen: (open: boolean) => void;
 };
+
+export type ContractorRegistrationInputs = {
+  name: string;
+  title: string;
+  representative: string;
+  zipCode: string;
+  prefecture: string;
+  city: string;
+  town: string;
+  address: string;
+  address2?: string;
+}
