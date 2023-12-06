@@ -173,12 +173,17 @@ const ContractorRegistrationForm = () => {
         </div>
 
         <div className="relative">
-          <label
-            htmlFor="address2"
-            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
-          >
-            都道府県
-          </label>
+          <div className="flex justify-between">
+            <label
+              htmlFor="address2"
+              className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            >
+              ビル名など
+            </label>
+            <span className="absolute -top-2 right-2 inline-block bg-white px-1 text-xs text-gray-900" id="address2-optional">
+              （任意）
+            </span>
+          </div>
           <input
             type="text"
             id="address2"
