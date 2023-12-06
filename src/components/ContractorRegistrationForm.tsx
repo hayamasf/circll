@@ -9,6 +9,8 @@ import CancelButton from "./CancelButton";
 import { ContractorRegistration } from "@/actions/ContractorRegistration";
 import { ContractorRegistrationInputs } from "@/types/types";
 
+import usePostcodeJP from "@/hooks/usePostcodeJP";
+
 const ContractorRegistrationForm = () => {
   const { register, handleSubmit, reset, formState: { errors }, } = useForm<ContractorRegistrationInputs>(
     {
@@ -27,6 +29,8 @@ const ContractorRegistrationForm = () => {
   )
 
   const onSubmit = handleSubmit((formData) => { ContractorRegistration(formData) })
+
+  const { zipCode, prefecture, city, town, handleZipCodeChange } = usePostcodeJP();
 
   return (
     <form onSubmit={onSubmit} className="mt-10">
@@ -102,6 +106,7 @@ const ContractorRegistrationForm = () => {
               type="text"
               id="zipCode"
               {...register("zipCode")}
+              onChange={handleZipCodeChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="104-0032"
             />
@@ -117,6 +122,7 @@ const ContractorRegistrationForm = () => {
             <input
               type="text"
               id="prefecture"
+              value={prefecture}
               {...register("prefecture")}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="東京都"
@@ -134,6 +140,7 @@ const ContractorRegistrationForm = () => {
             <input
               type="text"
               id="city"
+              value={city}
               {...register("city")}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="中央区"
@@ -150,6 +157,7 @@ const ContractorRegistrationForm = () => {
             <input
               type="text"
               id="town"
+              value={town}
               {...register("town")}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="八丁堀"
