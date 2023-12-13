@@ -11,7 +11,7 @@ import { ContractorRegistrationInputs } from "@/types/types";
 import usePostcodeJP from "@/hooks/usePostcodeJP";
 
 const ContractorRegistrationForm = () => {
-  const { register, handleSubmit, reset, formState: { errors }, } = useForm<ContractorRegistrationInputs>(
+  const { register, handleSubmit, reset, watch, formState: { errors }, } = useForm<ContractorRegistrationInputs>(
     {
       defaultValues: {
         name: "",
@@ -26,10 +26,18 @@ const ContractorRegistrationForm = () => {
       },
     }
   )
+  const nameValue = watch("name")
+  const titleValue = watch("title")
+  const representativeValue = watch("representative")
+  const zipCodeValue = watch("zipCode")
+  const prefectureValue = watch("prefecture")
+  const cityValue = watch("city")
+  const townValue = watch("town")
+  const addressValue = watch("address")
 
   const onSubmit = handleSubmit((formData) => { ContractorRegistration(formData) })
 
-  const { zipCode, prefecture, city, town, handleZipCodeChange } = usePostcodeJP();
+  const { prefecture, city, town, handleZipCodeChange } = usePostcodeJP();
 
   return (
     <form onSubmit={onSubmit} className="mt-10">
@@ -121,7 +129,7 @@ const ContractorRegistrationForm = () => {
               {...register("prefecture")}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="東京都"
-              disabled={true}
+              readOnly
             />
           </div>
           <div className="relative">
@@ -138,7 +146,7 @@ const ContractorRegistrationForm = () => {
               {...register("city")}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="中央区"
-              disabled={true}
+              readOnly
             />
           </div>
 
@@ -156,7 +164,7 @@ const ContractorRegistrationForm = () => {
               {...register("town")}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="八丁堀"
-              disabled={true}
+              readOnly
             />
           </div>
         </div>
@@ -199,7 +207,7 @@ const ContractorRegistrationForm = () => {
         </div>
       </div>
       <div className="mt-10 grid gap-y-5">
-        <SubmitButton label="登録" />
+        <SubmitButton label="登録" disabled={!nameValue || !titleValue || !representativeValue || !zipCodeValue || !prefectureValue || !cityValue || !townValue || !addressValue} />
         <CancelButton label="キャンセル"
           onClick={() => reset()} />
       </div>
