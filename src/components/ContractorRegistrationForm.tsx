@@ -10,7 +10,7 @@ import { ContractorRegistrationInputs } from "@/types/types";
 
 import usePostcodeJP from "@/hooks/usePostcodeJP";
 
-const ContractorRegistrationForm = () => {
+const ContractorRegisterForm = () => {
   const { register, handleSubmit, reset, watch, formState: { errors }, } = useForm<ContractorRegistrationInputs>(
     {
       defaultValues: {
@@ -215,4 +215,4 @@ const ContractorRegistrationForm = () => {
   );
 };
 
-export default ContractorRegistrationForm;
+export default ContractorRegisterForm;
