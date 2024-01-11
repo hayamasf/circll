@@ -6,6 +6,24 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Contractor {
+  id              String  @id @default(uuid() )
+  name            String
+  title           String
+  representative  String
+  zipCode         String
+  prefecture      String
+  city            String
+  town            String
+  address         String
+  address2        String?
+  createdAt       DateTime  @default(now())
+  createdBy       String
+  updatedAt       DateTime @updatedAt
+  updatedBy       String?
 }
