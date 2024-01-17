@@ -12,7 +12,7 @@ import { ContractorRegistrationInputs } from "@/types/types";
 import usePostcodeJP from "@/hooks/usePostcodeJP";
 
 const ContractorRegisterForm = () => {
-  const { register, handleSubmit, reset, watch, formState: { errors }, } = useForm<ContractorRegistrationInputs>(
+  const { register, handleSubmit, reset, formState: { errors }, } = useForm<ContractorRegistrationInputs>(
     {
       defaultValues: {
         name: "",
@@ -27,14 +27,6 @@ const ContractorRegisterForm = () => {
       },
     }
   )
-  const nameValue = watch("name")
-  const titleValue = watch("title")
-  const representativeValue = watch("representative")
-  const zipCodeValue = watch("zipCode")
-  const prefectureValue = watch("prefecture")
-  const cityValue = watch("city")
-  const townValue = watch("town")
-  const addressValue = watch("address")
 
   const onSubmit = handleSubmit((formData) => { ContractorRegistration(formData) })
 
@@ -55,10 +47,12 @@ const ContractorRegisterForm = () => {
           <input
             type="text"
             id="name"
-            {...register("name")}
+            {...register("name",
+              { required: "業者名は必須です" })}
             className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             placeholder="株式会社サティスファクトリー"
           />
+          {errors.name?.message && (<p className="text-xs text-red-500 p-1">{errors.name?.message}</p>)}
         </div>
 
         <div className="grid grid-cols-2 gap-x-3">
@@ -72,10 +66,13 @@ const ContractorRegisterForm = () => {
             <input
               type="text"
               id="title"
-              {...register("title")}
+              {...register("title",
+                { required: "代表者役職名は必須です" }
+              )}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="代表取締役"
             />
+            {errors.title?.message && (<p className="text-xs text-red-500 p-1">{errors.title?.message}</p>)}
           </div>
 
           <div className="relative">
@@ -88,16 +85,18 @@ const ContractorRegisterForm = () => {
             <input
               type="text"
               id="representative"
-              {...register("representative")}
+              {...register("representative",
+                { required: "代表者氏名は必須です" })}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="小松武司"
             />
-          </div>
+            {errors.representative?.message && (<p className="text-xs text-red-500 p-1">{errors.representative?.message}</p>)}
 
+          </div>
         </div>
         <hr className="my-2" />
 
-        <div className="grid grid-cols-3 gap-x-1">
+        <div className="grid grid-cols-2 gap-x-1">
           <div className="relative">
             <label
               htmlFor="zipCode"
@@ -108,13 +107,15 @@ const ContractorRegisterForm = () => {
             <input
               type="text"
               id="zipCode"
-              {...register("zipCode")}
+              {...register("zipCode",
+                { required: "郵便番号は必須です" })}
               onChange={handleZipCodeChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="1040032"
             />
           </div>
           <div className="pt-2 text-gray-900 sm:text-sm">← ハイフンなし</div>
+          {errors.zipCode?.message && (<p className="text-xs text-red-500 p-1">{errors.zipCode.message}</p>)}
 
         </div>
         <div className="flex gap-x-1">
@@ -129,11 +130,14 @@ const ContractorRegisterForm = () => {
               type="text"
               id="prefecture"
               value={prefecture}
-              {...register("prefecture")}
+              {...register("prefecture",
+                { required: "必須" })}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="東京都"
               readOnly
             />
+            {errors.prefecture?.message && (<p className="text-xs text-red-500 p-1">{errors.prefecture.message}</p>)}
+
           </div>
           <div className="relative">
             <label
@@ -146,11 +150,13 @@ const ContractorRegisterForm = () => {
               type="text"
               id="city"
               value={city}
-              {...register("city")}
+              {...register("city",
+                { required: "必須" })}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="中央区"
               readOnly
             />
+            {errors.city?.message && (<p className="text-xs text-red-500 p-1">{errors.city.message}</p>)}
           </div>
 
           <div className="relative">
@@ -164,11 +170,14 @@ const ContractorRegisterForm = () => {
               type="text"
               id="town"
               value={town}
-              {...register("town")}
+              {...register("town",
+                { required: "必須" })}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="八丁堀"
               readOnly
             />
+            {errors.town?.message && (<p className="text-xs text-red-500 p-1">{errors.town.message}</p>)}
+
           </div>
         </div>
 
@@ -182,10 +191,12 @@ const ContractorRegisterForm = () => {
           <input
             type="text"
             id="address"
-            {...register("address")}
+            {...register("address",
+              { required: "住所は必須です" })}
             className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             placeholder="三丁目12番8号"
           />
+          {errors.address?.message && (<p className="text-xs text-red-500 p-1">{errors.address.message}</p>)}
         </div>
 
         <div className="relative">
@@ -210,7 +221,7 @@ const ContractorRegisterForm = () => {
         </div>
       </div>
       <div className="mt-10 grid gap-y-5">
-        <SubmitButton label="登録" disabled={!nameValue || !titleValue || !representativeValue || !zipCodeValue || !prefectureValue || !cityValue || !townValue || !addressValue} />
+        <SubmitButton label="登録" />
         <CancelButton label="キャンセル"
           onClick={() => reset()} />
       </div>
