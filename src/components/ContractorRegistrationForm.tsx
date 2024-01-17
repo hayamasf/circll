@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import SubmitButton from "./SubmitButton";
@@ -38,6 +39,8 @@ const ContractorRegisterForm = () => {
   const onSubmit = handleSubmit((formData) => { ContractorRegistration(formData) })
 
   const { prefecture, city, town, handleZipCodeChange } = usePostcodeJP();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <form onSubmit={onSubmit} className="mt-10">
