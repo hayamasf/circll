@@ -40,4 +40,5 @@ export type ContractorRegistrationInputs = {
   town: string;
   address: string;
   address2?: string;
+  createdBy: string;
 }
