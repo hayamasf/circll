@@ -20,7 +20,6 @@ export default async function ContractorRegistration(formData: ContractorRegistr
             createdBy: formData.createdBy,
         }
     }    )
-    console.log(formData)
     revalidatePath('/contractors');
     redirect('/contractors');
 }

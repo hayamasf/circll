@@ -10,7 +10,6 @@ const Profile: NextPage = () => {
   if (!user) {
     return null;
   }
-  console.log(user);
 
   return (
     <div className="md:flex md:items-center md:justify-between md:space-x-5">
