@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import LinkButton from "./LinkButton";
 
 export default async function ContractorsList() {
 
@@ -14,12 +15,7 @@ export default async function ContractorsList() {
                     </p>
                 </div>
                 <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <button
-                        type="button"
-                        className="block rounded-full bg-slate-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-slate-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                        新規登録
-                    </button>
+                    <LinkButton href="/contractors/register">新規登録</LinkButton>
                 </div>
             </div>
             <div className="-mx-4 mt-8 sm:-mx-0">
