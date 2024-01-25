@@ -7,7 +7,7 @@ export default function Page() {
     <>
       <div className="flex justify-between mb-10 items-center">
         <PageHeader title="業者" />
-        <LinkButton href="/contractors/register" children={"新規登録"} />
+        <LinkButton href="/contractors/register">新規登録</LinkButton>
       </div>
       <ContractorsList />
     </>
