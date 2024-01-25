@@ -2,14 +2,11 @@ type PageHeaderProps = {
   title: string;
 };
 
-const PageHeader = ({ title }: PageHeaderProps) => {
+export default function PageHeader({ title }: PageHeaderProps) {
   return (
-    <div className="min-w-0 flex-1">
-      <h1 className="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight">
-        {title}
-      </h1>
-    </div>
+    <h1 className="mb-8 text-xl font-bold leading-7 text-gray-800 sm:mb-10 sm:truncate sm:text-2xl sm:tracking-tight">
+      {title}
+    </h1>
   );
 };
 
-export default PageHeader;
