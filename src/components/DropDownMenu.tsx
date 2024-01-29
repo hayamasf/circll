@@ -1,15 +1,26 @@
+'use client';
+
 import React, { Fragment } from "react";
 
 import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { classNames } from "@/utils/classNames";
 
-export default function DropDownMenu() {
+type DropDownMenuProps = {
+    actions: {
+        id: number;
+        label: string;
+        onClick: () => void;
+        href?: string;
+    }[]
+}
+
+export default function DropDownMenu({ actions }: DropDownMenuProps) {
     return (
         <Menu as="div" className="relative inline-block text-left">
             <div>
                 <Menu.Button className="flex items-center rounded-full bg-gray-100 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
-                    <span className="sr-only">Open options</span>
+                    <span className="sr-only">オプションを開く</span>
                     <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
                 </Menu.Button>
             </div>
@@ -25,60 +36,35 @@ export default function DropDownMenu() {
             >
                 <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="py-1">
-                        <Menu.Item>
-                            {({ active }) => (
-                                <a
-                                    href="#"
-                                    className={classNames(
-                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                        'block px-4 py-2 text-sm'
-                                    )}
-                                >
-                                    Account settings
-                                </a>
-                            )}
-                        </Menu.Item>
-                        <Menu.Item>
-                            {({ active }) => (
-                                <a
-                                    href="#"
-                                    className={classNames(
-                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                        'block px-4 py-2 text-sm'
-                                    )}
-                                >
-                                    Support
-                                </a>
-                            )}
-                        </Menu.Item>
-                        <Menu.Item>
-                            {({ active }) => (
-                                <a
-                                    href="#"
-                                    className={classNames(
-                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                        'block px-4 py-2 text-sm'
-                                    )}
-                                >
-                                    License
-                                </a>
-                            )}
-                        </Menu.Item>
-                        <form method="POST" action="#">
+                        {actions.map((action) => (
                             <Menu.Item>
                                 {({ active }) => (
-                                    <button
-                                        type="submit"
+                                    <a
+                                        href="#"
                                         className={classNames(
                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                            'block w-full px-4 py-2 text-left text-sm'
+                                            'block px-4 py-2 text-sm'
                                         )}
+                                        onClick={() => action.onClick()}
                                     >
-                                        Sign out
-                                    </button>
+                                        {action.label}
+                                    </a>
                                 )}
                             </Menu.Item>
-                        </form>
+                        ))}
+                        {/* <Menu.Item>
+                            {({ active }) => (
+                                <a
+                                    href="#"
+                                    className={classNames(
+                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                        'block px-4 py-2 text-sm'
+                                    )}
+                                >
+                                    この業者を削除する
+                                </a>
+                            )}
+                        </Menu.Item> */}
                     </div>
                 </Menu.Items>
             </Transition>
