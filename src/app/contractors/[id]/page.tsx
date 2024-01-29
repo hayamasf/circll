@@ -1,15 +1,10 @@
 import { prisma } from "@/lib/prisma"
 import { formatDateTime } from "@/utils/dateUtils";
-import EditDeleteMenu from "@/components/EditDeleteMenu";
+import EditLink from "@/components/EditLink";
 
 export default async function Page({ params }: { params: { id: string } }) {
 
     const contractor = await prisma.contractor.findUnique({ where: { id: params.id } });
-
-    // const actions = [
-    //     { id: 1, label: "これ", onClick: handleEditAction },
-    //     { id: 2, label: "それ", onClick: handleDeleteAction }
-    // ]
 
     if (!contractor) {
         return <div>該当する業者が見つかりませんでした.</div>
@@ -20,7 +15,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             <div className="px-4 sm:px-0">
                 <div className="flex items-center justify-between">
                     <h3 className="text-base font-semibold leading-7 text-gray-900">{contractor.name}</h3>
-                    <EditDeleteMenu />
+                    <EditLink href="/contractors" />
                 </div>
                 <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">{contractor.title} {contractor.representative}</p>
                 <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">〒 {contractor.zipCode}</p>
