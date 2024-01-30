@@ -30,7 +30,7 @@ export type TopBarProps = {
   setSidebarOpen: (open: boolean) => void;
 };
 
-export type ContractorRegistrationInputs = {
+export type ContractorFormValues = {
   name: string;
   title: string;
   representative: string;

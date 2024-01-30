@@ -1,11 +1,11 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { ContractorRegistrationInputs } from "@/types/types";
+import { ContractorFormValues } from "@/types/types";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export default async function ContractorRegistration(formData: ContractorRegistrationInputs) {
+export default async function ContractorRegistration(formData: ContractorFormValues) {
     await prisma.contractor.create({
         data: {
             name: formData.name,

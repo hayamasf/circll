@@ -1,12 +1,12 @@
 import PageHeader from "@/components/PageHeader";
-import ContractorRegistrationForm from "@/components/ContractorRegistrationForm";
-const RegisterPage = () => {
+import ContractorForm from "@/components/ContractorForm";
+
+export default function Page() {
   return (
     <div className="mx-auto max-w-sm">
       <PageHeader title="業者の新規登録" />
-      <ContractorRegistrationForm />
+      <ContractorForm />
     </div>
   );
-};
 
-export default RegisterPage;
+}

@@ -7,17 +7,16 @@ import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
 import ContractorRegistration from "@/actions/ContractorRegistration";
-import { ContractorRegistrationInputs } from "@/types/types";
+import { ContractorFormValues } from "@/types/types";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useEffect } from "react";
 
 import usePostcodeJP from "@/hooks/usePostcodeJP";
 
-const ContractorRegisterForm = () => {
-
+export default function ContractorForm() {
   const { user } = useUser()
 
-  const { register, handleSubmit, reset, setValue, formState: { errors }, } = useForm<ContractorRegistrationInputs>(
+  const { register, handleSubmit, reset, setValue, formState: { errors }, } = useForm<ContractorFormValues>(
     {
       defaultValues: {
         name: "",
@@ -110,7 +109,7 @@ const ContractorRegisterForm = () => {
         </div>
         <hr className="my-2" />
 
-        <div className="grid grid-cols-2 gap-x-1">
+        <div className="grid grid-cols-3 gap-x-1">
           <div className="relative">
             <label
               htmlFor="zipCode"
@@ -128,7 +127,7 @@ const ContractorRegisterForm = () => {
               placeholder="1040032"
             />
           </div>
-          <div className="pt-2 text-gray-900 sm:text-sm">← ハイフンなし</div>
+          <div className="pt-2 text-gray-900 col-span-2 sm:text-sm">← ハイフンなし</div>
           {errors.zipCode?.message && (<p className="text-xs text-red-500 p-1">{errors.zipCode.message}</p>)}
 
         </div>
@@ -241,6 +240,4 @@ const ContractorRegisterForm = () => {
       </div>
     </form>
   );
-};
-
-export default ContractorRegisterForm;
+}
