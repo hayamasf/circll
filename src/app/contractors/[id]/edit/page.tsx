@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import PageHeader from "@/components/PageHeader"
 import ContractorForm from "@/components/ContractorForm"
+import { updateContractor } from "@/actions/contractor";
 
 export default async function Page({ params }: { params: { id: string } }) {
 
@@ -14,7 +15,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <div className="container mx-auto max-w-md">
             <PageHeader title="業者情報の編集" />
             <p>{contractor.name}</p>
-            <ContractorForm />
+            <ContractorForm onSubmit={updateContractor} />
         </div>
     )
 }

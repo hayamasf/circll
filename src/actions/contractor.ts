@@ -24,3 +24,8 @@ export async function createContractor (formData: ContractorFormValues) {
     revalidatePath('/contractors');
     redirect('/contractors');
 }
+
+export async function updateContractor(formData:ContractorFormValues) {
+    console.log(formData);
+    
+}
