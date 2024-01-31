@@ -6,14 +6,17 @@ import { useForm } from "react-hook-form";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
-import ContractorRegistration from "@/actions/ContractorRegistration";
 import { ContractorFormValues } from "@/types/types";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useEffect } from "react";
 
 import usePostcodeJP from "@/hooks/usePostcodeJP";
 
-export default function ContractorForm() {
+type ContractorFormProps = {
+  onSubmit: (formData: ContractorFormValues) => void;
+}
+
+export default function ContractorForm({ onSubmit }: ContractorFormProps) {
   const { user } = useUser()
 
   const { register, handleSubmit, reset, setValue, formState: { errors }, } = useForm<ContractorFormValues>(
@@ -39,14 +42,14 @@ export default function ContractorForm() {
     }
   }, [user, setValue])
 
-  const onSubmit = handleSubmit((formData) => { ContractorRegistration(formData) })
+  const handleFormSubmit = (formData: ContractorFormValues) => { onSubmit(formData) };
 
   const { prefecture, city, town, handleZipCodeChange } = usePostcodeJP();
 
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <form onSubmit={onSubmit} className="mt-10">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="mt-10">
       <input type="hidden" id="createdBy"
         {...register("createdBy")} />
       <div className="grid gap-y-8">
