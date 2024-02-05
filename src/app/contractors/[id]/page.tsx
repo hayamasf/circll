@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             <div className="px-4 sm:px-0">
                 <div className="flex items-center justify-between">
                     <h3 className="text-base font-semibold leading-7 text-gray-900">{contractor.name}</h3>
-                    <EditLink href="/contractors" />
+                    <EditLink href={`/contractors/${contractor.id}/edit`} />
                 </div>
                 <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">{contractor.title} {contractor.representative}</p>
                 <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">〒 {contractor.zipCode}</p>

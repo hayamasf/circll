@@ -1,25 +1,22 @@
 "use client";
 
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
 import { ContractorFormValues } from "@/types/types";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import { useEffect } from "react";
 
 import usePostcodeJP from "@/hooks/usePostcodeJP";
 
 type ContractorFormProps = {
   onSubmit: (formData: ContractorFormValues) => void;
+  userId: string;
 }
 
-export default function ContractorForm({ onSubmit }: ContractorFormProps) {
-  const { user } = useUser()
+export default function ContractorForm({ onSubmit, userId }: ContractorFormProps) {
 
-  const { register, handleSubmit, reset, setValue, formState: { errors }, } = useForm<ContractorFormValues>(
+  const { register, handleSubmit, reset, formState: { errors }, } = useForm<ContractorFormValues>(
     {
       defaultValues: {
         name: "",
@@ -31,22 +28,14 @@ export default function ContractorForm({ onSubmit }: ContractorFormProps) {
         town: "",
         address: "",
         address2: "",
-        createdBy: "",
+        createdBy: userId,
       },
     }
   )
 
-  useEffect(() => {
-    if (user?.sub) {
-      setValue("createdBy", user.sub);
-    }
-  }, [user, setValue])
-
   const handleFormSubmit = (formData: ContractorFormValues) => { onSubmit(formData) };
 
   const { prefecture, city, town, handleZipCodeChange } = usePostcodeJP();
-
-  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="mt-10">
