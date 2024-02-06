@@ -17,29 +17,29 @@ const handleCreateContractor = (formData: ContractorFormValues) => {
 
 export default function ContractorForm() {
 
+  const { prefecture, city, town, handleZipCodeChange } = usePostcodeJP();
+
   const { user } = useUser()
   const userId = user?.sub || ''
 
+  const { register, handleSubmit, reset, formState: { errors }, } = useForm<ContractorFormValues>(
+    {
+      defaultValues: {
+        name: "",
+        title: "",
+        representative: "",
+        zipCode: "",
+        prefecture: "",
+        city: "",
+        town: "",
+        address: "",
+        address2: "",
+        createdBy: userId,
+      },
+    }
+  )
+
   if (userId) {
-
-    const { register, handleSubmit, reset, formState: { errors }, } = useForm<ContractorFormValues>(
-      {
-        defaultValues: {
-          name: "",
-          title: "",
-          representative: "",
-          zipCode: "",
-          prefecture: "",
-          city: "",
-          town: "",
-          address: "",
-          address2: "",
-          createdBy: userId,
-        },
-      }
-    )
-
-    const { prefecture, city, town, handleZipCodeChange } = usePostcodeJP();
 
     return (
       <form onSubmit={handleSubmit(handleCreateContractor)} className="mt-10">
