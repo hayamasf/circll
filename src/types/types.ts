@@ -30,7 +30,7 @@ export type TopBarProps = {
   setSidebarOpen: (open: boolean) => void;
 };
 
-export type ContractorFormValues = {
+export type Contractor = {
   name: string;
   title: string;
   representative: string;
@@ -39,6 +39,6 @@ export type ContractorFormValues = {
   city: string;
   town: string;
   address: string;
-  address2?: string;
+  address2?: string | null;
   createdBy: string;
 }
