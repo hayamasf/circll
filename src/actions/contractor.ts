@@ -1,11 +1,11 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { ContractorFormValues } from "@/types/types";
+import { Contractor } from "@/types/types";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function createContractor (formData: ContractorFormValues) {
+export async function createContractor (formData: Contractor) {
     // await prisma.contractor.create({
     //     data: {
     //         name: formData.name,
@@ -25,7 +25,7 @@ export async function createContractor (formData: ContractorFormValues) {
     redirect('/contractors');
 }
 
-export async function updateContractor(formData:ContractorFormValues) {
+export async function updateContractor(formData:Contractor) {
     console.log(formData);
     
 }

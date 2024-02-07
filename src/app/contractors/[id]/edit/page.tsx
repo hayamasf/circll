@@ -1,14 +1,15 @@
+import { prisma } from "@/lib/prisma";
 import PageHeader from "@/components/PageHeader"
-import ContractorForm from "@/components/ContractorForm"
+import ContractorEditForm from "@/components/ContractorEditForm"
 
-export default function Page() {
+export default async function Page({ params }: { params: { id: string } }) {
+
+    const contractor = await prisma.contractor.findUnique({ where: { id: params.id } });
 
     return (
         <div className="container mx-auto max-w-md">
             <PageHeader title="業者情報の編集" />
-            {/* <p>{contractor.name}</p> */}
-            <ContractorForm />
+            {contractor && <ContractorEditForm contractor={contractor} />}
         </div>
     )
-
 }
