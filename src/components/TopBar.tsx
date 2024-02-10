@@ -1,13 +1,16 @@
-import React from "react";
+'use client';
+
+import React, { useState } from "react";
 
 import Bars3Icon from "@/app/icons/Bars3Icon";
 import BellIcon from "@/app/icons/BellIcon";
 import MagnifyingGlassIcon from "@/app/icons/MagnifyingGlassIcon";
 
-import { TopBarProps } from "@/types/types";
 import ProfileDropdown from "./ProfileDropdown";
 
-const TopBar: React.FC<TopBarProps> = ({ setSidebarOpen }) => {
+const TopBar = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div className="sticky top-0 z-40 lg:mx-auto lg:max-w-7xl lg:px-8">
       <div className="flex h-16 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none">

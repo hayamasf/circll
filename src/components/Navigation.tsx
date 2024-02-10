@@ -1,17 +1,38 @@
+'use client';
+
 import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import { usePathname } from "next/navigation";
 
 import XMarkIcon from "@/app/icons/XMarkIcon";
 
-import { NavigationProps } from "@/types/types";
+import { NavigationItem } from "@/types/types";
 import Link from "next/link";
 import { classNames } from "@/utils/classNames";
+import {
+  BuildingOfficeIcon,
+  BuildingStorefrontIcon,
+  ChartPieIcon,
+  DocumentDuplicateIcon,
+  TruckIcon,
+  HomeIcon,
+} from "@heroicons/react/24/outline";
 
-const Navigation: React.FC<NavigationProps> = ({
-  navigation,
-  sidebarOpen,
-  setSidebarOpen,
+const navigation: NavigationItem[] = [
+  { name: "ホーム", href: "/", icon: HomeIcon, current: true },
+  { name: "排出事業者", href: "#", icon: BuildingOfficeIcon, current: false },
+  { name: "事業場", href: "#", icon: BuildingStorefrontIcon, current: false },
+  { name: "業者", href: "/contractors", icon: TruckIcon, current: false },
+  { name: "Documents", href: "#", icon: DocumentDuplicateIcon, current: false },
+  { name: "Reports", href: "#", icon: ChartPieIcon, current: false },
+];
+
+const Navigation = ({
 }) => {
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const currentPath = usePathname();
+
   return (
     <>
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -127,6 +148,7 @@ const Navigation: React.FC<NavigationProps> = ({
             />
           </div>
           <nav className="flex flex-1 flex-col">
+            {currentPath}
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
                 <ul role="list" className="-mx-2 space-y-1">
