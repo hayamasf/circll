@@ -20,7 +20,7 @@ export type UserNavigationItem = {
 };
 
 export type NavigationProps = {
-  navigation: NavigationItem[];
+  // navigation: NavigationItem[];
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
 };
