@@ -16,7 +16,6 @@ import {
 
 import { NavigationItem } from "@/types/types";
 import { TeamItem } from "@/types/types";
-import { UserNavigationItem } from "@/types/types";
 
 import Navigation from "@/components/Navigation";
 import TopBar from "@/components/TopBar";
@@ -35,11 +34,6 @@ const teams: TeamItem[] = [
   { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
 ];
 
-const userNavigation: UserNavigationItem[] = [
-  { name: "プロフィール", href: "#" },
-  { name: "ログアウト", href: "/api/auth/logout" },
-];
-
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -53,7 +47,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       />
       <div className="lg:pl-72">
         <TopBar
-          userNavigation={userNavigation}
           setSidebarOpen={setSidebarOpen}
         />
         <main className="py-10">

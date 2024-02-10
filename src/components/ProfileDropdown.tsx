@@ -6,10 +6,14 @@ import ChevronDownIcon from "@/app/icons/ChevronDownIcon";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 import Image from "next/image";
+import { classNames } from "@/utils/classNames";
 
-function classNames(...classes: (string | boolean)[]) {
-  return classes.filter(Boolean).join(" ");
-}
+import { UserNavigationItem } from "@/types/types";
+
+const userNavigation: UserNavigationItem[] = [
+  { id: 1, name: "プロフィール", href: "/profile" },
+  { id: 2, name: "ログアウト", href: "/api/auth/logout" }
+];
 
 const ProfileDropdown = () => {
   const { user } = useUser();
@@ -52,32 +56,21 @@ const ProfileDropdown = () => {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-          <Menu.Item key="profile">
-            {({ active }) => (
-              <Link
-                href="/profile"
-                className={classNames(
-                  active ? "bg-gray-50" : "",
-                  "block px-3 py-1 text-sm leading-6 text-gray-900",
-                )}
-              >
-                プロフィール
-              </Link>
-            )}
-          </Menu.Item>
-          <Menu.Item key="logout">
-            {({ active }) => (
-              <Link
-                href="/api/auth/logout"
-                className={classNames(
-                  active ? "bg-gray-50" : "",
-                  "block px-3 py-1 text-sm leading-6 text-gray-900",
-                )}
-              >
-                ログアウト
-              </Link>
-            )}
-          </Menu.Item>
+          {userNavigation.map((item) => (
+            <Menu.Item key={item.id}>
+              {({ active }) => (
+                <Link
+                  href={item.href}
+                  className={classNames(
+                    active ? "bg-gray-50 text-gray-800" : "",
+                    "block px-3 py-1 text-sm leading-6 text-gray-600",
+                  )}
+                >
+                  {item.name}
+                </Link>
+              )}
+            </Menu.Item>
+          ))}
         </Menu.Items>
       </Transition>
     </Menu>

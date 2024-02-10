@@ -14,6 +14,7 @@ export type TeamItem = {
 };
 
 export type UserNavigationItem = {
+  id: number;
   name: string;
   href: string;
 };
@@ -26,7 +27,7 @@ export type NavigationProps = {
 };
 
 export type TopBarProps = {
-  userNavigation: UserNavigationItem[];
+  // userNavigation: UserNavigationItem[];
   setSidebarOpen: (open: boolean) => void;
 };
 
