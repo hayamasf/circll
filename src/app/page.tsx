@@ -1,9 +1,9 @@
-import PageHeader from "@/components/PageHeader";
+import Stats from "@/components/Stats";
 
-export default function Home() {
+export default function Page() {
   return (
     <>
-      <PageHeader title="ホーム" />
+      <Stats />
     </>
   );
 }
