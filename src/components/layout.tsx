@@ -15,7 +15,6 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { NavigationItem } from "@/types/types";
-import { TeamItem } from "@/types/types";
 
 import Navigation from "@/components/Navigation";
 import TopBar from "@/components/TopBar";
@@ -28,11 +27,6 @@ const navigation: NavigationItem[] = [
   { name: "Documents", href: "#", icon: DocumentDuplicateIcon, current: false },
   { name: "Reports", href: "#", icon: ChartPieIcon, current: false },
 ];
-const teams: TeamItem[] = [
-  { id: 1, name: "Heroicons", href: "#", initial: "H", current: false },
-  { id: 2, name: "Tailwind Labs", href: "#", initial: "T", current: false },
-  { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
-];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -41,7 +35,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div>
       <Navigation
         navigation={navigation}
-        teams={teams}
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
       />

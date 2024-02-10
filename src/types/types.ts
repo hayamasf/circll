@@ -21,13 +21,11 @@ export type UserNavigationItem = {
 
 export type NavigationProps = {
   navigation: NavigationItem[];
-  teams: TeamItem[];
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
 };
 
 export type TopBarProps = {
-  // userNavigation: UserNavigationItem[];
   setSidebarOpen: (open: boolean) => void;
 };
 
