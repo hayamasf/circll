@@ -2,8 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
-
-import Layout from "@/components/layout";
+import Navigation from "@/components/Navigation";
+import TopBar from "@/components/TopBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +21,19 @@ export default function RootLayout({
     <html lang="ja" className="h-full bg-white">
       <body className={inter.className + "h-full"}>
         <UserProvider>
-          <Layout>{children}</Layout>
+          <div>
+            <Navigation
+            />
+            <div className="lg:pl-72">
+              <TopBar
+              />
+              <main className="py-10">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                  {children}
+                </div>
+              </main>
+            </div>
+          </div>
         </UserProvider>
       </body>
     </html>
