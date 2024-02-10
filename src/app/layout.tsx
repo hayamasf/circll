@@ -8,8 +8,8 @@ import Layout from "@/components/layout";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "circll | サークル",
-  description: "circll-サークル アプリケーション",
+  title: "サークル | circll",
+  description: "サークル - circll 資源物・廃棄物関連業務の管理アプリケーション",
 };
 
 export default function RootLayout({
