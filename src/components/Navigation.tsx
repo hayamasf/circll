@@ -12,8 +12,6 @@ import { classNames } from "@/utils/classNames";
 import {
   BuildingOfficeIcon,
   BuildingStorefrontIcon,
-  ChartPieIcon,
-  DocumentDuplicateIcon,
   TruckIcon,
   HomeIcon,
 } from "@heroicons/react/24/outline";
@@ -25,12 +23,10 @@ import MagnifyingGlassIcon from "@/app/icons/MagnifyingGlassIcon";
 import ProfileDropdown from "./ProfileDropdown";
 
 const navigation: NavigationItem[] = [
-  { name: "ホーム", href: "/", icon: HomeIcon, current: true },
-  { name: "排出事業者", href: "#", icon: BuildingOfficeIcon, current: false },
-  { name: "事業場", href: "#", icon: BuildingStorefrontIcon, current: false },
-  { name: "業者", href: "/contractors", icon: TruckIcon, current: false },
-  { name: "Documents", href: "#", icon: DocumentDuplicateIcon, current: false },
-  { name: "Reports", href: "#", icon: ChartPieIcon, current: false },
+  { id: 1, name: "ホーム", href: "/", icon: HomeIcon, current: true },
+  { id: 2, name: "排出事業者", href: "#", icon: BuildingOfficeIcon, current: false },
+  { id: 3, name: "事業場", href: "#", icon: BuildingStorefrontIcon, current: false },
+  { id: 4, name: "業者", href: "/contractors", icon: TruckIcon, current: false },
 ];
 
 const Navigation = ({
@@ -107,7 +103,7 @@ const Navigation = ({
                       <li>
                         <ul role="list" className="-mx-2 space-y-1">
                           {navigation.map((item) => (
-                            <li key={item.name}>
+                            <li key={item.id}>
                               <Link
                                 href={item.href}
                                 onClick={() => setSidebarOpen(false)}
@@ -154,12 +150,11 @@ const Navigation = ({
             />
           </div>
           <nav className="flex flex-1 flex-col">
-            {currentPath}
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
                 <ul role="list" className="-mx-2 space-y-1">
                   {navigation.map((item) => (
-                    <li key={item.name}>
+                    <li key={item.id}>
                       <Link
                         href={item.href}
                         className={classNames(
@@ -188,6 +183,8 @@ const Navigation = ({
           </nav>
         </div>
       </div>
+
+      {/* Topbar */}
       <div className="lg:pl-72">
         <div className="sticky top-0 z-40 flex h-16 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
           <button
