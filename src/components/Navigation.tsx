@@ -6,28 +6,14 @@ import { usePathname } from "next/navigation";
 
 import XMarkIcon from "@/app/icons/XMarkIcon";
 
-import { NavigationItem } from "@/types/types";
 import Link from "next/link";
 import { classNames } from "@/utils/classNames";
-import {
-  BuildingOfficeIcon,
-  BuildingStorefrontIcon,
-  TruckIcon,
-  HomeIcon,
-} from "@heroicons/react/24/outline";
 
 import Bars3Icon from "@/app/icons/Bars3Icon";
 import BellIcon from "@/app/icons/BellIcon";
 import MagnifyingGlassIcon from "@/app/icons/MagnifyingGlassIcon";
-
+import { navigationItems } from "./navigationItems";
 import ProfileDropdown from "./ProfileDropdown";
-
-const navigation: NavigationItem[] = [
-  { id: 1, name: "ホーム", href: "/", icon: HomeIcon, current: true },
-  { id: 2, name: "排出事業者", href: "#", icon: BuildingOfficeIcon, current: false },
-  { id: 3, name: "事業場", href: "#", icon: BuildingStorefrontIcon, current: false },
-  { id: 4, name: "業者", href: "/contractors", icon: TruckIcon, current: false },
-];
 
 const Navigation = ({
 }) => {
@@ -102,7 +88,7 @@ const Navigation = ({
                     <ul role="list" className="flex flex-1 flex-col gap-y-7">
                       <li>
                         <ul role="list" className="-mx-2 space-y-1">
-                          {navigation.map((item) => (
+                          {navigationItems.map((item) => (
                             <li key={item.id}>
                               <Link
                                 href={item.href}
@@ -153,7 +139,7 @@ const Navigation = ({
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
                 <ul role="list" className="-mx-2 space-y-1">
-                  {navigation.map((item) => (
+                  {navigationItems.map((item) => (
                     <li key={item.id}>
                       <Link
                         href={item.href}
