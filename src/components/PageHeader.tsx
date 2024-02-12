@@ -8,4 +8,4 @@ export default function PageHeader({ title }: PageHeaderProps) {
       {title}
     </h1>
   );
-};
+}

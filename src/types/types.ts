@@ -23,4 +23,4 @@ export type Contractor = {
   address: string;
   address2?: string | null;
   createdBy: string;
-}
+};

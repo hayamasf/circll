@@ -12,7 +12,7 @@ import { UserNavigationItem } from "@/types/types";
 
 const userNavigation: UserNavigationItem[] = [
   { id: 1, name: "プロフィール", href: "/profile" },
-  { id: 2, name: "ログアウト", href: "/api/auth/logout" }
+  { id: 2, name: "ログアウト", href: "/api/auth/logout" },
 ];
 
 const ProfileDropdown = () => {

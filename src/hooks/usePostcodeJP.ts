@@ -19,7 +19,7 @@ const usePostcodeJP = () => {
             headers: {
               Authorization: `Bearer ${API_KEY}`,
             },
-          }
+          },
         );
         const [data] = await response.json();
 
