@@ -11,10 +11,10 @@ export default function EditLink({ href }: EditLinkProps) {
     <>
       <Link
         href={href}
-        className="group flex items-center text-sm text-gray-500 hover:text-gray-700"
+        className="group flex items-center text-sm text-gray-800 hover:text-gray-500"
       >
         <PencilSquareIcon
-          className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-700"
+          className="mr-3 h-5 w-5 text-gray-800 group-hover:text-gray-500"
           aria-hidden="true"
         />
         編集する
