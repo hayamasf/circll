@@ -1,5 +1,5 @@
 "use client";
-
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import SubmitButton from "./SubmitButton";
@@ -25,6 +25,7 @@ export default function ContractorForm() {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<Contractor>({
     defaultValues: {
@@ -40,6 +41,12 @@ export default function ContractorForm() {
       createdBy: userId,
     },
   });
+
+  useEffect(() => {
+    setValue("prefecture", prefecture);
+    setValue("city", city);
+    setValue("town", town);
+  }, [prefecture, city, town, setValue]);
 
   if (!userId || userId.length === 0) {
     return <div className="mt-10">Loading...</div>;
@@ -150,7 +157,6 @@ export default function ContractorForm() {
             <input
               type="text"
               id="prefecture"
-              value={prefecture}
               {...register("prefecture", { required: "必須" })}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="東京都"
@@ -172,7 +178,6 @@ export default function ContractorForm() {
             <input
               type="text"
               id="city"
-              value={city}
               {...register("city", { required: "必須" })}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="中央区"
@@ -193,7 +198,6 @@ export default function ContractorForm() {
             <input
               type="text"
               id="town"
-              value={town}
               {...register("town", { required: "必須" })}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="八丁堀"
