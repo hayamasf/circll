@@ -1,13 +1,14 @@
 "use client";
-import React, { useEffect } from "react";
+
+import React, { ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
+import getPrefectureCityTown from "@/hooks/getPrefectureCityTown";
 
 import { Contractor } from "@/types/types";
 
-import usePostcodeJP from "@/hooks/usePostcodeJP";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { createContractor } from "@/actions/contractor";
 
@@ -15,8 +16,25 @@ const handleCreateContractor = (formData: Contractor) => {
   createContractor(formData);
 };
 
+
 export default function ContractorForm() {
-  const { prefecture, city, town, handleZipCodeChange } = usePostcodeJP();
+
+  const handleZipCodeChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const zipCode = e.target.value;
+
+    if (zipCode.length === 7) {
+      try {
+        const { pref, city, town } = await getPrefectureCityTown(zipCode)
+        setValue("prefecture", pref);
+        setValue("city", city);
+        setValue("town", town);
+        console.log(pref, city, town)
+
+      } catch (error) {
+        console.log("住所データが取得できませんでした.", error)
+      }
+    }
+  }
 
   const { user } = useUser();
   const userId = user?.sub || "";
@@ -41,12 +59,6 @@ export default function ContractorForm() {
       createdBy: userId,
     },
   });
-
-  useEffect(() => {
-    setValue("prefecture", prefecture);
-    setValue("city", city);
-    setValue("town", town);
-  }, [prefecture, city, town, setValue]);
 
   if (!userId || userId.length === 0) {
     return <div className="mt-10">Loading...</div>;
