@@ -1,37 +1,59 @@
 "use client";
 
+import React, { useState, ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
 import { Contractor } from "@/types/types";
-import usePostcodeJP from "@/hooks/usePostcodeJP";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { updateContractor } from "@/actions/contractor";
-
-const handleUpdateContractor = (formData: Contractor) => {
-  updateContractor(formData);
-};
+import getPrefectureCityTown from "@/hooks/getPrefectureCityTown";
 
 export default function ContractorEditForm({
   contractor,
 }: {
   contractor: Contractor;
 }) {
-  const { prefecture, city, town, handleZipCodeChange } = usePostcodeJP();
 
   const { user } = useUser();
   const userId = user?.sub || "";
+
+  const [formDataChanged, setFormDataChanged] = useState(false);
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Contractor>({
-    defaultValues: {
-      name: contractor.name,
+    setValue,
+  } = useForm<Contractor>(
+    {
+      defaultValues: contractor
+    }
+  );
+
+  const handleZipCodeChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const zipCode = e.target.value;
+
+    if (zipCode.length === 7) {
+      try {
+        const { pref, city, town } = await getPrefectureCityTown(zipCode)
+        setValue("prefecture", pref);
+        setValue("city", city);
+        setValue("town", town);
+        console.log(pref, city, town)
+
+      } catch (error) {
+        console.log("住所データが取得できませんでした.", error)
+      }
+    }
+  }
+
+  const handleUpdateContractor = (formData: Contractor) => {
+    const changedData: Contractor = {
+      name: "",
       title: "",
       representative: "",
       zipCode: "",
@@ -39,13 +61,30 @@ export default function ContractorEditForm({
       city: "",
       town: "",
       address: "",
-      address2: "",
-    },
-  });
+      address2: null,
+      createdBy: "",
+      updatedBy: null,
+    };
+    Object.keys(formData).forEach((key) => {
+      if (formData[key] !== contractor[key]) {
+        changedData[key] = formData[key];
+      }
+    })
+
+    updateContractor(changedData);
+  };
+
+  const handleChange = () => {
+    setFormDataChanged(true);
+  }
+
+  if (!userId || userId.length === 0) {
+    return <div className="mt-10">Loading...</div>;
+  }
 
   return (
     <form onSubmit={handleSubmit(handleUpdateContractor)} className="mt-10">
-      <input type="hidden" id="createdBy" {...register("createdBy")} />
+      <input type="hidden" id="updatedBy" {...register("updatedBy")} />
       <div className="grid gap-y-8">
         <div className="relative">
           <label
@@ -58,8 +97,8 @@ export default function ContractorEditForm({
             type="text"
             id="name"
             {...register("name", { required: "業者名は必須です" })}
+            onChange={handleChange}
             className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-            placeholder="株式会社サティスファクトリー"
           />
           {errors.name?.message && (
             <p className="text-xs text-red-500 p-1">{errors.name?.message}</p>
@@ -78,8 +117,8 @@ export default function ContractorEditForm({
               type="text"
               id="title"
               {...register("title", { required: "代表者役職名は必須です" })}
+              onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-              placeholder="代表取締役"
             />
             {errors.title?.message && (
               <p className="text-xs text-red-500 p-1">
@@ -101,8 +140,8 @@ export default function ContractorEditForm({
               {...register("representative", {
                 required: "代表者氏名は必須です",
               })}
+              onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-              placeholder="小松武司"
             />
             {errors.representative?.message && (
               <p className="text-xs text-red-500 p-1">
@@ -126,8 +165,8 @@ export default function ContractorEditForm({
               id="zipCode"
               {...register("zipCode", { required: "郵便番号は必須です" })}
               onChange={handleZipCodeChange}
+
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-              placeholder="1040032"
             />
           </div>
           <div className="pt-2 text-gray-900 col-span-2 sm:text-sm">
@@ -148,10 +187,9 @@ export default function ContractorEditForm({
             <input
               type="text"
               id="prefecture"
-              value={prefecture}
               {...register("prefecture", { required: "必須" })}
+              onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-              placeholder="東京都"
               readOnly
             />
             {errors.prefecture?.message && (
@@ -170,10 +208,9 @@ export default function ContractorEditForm({
             <input
               type="text"
               id="city"
-              value={city}
               {...register("city", { required: "必須" })}
+              onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-              placeholder="中央区"
               readOnly
             />
             {errors.city?.message && (
@@ -191,10 +228,9 @@ export default function ContractorEditForm({
             <input
               type="text"
               id="town"
-              value={town}
               {...register("town", { required: "必須" })}
+              onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-              placeholder="八丁堀"
               readOnly
             />
             {errors.town?.message && (
@@ -214,8 +250,8 @@ export default function ContractorEditForm({
             type="text"
             id="address"
             {...register("address", { required: "住所は必須です" })}
+            onChange={handleChange}
             className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-            placeholder="三丁目12番8号"
           />
           {errors.address?.message && (
             <p className="text-xs text-red-500 p-1">{errors.address.message}</p>
@@ -241,8 +277,8 @@ export default function ContractorEditForm({
             type="text"
             id="address2"
             {...register("address2")}
+            onChange={handleChange}
             className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-            placeholder="HF八丁堀ビル"
           />
         </div>
       </div>
