@@ -9,7 +9,7 @@ import CancelButton from "./CancelButton";
 import { Contractor } from "@/types/types";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { updateContractor } from "@/actions/contractor";
-import getAddressFromZipCode from "@/utils/getAddressFromZipCode";
+import getPrefectureCityTown from "@/utils/getPrefectureCityTown";
 
 export default function ContractorEditForm({
   contractor,
@@ -60,6 +60,26 @@ export default function ContractorEditForm({
 
   const handleChange = () => {
     setFormDataChanged(true);
+  }
+
+  const getAddressFromZipCode = async (e: ChangeEvent<HTMLInputElement>) => {
+
+    const zipCode = e.target.value;
+
+    if (zipCode.length === 7) {
+      try {
+        const { pref, city, town, error } = await getPrefectureCityTown(zipCode)
+
+        if (error) {
+          throw new Error((error as Error).message);
+        }
+        setValue("prefecture", pref);
+        setValue("city", city);
+        setValue("town", town);
+      } catch (error) {
+        console.error("住所データが取得できませんでした.", (error as Error).message || error)
+      }
+    }
   }
 
   if (!userId || userId.length === 0) {
