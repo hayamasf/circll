@@ -9,7 +9,7 @@ import CancelButton from "./CancelButton";
 import { Contractor } from "@/types/types";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { updateContractor } from "@/actions/contractor";
-import getPrefectureCityTown from "@/hooks/getPrefectureCityTown";
+import getAddressFromZipCode from "@/utils/getAddressFromZipCode";
 
 export default function ContractorEditForm({
   contractor,
@@ -34,22 +34,6 @@ export default function ContractorEditForm({
     }
   );
 
-  const handleZipCodeChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const zipCode = e.target.value;
-
-    if (zipCode.length === 7) {
-      try {
-        const { pref, city, town } = await getPrefectureCityTown(zipCode)
-        setValue("prefecture", pref);
-        setValue("city", city);
-        setValue("town", town);
-        console.log(pref, city, town)
-
-      } catch (error) {
-        console.log("住所データが取得できませんでした.", error)
-      }
-    }
-  }
 
   const handleUpdateContractor = (formData: Contractor) => {
     const changedData: Contractor = {
@@ -164,19 +148,19 @@ export default function ContractorEditForm({
               type="text"
               id="zipCode"
               {...register("zipCode", { required: "郵便番号は必須です" })}
-              onChange={handleZipCodeChange}
-
+              onChange={(e) => { getAddressFromZipCode(e) }}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             />
           </div>
           <div className="pt-2 text-gray-900 col-span-2 sm:text-sm">
-            ← ハイフンなし
+            ← ハイフンなし、7桁
           </div>
           {errors.zipCode?.message && (
             <p className="text-xs text-red-500 p-1">{errors.zipCode.message}</p>
           )}
         </div>
-        <div className="flex gap-x-1">
+
+        <div className="grid grid-cols-2 gap-x-1">
           <div className="relative">
             <label
               htmlFor="prefecture"
@@ -217,7 +201,9 @@ export default function ContractorEditForm({
               <p className="text-xs text-red-500 p-1">{errors.city.message}</p>
             )}
           </div>
+        </div>
 
+        <div className="grid grid-cols-2 gap-x-1">
           <div className="relative">
             <label
               htmlFor="town"
@@ -231,31 +217,29 @@ export default function ContractorEditForm({
               {...register("town", { required: "必須" })}
               onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-              readOnly
             />
             {errors.town?.message && (
               <p className="text-xs text-red-500 p-1">{errors.town.message}</p>
             )}
           </div>
-        </div>
-
-        <div className="relative">
-          <label
-            htmlFor="address"
-            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
-          >
-            丁目、番地以下
-          </label>
-          <input
-            type="text"
-            id="address"
-            {...register("address", { required: "住所は必須です" })}
-            onChange={handleChange}
-            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
-          />
-          {errors.address?.message && (
-            <p className="text-xs text-red-500 p-1">{errors.address.message}</p>
-          )}
+          <div className="relative">
+            <label
+              htmlFor="address"
+              className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            >
+              丁目、番地以下
+            </label>
+            <input
+              type="text"
+              id="address"
+              {...register("address", { required: "住所は必須です" })}
+              onChange={handleChange}
+              className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+            />
+            {errors.address?.message && (
+              <p className="text-xs text-red-500 p-1">{errors.address.message}</p>
+            )}
+          </div>
         </div>
 
         <div className="relative">
