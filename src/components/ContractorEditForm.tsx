@@ -20,6 +20,15 @@ export default function ContractorEditForm({
   const { user } = useUser();
   const userId = user?.sub || "";
 
+  if (userId) {
+    return <EditForm contractor={contractor} userId={userId} />
+  }
+  return <div className="mt-10">Loading...</div>;
+}
+
+function EditForm(props: { contractor: Contractor, userId: string }) {
+  const { contractor } = props;
+
   const [formDataChanged, setFormDataChanged] = useState(false);
 
   const {
@@ -68,16 +77,18 @@ export default function ContractorEditForm({
     }
   };
 
-  if (!userId || userId.length === 0) {
-    return <div className="mt-10">Loading...</div>;
-  }
-
   const handleUpdateContractor = (formData: Contractor) => {
+
+    const data = {
+      ...formData,
+      updatedBy: props.userId
+    }
     const changedData: Partial<Contractor> = {
     };
-    Object.keys(formData).forEach((key) => {
-      if (formData[key] !== contractor[key]) {
-        changedData[key] = formData[key];
+
+    Object.keys(data).forEach((key) => {
+      if (data[key] !== contractor[key]) {
+        changedData[key] = data[key];
       }
     })
 
