@@ -42,23 +42,35 @@ export default function ContractorForm() {
     },
   });
 
-  const getAddressFromZipCode = async (e: ChangeEvent<HTMLInputElement>) => {
+  const getAddressFromZipCode = async (zipCode: string) => {
 
-    const zipCode = e.target.value;
+    try {
+      const { pref, city, town, error } = await getPrefectureCityTown(zipCode)
 
-    if (zipCode.length === 7) {
-      try {
-        const { pref, city, town, error } = await getPrefectureCityTown(zipCode)
-
-        if (error) {
-          throw new Error((error as Error).message);
-        }
-        setValue("prefecture", pref);
-        setValue("city", city);
-        setValue("town", town);
-      } catch (error) {
-        console.error("住所データが取得できませんでした.", (error as Error).message || error)
+      if (error) {
+        throw new Error((error as Error).message);
       }
+      return { pref, city, town }
+    } catch (error) {
+      console.error("住所データが取得できませんでした.", (error as Error).message || error)
+    }
+
+  }
+
+  const setPrefCityTown = ({ pref, city, town }: { pref: string; city: string; town: string; }) => {
+    setValue("prefecture", pref);
+    setValue("city", city);
+    setValue("town", town)
+  }
+
+  const handleZipCodeInput = async (e: ChangeEvent<HTMLInputElement>) => {
+    const zipCode = e.target.value;
+    if (zipCode.length === 7) {
+      const prefCityTown = await getAddressFromZipCode(zipCode);
+      if (prefCityTown) {
+        setPrefCityTown(prefCityTown)
+      }
+
     }
   }
 
@@ -148,7 +160,7 @@ export default function ContractorForm() {
               type="text"
               id="zipCode"
               {...register("zipCode", { required: "郵便番号は必須です" })}
-              onChange={(e) => { getAddressFromZipCode(e) }}
+              onChange={(e) => { handleZipCodeInput(e) }}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="1040032"
             />
