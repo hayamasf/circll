@@ -41,7 +41,6 @@ function Form(props: { userId: string }) {
       town: "",
       address: "",
       address2: "",
-      createdBy: props.userId,
     },
   });
 
