@@ -10,14 +10,13 @@ import { Contractor } from "@/types/types";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { createContractor } from "@/actions/contractor";
-import fetchPrefCityTown from "@/hooks/fetchPrefCityTown";
+import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
 
 const handleCreateContractor = (formData: Contractor) => {
   createContractor(formData);
 };
 
 export default function ContractorForm() {
-
   const { user } = useUser();
   const userId = user?.sub || "";
 
@@ -42,22 +41,29 @@ export default function ContractorForm() {
     },
   });
 
-  const setPrefCityTown = ({ pref, city, town }: { pref: string; city: string; town: string; }) => {
+  const setPrefCityTown = ({
+    pref,
+    city,
+    town,
+  }: {
+    pref: string;
+    city: string;
+    town: string;
+  }) => {
     setValue("prefecture", pref);
     setValue("city", city);
-    setValue("town", town)
-  }
+    setValue("town", town);
+  };
 
   const handleZipCodeInput = async (e: ChangeEvent<HTMLInputElement>) => {
     const zipCode = e.target.value;
     if (zipCode.length === 7) {
       const prefCityTown = await fetchPrefCityTown(zipCode);
       if (prefCityTown) {
-        setPrefCityTown(prefCityTown)
+        setPrefCityTown(prefCityTown);
       }
-
     }
-  }
+  };
 
   if (!userId || userId.length === 0) {
     return <div className="mt-10">Loading...</div>;
@@ -145,7 +151,9 @@ export default function ContractorForm() {
               type="text"
               id="zipCode"
               {...register("zipCode", { required: "郵便番号は必須です" })}
-              onChange={(e) => { handleZipCodeInput(e) }}
+              onChange={(e) => {
+                handleZipCodeInput(e);
+              }}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               placeholder="1040032"
             />
@@ -202,7 +210,6 @@ export default function ContractorForm() {
           </div>
         </div>
 
-
         {/* ここから */}
         <div className="grid grid-cols-2 gap-x-1">
           <div className="relative">
@@ -238,7 +245,9 @@ export default function ContractorForm() {
               placeholder="三丁目12番8号"
             />
             {errors.address?.message && (
-              <p className="text-xs text-red-500 p-1">{errors.address.message}</p>
+              <p className="text-xs text-red-500 p-1">
+                {errors.address.message}
+              </p>
             )}
           </div>
         </div>
