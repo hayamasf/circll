@@ -12,7 +12,7 @@ import { updateContractor } from "@/actions/contractor";
 import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
 
 export default function ContractorEditForm({
-  contractor,
+  contractor
 }: {
   contractor: Contractor;
 }) {
@@ -39,7 +39,7 @@ export default function ContractorEditForm({
         city: contractor.city,
         town: contractor.town,
         address: contractor.address,
-        address2: contractor.addres2,
+        address2: contractor.address2,
       }
     }
   );
