@@ -10,7 +10,7 @@ import { Contractor } from "@/types/types";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { createContractor } from "@/actions/contractor";
-import getPrefectureCityTown from "@/utils/getPrefectureCityTown";
+import fetchPrefCityTown from "@/hooks/fetchPrefCityTown";
 
 const handleCreateContractor = (formData: Contractor) => {
   createContractor(formData);
@@ -42,21 +42,6 @@ export default function ContractorForm() {
     },
   });
 
-  const getAddressFromZipCode = async (zipCode: string) => {
-
-    try {
-      const { pref, city, town, error } = await getPrefectureCityTown(zipCode)
-
-      if (error) {
-        throw new Error((error as Error).message);
-      }
-      return { pref, city, town }
-    } catch (error) {
-      console.error("住所データが取得できませんでした.", (error as Error).message || error)
-    }
-
-  }
-
   const setPrefCityTown = ({ pref, city, town }: { pref: string; city: string; town: string; }) => {
     setValue("prefecture", pref);
     setValue("city", city);
@@ -66,7 +51,7 @@ export default function ContractorForm() {
   const handleZipCodeInput = async (e: ChangeEvent<HTMLInputElement>) => {
     const zipCode = e.target.value;
     if (zipCode.length === 7) {
-      const prefCityTown = await getAddressFromZipCode(zipCode);
+      const prefCityTown = await fetchPrefCityTown(zipCode);
       if (prefCityTown) {
         setPrefCityTown(prefCityTown)
       }
