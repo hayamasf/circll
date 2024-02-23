@@ -12,13 +12,17 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { createContractor } from "@/actions/contractor";
 import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
 
-const handleCreateContractor = (formData: Contractor) => {
-  createContractor(formData);
-};
-
 export default function ContractorForm() {
   const { user } = useUser();
   const userId = user?.sub || "";
+
+  if (userId) {
+    return <Form userId={userId} />
+  }
+  return <div className="mt-10">Loading...</div>;
+}
+
+function Form(props: { userId: string }) {
 
   const {
     register,
@@ -37,7 +41,7 @@ export default function ContractorForm() {
       town: "",
       address: "",
       address2: "",
-      createdBy: userId,
+      createdBy: props.userId,
     },
   });
 
@@ -65,13 +69,18 @@ export default function ContractorForm() {
     }
   };
 
-  if (!userId || userId.length === 0) {
-    return <div className="mt-10">Loading...</div>;
-  }
+  const handleCreateContractor = (formData: Contractor) => {
+    const data = {
+      ...formData,
+      createdBy: props.userId
+    }
+    createContractor(data);
+  };
 
   return (
     <form onSubmit={handleSubmit(handleCreateContractor)} className="mt-10">
       <input type="hidden" id="createdBy" {...register("createdBy")} />
+      {/* <div>{props.userId}</div> */}
       <div className="grid gap-y-8">
         <div className="relative">
           <label
