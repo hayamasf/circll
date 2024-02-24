@@ -77,32 +77,39 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
     }
   };
 
-  const handleUpdateContractor = (formData: Contractor) => {
+  // const handleUpdateContractor = (formData: Contractor) => {
 
+  //   const data = {
+  //     ...formData,
+  //     updatedBy: props.userId
+  //   }
+  //   const changedData: Partial<Contractor> = {
+  //   };
+
+  //   Object.keys(data).forEach((key) => {
+  //     if (data[key] !== contractor[key]) {
+  //       changedData[key] = data[key];
+  //     }
+  //   })
+
+  //   updateContractor(changedData as Contractor);
+  // };
+
+  // const handleChange = () => {
+  //   setFormDataChanged(true);
+  // }
+
+  const onSubmit = (formData: Contractor) => {
     const data = {
       ...formData,
-      updatedBy: props.userId
+      createdBy: props.userId
     }
-    const changedData: Partial<Contractor> = {
-    };
-
-    Object.keys(data).forEach((key) => {
-      if (data[key] !== contractor[key]) {
-        changedData[key] = data[key];
-      }
-    })
-
-    updateContractor(changedData as Contractor);
+    updateContractor(data);
   };
 
 
-  const handleChange = () => {
-    setFormDataChanged(true);
-  }
-
-
   return (
-    <form onSubmit={handleSubmit(handleUpdateContractor)} className="mt-10">
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
       <div className="grid gap-y-8">
         <div className="relative">
           <label
@@ -115,7 +122,7 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
             type="text"
             id="name"
             {...register("name", { required: "業者名は必須です" })}
-            onChange={handleChange}
+            // onChange={handleChange}
             className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
           />
           {errors.name?.message && (
@@ -135,7 +142,7 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
               type="text"
               id="title"
               {...register("title", { required: "代表者役職名は必須です" })}
-              onChange={handleChange}
+              // onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             />
             {errors.title?.message && (
@@ -158,7 +165,7 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
               {...register("representative", {
                 required: "代表者氏名は必須です",
               })}
-              onChange={handleChange}
+              // onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             />
             {errors.representative?.message && (
@@ -183,7 +190,7 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
               id="zipCode"
               {...register("zipCode", { required: "郵便番号は必須です" })}
               onChange={(e) => {
-                handleChange;
+                // handleChange;
                 handleZipCodeInput(e);
               }}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
@@ -209,7 +216,7 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
               type="text"
               id="prefecture"
               {...register("prefecture", { required: "必須" })}
-              onChange={handleChange}
+              // onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               readOnly
             />
@@ -230,7 +237,7 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
               type="text"
               id="city"
               {...register("city", { required: "必須" })}
-              onChange={handleChange}
+              // onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               readOnly
             />
@@ -252,7 +259,7 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
               type="text"
               id="town"
               {...register("town", { required: "必須" })}
-              onChange={handleChange}
+              // onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             />
             {errors.town?.message && (
@@ -270,7 +277,7 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
               type="text"
               id="address"
               {...register("address", { required: "住所は必須です" })}
-              onChange={handleChange}
+              // onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             />
             {errors.address?.message && (
@@ -298,7 +305,7 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
             type="text"
             id="address2"
             {...register("address2")}
-            onChange={handleChange}
+            // onChange={handleChange}
             className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
           />
         </div>
