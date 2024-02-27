@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 // or type Contractor
-export async function createContractor(data: FormData) {
+export async function createContractor(data: Contractor) {
   // await prisma.contractor.create({
   //     data: {
   //         name: formData.name,
