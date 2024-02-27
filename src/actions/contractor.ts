@@ -5,7 +5,8 @@ import { Contractor } from "@/types/types";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function createContractor(data: Contractor) {
+// or type Contractor
+export async function createContractor(data: FormData) {
   // await prisma.contractor.create({
   //     data: {
   //         name: formData.name,
@@ -25,8 +26,8 @@ export async function createContractor(data: Contractor) {
   redirect("/contractors");
 }
 
-export async function updateContractor(formData: Contractor) {
-  console.log(formData);
+export async function updateContractor(data: Record<string, string>) {
+  console.log(data)
   revalidatePath("/contractors");
   redirect("/contractors");
 }

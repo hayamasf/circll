@@ -12,46 +12,65 @@ import { updateContractor } from "@/actions/contractor";
 import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
 
 export default function ContractorEditForm({
-  contractor
+  contractor,
 }: {
   contractor: Contractor;
 }) {
-
   const { user } = useUser();
   const userId = user?.sub || "";
 
   if (userId) {
-    return <EditForm contractor={contractor} userId={userId} />
+    return <EditForm contractor={contractor} userId={userId} />;
   }
   return <div className="mt-10">Loading...</div>;
 }
 
-function EditForm(props: { contractor: Contractor, userId: string }) {
+function EditForm(props: { contractor: Contractor; userId: string }) {
   const { contractor } = props;
 
   const [formDataChanged, setFormDataChanged] = useState(false);
 
   const {
+    getValues,
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, dirtyFields },
     setValue,
-  } = useForm<Contractor>(
-    {
-      defaultValues: {
-        name: contractor.name,
-        title: contractor.title,
-        representative: contractor.representative,
-        zipCode: contractor.zipCode,
-        prefecture: contractor.prefecture,
-        city: contractor.city,
-        town: contractor.town,
-        address: contractor.address,
-        address2: contractor.address2,
+  } = useForm<Contractor>({
+    defaultValues: {
+      name: contractor.name,
+      title: contractor.title,
+      representative: contractor.representative,
+      zipCode: contractor.zipCode,
+      prefecture: contractor.prefecture,
+      city: contractor.city,
+      town: contractor.town,
+      address: contractor.address,
+      address2: contractor.address2,
+    },
+  });
+
+  // const getDirtyFields = () => {
+  //   return dirtyFields;
+  // }
+
+  const onSubmit = () => {
+    // const formData = new FormData();
+
+    const dirtyFieldValues: Record<string, string> = {};
+    Object.keys(dirtyFields).forEach((fieldName) => {
+      if (dirtyFields[fieldName]) {
+        // formData.append(fieldName, getValues(fieldName))
+        dirtyFieldValues[fieldName] = getValues(fieldName);
       }
-    }
-  );
+    });
+    console.log(dirtyFieldValues);
+    updateContractor(dirtyFieldValues)
+
+    // console.log(formData);
+    // updateContractor(formData)
+  };
 
   const setPrefCityTown = ({
     pref,
@@ -62,13 +81,14 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
     city: string;
     town: string;
   }) => {
-    setValue("prefecture", pref);
-    setValue("city", city);
-    setValue("town", town);
+    setValue("prefecture", pref, { shouldDirty: true });
+    setValue("city", city, { shouldDirty: true });
+    setValue("town", town, { shouldDirty: true });
   };
 
   const handleZipCodeInput = async (e: ChangeEvent<HTMLInputElement>) => {
     const zipCode = e.target.value;
+
     if (zipCode.length === 7) {
       const prefCityTown = await fetchPrefCityTown(zipCode);
       if (prefCityTown) {
@@ -99,14 +119,39 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
   //   setFormDataChanged(true);
   // }
 
-  const onSubmit = (formData: Contractor) => {
-    const data = {
-      ...formData,
-      createdBy: props.userId
-    }
-    updateContractor(data);
-  };
+  // const onSubmit = (formData: Contractor) => {
+  //   const updatedFields: Partial<Contractor> = {}
+  //   Object.keys(dirtyFields).forEach((fieldName) => {
+  //     updatedFields[fieldName] = formData[fieldName];
+  //   })
+  //   updateContractor(updatedFields as Contractor);
+  // };
 
+  // type UnknownObject = Record<string, unknown>;
+  // type UnknownArrayOrObject = unknown[] | UnknownObject;
+
+  // const dirtyValues = (
+  //   dirtyFields: unknown | DirtyField,
+  //   allValues: UnknownArrayOrObject | unknown[]
+  // ): UnknownArrayOrObject | unknown => {
+
+  //   if (dirtyFields === true || Array.isArray(dirtyFields))
+  //     return allValues;
+
+  //   const dirtyFieldsObject = dirtyFields as UnknownObject;
+  //   const allValuesObject = allValues as UnknownObject;
+
+  //   return Object.fromEntries(
+  //     Object.keys(dirtyFieldsObject).map((key) => [
+  //       key,
+  //       dirtyFields(dirtyFieldsObject[key], allValuesObject[key])
+  //     ])
+  //   )
+  // }
+
+  // const onSubmit = (FormData: Contractor) => {
+  //   alert(JSON.stringify(dirtyValues(dirtyFields, FormData)));
+  // }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
@@ -122,7 +167,6 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
             type="text"
             id="name"
             {...register("name", { required: "業者名は必須です" })}
-            // onChange={handleChange}
             className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
           />
           {errors.name?.message && (
@@ -142,7 +186,6 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
               type="text"
               id="title"
               {...register("title", { required: "代表者役職名は必須です" })}
-              // onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             />
             {errors.title?.message && (
@@ -165,7 +208,6 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
               {...register("representative", {
                 required: "代表者氏名は必須です",
               })}
-              // onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             />
             {errors.representative?.message && (
@@ -188,11 +230,12 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
             <input
               type="text"
               id="zipCode"
-              {...register("zipCode", { required: "郵便番号は必須です" })}
-              onChange={(e) => {
-                // handleChange;
-                handleZipCodeInput(e);
-              }}
+              {...register("zipCode", {
+                required: "郵便番号は必須です",
+                onChange: (e) => {
+                  handleZipCodeInput(e);
+                },
+              })}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             />
           </div>
@@ -216,7 +259,6 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
               type="text"
               id="prefecture"
               {...register("prefecture", { required: "必須" })}
-              // onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               readOnly
             />
@@ -237,7 +279,6 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
               type="text"
               id="city"
               {...register("city", { required: "必須" })}
-              // onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               readOnly
             />
@@ -259,7 +300,6 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
               type="text"
               id="town"
               {...register("town", { required: "必須" })}
-              // onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             />
             {errors.town?.message && (
@@ -277,11 +317,12 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
               type="text"
               id="address"
               {...register("address", { required: "住所は必須です" })}
-              // onChange={handleChange}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             />
             {errors.address?.message && (
-              <p className="text-xs text-red-500 p-1">{errors.address.message}</p>
+              <p className="text-xs text-red-500 p-1">
+                {errors.address.message}
+              </p>
             )}
           </div>
         </div>
@@ -305,7 +346,6 @@ function EditForm(props: { contractor: Contractor, userId: string }) {
             type="text"
             id="address2"
             {...register("address2")}
-            // onChange={handleChange}
             className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
           />
         </div>
