@@ -1,34 +1,23 @@
 "use client";
 
-import React, { useState, ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
 import { Contractor } from "@/types/types";
-import { useUser } from "@auth0/nextjs-auth0/client";
 import { updateContractor } from "@/actions/contractor";
 import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
+import { usePathname } from "next/navigation";
 
 export default function ContractorEditForm({
   contractor,
 }: {
   contractor: Contractor;
 }) {
-  const { user } = useUser();
-  const userId = user?.sub || "";
 
-  if (userId) {
-    return <EditForm contractor={contractor} userId={userId} />;
-  }
-  return <div className="mt-10">Loading...</div>;
-}
-
-function EditForm(props: { contractor: Contractor; userId: string }) {
-  const { contractor } = props;
-
-  const [formDataChanged, setFormDataChanged] = useState(false);
+  const pathname = usePathname()
 
   const {
     getValues,
@@ -51,25 +40,22 @@ function EditForm(props: { contractor: Contractor; userId: string }) {
     },
   });
 
-  // const getDirtyFields = () => {
-  //   return dirtyFields;
-  // }
-
-  const onSubmit = () => {
-    // const formData = new FormData();
-
+  const getDirtyFieldValues = () => {
     const dirtyFieldValues: Record<string, string> = {};
     Object.keys(dirtyFields).forEach((fieldName) => {
       if (dirtyFields[fieldName]) {
-        // formData.append(fieldName, getValues(fieldName))
         dirtyFieldValues[fieldName] = getValues(fieldName);
       }
     });
-    console.log(dirtyFieldValues);
-    updateContractor(dirtyFieldValues)
 
-    // console.log(formData);
-    // updateContractor(formData)
+    return dirtyFieldValues;
+  }
+
+  const onSubmit = () => {
+    const data = getDirtyFieldValues();
+    console.log(pathname);
+    console.log(data);
+    updateContractor(data)
   };
 
   const setPrefCityTown = ({
@@ -96,62 +82,6 @@ function EditForm(props: { contractor: Contractor; userId: string }) {
       }
     }
   };
-
-  // const handleUpdateContractor = (formData: Contractor) => {
-
-  //   const data = {
-  //     ...formData,
-  //     updatedBy: props.userId
-  //   }
-  //   const changedData: Partial<Contractor> = {
-  //   };
-
-  //   Object.keys(data).forEach((key) => {
-  //     if (data[key] !== contractor[key]) {
-  //       changedData[key] = data[key];
-  //     }
-  //   })
-
-  //   updateContractor(changedData as Contractor);
-  // };
-
-  // const handleChange = () => {
-  //   setFormDataChanged(true);
-  // }
-
-  // const onSubmit = (formData: Contractor) => {
-  //   const updatedFields: Partial<Contractor> = {}
-  //   Object.keys(dirtyFields).forEach((fieldName) => {
-  //     updatedFields[fieldName] = formData[fieldName];
-  //   })
-  //   updateContractor(updatedFields as Contractor);
-  // };
-
-  // type UnknownObject = Record<string, unknown>;
-  // type UnknownArrayOrObject = unknown[] | UnknownObject;
-
-  // const dirtyValues = (
-  //   dirtyFields: unknown | DirtyField,
-  //   allValues: UnknownArrayOrObject | unknown[]
-  // ): UnknownArrayOrObject | unknown => {
-
-  //   if (dirtyFields === true || Array.isArray(dirtyFields))
-  //     return allValues;
-
-  //   const dirtyFieldsObject = dirtyFields as UnknownObject;
-  //   const allValuesObject = allValues as UnknownObject;
-
-  //   return Object.fromEntries(
-  //     Object.keys(dirtyFieldsObject).map((key) => [
-  //       key,
-  //       dirtyFields(dirtyFieldsObject[key], allValuesObject[key])
-  //     ])
-  //   )
-  // }
-
-  // const onSubmit = (FormData: Contractor) => {
-  //   alert(JSON.stringify(dirtyValues(dirtyFields, FormData)));
-  // }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
@@ -356,4 +286,9 @@ function EditForm(props: { contractor: Contractor; userId: string }) {
       </div>
     </form>
   );
+
+}
+
+function EditForm(props: { contractor: Contractor }) {
+
 }

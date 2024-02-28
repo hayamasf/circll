@@ -33,8 +33,10 @@ export async function createContractor(data: Contractor) {
 export async function updateContractor(data: Record<string, string>) {
   const session = await getSession()
   const userId = session?.user.sub;
+
   console.log(data)
   console.log(userId)
+
   revalidatePath("/contractors");
   redirect("/contractors");
 }
