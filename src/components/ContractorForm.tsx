@@ -67,17 +67,12 @@ function Form(props: { userId: string }) {
     }
   };
 
-  const handleCreateContractor = (formData: Contractor) => {
-    const data = {
-      ...formData,
-      createdBy: props.userId,
-    };
+  const onSubmit = (data: Contractor) => {
     createContractor(data);
   };
 
   return (
-    <form onSubmit={handleSubmit(handleCreateContractor)} className="mt-10">
-      <input type="hidden" id="createdBy" {...register("createdBy")} />
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
       <div className="grid gap-y-8">
         <div className="relative">
           <label
