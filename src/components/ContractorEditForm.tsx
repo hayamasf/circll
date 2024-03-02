@@ -9,22 +9,22 @@ import CancelButton from "./CancelButton";
 import { Contractor } from "@/types/types";
 import { updateContractor } from "@/actions/contractor";
 import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
-import { usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 
 export default function ContractorEditForm({
   contractor,
 }: {
   contractor: Contractor;
 }) {
-
-  const pathname = usePathname()
+  const params = useParams<{ id: string }>();
+  const id = params.id;
 
   const {
     getValues,
     register,
     handleSubmit,
     reset,
-    formState: { errors, dirtyFields },
+    formState: { errors, dirtyFields, isDirty },
     setValue,
   } = useForm<Contractor>({
     defaultValues: {
@@ -49,13 +49,14 @@ export default function ContractorEditForm({
     });
 
     return dirtyFieldValues;
-  }
+  };
 
   const onSubmit = () => {
     const data = getDirtyFieldValues();
-    console.log(pathname);
+    const updateContractorWithId = updateContractor.bind(null, id);
+    console.log(id);
     console.log(data);
-    updateContractor(data)
+    updateContractorWithId(data);
   };
 
   const setPrefCityTown = ({
@@ -281,14 +282,9 @@ export default function ContractorEditForm({
         </div>
       </div>
       <div className="mt-10 grid gap-y-5">
-        <SubmitButton label="登録" />
+        <SubmitButton label="登録" disabled={!isDirty} />
         <CancelButton label="キャンセル" onClick={() => reset()} />
       </div>
     </form>
   );
-
-}
-
-function EditForm(props: { contractor: Contractor }) {
-
 }
