@@ -30,17 +30,22 @@ export async function createContractor(data: Contractor) {
 }
 
 export async function updateContractor(id: string, data: Partial<Contractor>) {
-  const session = await getSession();
-  const userId = session?.user.sub;
+  try {
+    const session = await getSession();
+    const userId = session?.user.sub;
 
-  await prisma.contractor.update({
-    where: { id: id },
-    data: { updatedBy: userId },
-  });
+    await prisma.contractor.update({
+      where: { id: id },
+      data: { 
+        ...data,
+        updatedBy: userId,
+       },  
+    });
 
-  console.log(data);
-  console.log(id);
+    return {success: true, message: "更新が成功しました."};
 
-  revalidatePath("/contractors");
-  redirect("/contractors");
+  } catch(error) {
+    console.error("データの更新に失敗しました.", error);
+    throw new Error("データの更新に失敗しました.")
+  }
 }

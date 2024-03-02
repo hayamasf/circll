@@ -2,6 +2,7 @@
 
 import React, { ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
@@ -11,11 +12,15 @@ import { updateContractor } from "@/actions/contractor";
 import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
 import { useParams } from "next/navigation";
 
+
 export default function ContractorEditForm({
   contractor,
 }: {
   contractor: Contractor;
 }) {
+
+  const router = useRouter();
+
   const params = useParams<{ id: string }>();
   const id = params.id;
 
@@ -51,12 +56,26 @@ export default function ContractorEditForm({
     return dirtyFieldValues;
   };
 
-  const onSubmit = () => {
-    const data = getDirtyFieldValues();
-    const updateContractorWithId = updateContractor.bind(null, id);
-    console.log(id);
-    console.log(data);
-    updateContractorWithId(data);
+  const onSubmit = async () => {
+
+    try {
+      const data = getDirtyFieldValues();
+      const updateContractorWithId = updateContractor.bind(null, id);
+      const result = await updateContractorWithId(data);
+      if (result.success) {
+        console.log(result.message)
+
+        router.push(`/contractors/${id}`)
+
+      }
+      else {
+        console.error(result.message)
+      }
+    }
+    catch (error) {
+      console.error("データ更新時にエラーが発生しました.", error)
+
+    }
   };
 
   const setPrefCityTown = ({

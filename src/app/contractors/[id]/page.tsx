@@ -44,24 +44,32 @@ export default async function Page({ params }: { params: { id: string } }) {
             <dt className="text-sm font-medium leading-6 text-gray-900">
               登録
             </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
+            <dd className="mt-1 text-xs leading-6 text-gray-700 sm:mt-2">
               {formatDateTime(contractor.createdAt)}
             </dd>
-            <dd className="text-sm leading-6 text-gray-700">
+            <dd className="text-xs leading-6 text-gray-700">
               {contractor.createdBy}
             </dd>
           </div>
+
           <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
             <dt className="text-sm font-medium leading-6 text-gray-900">
               更新
             </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
-              {contractor.createdAt.toLocaleString("ja-JP")}
-            </dd>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">
-              {contractor.updatedBy}
-            </dd>
+            {contractor.updatedBy &&
+              <div>
+                <dd className="mt-1 text-xs leading-6 text-gray-700 sm:mt-2">
+                  {contractor.createdAt.toLocaleString("ja-JP")}
+                </dd>
+                <dd className="text-xs leading-6 text-gray-700">
+                  {contractor.updatedBy}
+
+                </dd>
+              </div>
+            }
           </div>
+
+
         </dl>
       </div>
     </div>
