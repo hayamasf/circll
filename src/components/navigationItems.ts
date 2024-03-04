@@ -12,7 +12,7 @@ export const navigationItems: NavigationItem[] = [
   {
     id: 2,
     name: "排出事業者",
-    href: "#",
+    href: "/clients",
     icon: BuildingOfficeIcon,
     current: false,
   },
