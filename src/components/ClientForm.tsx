@@ -57,7 +57,8 @@ export default function ClientForm() {
     }
   };
 
-  const onSubmit = (data: Contractor) => {
+  const onSubmit = (data: any) => {
+    console.log(data)
     createClient(data);
   };
 
