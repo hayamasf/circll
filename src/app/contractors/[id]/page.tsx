@@ -56,20 +56,17 @@ export default async function Page({ params }: { params: { id: string } }) {
             <dt className="text-sm font-medium leading-6 text-gray-900">
               更新
             </dt>
-            {contractor.updatedBy &&
+            {contractor.updatedBy && (
               <div>
                 <dd className="mt-1 text-xs leading-6 text-gray-700 sm:mt-2">
                   {contractor.createdAt.toLocaleString("ja-JP")}
                 </dd>
                 <dd className="text-xs leading-6 text-gray-700">
                   {contractor.updatedBy}
-
                 </dd>
               </div>
-            }
+            )}
           </div>
-
-
         </dl>
       </div>
     </div>

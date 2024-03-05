@@ -12,13 +12,11 @@ import { updateContractor } from "@/actions/contractor";
 import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
 import { useParams } from "next/navigation";
 
-
 export default function ContractorEditForm({
   contractor,
 }: {
   contractor: Contractor;
 }) {
-
   const router = useRouter();
 
   const params = useParams<{ id: string }>();
@@ -57,24 +55,19 @@ export default function ContractorEditForm({
   };
 
   const onSubmit = async () => {
-
     try {
       const data = getDirtyFieldValues();
       const updateContractorWithId = updateContractor.bind(null, id);
       const result = await updateContractorWithId(data);
       if (result.success) {
-        console.log(result.message)
+        console.log(result.message);
 
-        router.push(`/contractors/${id}`)
-
+        router.push(`/contractors/${id}`);
+      } else {
+        console.error(result.message);
       }
-      else {
-        console.error(result.message)
-      }
-    }
-    catch (error) {
-      console.error("データ更新時にエラーが発生しました.", error)
-
+    } catch (error) {
+      console.error("データ更新時にエラーが発生しました.", error);
     }
   };
 

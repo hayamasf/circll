@@ -36,16 +36,15 @@ export async function updateContractor(id: string, data: Partial<Contractor>) {
 
     await prisma.contractor.update({
       where: { id: id },
-      data: { 
+      data: {
         ...data,
         updatedBy: userId,
-       },  
+      },
     });
 
-    return {success: true, message: "更新が成功しました."};
-
-  } catch(error) {
+    return { success: true, message: "更新が成功しました." };
+  } catch (error) {
     console.error("データの更新に失敗しました.", error);
-    throw new Error("データの更新に失敗しました.")
+    throw new Error("データの更新に失敗しました.");
   }
 }
