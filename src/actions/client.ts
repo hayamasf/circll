@@ -1,3 +1,5 @@
+"use server";
+
 import { getSession } from "@auth0/nextjs-auth0";
 
 export async function createClient(data: any) {
@@ -5,4 +7,5 @@ export async function createClient(data: any) {
   const userId = session?.user.sub;
 
   console.log(userId);
+  console.log(data)
 }
