@@ -64,74 +64,57 @@ export default function ClientForm() {
 
   const isSoleProprietor = watch("isSoleProprietor");
 
-  const notificationMethods = [
-    { id: "email", title: "前" },
-    { id: "sms", title: "後ろ" },
+  const entityTypePositions = [
+    { id: "before", title: "前" },
+    { id: "after", title: "後ろ" },
   ];
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
       <div className="grid gap-y-8">
-        {/* <div className="relative">
-                    <label htmlFor="entityType" className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900">
-                        法人格の種類
-                    </label>
-                    <select
-                        id="entityType"
-                        {...register("entityType")}
-                        className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-                    >
-                        <option>株式会社</option>
-                        <option>有限会社</option>
-                        <option>合同会社</option>
-                        <option>合名会社</option>
-                        <option>合資会社</option>
-                    </select>
-                </div> */}
+        <div className="relative">
+          <label htmlFor="entityType" className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900">
+            法人格の種類
+          </label>
+          <select
+            id="entityType"
+            {...register("entityType")}
+            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
+          >
+            <option value="株式会社">株式会社</option>
+            <option value="有限会社">有限会社</option>
+            <option value="合同会社">合同会社</option>
+            <option value="合名会社">合名会社</option>
+            <option value="合資会社">合資会社</option>
+          </select>
+        </div>
         <div>
           <label className="ml-3 text-xs text-gray-800">法人格の位置</label>
           <fieldset className="mt-0">
             <legend className="sr-only">法人格の位置</legend>
             <div className="ml-3 flex items-center space-x-10">
-              {notificationMethods.map((notificationMethod) => (
-                <div key={notificationMethod.id} className="flex items-center">
+              {entityTypePositions.map((position) => (
+                <div key={position.id} className="flex items-center">
                   <input
-                    id={notificationMethod.id}
-                    name="notification-method"
+                    id={position.id}
                     type="radio"
-                    defaultChecked={notificationMethod.id === "email"}
+                    value={String(position.id === "before")}
+                    defaultChecked={position.id === "before"}
                     className="h-4 w-4 border-gray-300 text-gray-600 focus:ring-gray-600"
+                    {...register("entityTypeBeforeName")}
                   />
                   <label
-                    htmlFor={notificationMethod.id}
+                    htmlFor={position.id}
                     className="ml-3 block text-sm font-medium leading-6 text-gray-900"
                   >
-                    {notificationMethod.title}
+                    {position.title}
                   </label>
                 </div>
               ))}
             </div>
           </fieldset>
         </div>
-        {/* <div className="relative flex items-start">
-                    <div className="flex h-6 items-center">
-                        <input
-                            id="isSoleProprietor"
-                            aria-describedby="comments-description"
-                            {...register("isSoleProprietor")}
-                            type="checkbox"
-                            className="h-4 w-4 rounded border-gray-300 text-gray-600 focus:ring-gray-600"
-                        />
-                    </div>
-                    <div className="ml-3 text-sm leading-6">
-                        <label htmlFor="isSoleProprietor" className="font-medium text-gray-900">
-                            個人事業者
-                        </label>{' '}
-                        <span id="isSoleProprietor-description" className="text-gray-500">
-                            <span className="sr-only">個人事業者 </span>法人でない場合にチェック
-                        </span>
-                    </div>
-                </div> */}
+
         <div className="relative">
           <label
             htmlFor="name"
