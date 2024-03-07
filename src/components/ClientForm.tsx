@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
-import { Contractor } from "@/types/types";
+import { Client } from "@/types/types";
 
 import { createClient } from "@/actions/client";
 import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
@@ -19,7 +19,7 @@ export default function ClientForm() {
     setValue,
     formState: { errors },
     watch,
-  } = useForm<Contractor>({
+  } = useForm<Client>({
     defaultValues: {
       name: "",
       title: "",
@@ -62,8 +62,6 @@ export default function ClientForm() {
     createClient(data);
   };
 
-  const isSoleProprietor = watch("isSoleProprietor");
-
   const entityTypePositions = [
     { id: "before", title: "前" },
     { id: "after", title: "後ろ" },
@@ -101,7 +99,7 @@ export default function ClientForm() {
                     value={String(position.id === "before")}
                     defaultChecked={position.id === "before"}
                     className="h-4 w-4 border-gray-300 text-gray-600 focus:ring-gray-600"
-                    {...register("entityTypeBeforeName")}
+                    {...register("isPrefixEntityType")}
                   />
                   <label
                     htmlFor={position.id}
@@ -146,11 +144,10 @@ export default function ClientForm() {
               type="text"
               id="title"
               {...register("title", {
-                required: isSoleProprietor ? false : "代表者役職名は必須です",
+                required: "代表者役職名は必須です",
               })}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
               placeholder="代表取締役"
-              disabled={isSoleProprietor}
             />
             {errors.title?.message && (
               <p className="text-xs text-red-500 p-1">

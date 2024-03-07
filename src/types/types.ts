@@ -26,3 +26,23 @@ export type Contractor = {
   updatedBy?: string | null;
   [key: string]: any;
 };
+
+export type Client = {
+  id:                 number;
+  createdAt:          Date;
+  createdBy:          string;
+  updatedAt:          Date;
+  updatedBy?:          string;
+  entityType?:         string;
+  isPrefixEntityType?: boolean;
+  name:               string;
+  tradeName?:          string;
+  title?:              string;
+  representative?:     string;
+  zipCode:            string;
+  prefecture:         string;
+  city:               string;
+  town:               string;
+  address:            string;
+  address2?:           string;
+}
