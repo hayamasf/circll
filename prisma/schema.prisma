@@ -46,6 +46,5 @@ model Client {
   town              String
   address           String
   address2          String?
-
 }
 
