@@ -58,7 +58,7 @@ export default function ClientForm() {
   };
 
   const onSubmit = (data: any) => {
-    console.log(data)
+    console.log(data);
     createClient(data);
   };
 
@@ -71,7 +71,10 @@ export default function ClientForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
       <div className="grid gap-y-8">
         <div className="relative">
-          <label htmlFor="entityType" className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900">
+          <label
+            htmlFor="entityType"
+            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+          >
             法人格の種類
           </label>
           <select
