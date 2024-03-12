@@ -12,23 +12,23 @@ export async function createClient(data: Client) {
     const session = await getSession();
     const userId = session?.user.sub;
 
-    await prisma.client.create({
-      data: {
-        createdBy: userId,
-        entityType: data.entityType,
-        name: data.name,
-        tradeName: data.tradeName,
-        title: data.title,
-        representative: data.representative,
-        zipCode: data.zipCode,
-        prefecture: data.prefecture,
-        city: data.city,
-        town: data.town,
-        address: data.address,
-        address2: data.address2,
-      },
-    });
-    console.log(data);
+    // await prisma.client.create({
+    //   data: {
+    //     createdBy: userId,
+    //     entityType: data.entityType,
+    //     name: data.name,
+    //     tradeName: data.tradeName,
+    //     title: data.title,
+    //     representative: data.representative,
+    //     zipCode: data.zipCode,
+    //     prefecture: data.prefecture,
+    //     city: data.city,
+    //     town: data.town,
+    //     address: data.address,
+    //     address2: data.address2,
+    //   },
+    // });
+    console.log(typeof data.isPrefixEntityType);
     revalidatePath("/clients");
   } catch (error) {
     console.error("データの更新に失敗しました.", error);

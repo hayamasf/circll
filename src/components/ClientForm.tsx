@@ -5,8 +5,10 @@ import { useForm } from "react-hook-form";
 
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
+import LegalEntitySelector from "./LegalEntitySelector";
 
 import { Client } from "@/types/types";
+
 
 import { createClient } from "@/actions/client";
 import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
@@ -70,12 +72,13 @@ export default function ClientForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
       <div className="grid gap-y-8">
+        <LegalEntitySelector />
         <div className="relative">
           <label
             htmlFor="entityType"
             className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
           >
-            法人格の種類
+            法人の種類
           </label>
           <select
             id="entityType"
@@ -90,7 +93,7 @@ export default function ClientForm() {
           </select>
         </div>
         <div>
-          <label className="ml-3 text-xs text-gray-800">法人格の位置</label>
+          <label className="ml-3 text-xs text-gray-800">法人格の位置は、法人名称の</label>
           <fieldset className="mt-0">
             <legend className="sr-only">法人格の位置</legend>
             <div className="ml-3 flex items-center space-x-10">
