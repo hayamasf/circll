@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
 import { Client } from "@/types/types";
 
@@ -18,9 +18,13 @@ export default function LegalEntitySelector({
   register: UseFormRegister<Client>;
   errors: FieldErrors<Client>;
 }) {
+
+  const [tabIndex, setTabIndex] = useState(0);
+
   return (
     <Tabs
-      onSelect={(index) => console.log(index)}
+      selectedIndex={tabIndex}
+      onSelect={(index) => { setTabIndex(index) }}
       className={""}
       selectedTabClassName="bg-gray-100 font-bold hover:cursor-auto"
     >
@@ -42,6 +46,7 @@ export default function LegalEntitySelector({
       </TabList>
 
       <TabPanel className={"grid gap-y-8 mt-10"}>
+        {tabIndex}
         <div className="relative">
           <label
             htmlFor="entityType"
@@ -156,7 +161,22 @@ export default function LegalEntitySelector({
         </div>
       </TabPanel>
       <TabPanel>
-        <h2>Any content 2</h2>
+        {tabIndex}
+        <div className="relative">
+          <label
+            htmlFor="tradeName"
+            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+          >
+            屋号
+          </label>
+          <input
+            type="text"
+            id="name"
+            {...register("tradeName",)}
+            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
+            placeholder="与島クリーン"
+          />
+        </div>
       </TabPanel>
     </Tabs>
   );
