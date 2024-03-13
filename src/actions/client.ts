@@ -28,7 +28,7 @@ export async function createClient(data: Client) {
     //     address2: data.address2,
     //   },
     // });
-    console.log(typeof data.isPrefixEntityType);
+    console.log(data)
     revalidatePath("/clients");
   } catch (error) {
     console.error("データの更新に失敗しました.", error);
