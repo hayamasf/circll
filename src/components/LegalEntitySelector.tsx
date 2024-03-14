@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
 import { Client } from "@/types/types";
 
@@ -18,17 +18,16 @@ export default function LegalEntitySelector({
   register: UseFormRegister<Client>;
   errors: FieldErrors<Client>;
 }) {
-
   const [types, setTypes] = useState([
-    { id: 1, name: '会社など法人', current: true },
-    { id: 2, name: '個人事業主', current: false },
-  ])
+    { id: 1, name: "会社など法人", current: true },
+    { id: 2, name: "個人事業主", current: false },
+  ]);
 
   const toggleCurrent = (tabId: number) => {
-    setTypes(prevTypes =>
-      prevTypes.map((type) => ({ ...type, current: type.id === tabId }))
-    )
-  }
+    setTypes((prevTypes) =>
+      prevTypes.map((type) => ({ ...type, current: type.id === tabId })),
+    );
+  };
 
   return (
     <>
@@ -37,14 +36,15 @@ export default function LegalEntitySelector({
           <nav className="-mb-px flex" aria-label="Tabs">
             <ul className="flex w-full">
               {types.map((type) => (
-                <li key={type.id}
+                <li
+                  key={type.id}
                   className={classNames(
                     type.current
-                      ? 'border-gray-500 text-gray-800'
-                      : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 hover: cursor-pointer',
-                    'w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium'
+                      ? "border-gray-500 text-gray-800"
+                      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 hover: cursor-pointer",
+                    "w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium",
                   )}
-                  aria-current={type.current ? 'page' : undefined}
+                  aria-current={type.current ? "page" : undefined}
                   onClick={() => toggleCurrent(type.id)}
                 >
                   {type.name}
@@ -74,11 +74,11 @@ export default function LegalEntitySelector({
           <option value="合資会社">合資会社</option>
         </select>
       </div>
-      <div>
-        <label className="ml-3 text-xs text-gray-800">
-          法人格の位置は、名称の
+      <div className="flex w-full">
+        <label className="w-1/2 ml-3 text-xs text-gray-800">
+          法人格は名称の
         </label>
-        <fieldset className="mt-0">
+        <fieldset className="mt-0 w-1/2">
           <legend className="sr-only">法人格の位置</legend>
           <div className="ml-3 flex items-center justify-around">
             {entityTypePositions.map((position) => (
@@ -88,7 +88,7 @@ export default function LegalEntitySelector({
                   type="radio"
                   value={String(position.id === "before")}
                   defaultChecked={position.id === "before"}
-                  className="h-4 w-4 border-gray-300 text-gray-600 focus:ring-gray-600"
+                  className="h-4 w-4 border-gray-300 text-gray-600 focus:ring-0"
                   {...register("isPrefixEntityType")}
                 />
                 <label
@@ -138,9 +138,7 @@ export default function LegalEntitySelector({
             placeholder="代表取締役"
           />
           {errors.title?.message && (
-            <p className="text-xs text-red-500 p-1">
-              {errors.title?.message}
-            </p>
+            <p className="text-xs text-red-500 p-1">{errors.title?.message}</p>
           )}
         </div>
 
@@ -167,6 +165,7 @@ export default function LegalEntitySelector({
           )}
         </div>
       </div>
+
       <div className="relative">
         <label
           htmlFor="tradeName"
@@ -177,7 +176,7 @@ export default function LegalEntitySelector({
         <input
           type="text"
           id="name"
-          {...register("tradeName",)}
+          {...register("tradeName")}
           className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
           placeholder="与島クリーン"
         />
