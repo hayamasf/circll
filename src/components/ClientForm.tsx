@@ -15,15 +15,19 @@ import { createClient } from "@/actions/client";
 export default function ClientForm() {
   const {
     register,
+    unregister,
     handleSubmit,
     reset,
     setValue,
     formState: { errors },
   } = useForm<Client>({
     defaultValues: {
+      entityType: "株式会社",
+      isPrefixEntityType: true,
       name: "",
       title: "",
       representative: "",
+      tradeName: "",
       zipCode: "",
       prefecture: "",
       city: "",
@@ -31,6 +35,7 @@ export default function ClientForm() {
       address: "",
       address2: "",
     },
+    shouldUnregister: true
   });
 
   const onSubmit = (data: any) => {
@@ -41,7 +46,7 @@ export default function ClientForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
       <div className="grid gap-y-8">
-        <LegalEntitySelector register={register} errors={errors} />
+        <LegalEntitySelector register={register} errors={errors} unregister={unregister} />
         <hr className="my-2" />
         <AddressInputs
           register={register}

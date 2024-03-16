@@ -1,23 +1,24 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { UseFormRegister, FieldErrors } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import { UseFormRegister, FieldErrors, UseFormUnregister } from "react-hook-form";
 import { Client } from "@/types/types";
 
 import { classNames } from "@/utils/classNames";
 
-const entityTypePositions = [
-  { id: "before", title: "前" },
-  { id: "after", title: "後ろ" },
-];
+import CorporateEntityInputs from "./CorporateEntityInputs";
+import SoleProprietorInputs from "./SoleProprietorInputs";
 
 export default function LegalEntitySelector({
   register,
+  unregister,
   errors,
 }: {
   register: UseFormRegister<Client>;
+  unregister: UseFormUnregister<Client>;
   errors: FieldErrors<Client>;
 }) {
+
   const [types, setTypes] = useState([
     { id: 1, name: "会社など法人", current: true },
     { id: 2, name: "個人事業主", current: false },
@@ -28,6 +29,20 @@ export default function LegalEntitySelector({
       prevTypes.map((type) => ({ ...type, current: type.id === tabId })),
     );
   };
+
+  const selectedType = types.find((type) => { return type.current })
+
+  useEffect(() => {
+    if (selectedType?.id === 1) {
+      unregister("tradeName")
+    }
+    if (selectedType?.id === 2) {
+      unregister("entityType")
+      unregister("isPrefixEntityType")
+      unregister("title")
+      unregister("representative")
+    }
+  }, [selectedType])
 
   return (
     <>
@@ -54,133 +69,8 @@ export default function LegalEntitySelector({
           </nav>
         </div>
       </div>
-
-      <div className="relative">
-        <label
-          htmlFor="entityType"
-          className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
-        >
-          法人の種類
-        </label>
-        <select
-          id="entityType"
-          {...register("entityType")}
-          className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-        >
-          <option value="株式会社">株式会社</option>
-          <option value="有限会社">有限会社</option>
-          <option value="合同会社">合同会社</option>
-          <option value="合名会社">合名会社</option>
-          <option value="合資会社">合資会社</option>
-        </select>
-      </div>
-      <div className="flex w-full">
-        <label className="w-1/2 ml-3 text-xs text-gray-800">
-          法人格は名称の
-        </label>
-        <fieldset className="mt-0 w-1/2">
-          <legend className="sr-only">法人格の位置</legend>
-          <div className="ml-3 flex items-center justify-around">
-            {entityTypePositions.map((position) => (
-              <div key={position.id} className="flex items-center">
-                <input
-                  id={position.id}
-                  type="radio"
-                  value={String(position.id === "before")}
-                  defaultChecked={position.id === "before"}
-                  className="h-4 w-4 border-gray-300 text-gray-600 focus:ring-0"
-                  {...register("isPrefixEntityType")}
-                />
-                <label
-                  htmlFor={position.id}
-                  className="ml-3 block text-sm font-medium leading-6 text-gray-900"
-                >
-                  {position.title}
-                </label>
-              </div>
-            ))}
-          </div>
-        </fieldset>
-      </div>
-      <div className="relative">
-        <label
-          htmlFor="name"
-          className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
-        >
-          名称（法人格は入力しない）
-        </label>
-        <input
-          type="text"
-          id="name"
-          {...register("name", { required: "業者名は必須です" })}
-          className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-          placeholder="サティスファクトリー"
-        />
-        {errors.name?.message && (
-          <p className="text-xs text-red-500 p-1">{errors.name?.message}</p>
-        )}
-      </div>
-      <div className="grid grid-cols-2 gap-x-3">
-        <div className="relative">
-          <label
-            htmlFor="title"
-            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
-          >
-            代表者役職名
-          </label>
-          <input
-            type="text"
-            id="title"
-            {...register("title", {
-              required: "代表者役職名は必須です",
-            })}
-            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-            placeholder="代表取締役"
-          />
-          {errors.title?.message && (
-            <p className="text-xs text-red-500 p-1">{errors.title?.message}</p>
-          )}
-        </div>
-
-        <div className="relative">
-          <label
-            htmlFor="representative"
-            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
-          >
-            代表者氏名
-          </label>
-          <input
-            type="text"
-            id="representative"
-            {...register("representative", {
-              required: "代表者氏名は必須です",
-            })}
-            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-            placeholder="小松武司"
-          />
-          {errors.representative?.message && (
-            <p className="text-xs text-red-500 p-1">
-              {errors.representative?.message}
-            </p>
-          )}
-        </div>
-      </div>
-
-      <div className="relative">
-        <label
-          htmlFor="tradeName"
-          className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
-        >
-          屋号
-        </label>
-        <input
-          type="text"
-          id="name"
-          {...register("tradeName")}
-          className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-          placeholder="与島クリーン"
-        />
-      </div>
+      {selectedType?.id === 1 && <CorporateEntityInputs register={register} errors={errors} />}
+      {selectedType?.id === 2 && <SoleProprietorInputs register={register} errors={errors} />}
     </>
   );
 }

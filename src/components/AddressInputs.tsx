@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { UseFormRegister, FieldErrors } from "react-hook-form";
+import { UseFormRegister, UseFormSetValue, FieldErrors } from "react-hook-form";
 import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
 
 import { Client } from "@/types/types";
@@ -11,7 +11,7 @@ export default function AddressInputs({
 }: {
   register: UseFormRegister<Client>;
   errors: FieldErrors<Client>;
-  setValue: any;
+  setValue: UseFormSetValue<Client>
 }) {
   const setPrefCityTown = ({
     pref,
