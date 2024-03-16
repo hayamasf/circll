@@ -6,6 +6,13 @@ export type NavigationItem = {
   current: boolean;
 };
 
+export type ConfigItem = {
+  id: number;
+  name: string;
+  href: string;
+  current: boolean;
+};
+
 export type UserNavigationItem = {
   id: number;
   name: string;

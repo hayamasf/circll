@@ -1,5 +1,3 @@
-import { NavigationItem } from "@/types/types";
-
 import {
   BuildingOfficeIcon,
   BuildingStorefrontIcon,
@@ -7,7 +5,7 @@ import {
   HomeIcon,
 } from "@heroicons/react/24/outline";
 
-export const navigationItems: NavigationItem[] = [
+export const navigationItems = [
   { id: 1, name: "ホーム", href: "/", icon: HomeIcon, current: true },
   {
     id: 2,

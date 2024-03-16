@@ -5,6 +5,7 @@ import React, { Fragment, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import XMarkIcon from "@/app/icons/XMarkIcon";
+import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 
 import Link from "next/link";
 import { classNames } from "@/utils/classNames";
@@ -13,6 +14,7 @@ import DesktopSidebar from "./DesktopSidebar";
 import Topbar from "./Topbar";
 
 import { navigationItems } from "./navigationItems";
+import { configItems } from "./configItems";
 
 const Navigation = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -112,6 +114,32 @@ const Navigation = () => {
                           ))}
                         </ul>
                       </li>
+                      <li>
+                        <div className="mb-3 text-sm flex font-semibold leading-6 text-gray-400">
+                          <Cog6ToothIcon
+                            className="h-6 w-6 shrink-0 mr-3"
+                            aria-hidden="true"
+                          />
+                          設定
+                        </div>
+                        <ul role="list" className="-mx-2 space-y-1">
+                          {configItems.map((item: any) => (
+                            <li key={item.id}>
+                              <Link
+                                href={item.href}
+                                className={classNames(
+                                  item.current
+                                    ? "bg-gray-50 text-gray-800"
+                                    : "text-gray-600 hover:text-gray-800 hover:bg-gray-50",
+                                  "block pl-11 rounded-md p-2 text-sm leading-6",
+                                )}
+                              >
+                                {item.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>{" "}
                     </ul>
                   </nav>
                 </div>
@@ -122,7 +150,10 @@ const Navigation = () => {
       </Transition.Root>
 
       {/* Static sidebar for desktop */}
-      <DesktopSidebar navigationItems={navigationItems} />
+      <DesktopSidebar
+        navigationItems={navigationItems}
+        configItems={configItems}
+      />
 
       {/* Topbar */}
       <Topbar setSidebarOpen={setSidebarOpen} />
