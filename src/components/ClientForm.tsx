@@ -35,7 +35,7 @@ export default function ClientForm() {
       address: "",
       address2: "",
     },
-    shouldUnregister: true
+    shouldUnregister: true,
   });
 
   const onSubmit = (data: any) => {
@@ -46,7 +46,11 @@ export default function ClientForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
       <div className="grid gap-y-8">
-        <LegalEntitySelector register={register} errors={errors} unregister={unregister} />
+        <LegalEntitySelector
+          register={register}
+          errors={errors}
+          unregister={unregister}
+        />
         <hr className="my-2" />
         <AddressInputs
           register={register}

@@ -1,7 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { UseFormRegister, FieldErrors, UseFormUnregister } from "react-hook-form";
+import {
+  UseFormRegister,
+  FieldErrors,
+  UseFormUnregister,
+} from "react-hook-form";
 import { Client } from "@/types/types";
 
 import { classNames } from "@/utils/classNames";
@@ -18,7 +22,6 @@ export default function LegalEntitySelector({
   unregister: UseFormUnregister<Client>;
   errors: FieldErrors<Client>;
 }) {
-
   const [types, setTypes] = useState([
     { id: 1, name: "会社など法人", current: true },
     { id: 2, name: "個人事業主", current: false },
@@ -30,19 +33,21 @@ export default function LegalEntitySelector({
     );
   };
 
-  const selectedType = types.find((type) => { return type.current })
+  const selectedType = types.find((type) => {
+    return type.current;
+  });
 
   useEffect(() => {
     if (selectedType?.id === 1) {
-      unregister("tradeName")
+      unregister("tradeName");
     }
     if (selectedType?.id === 2) {
-      unregister("entityType")
-      unregister("isPrefixEntityType")
-      unregister("title")
-      unregister("representative")
+      unregister("entityType");
+      unregister("isPrefixEntityType");
+      unregister("title");
+      unregister("representative");
     }
-  }, [selectedType])
+  }, [selectedType]);
 
   return (
     <>
@@ -69,8 +74,12 @@ export default function LegalEntitySelector({
           </nav>
         </div>
       </div>
-      {selectedType?.id === 1 && <CorporateEntityInputs register={register} errors={errors} />}
-      {selectedType?.id === 2 && <SoleProprietorInputs register={register} errors={errors} />}
+      {selectedType?.id === 1 && (
+        <CorporateEntityInputs register={register} errors={errors} />
+      )}
+      {selectedType?.id === 2 && (
+        <SoleProprietorInputs register={register} errors={errors} />
+      )}
     </>
   );
 }

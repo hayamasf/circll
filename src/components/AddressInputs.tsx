@@ -11,7 +11,7 @@ export default function AddressInputs({
 }: {
   register: UseFormRegister<Client>;
   errors: FieldErrors<Client>;
-  setValue: UseFormSetValue<Client>
+  setValue: UseFormSetValue<Client>;
 }) {
   const setPrefCityTown = ({
     pref,
