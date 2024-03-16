@@ -127,6 +127,7 @@ const Navigation = () => {
                             <li key={item.id}>
                               <Link
                                 href={item.href}
+                                onClick={() => setSidebarOpen(false)}
                                 className={classNames(
                                   item.current
                                     ? "bg-gray-50 text-gray-800"
