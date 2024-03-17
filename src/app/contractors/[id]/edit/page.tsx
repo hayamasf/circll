@@ -3,8 +3,16 @@ import PageHeader from "@/components/PageHeader";
 import ContractorEditForm from "@/components/ContractorEditForm";
 
 export default async function Page({ params }: { params: { id: string } }) {
+
+  const id = Number(params.id);
+
+  if (isNaN(id)) {
+    console.error("idは整数のはずです.")
+    return;
+  }
+
   const contractor = await prisma.contractor.findUnique({
-    where: { id: params.id },
+    where: { id: id },
   });
 
   return (
