@@ -5,9 +5,9 @@ import { redirect } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@auth0/nextjs-auth0";
-import { ContractParty } from "@/types/types";
+import { LegalEntity } from "@/types/types";
 
-export async function createClient(data: ContractParty) {
+export async function createClient(data: LegalEntity) {
   try {
     const session = await getSession();
     const userId = session?.user.sub;
