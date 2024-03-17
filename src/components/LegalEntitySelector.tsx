@@ -6,8 +6,7 @@ import {
   FieldErrors,
   UseFormUnregister,
 } from "react-hook-form";
-import { Client } from "@/types/types";
-import { ContractParty } from "@/types/types";
+import { LegalEntity } from "@/types/types";
 
 import { classNames } from "@/utils/classNames";
 
@@ -19,9 +18,9 @@ export default function LegalEntitySelector({
   unregister,
   errors,
 }: {
-  register: UseFormRegister<ContractParty>;
-  unregister: UseFormUnregister<ContractParty>;
-  errors: FieldErrors<ContractParty>;
+  register: UseFormRegister<LegalEntity>;
+  unregister: UseFormUnregister<LegalEntity>;
+  errors: FieldErrors<LegalEntity>;
 }) {
   const [types, setTypes] = useState([
     { id: 1, name: "会社など法人", current: true },

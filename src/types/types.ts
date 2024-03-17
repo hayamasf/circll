@@ -19,57 +19,58 @@ export type UserNavigationItem = {
   href: string;
 };
 
-export type Contractor = {
+// export type Contractor = {
+//   name: string;
+//   title: string;
+//   representative: string;
+//   zipCode: string;
+//   prefecture: string;
+//   city: string;
+//   town: string;
+//   address: string;
+//   address2?: string | null;
+//   createdBy: string;
+//   updatedBy?: string | null;
+//   [key: string]: any;
+// };
+
+// export type Client = {
+//   id: number;
+//   createdAt: Date;
+//   createdBy: string;
+//   updatedAt: Date;
+//   updatedBy?: string;
+//   entityType?: string;
+//   isPrefixEntityType?: boolean;
+//   name: string;
+//   tradeName?: string;
+//   title?: string;
+//   representative?: string;
+//   zipCode: string;
+//   prefecture: string;
+//   city: string;
+//   town: string;
+//   address: string;
+//   address2?: string;
+// };
+
+export type LegalEntity = {
+  id: number;
+  createdAt: Date;
+  createdBy: string;
+  updatedAt: Date;
+  updatedBy?: string;
+  entityType?: string;
+  isPrefixEntityType?: boolean;
   name: string;
-  title: string;
-  representative: string;
+  tradeName?: string;
+  title?: string;
+  representative?: string;
   zipCode: string;
   prefecture: string;
   city: string;
   town: string;
   address: string;
-  address2?: string | null;
-  createdBy: string;
-  updatedBy?: string | null;
+  address2?: string;
   [key: string]: any;
-};
-
-export type Client = {
-  id: number;
-  createdAt: Date;
-  createdBy: string;
-  updatedAt: Date;
-  updatedBy?: string;
-  entityType?: string;
-  isPrefixEntityType?: boolean;
-  name: string;
-  tradeName?: string;
-  title?: string;
-  representative?: string;
-  zipCode: string;
-  prefecture: string;
-  city: string;
-  town: string;
-  address: string;
-  address2?: string;
-};
-
-export type ContractParty = {
-  id: number;
-  createdAt: Date;
-  createdBy: string;
-  updatedAt: Date;
-  updatedBy?: string;
-  entityType?: string;
-  isPrefixEntityType?: boolean;
-  name: string;
-  tradeName?: string;
-  title?: string;
-  representative?: string;
-  zipCode: string;
-  prefecture: string;
-  city: string;
-  town: string;
-  address: string;
-  address2?: string;
 };

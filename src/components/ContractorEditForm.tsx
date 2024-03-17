@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
-import { Contractor } from "@/types/types";
+import { LegalEntity } from "@/types/types";
 import { updateContractor } from "@/actions/contractor";
 import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
 import { useParams } from "next/navigation";
@@ -15,7 +15,7 @@ import { useParams } from "next/navigation";
 export default function ContractorEditForm({
   contractor,
 }: {
-  contractor: Contractor;
+  contractor: LegalEntity;
 }) {
   const router = useRouter();
 
@@ -29,7 +29,7 @@ export default function ContractorEditForm({
     reset,
     formState: { errors, dirtyFields, isDirty },
     setValue,
-  } = useForm<Contractor>({
+  } = useForm<LegalEntity>({
     defaultValues: {
       name: contractor.name,
       title: contractor.title,
@@ -57,7 +57,7 @@ export default function ContractorEditForm({
   const onSubmit = async () => {
     try {
       const data = getDirtyFieldValues();
-      const updateContractorWithId = updateContractor.bind(null, id);
+      const updateContractorWithId = updateContractor.bind(null, Number(id));
       const result = await updateContractorWithId(data);
       if (result.success) {
         console.log(result.message);

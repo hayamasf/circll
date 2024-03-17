@@ -1,35 +1,45 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { Contractor } from "@/types/types";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getSession } from "@auth0/nextjs-auth0";
 
-export async function createContractor(data: Contractor) {
-  const session = await getSession();
-  const userId = session?.user.sub;
+import { LegalEntity } from "@/types/types";
 
-  await prisma.contractor.create({
-    data: {
-      name: data.name,
-      title: data.title,
-      representative: data.representative,
-      zipCode: data.zipCode,
-      prefecture: data.prefecture,
-      city: data.city,
-      town: data.town,
-      address: data.address,
-      address2: data.address2,
-      createdBy: userId,
-    },
-  });
-  console.log(data);
-  revalidatePath("/contractors");
+export async function createContractor(data: LegalEntity) {
+  try {
+    const session = await getSession();
+    const userId = session?.user.sub;
+  
+    await prisma.contractor.create({
+      data: {        
+        createdBy: userId,
+        entityType: data.entityType,
+        isPrefixEntityType: data.isPrefixEntityType,
+        name: data.name,
+        tradeName: data.tradeName,
+        title: data.title,
+        representative: data.representative,
+        zipCode: data.zipCode,
+        prefecture: data.prefecture,
+        city: data.city,
+        town: data.town,
+        address: data.address,
+        address2: data.address2,
+      },
+    });
+    console.log(data);
+    revalidatePath("/contractors");
+
+  } catch (error) {
+    console.error("データの更新に失敗しました.", error);
+    throw new Error("データの更新に失敗しました.");
+  }
   redirect("/contractors");
 }
 
-export async function updateContractor(id: string, data: Partial<Contractor>) {
+export async function updateContractor(id: number, data: Partial<LegalEntity>) {
   try {
     const session = await getSession();
     const userId = session?.user.sub;

@@ -6,8 +6,7 @@ import { useForm } from "react-hook-form";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
-import { Contractor } from "@/types/types";
-import { ContractParty } from "@/types/types";
+import { LegalEntity } from "@/types/types";
 import LegalEntitySelector from "./LegalEntitySelector";
 import AddressInputs from "./AddressInputs";
 
@@ -21,7 +20,7 @@ export default function ContractorForm() {
     reset,
     setValue,
     formState: { errors },
-  } = useForm<ContractParty>({
+  } = useForm<LegalEntity>({
     defaultValues: {
       entityType: "株式会社",
       isPrefixEntityType: true,
