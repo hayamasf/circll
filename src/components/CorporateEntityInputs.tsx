@@ -3,13 +3,14 @@
 import React from "react";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
 import { Client } from "@/types/types";
+import { ContractParty } from "@/types/types";
 
 export default function CorporateEntityInputs({
   register,
   errors,
 }: {
-  register: UseFormRegister<Client>;
-  errors: FieldErrors<Client>;
+  register: UseFormRegister<ContractParty>;
+  errors: FieldErrors<ContractParty>;
 }) {
   return (
     <>

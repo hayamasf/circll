@@ -53,3 +53,23 @@ export type Client = {
   address: string;
   address2?: string;
 };
+
+export type ContractParty = {
+  id: number;
+  createdAt: Date;
+  createdBy: string;
+  updatedAt: Date;
+  updatedBy?: string;
+  entityType?: string;
+  isPrefixEntityType?: boolean;
+  name: string;
+  tradeName?: string;
+  title?: string;
+  representative?: string;
+  zipCode: string;
+  prefecture: string;
+  city: string;
+  town: string;
+  address: string;
+  address2?: string;
+};
