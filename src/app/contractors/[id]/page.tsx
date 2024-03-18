@@ -1,18 +1,25 @@
+"use client"
+
 import { prisma } from "@/lib/prisma";
+
+import { useParams } from "next/navigation";
+
 import { formatDateTime } from "@/utils/dateUtils";
+
 import EditLink from "@/components/EditLink";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page() {
 
-  const id = Number(params.id);
+  const params = useParams();
+  const contractorId = Number(params.id)
 
-  if (isNaN(id)) {
-    console.error("idは整数のはずです.")
-    return;
+  if (isNaN(contractorId)) {
+    console.log("不正な業者IDです.")
+    return "不正な業者IDです."
   }
 
   const contractor = await prisma.contractor.findUnique({
-    where: { id: id },
+    where: { id: contractorId },
   });
 
   if (!contractor) {

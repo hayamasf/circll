@@ -13,7 +13,7 @@ export default async function ClientsList() {
               <div className="flex min-w-0 gap-x-4">
                 <div className="min-w-0 flex-auto">
                   <p className="text-sm font-semibold leading-6 text-gray-900">
-                    <Link href={`/contractors/${client.id}`}>
+                    <Link href={`/clients/${client.id}`}>
                       <span className="absolute inset-x-0 -top-px bottom-0" />
                       {client.name}
                     </Link>
