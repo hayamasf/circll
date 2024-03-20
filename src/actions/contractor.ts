@@ -11,9 +11,9 @@ export async function createContractor(data: LegalEntity) {
   try {
     const session = await getSession();
     const userId = session?.user.sub;
-  
+
     await prisma.contractor.create({
-      data: {        
+      data: {
         createdBy: userId,
         entityType: data.entityType,
         isPrefixEntityType: data.isPrefixEntityType,
@@ -31,7 +31,6 @@ export async function createContractor(data: LegalEntity) {
     });
     console.log(data);
     revalidatePath("/contractors");
-
   } catch (error) {
     console.error("データの更新に失敗しました.", error);
     throw new Error("データの更新に失敗しました.");
@@ -56,5 +55,16 @@ export async function updateContractor(id: number, data: Partial<LegalEntity>) {
   } catch (error) {
     console.error("データの更新に失敗しました.", error);
     throw new Error("データの更新に失敗しました.");
+  }
+}
+
+export async function fetchContractor(id:number) {
+  try {
+    const contractor = await prisma.client.findUnique({
+      where: {id: id}
+    })
+    return contractor;
+  } catch (error){
+    console.error("業者データの取得に失敗しました.")
   }
 }
