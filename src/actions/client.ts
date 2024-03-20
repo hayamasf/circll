@@ -8,34 +8,46 @@ import { getSession } from "@auth0/nextjs-auth0";
 import { LegalEntity } from "@/types/types";
 
 export async function createClient(data: LegalEntity) {
+  let newClientId: number | undefined;
+
   try {
     const session = await getSession();
     const userId = session?.user.sub;
 
-    await prisma.client.create({
+    if (!userId) {
+      throw new Error("不正なユーザーIDです.");
+    }
+
+    const newClient = await prisma.client.create({
       data: {
         createdBy: userId,
-        entityType: data.entityType,
-        isPrefixEntityType: data.isPrefixEntityType,
+        ...(data.entityType && { entityType: data.entityType }),
+        ...(data.isPrefixEntityType && {
+          isPrefixEntityType: data.isPrefixEntityType,
+        }),
         name: data.name,
-        tradeName: data.tradeName,
-        title: data.title,
-        representative: data.representative,
+        ...(data.title && { title: data.title }),
+        ...(data.representative && { representative: data.representative }),
+        ...(data.tradeName && { tradeName: data.tradeName }),
         zipCode: data.zipCode,
         prefecture: data.prefecture,
         city: data.city,
         town: data.town,
         address: data.address,
-        address2: data.address2,
+        ...(data.address2 && { address2: data.address2 }),
       },
     });
+
+    newClientId = newClient.id;
+
     console.log(data);
-    revalidatePath("/clients");
+    revalidatePath(`/clients/${newClientId}`);
   } catch (error) {
     console.error("データの更新に失敗しました.", error);
     throw new Error("データの更新に失敗しました.");
+  } finally {
+    if (newClientId !== undefined) {
+      redirect(`/clients/${newClientId}`);
+    }
   }
-
-  // erros if redirect inside try-catch;
-  redirect("/clients");
 }
