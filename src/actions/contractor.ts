@@ -58,13 +58,13 @@ export async function updateContractor(id: number, data: Partial<LegalEntity>) {
   }
 }
 
-export async function fetchContractor(id:number) {
+export async function fetchContractor(id: number) {
   try {
     const contractor = await prisma.client.findUnique({
-      where: {id: id}
-    })
+      where: { id: id },
+    });
     return contractor;
-  } catch (error){
-    console.error("業者データの取得に失敗しました.")
+  } catch (error) {
+    console.error("業者データの取得に失敗しました.");
   }
 }

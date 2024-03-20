@@ -6,23 +6,20 @@ import EditLink from "@/components/EditLink";
 import useFetchClient from "@/hooks/useFetchClient";
 
 export default function Page() {
-
   const params = useParams();
-  const id = Number(params.id)
+  const id = Number(params.id);
 
   if (isNaN(id)) {
-    return <div>顧客のIDを確認してください.</div>
+    return <div>顧客のIDを確認してください.</div>;
   }
 
   const { client, isLoading, error } = useFetchClient(id);
 
   if (isLoading) {
-    return <div>顧客データを取得中...</div>
-  }
-  else if (error) {
-    return <div>データの取得に失敗しました.</div>
-  }
-  else if (client) {
+    return <div>顧客データを取得中...</div>;
+  } else if (error) {
+    return <div>データの取得に失敗しました.</div>;
+  } else if (client) {
     return (
       <div className="container mx-auto max-w-3xl">
         <div className="px-4 sm:px-0">
@@ -53,17 +50,13 @@ export default function Page() {
         <div className="mt-6">
           <dl className="grid grid-cols-1 sm:grid-cols-2">
             <div className="flex border-t border-gray-100 px-4 py-6 text-xs sm:col-span-1 sm:px-0">
-              <dt className="font-medium leading-6 text-gray-900">
-                登録
-              </dt>
+              <dt className="font-medium leading-6 text-gray-900">登録</dt>
               <dd className="ml-3 leading-6 text-gray-700">
                 {formatDateTime(client.createdAt)}
               </dd>
             </div>
             <div className="flex text-xs border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
-              <dt className="font-medium leading-6 text-gray-900">
-                更新
-              </dt>
+              <dt className="font-medium leading-6 text-gray-900">更新</dt>
               <dd className="ml-3 leading-6 text-gray-700">
                 {client.createdAt.toLocaleString("ja-JP")}
               </dd>
@@ -71,9 +64,8 @@ export default function Page() {
           </dl>
         </div>
       </div>
-    )
-  }
-  else {
-    return <div>顧客データが見つかりません.</div>
+    );
+  } else {
+    return <div>顧客データが見つかりません.</div>;
   }
 }

@@ -6,7 +6,6 @@ import EditLink from "@/components/EditLink";
 import useFetchContractor from "@/hooks/useFetchContractor";
 
 export default function Page() {
-
   const params = useParams();
   const id = Number(params.id);
 
@@ -18,11 +17,9 @@ export default function Page() {
 
   if (isLoading) {
     return <div>業者データを取得中...</div>;
-  }
-  else if (error) {
-    return <div>データの取得に失敗しました.</div>
-  }
-  else if (contractor) {
+  } else if (error) {
+    return <div>データの取得に失敗しました.</div>;
+  } else if (contractor) {
     return (
       <div className="container mx-auto max-w-3xl">
         <div className="px-4 sm:px-0">
@@ -83,8 +80,7 @@ export default function Page() {
         </div>
       </div>
     );
-  }
-  else {
-    return <div>業者データが見つかりません.</div>
+  } else {
+    return <div>業者データが見つかりません.</div>;
   }
 }
