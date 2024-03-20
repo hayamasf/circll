@@ -9,10 +9,6 @@ export default function Page() {
   const params = useParams();
   const id = Number(params.id);
 
-  if (isNaN(id)) {
-    return <div>業者IDを確認してください.</div>;
-  }
-
   const { contractor, isLoading, error } = useFetchContractor(id);
 
   if (isLoading) {

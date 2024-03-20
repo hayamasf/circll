@@ -9,10 +9,6 @@ export default function Page() {
   const params = useParams();
   const id = Number(params.id);
 
-  if (isNaN(id)) {
-    return <div>顧客のIDを確認してください.</div>;
-  }
-
   const { client, isLoading, error } = useFetchClient(id);
 
   if (isLoading) {
