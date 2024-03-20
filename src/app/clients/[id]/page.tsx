@@ -19,11 +19,9 @@ export default function Page() {
   if (isLoading) {
     return <div>顧客データを取得中...</div>
   }
-
   else if (error) {
     return <div>データの取得に失敗しました.</div>
   }
-
   else if (client) {
     return (
       <div className="container mx-auto max-w-3xl">
@@ -74,7 +72,8 @@ export default function Page() {
         </div>
       </div>
     )
-  } else {
-    return <div>顧客のデータが見つかりません.</div>
+  }
+  else {
+    return <div>顧客データが見つかりません.</div>
   }
 }

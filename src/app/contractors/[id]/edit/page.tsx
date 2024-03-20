@@ -3,11 +3,10 @@ import PageHeader from "@/components/PageHeader";
 import ContractorEditForm from "@/components/ContractorEditForm";
 
 export default async function Page({ params }: { params: { id: string } }) {
-
   const id = Number(params.id);
 
   if (isNaN(id)) {
-    console.error("idは整数のはずです.")
+    console.error("idは整数のはずです.");
     return;
   }
 
