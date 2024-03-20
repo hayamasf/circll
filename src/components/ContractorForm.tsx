@@ -62,5 +62,5 @@ export default function ContractorForm() {
         <CancelButton label="キャンセル" onClick={() => reset()} />
       </div>
     </form>
-  )
+  );
 }

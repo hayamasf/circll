@@ -49,7 +49,6 @@ export default function CorporateEntityInputs({
             <option value="false">後ろ</option>
           </select>
         </div>
-
       </div>
       <div className="relative">
         <label
