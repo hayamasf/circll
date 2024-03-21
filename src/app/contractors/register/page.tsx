@@ -9,15 +9,14 @@ import LegalEntityTypeSelector from "@/components/LegalEntityTypeSelector";
 
 export default function Page() {
   const searchParams = useSearchParams();
-  let type = searchParams.get("type")
+  let type = searchParams.get("type");
 
   let formContent;
 
   if (!type) {
     formContent = <LegalEntityTypeSelector />;
-  }
-  else if (type = "corporate") {
-    formContent = <ContractorForm />
+  } else if ((type = "corporate")) {
+    formContent = <ContractorForm />;
   }
 
   return (
