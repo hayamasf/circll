@@ -10,7 +10,7 @@ export default function useFetchClient(id: number) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!isNaN(id)) {
+    if (!Number.isNaN(id)) {
       setIsLoading(true);
       fetchClient(id)
         .then((client) => {
