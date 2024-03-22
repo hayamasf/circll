@@ -1,21 +1,25 @@
-"use client";
-
-import { useParams } from "next/navigation";
+import React from "react";
 import { formatDateTime } from "@/utils/dateUtils";
 import EditLink from "@/components/EditLink";
-import useFetchContractor from "@/hooks/useFetchContractor";
+import { prisma } from "@/lib/prisma";
 
-export default function Page() {
-  const params = useParams();
+async function fetchContractor(id: number) {
+  try {
+    const contractor = await prisma.contractor.findUnique({
+      where: { id }
+    })
+    return contractor;
+  } catch (error) {
+    console.error("contractor fetch failed.");
+    throw error;
+  }
+}
+
+export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
+  const contractor = await fetchContractor(id);
 
-  const { contractor, isLoading, error } = useFetchContractor(id);
-
-  if (isLoading) {
-    return <div>業者データを取得中...</div>;
-  } else if (error) {
-    return <div>データの取得に失敗しました.</div>;
-  } else if (contractor) {
+  if (contractor) {
     return (
       <div className="container mx-auto max-w-3xl">
         <div className="px-4 sm:px-0">
@@ -77,6 +81,6 @@ export default function Page() {
       </div>
     );
   } else {
-    return <div>業者データが見つかりません.</div>;
+    return <div>業者データを取得中...</div>;
   }
 }
