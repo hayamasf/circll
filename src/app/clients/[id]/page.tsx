@@ -6,18 +6,18 @@ import { prisma } from "@/lib/prisma";
 async function fetchClient(id: number) {
   try {
     const client = await prisma.client.findUnique({
-      where: { id }
-    })
+      where: { id },
+    });
     return client;
   } catch (error) {
-    console.error("client fetch failed.", error)
+    console.error("client fetch failed.", error);
     throw error;
   }
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const id = Number(params.id)
-  const client = await fetchClient(id)
+  const id = Number(params.id);
+  const client = await fetchClient(id);
 
   if (client) {
     return (

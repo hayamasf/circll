@@ -6,8 +6,8 @@ import { prisma } from "@/lib/prisma";
 async function fetchContractor(id: number) {
   try {
     const contractor = await prisma.contractor.findUnique({
-      where: { id }
-    })
+      where: { id },
+    });
     return contractor;
   } catch (error) {
     console.error("contractor fetch failed.");

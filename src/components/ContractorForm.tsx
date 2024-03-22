@@ -14,7 +14,6 @@ import AddressInputs from "./AddressInputs";
 import { createContractor } from "@/actions/contractor";
 
 export default function ContractorForm({ type }: { type: string }) {
-
   const {
     register,
     unregister,
@@ -42,22 +41,24 @@ export default function ContractorForm({ type }: { type: string }) {
   useEffect(() => {
     if (type === "corporate") {
       unregister("tradeName");
-    }
-    else if (type === "sole-proprietor") {
+    } else if (type === "sole-proprietor") {
       unregister("entityType");
       unregister("isPrefixEntityType");
       unregister("title");
       unregister("representative");
     }
-  }, [type, unregister])
+  }, [type, unregister]);
 
   let legalEntityInputs;
 
   if (type === "corporate") {
-    legalEntityInputs = <CorporateEntityInputs register={register} errors={errors} />
-  }
-  else if (type === "sole-proprietor") {
-    legalEntityInputs = <SoleProprietorInputs register={register} errors={errors} />
+    legalEntityInputs = (
+      <CorporateEntityInputs register={register} errors={errors} />
+    );
+  } else if (type === "sole-proprietor") {
+    legalEntityInputs = (
+      <SoleProprietorInputs register={register} errors={errors} />
+    );
   }
 
   const onSubmit = (data: any) => {
