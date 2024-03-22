@@ -15,7 +15,7 @@ export async function createClient(data: LegalEntity) {
     const userId = session?.user.sub;
 
     if (!userId) {
-      throw new Error("不正なユーザーIDです.");
+      throw new Error("ユーザーIDを確認してください.");
     }
 
     const newClient = await prisma.client.create({
