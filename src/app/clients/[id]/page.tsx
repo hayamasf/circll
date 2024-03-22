@@ -1,21 +1,25 @@
-"use client";
-
-import { useParams } from "next/navigation";
+import React from "react";
 import { formatDateTime } from "@/utils/dateUtils";
 import EditLink from "@/components/EditLink";
-import useFetchClient from "@/hooks/useFetchClient";
+import { prisma } from "@/lib/prisma";
 
-export default function Page() {
-  const params = useParams();
-  const id = Number(params.id);
+async function fetchClient(id: number) {
+  try {
+    const client = await prisma.client.findUnique({
+      where: { id }
+    })
+    return client;
+  } catch (error) {
+    console.error("client fetch failed.", error)
+    throw error;
+  }
+}
 
-  const { client, isLoading, error } = useFetchClient(id);
+export default async function Page({ params }: { params: { id: string } }) {
+  const id = Number(params.id)
+  const client = await fetchClient(id)
 
-  if (isLoading) {
-    return <div>顧客データを取得中...</div>;
-  } else if (error) {
-    return <div>データの取得に失敗しました.</div>;
-  } else if (client) {
+  if (client) {
     return (
       <div className="container mx-auto max-w-3xl">
         <div className="px-4 sm:px-0">
@@ -62,6 +66,6 @@ export default function Page() {
       </div>
     );
   } else {
-    return <div>顧客データが見つかりません.</div>;
+    <div>顧客データを取得中...</div>;
   }
 }
