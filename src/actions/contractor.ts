@@ -9,11 +9,13 @@ import { LegalEntity } from "@/types/types";
 import convertToBoolean from "@/utils/convertToBoolean";
 
 export async function createContractor(data: LegalEntity) {
+  let isPrefixEntityType;
 
-  let isPrefixEntityType
-
-  if (data.isPrefixEntityType !== undefined && data.isPrefixEntityType !== null) {
-    isPrefixEntityType = convertToBoolean(data.isPrefixEntityType)
+  if (
+    data.isPrefixEntityType !== undefined &&
+    data.isPrefixEntityType !== null
+  ) {
+    isPrefixEntityType = convertToBoolean(data.isPrefixEntityType);
   }
 
   let newContractorId: number | undefined;
