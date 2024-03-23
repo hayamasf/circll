@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
-
 import { LegalEntity } from "@/types/types";
 import CorporateEntityInputs from "./CorporateEntityInputs";
 import SoleProprietorInputs from "./SoleProprietorInputs";

@@ -1,17 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 import { LegalEntity } from "@/types/types";
-import LegalEntitySelector from "./LegalEntitySelector";
+import CorporateEntityInputs from "./CorporateEntityInputs";
+import SoleProprietorInputs from "./SoleProprietorInputs";
 import AddressInputs from "./AddressInputs";
 
 import { createClient } from "@/actions/client";
 
-export default function ClientForm() {
+export default function ClientForm({ type }: { type: string }) {
   const {
     register,
     unregister,
@@ -37,6 +38,29 @@ export default function ClientForm() {
     shouldUnregister: true,
   });
 
+  useEffect(() => {
+    if (type === "corporate") {
+      unregister("tradeName");
+    } else if (type === "sole-proprietor") {
+      unregister("entityType");
+      unregister("isPrefixEntityType");
+      unregister("title");
+      unregister("representative");
+    }
+  }, [type, unregister]);
+
+  let legalEntityInputs;
+
+  if (type === "corporate") {
+    legalEntityInputs = (
+      <CorporateEntityInputs register={register} errors={errors} />
+    );
+  } else if (type === "sole-proprietor") {
+    legalEntityInputs = (
+      <SoleProprietorInputs register={register} errors={errors} />
+    );
+  }
+
   const onSubmit = (data: any) => {
     console.log(data);
     createClient(data);
@@ -45,11 +69,7 @@ export default function ClientForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
       <div className="grid gap-y-8">
-        <LegalEntitySelector
-          register={register}
-          errors={errors}
-          unregister={unregister}
-        />
+        {legalEntityInputs}
         <hr className="my-2" />
         <AddressInputs
           register={register}
