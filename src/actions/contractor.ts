@@ -44,7 +44,7 @@ export async function createContractor(data: LegalEntity) {
         city: data.city,
         town: data.town,
         address: data.address,
-        ...(data.address2 && { address2: data.address2 }),
+        ...(data.address2 && { address2: data.address2 }), //to be changed. when there is no data. on the client side?
       },
     });
 
