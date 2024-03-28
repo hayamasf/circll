@@ -61,7 +61,15 @@ export default function ClientForm({ type }: { type: string }) {
     );
   }
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (formData: any) => {
+
+    const { address2, ...rest } = formData;
+
+    const data = {
+      ...rest,
+      ...(address2 ? { address2 } : {})
+    }
+
     console.log(data);
     createClient(data);
   };
