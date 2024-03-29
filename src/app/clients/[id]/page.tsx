@@ -19,9 +19,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const client = await fetchClient(id);
 
   if (client) {
-    return (
-      <LegalEntityProfile entity={client} />
-    );
+    return <LegalEntityProfile entity={client} />;
   } else {
     <div>データを取得中...</div>;
   }

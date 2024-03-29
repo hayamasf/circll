@@ -17,11 +17,14 @@ export default async function ContractorsList() {
                       <span className="absolute inset-x-0 -top-px bottom-0" />
                       {contractor.isPrefixEntityType && contractor.entityType}
                       {contractor.name}
-                      {contractor.entityType && !contractor.isPrefixEntityType && contractor.entityType}
+                      {contractor.entityType &&
+                        !contractor.isPrefixEntityType &&
+                        contractor.entityType}
                     </Link>
                   </p>
                   <p className="mt-1 flex text-xs leading-5 text-gray-500">
-                    {contractor.entityType && (contractor.title + " " + contractor.representative)}
+                    {contractor.entityType &&
+                      contractor.title + " " + contractor.representative}
                     {contractor.tradeName && contractor.tradeName}
                   </p>
                 </div>

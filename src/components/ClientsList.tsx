@@ -17,11 +17,14 @@ export default async function ClientsList() {
                       <span className="absolute inset-x-0 -top-px bottom-0" />
                       {client.isPrefixEntityType && client.entityType}
                       {client.name}
-                      {client.entityType && !client.isPrefixEntityType && client.entityType}
+                      {client.entityType &&
+                        !client.isPrefixEntityType &&
+                        client.entityType}
                     </Link>
                   </p>
                   <p className="mt-1 flex text-xs leading-5 text-gray-500">
-                    {client.entityType && (client.title + " " + client.representative)}
+                    {client.entityType &&
+                      client.title + " " + client.representative}
                     {client.tradeName && client.tradeName}
                   </p>
                 </div>
