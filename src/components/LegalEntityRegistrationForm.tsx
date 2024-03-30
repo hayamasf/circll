@@ -10,9 +10,13 @@ import CorporateEntityInputs from "./CorporateEntityInputs";
 import SoleProprietorInputs from "./SoleProprietorInputs";
 import AddressInputs from "./AddressInputs";
 
-import { createContractor } from "@/actions/contractor";
-
-export default function ContractorForm({ type }: { type: string }) {
+export default function LegalEntityRegistrationForm({
+  type,
+  onSubmit,
+}: {
+  type: string;
+  onSubmit: (formData: LegalEntity) => void;
+}) {
   const {
     register,
     unregister,
@@ -59,18 +63,6 @@ export default function ContractorForm({ type }: { type: string }) {
       <SoleProprietorInputs register={register} errors={errors} />
     );
   }
-
-  const onSubmit = (formData: any) => {
-    const { address2, ...rest } = formData;
-
-    const data = {
-      ...rest,
-      ...(address2 ? { address2 } : {}),
-    };
-
-    console.log(data);
-    createContractor(data);
-  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
