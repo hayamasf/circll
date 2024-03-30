@@ -1,45 +1,51 @@
-import { prisma } from "@/lib/prisma";
+import React from "react";
+
 import Link from "next/link";
+import { LegalEntity } from "@/types/types";
 
-export default async function ContractorsList() {
-  const contractors = await prisma.contractor.findMany();
-
+export default function LegalEntitiesList({
+  entities,
+  path,
+}: {
+  entities: LegalEntity[];
+  path: string;
+}) {
   return (
     <ul role="list" className="divide-y divide-gray-100">
-      {contractors.map((contractor) => (
-        <li key={contractor.id} className="relative py-5 hover:bg-gray-50">
+      {entities.map((entity) => (
+        <li key={entity.id} className="relative py-5 hover:bg-gray-50">
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="mx-auto flex max-w-4xl justify-between gap-x-6">
               <div className="flex min-w-0 gap-x-4">
                 <div className="min-w-0 flex-auto">
                   <p className="text-sm font-semibold leading-6 text-gray-900">
-                    <Link href={`/contractors/${contractor.id}`}>
+                    <Link href={path + "/" + entity.id}>
                       <span className="absolute inset-x-0 -top-px bottom-0" />
-                      {contractor.isPrefixEntityType && contractor.entityType}
-                      {contractor.name}
-                      {contractor.entityType &&
-                        !contractor.isPrefixEntityType &&
-                        contractor.entityType}
+                      {entity.isPrefixEntityType && entity.entityType}
+                      {entity.name}
+                      {entity.entityType &&
+                        !entity.isPrefixEntityType &&
+                        entity.entityType}
                     </Link>
                   </p>
                   <p className="mt-1 flex text-xs leading-5 text-gray-500">
-                    {contractor.entityType &&
-                      contractor.title + " " + contractor.representative}
-                    {contractor.tradeName && contractor.tradeName}
+                    {entity.entityType &&
+                      entity.title + " " + entity.representative}
+                    {entity.tradeName && entity.tradeName}
                   </p>
                 </div>
               </div>
               <div className="flex shrink-0 items-center gap-x-4">
                 <div className="hidden sm:flex sm:flex-col sm:items-end">
                   <p className="text-sm leading-6 text-gray-900">
-                    {contractor.prefecture}
-                    {contractor.city}
-                    {contractor.town}
-                    {contractor.address}
+                    {entity.prefecture}
+                    {entity.city}
+                    {entity.town}
+                    {entity.address}
                   </p>
-                  {contractor.address2 && (
+                  {entity.address2 && (
                     <p className="text-sm leading-6 text-gray-900">
-                      {contractor.address2}
+                      {entity.address2}
                     </p>
                   )}
                 </div>
