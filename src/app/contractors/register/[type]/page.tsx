@@ -11,11 +11,12 @@ export default function Page({ params }: { params: { type: string } }) {
   const type = params.type;
 
   const onSubmit = (formData: LegalEntity) => {
-    const { address2, ...rest } = formData;
+    const { address2, tradeName, ...rest } = formData;
 
     const data = {
       ...rest,
       ...(address2 ? { address2 } : {}),
+      ...(tradeName ? { tradeName } : {})
     };
 
     console.log(data);
