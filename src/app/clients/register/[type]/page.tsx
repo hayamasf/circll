@@ -16,7 +16,7 @@ export default function Page({ params }: { params: { type: string } }) {
     const data = {
       ...rest,
       ...(address2 ? { address2 } : {}),
-      ...(tradeName ? { tradeName } : {})
+      ...(tradeName ? { tradeName } : {}),
     };
 
     console.log(data);
