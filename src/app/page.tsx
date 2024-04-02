@@ -1,9 +1,14 @@
 import Stats from "@/components/Stats";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export default function Page() {
   return (
     <>
-      <Stats />
+      <div>これは</div>
+      <Suspense fallback={<Loading />}>
+        <Stats />
+      </Suspense>
     </>
   );
 }

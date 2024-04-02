@@ -3,6 +3,8 @@ import React from "react";
 import { prisma } from "@/lib/prisma";
 
 export default async function ClientCounterCard() {
+  await new Promise(resolve => setTimeout(resolve, 3000))
+
   const count = await prisma.client.count();
   return (
     <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
