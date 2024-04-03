@@ -1,13 +1,14 @@
 import React from "react";
 import PageHeader from "@/components/PageHeader";
 import LegalEntityEditForm from "@/components/LegalEntityEditForm";
-import { LegalEntity } from "@/types/types";
-import { fetchClient } from "@/actions/client";
+import fetchClientById from "@/utils/fetchClientById";
 import { updateClient } from "@/actions/client";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
-  const client = await fetchClient(id);
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  const client = await fetchClientById(id);
 
   if (client) {
     return (
@@ -16,7 +17,5 @@ export default async function Page({ params }: { params: { id: string } }) {
         <LegalEntityEditForm entity={client} action={updateClient} />
       </div>
     );
-  } else {
-    return <div>データ取得中...</div>;
   }
 }
