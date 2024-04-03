@@ -15,7 +15,8 @@ export default function LegalEntityEditForm({
   action,
 }: {
   entity: LegalEntity;
-  action: (formData: LegalEntity) => Promise<void>;
+  action: (FormData: LegalEntity) => Promise<{ success: boolean; message: string; }>
+  // action: (formData: LegalEntity) => Promise<void>;
 }) {
   const {
     getValues,

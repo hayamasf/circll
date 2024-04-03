@@ -1,31 +1,21 @@
-import { prisma } from "@/lib/prisma";
+import React from "react";
 import PageHeader from "@/components/PageHeader";
-import ContractorEditForm from "@/components/ContractorEditForm";
-
-async function fetchContractor(id: number) {
-  try {
-    const contractor = await prisma.contractor.findUnique({
-      where: { id },
-    });
-    return contractor;
-  } catch (error) {
-    console.error("contractor fetch failed.");
-    throw error;
-  }
-}
+import LegalEntityEditForm from "@/components/LegalEntityEditForm";
+import fetchContractorById from "@/utils/fetchContractorById";
+import { updateContractor } from "@/actions/contractor";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
-  const contractor = await fetchContractor(id);
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  const contractor = await fetchContractorById(id);
 
   if (contractor) {
     return (
       <div className="container mx-auto max-w-md">
         <PageHeader title="業者情報の編集" />
-        {contractor && <ContractorEditForm contractor={contractor} />}
+        <LegalEntityEditForm entity={contractor} action={updateContractor} />
       </div>
     );
-  } else {
-    return <div>データ取得中...</div>;
   }
 }
