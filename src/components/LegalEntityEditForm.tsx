@@ -82,7 +82,7 @@ export default function LegalEntityEditForm({
 
       if (result.success) {
         console.log(result.message);
-        router.push(`/contractors/${id}`);
+        router.push("./");
       } else {
         console.error(result.message);
       }
