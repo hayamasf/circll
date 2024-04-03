@@ -6,7 +6,7 @@ import LegalEntitiesList from "@/components/LegalEntitiesList";
 import { Suspense } from "react";
 
 async function getContractors() {
-  await new Promise(resolve => setTimeout(resolve, 3000))
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
   const contractors = await prisma.contractor.findMany();
   return contractors;
