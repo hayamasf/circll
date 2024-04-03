@@ -62,18 +62,21 @@ export async function createContractor(data: LegalEntity) {
   }
 }
 
-export async function updateContractor(id: number, data: Partial<LegalEntity>) {
+export async function updateContractor(data: Partial<LegalEntity>) {
   try {
+    const id = data.id;
     const session = await getSession();
     const userId = session?.user.sub;
 
-    await prisma.contractor.update({
-      where: { id: id },
-      data: {
-        ...data,
-        updatedBy: userId,
-      },
-    });
+    console.log(id + "&" + userId);
+
+    // await prisma.contractor.update({
+    //   where: { id: id },
+    //   data: {
+    //     ...data,
+    //     updatedBy: userId,
+    //   },
+    // });
 
     return { success: true, message: "更新が成功しました." };
   } catch (error) {
@@ -81,14 +84,3 @@ export async function updateContractor(id: number, data: Partial<LegalEntity>) {
     throw new Error("データの更新に失敗しました.");
   }
 }
-
-// export async function fetchContractor(id: number) {
-//   try {
-//     const contractor = await prisma.client.findUnique({
-//       where: { id: id },
-//     });
-//     return contractor;
-//   } catch (error) {
-//     console.error("業者データの取得に失敗しました.");
-//   }
-// }

@@ -52,20 +52,16 @@ export async function createClient(data: LegalEntity) {
   }
 }
 
-export async function fetchClient(id: number) {
+export async function updateClient(data: Partial<LegalEntity>) {
   try {
-    const client = await prisma.client.findUnique({
-      where: { id },
-    });
-    return client;
+    const id = data.id;
+    const session = await getSession();
+    const userId = session?.user.sub;
+
+    console.log(id + "&" + userId);
+    console.log(data);
   } catch (error) {
-    console.error("顧客データの取得に失敗しました.");
-    throw error;
+    console.error("データの更新に失敗しました.", error);
+    throw new Error("データの更新に失敗しました.");
   }
-}
-
-export async function updateClient(data: LegalEntity) {
-  console.log(data);
-  // ここにawaitの処理を書く
-
 }
