@@ -3,7 +3,7 @@ import React from "react";
 import { prisma } from "@/lib/prisma";
 
 export default async function ClientCounterCard() {
-  await new Promise(resolve => setTimeout(resolve, 3000))
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
   const count = await prisma.client.count();
   return (
