@@ -6,6 +6,8 @@ import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
 import { LegalEntity } from "@/types/types";
+import CorporateEntityInputs from "./CorporateEntityInputs";
+import SoleProprietorInputs from "./SoleProprietorInputs";
 import AddressInputs from "./AddressInputs";
 
 export default function LegalEntityEditForm({
@@ -25,6 +27,7 @@ export default function LegalEntityEditForm({
     unregister,
   } = useForm<LegalEntity>({
     defaultValues: {
+      id: entity.id,
       entityType: entity.entityType,
       isPrefixEntityType: entity.isPrefixEntityType,
       name: entity.name,
@@ -42,18 +45,18 @@ export default function LegalEntityEditForm({
 
   useEffect(() => {
     if (entity.entityType) {
-      unregister("tradeName")
+      unregister("tradeName");
     } else {
       unregister("entityType");
       unregister("isPrefixEntityType");
       unregister("title");
       unregister("representative");
     }
-  }, [entity.entityType, unregister])
+  }, [entity.entityType, unregister]);
 
   const onSubmit = async (formData: LegalEntity) => {
     try {
-      await action(formData)
+      await action(formData);
       console.log(formData);
     } catch (error) {
       console.error("データ更新時にエラーが発生しました.", error);
@@ -63,6 +66,11 @@ export default function LegalEntityEditForm({
   return (
     <form className="mt-10" onSubmit={handleSubmit(onSubmit)}>
       <div className="grid gap-y-8">
+        {entity.entityType ? (
+          <CorporateEntityInputs register={register} errors={errors} />
+        ) : (
+          <SoleProprietorInputs register={register} errors={errors} />
+        )}
         <hr className="my-2" />
         <AddressInputs
           register={register}
