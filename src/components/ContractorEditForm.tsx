@@ -57,8 +57,7 @@ export default function ContractorEditForm({
   const onSubmit = async () => {
     try {
       const data = getDirtyFieldValues();
-      const updateContractorWithId = updateContractor.bind(null, Number(id));
-      const result = await updateContractorWithId(data);
+      const result = await updateContractor(data);
       if (result.success) {
         console.log(result.message);
 
