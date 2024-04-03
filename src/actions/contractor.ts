@@ -68,17 +68,15 @@ export async function updateContractor(data: Partial<LegalEntity>) {
     const session = await getSession();
     const userId = session?.user.sub;
 
-    console.log(id + "&" + userId);
+    await prisma.contractor.update({
+      where: { id: id },
+      data: {
+        ...data,
+        updatedBy: userId,
+      },
+    });
 
-    // await prisma.contractor.update({
-    //   where: { id: id },
-    //   data: {
-    //     ...data,
-    //     updatedBy: userId,
-    //   },
-    // });
-
-    return { success: true, message: "更新が成功しました." };
+    return { success: true, message: "業者情報を更新しました！" };
   } catch (error) {
     console.error("データの更新に失敗しました.", error);
     throw new Error("データの更新に失敗しました.");

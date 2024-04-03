@@ -4,6 +4,8 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
+import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 
 import { LegalEntity } from "@/types/types";
 import CorporateEntityInputs from "./CorporateEntityInputs";
@@ -15,9 +17,15 @@ export default function LegalEntityEditForm({
   action,
 }: {
   entity: LegalEntity;
-  action: (FormData: LegalEntity) => Promise<{ success: boolean; message: string; }>
+  action: (
+    data: Partial<LegalEntity>,
+  ) => Promise<{ success: boolean; message: string }>;
   // action: (formData: LegalEntity) => Promise<void>;
 }) {
+  const router = useRouter();
+  const params = useParams<{ id: string }>();
+  const id = params.id;
+
   const {
     getValues,
     register,
@@ -55,10 +63,29 @@ export default function LegalEntityEditForm({
     }
   }, [entity.entityType, unregister]);
 
-  const onSubmit = async (formData: LegalEntity) => {
+  const getDirtyFieldValues = () => {
+    const dirtyFieldValues: Record<string, string> = {};
+    Object.keys(dirtyFields).forEach((fieldName) => {
+      if (dirtyFields[fieldName]) {
+        dirtyFieldValues[fieldName] = getValues(fieldName);
+      }
+    });
+
+    return dirtyFieldValues;
+  };
+
+  const onSubmit = async () => {
     try {
-      await action(formData);
-      console.log(formData);
+      const dirtyData = getDirtyFieldValues();
+      const data = { ...dirtyData, id: Number(id) };
+      const result = await action(data);
+
+      if (result.success) {
+        console.log(result.message);
+        router.push(`/contractors/${id}`);
+      } else {
+        console.error(result.message);
+      }
     } catch (error) {
       console.error("データ更新時にエラーが発生しました.", error);
     }
