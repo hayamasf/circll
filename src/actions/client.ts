@@ -68,7 +68,6 @@ export async function updateClient(data: Partial<LegalEntity>) {
 
     console.log(data);
     return { success: true, message: "更新が成功しました." };
-    
   } catch (error) {
     console.error("データの更新に失敗しました.", error);
     throw new Error("データの更新に失敗しました.");
