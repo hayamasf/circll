@@ -1,9 +1,9 @@
-const fetchPrefCityTown = async (postalCode: string) => {
+const fetchPrefCityTown = async (zipCode: string) => {
   const API_KEY = process.env.POSTCODEJP_API_KEY;
 
   try {
     const response = await fetch(
-      `https://apis.postcode-jp.com/api/v5/postcodes/${postalCode}`,
+      `https://apis.postcode-jp.com/api/v5/postcodes/${zipCode}`,
       {
         headers: {
           Authorization: `Bearer ${API_KEY}`,
