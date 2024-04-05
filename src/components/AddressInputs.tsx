@@ -35,6 +35,7 @@ export default function AddressInputs({
         setPrefCityTown(prefCityTown);
       }
     }
+    setValue("zipCode", zipCode, { shouldDirty: true });
   };
 
   return (
