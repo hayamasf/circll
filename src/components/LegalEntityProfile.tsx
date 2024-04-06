@@ -1,6 +1,7 @@
 import React from "react";
 import EditLink from "./EditLink";
 import { formatDateTime } from "@/utils/dateUtils";
+import { formatPostalCode } from "@/utils/formatPostalCode";
 import { LegalEntity } from "@/types/types";
 
 export default function LegalEntityProfile({
@@ -26,7 +27,7 @@ export default function LegalEntityProfile({
           {entity.tradeName && entity.tradeName}
         </p>
         <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-          〒 {entity.zipCode}
+          {formatPostalCode(entity.zipCode)}
         </p>
         <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
           {entity.prefecture}
