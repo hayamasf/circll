@@ -6,7 +6,6 @@ import LegalEntitiesList from "@/components/LegalEntitiesList";
 
 export default async function Page() {
   const clients = await prisma.client.findMany();
-  const routePath = "clients";
 
   return (
     <div className="container mx-auto max-w-3xl">
@@ -14,7 +13,7 @@ export default async function Page() {
         <PageHeader title="排出事業者" />
         <LinkButton href="/clients/register">新規登録</LinkButton>
       </div>
-      <LegalEntitiesList entities={clients} path={routePath} />
+      <LegalEntitiesList entities={clients} path={"clients"} />
     </div>
   );
 }
