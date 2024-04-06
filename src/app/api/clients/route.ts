@@ -1,3 +1,4 @@
-export function GET() {
-  console.log("get")
+export async function GET() {
+  const data = ""
+  return Response.json(data)
 }
