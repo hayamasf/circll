@@ -12,7 +12,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     return (
       <div className="mx-auto max-w-3xl">
         <LegalEntityProfile entity={client} />
-        <LinkButton children={"事業所を登録"} Icon={PlusIcon} href={`./${id}/sites/register`} />
+        <LinkButton href={`./${id}/sites/register`}><PlusIcon className="h-5 w-5 mr-3" />事業所を登録</LinkButton>
       </div>
     );
   }
