@@ -41,7 +41,7 @@ export default function LegalEntityProfile({
           </p>
         )}
       </div>
-      <div className="mt-6">
+      {/* <div className="mt-6">
         <dl className="grid grid-cols-1 sm:grid-cols-2">
           <div className="flex border-t border-gray-100 px-4 py-6 text-xs sm:col-span-1 sm:px-0">
             <dt className="font-medium leading-6 text-gray-900">登録</dt>
@@ -52,11 +52,11 @@ export default function LegalEntityProfile({
           <div className="flex text-xs border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
             <dt className="font-medium leading-6 text-gray-900">更新</dt>
             <dd className="ml-3 leading-6 text-gray-700">
-              {entity.createdAt.toLocaleString("ja-JP")}
+              {entity.updatedAt.toLocaleString("ja-JP")}
             </dd>
           </div>
         </dl>
-      </div>
+      </div> */}
     </div>
   );
 }

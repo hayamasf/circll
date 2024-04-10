@@ -12,7 +12,12 @@ export default async function Page({ params }: { params: { id: string } }) {
     return (
       <div className="mx-auto max-w-3xl">
         <LegalEntityProfile entity={client} />
-        <LinkButton href={`./${id}/sites/register`}><PlusIcon className="h-5 w-5 mr-3" />事業所を登録</LinkButton>
+        <div className="flex justify-end my-8">
+          <LinkButton href={`./${id}/sites/register`}>
+            <PlusIcon className="h-5 w-5 mr-3" />
+            事業所を登録
+          </LinkButton>
+        </div>
       </div>
     );
   }

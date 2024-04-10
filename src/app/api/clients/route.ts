@@ -1,4 +1,4 @@
 export async function GET() {
-  const data = ""
-  return Response.json(data)
+  const data = "";
+  return Response.json(data);
 }
