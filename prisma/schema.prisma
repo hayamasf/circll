@@ -22,7 +22,7 @@ model Contractor {
   title             String?
   representative    String?
   tradeName         String?
-  zipCode           String
+  postalCode        String
   prefecture        String
   city              String
   town              String
@@ -42,11 +42,28 @@ model Client {
   title             String?
   representative    String?
   tradeName         String?
-  zipCode           String
+  postalCode        String
   prefecture        String
   city              String
   town              String
   address           String
   address2          String?
+  sites             Site[]
 }
 
+model Site {
+  id                Int @id @default(autoincrement())
+  createdAt         DateTime @default(now())
+  createdBy         String
+  updatedAt         DateTime @updatedAt
+  updatedBy         String?
+  name              String
+  postalCode        String
+  prefecture        String
+  city              String
+  town              String
+  address           String
+  address2          String?
+  clientId          Int
+  client            Client @relation(fields: [clientId], references: [id])
+}
