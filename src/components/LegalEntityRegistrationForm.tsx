@@ -32,7 +32,7 @@ export default function LegalEntityRegistrationForm({
       title: "",
       representative: "",
       tradeName: "",
-      zipCode: "",
+      postalCode: "",
       prefecture: "",
       city: "",
       town: "",

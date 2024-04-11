@@ -28,14 +28,14 @@ export default function AddressInputs({
   };
 
   const handleZipCodeInput = async (e: ChangeEvent<HTMLInputElement>) => {
-    const zipCode = e.target.value;
-    if (zipCode.length === 7) {
-      const prefCityTown = await fetchPrefCityTown(zipCode);
+    const postalCode = e.target.value;
+    if (postalCode.length === 7) {
+      const prefCityTown = await fetchPrefCityTown(postalCode);
       if (prefCityTown) {
         setPrefCityTown(prefCityTown);
       }
     }
-    setValue("zipCode", zipCode, { shouldDirty: true });
+    setValue("postalCode", postalCode, { shouldDirty: true });
   };
 
   return (
@@ -43,15 +43,15 @@ export default function AddressInputs({
       <div className="grid grid-cols-3 gap-x-1">
         <div className="relative">
           <label
-            htmlFor="zipCode"
+            htmlFor="postalCode"
             className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
           >
             郵便番号
           </label>
           <input
             type="text"
-            id="zipCode"
-            {...register("zipCode", { required: "郵便番号は必須です" })}
+            id="postalCode"
+            {...register("postalCode", { required: "郵便番号は必須です" })}
             onChange={(e) => {
               handleZipCodeInput(e);
             }}
@@ -62,8 +62,8 @@ export default function AddressInputs({
         <div className="pt-2 text-gray-900 col-span-2 sm:text-sm">
           ← ハイフンなし、7桁
         </div>
-        {errors.zipCode?.message && (
-          <p className="text-xs text-red-500 p-1">{errors.zipCode.message}</p>
+        {errors.postalCode?.message && (
+          <p className="text-xs text-red-500 p-1">{errors.postalCode.message}</p>
         )}
       </div>
       <div className="grid grid-cols-2 gap-x-1">

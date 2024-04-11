@@ -39,7 +39,7 @@ export async function createContractor(data: LegalEntity) {
         ...(data.title && { title: data.title }),
         ...(data.representative && { representative: data.representative }),
         ...(data.tradeName && { tradeName: data.tradeName }),
-        zipCode: data.zipCode,
+        postalCode: data.postalCode,
         prefecture: data.prefecture,
         city: data.city,
         town: data.town,

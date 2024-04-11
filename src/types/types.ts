@@ -31,11 +31,27 @@ export type LegalEntity = {
   tradeName?: string | null;
   title?: string | null;
   representative?: string | null;
-  zipCode: string;
+  postalCode: string;
   prefecture: string;
   city: string;
   town: string;
   address: string;
   address2?: string | null;
   [key: string]: any;
+};
+
+export type Site = {
+  id: number;
+  clientId: number;
+  createdAt: Date;
+  createdBy: string;
+  updatedAt: Date;
+  updatedBy?: string | null;
+  name: string;
+  postalCode: string;
+  prefecture: string;
+  city: string;
+  town: string;
+  address: string;
+  address2?: string | null;
 };

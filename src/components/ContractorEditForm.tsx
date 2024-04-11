@@ -34,7 +34,7 @@ export default function ContractorEditForm({
       name: contractor.name,
       title: contractor.title,
       representative: contractor.representative,
-      zipCode: contractor.zipCode,
+      postalCode: contractor.postalCode,
       prefecture: contractor.prefecture,
       city: contractor.city,
       town: contractor.town,
@@ -85,10 +85,10 @@ export default function ContractorEditForm({
   };
 
   const handleZipCodeInput = async (e: ChangeEvent<HTMLInputElement>) => {
-    const zipCode = e.target.value;
+    const postalCode = e.target.value;
 
-    if (zipCode.length === 7) {
-      const prefCityTown = await fetchPrefCityTown(zipCode);
+    if (postalCode.length === 7) {
+      const prefCityTown = await fetchPrefCityTown(postalCode);
       if (prefCityTown) {
         setPrefCityTown(prefCityTown);
       }
@@ -164,15 +164,15 @@ export default function ContractorEditForm({
         <div className="grid grid-cols-3 gap-x-1">
           <div className="relative">
             <label
-              htmlFor="zipCode"
+              htmlFor="postalCode"
               className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
             >
               郵便番号
             </label>
             <input
               type="text"
-              id="zipCode"
-              {...register("zipCode", {
+              id="postalCode"
+              {...register("postalCode", {
                 required: "郵便番号は必須です",
                 onChange: (e) => {
                   handleZipCodeInput(e);
@@ -184,8 +184,8 @@ export default function ContractorEditForm({
           <div className="pt-2 text-gray-900 col-span-2 sm:text-sm">
             ← ハイフンなし、7桁
           </div>
-          {errors.zipCode?.message && (
-            <p className="text-xs text-red-500 p-1">{errors.zipCode.message}</p>
+          {errors.postalCode?.message && (
+            <p className="text-xs text-red-500 p-1">{errors.postalCode.message}</p>
           )}
         </div>
 

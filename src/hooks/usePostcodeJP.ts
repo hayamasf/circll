@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent } from "react";
 
 const usePostcodeJP = () => {
-  const [zipCode, setZipCode] = useState("");
+  const [postalCode, setPostalCode] = useState("");
   const [prefecture, setPrefecture] = useState("");
   const [city, setCity] = useState("");
   const [town, setTown] = useState("");
@@ -10,11 +10,11 @@ const usePostcodeJP = () => {
     const API_KEY = process.env.POSTCODEJP_API_KEY;
 
     const getPrefCityTown = async () => {
-      if (zipCode.length !== 7) return;
+      if (postalCode.length !== 7) return;
 
       try {
         const response = await fetch(
-          `https://apis.postcode-jp.com/api/v5/postcodes/${zipCode}`,
+          `https://apis.postcode-jp.com/api/v5/postcodes/${postalCode}`,
           {
             headers: {
               Authorization: `Bearer ${API_KEY}`,
@@ -37,13 +37,13 @@ const usePostcodeJP = () => {
       }
     };
     getPrefCityTown();
-  }, [zipCode]);
+  }, [postalCode]);
 
   const handleZipCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setZipCode(event.target.value);
+    setPostalCode(event.target.value);
   };
   return {
-    zipCode,
+    postalCode,
     prefecture,
     city,
     town,

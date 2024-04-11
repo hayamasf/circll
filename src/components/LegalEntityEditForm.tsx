@@ -43,7 +43,7 @@ export default function LegalEntityEditForm({
       title: entity.title,
       representative: entity.representative,
       tradeName: entity.tradeName,
-      zipCode: entity.zipCode,
+      postalCode: entity.postalCode,
       prefecture: entity.prefecture,
       city: entity.city,
       town: entity.town,

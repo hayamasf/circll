@@ -27,7 +27,7 @@ export default function LegalEntityProfile({
           {entity.tradeName && entity.tradeName}
         </p>
         <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-          {formatPostalCode(entity.zipCode)}
+          {formatPostalCode(entity.postalCode)}
         </p>
         <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
           {entity.prefecture}
