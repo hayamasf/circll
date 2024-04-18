@@ -8,7 +8,7 @@ export const configItems = [
   {
     id: 2,
     name: "事業所",
-    href: "/premises",
+    href: "/sites",
     current: false,
   },
   {

@@ -1,16 +1,19 @@
 "use client";
 
-import React from "react";
-import { UseFormRegister, FieldErrors } from "react-hook-form";
+import React, { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 import { LegalEntity } from "@/types/types";
 
-export default function SoleProprietorInputs({
-  register,
-  errors,
-}: {
-  register: UseFormRegister<LegalEntity>;
-  errors: FieldErrors<LegalEntity>;
-}) {
+export default function SoleProprietorInputs() {
+  const { register, unregister, formState: { errors } } = useFormContext<LegalEntity>();
+
+  useEffect(() => {
+    unregister("entityType");
+    unregister("isPrefixEntityType");
+    unregister("title");
+    unregister("representative");
+  }, [])
+
   return (
     <>
       <div className="relative">

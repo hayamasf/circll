@@ -1,18 +1,14 @@
-import React, { ChangeEvent } from "react";
-import { UseFormRegister, UseFormSetValue, FieldErrors } from "react-hook-form";
+import React, { useState, ChangeEvent } from "react";
+import { useFormContext } from "react-hook-form";
 import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
 
-import { LegalEntity } from "@/types/types";
+import { Address } from "@/types/types";
 
-export default function AddressInputs({
-  register,
-  errors,
-  setValue,
-}: {
-  register: UseFormRegister<LegalEntity>;
-  errors: FieldErrors<LegalEntity>;
-  setValue: UseFormSetValue<LegalEntity>;
-}) {
+export default function AddressInputs() {
+  const { register, setValue, formState: { errors }, } = useFormContext<Address>();
+
+  const [postalCode, setPostalCode] = useState("");
+
   const setPrefCityTown = ({
     pref,
     city,
@@ -27,16 +23,31 @@ export default function AddressInputs({
     setValue("town", town);
   };
 
-  const handleZipCodeInput = async (e: ChangeEvent<HTMLInputElement>) => {
-    const postalCode = e.target.value;
-    if (postalCode.length === 7) {
-      const prefCityTown = await fetchPrefCityTown(postalCode);
-      if (prefCityTown) {
-        setPrefCityTown(prefCityTown);
+  const handleFetchAddress = async () => {
+    const isValidPostalCode = /^\d{7}$/.test(postalCode)
+
+    if (isValidPostalCode) {
+      try {
+        const prefCityTown = await fetchPrefCityTown(postalCode)
+        if (prefCityTown) {
+          setPrefCityTown(prefCityTown)
+
+        } else {
+          alert("郵便番号に該当する住所が見つかりませんでした.")
+        }
+      } catch (error) {
+        console.error("住所情報の取得に失敗しました.", error)
+        alert("住所情報の取得中にエラーが発生しました.")
       }
+    } else {
+      alert("数字のみ7桁の郵便番号を入力してください.")
     }
-    setValue("postalCode", postalCode, { shouldDirty: true });
-  };
+  }
+
+  const handlePostalCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPostalCode(e.target.value);
+    setValue("postalCode", e.target.value, { shouldDirty: true })
+  }
 
   return (
     <>
@@ -52,15 +63,15 @@ export default function AddressInputs({
             type="text"
             id="postalCode"
             {...register("postalCode", { required: "郵便番号は必須です" })}
-            onChange={(e) => {
-              handleZipCodeInput(e);
-            }}
+            value={postalCode}
+            onChange={handlePostalCodeChange}
+            maxLength={7}
             className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
             placeholder="1040032"
           />
         </div>
-        <div className="pt-2 text-gray-900 col-span-2 sm:text-sm">
-          ← ハイフンなし、7桁
+        <div className="col-span-2 ml-3 place-content-center">
+          <button type="button" className="py-1.5 px-1 rounded-md bg-gray-500 text-white text-xs" onClick={handleFetchAddress}>郵便番号から住所を入力</button>
         </div>
         {errors.postalCode?.message && (
           <p className="text-xs text-red-500 p-1">{errors.postalCode.message}</p>

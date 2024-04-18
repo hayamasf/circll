@@ -1,16 +1,16 @@
 "use client";
 
-import React from "react";
-import { UseFormRegister, FieldErrors } from "react-hook-form";
+import React, { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 import { LegalEntity } from "@/types/types";
 
-export default function CorporateEntityInputs({
-  register,
-  errors,
-}: {
-  register: UseFormRegister<LegalEntity>;
-  errors: FieldErrors<LegalEntity>;
-}) {
+export default function CorporateEntityInputs() {
+  const { register, unregister, formState: { errors }, } = useFormContext<LegalEntity>();
+
+  useEffect(() => {
+    unregister("tradeName");
+  }, [])
+
   return (
     <>
       <div className="grid grid-cols-2 gap-x-1">
@@ -65,7 +65,7 @@ export default function CorporateEntityInputs({
           placeholder="サティスファクトリー"
         />
         {errors.name?.message && (
-          <p className="text-xs text-red-500 p-1">{errors.name?.message}</p>
+          <p className="text-xs text-red-500 p-1">{errors.name.message}</p>
         )}
       </div>
       <div className="grid grid-cols-2 gap-x-1">

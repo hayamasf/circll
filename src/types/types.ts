@@ -19,6 +19,15 @@ export type UserNavigationItem = {
   href: string;
 };
 
+export type Address = {
+  postalCode: string;
+  prefecture: string;
+  city: string;
+  town: string;
+  address: string;
+  address2?: string | null;
+}
+
 export type LegalEntity = {
   id: number;
   createdAt: Date;
