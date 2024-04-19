@@ -9,57 +9,57 @@ import { LegalEntity } from "@/types/types";
 import convertToBoolean from "@/utils/convertToBoolean";
 
 export async function createContractor(data: LegalEntity) {
-  let isPrefixEntityType;
+  // let isPrefixEntityType;
 
-  if (
-    data.isPrefixEntityType !== undefined &&
-    data.isPrefixEntityType !== null
-  ) {
-    isPrefixEntityType = convertToBoolean(data.isPrefixEntityType);
-  }
+  // if (
+  //   data.isPrefixEntityType !== undefined &&
+  //   data.isPrefixEntityType !== null
+  // ) {
+  //   isPrefixEntityType = convertToBoolean(data.isPrefixEntityType);
+  // }
 
-  let newContractorId: number | undefined;
+  // let newContractorId: number | undefined;
 
-  try {
-    const session = await getSession();
-    const userId = session?.user.sub;
+  // try {
+  //   const session = await getSession();
+  //   const userId = session?.user.sub;
 
-    if (!userId) {
-      throw new Error("ユーザーIDを確認してください.");
-    }
+  //   if (!userId) {
+  //     throw new Error("ユーザーIDを確認してください.");
+  //   }
 
-    const newContractor = await prisma.contractor.create({
-      data: {
-        createdBy: userId,
-        ...(data.entityType && { entityType: data.entityType }),
-        ...(data.isPrefixEntityType && {
-          isPrefixEntityType: isPrefixEntityType,
-        }),
-        name: data.name,
-        ...(data.title && { title: data.title }),
-        ...(data.representative && { representative: data.representative }),
-        ...(data.tradeName && { tradeName: data.tradeName }),
-        postalCode: data.postalCode,
-        prefecture: data.prefecture,
-        city: data.city,
-        town: data.town,
-        address: data.address,
-        ...(data.address2 && { address2: data.address2 }),
-      },
-    });
+  //   const newContractor = await prisma.contractor.create({
+  //     data: {
+  //       createdBy: userId,
+  //       ...(data.entityType && { entityType: data.entityType }),
+  //       ...(data.isPrefixEntityType && {
+  //         isPrefixEntityType: isPrefixEntityType,
+  //       }),
+  //       name: data.name,
+  //       ...(data.title && { title: data.title }),
+  //       ...(data.representative && { representative: data.representative }),
+  //       ...(data.tradeName && { tradeName: data.tradeName }),
+  //       postalCode: data.postalCode,
+  //       prefecture: data.prefecture,
+  //       city: data.city,
+  //       town: data.town,
+  //       address: data.address,
+  //       ...(data.address2 && { address2: data.address2 }),
+  //     },
+  //   });
 
-    newContractorId = newContractor.id;
+  //   newContractorId = newContractor.id;
 
     console.log(data);
-    revalidatePath(`/contractors/${newContractorId}`);
-  } catch (error) {
-    console.error("データの更新に失敗しました.", error);
-    throw new Error("データの更新に失敗しました.");
-  } finally {
-    if (newContractorId !== undefined) {
-      redirect(`/contractors/${newContractorId}`);
-    }
-  }
+  //   revalidatePath(`/contractors/${newContractorId}`);
+  // } catch (error) {
+  //   console.error("データの更新に失敗しました.", error);
+  //   throw new Error("データの更新に失敗しました.");
+  // } finally {
+  //   if (newContractorId !== undefined) {
+  //     redirect(`/contractors/${newContractorId}`);
+  //   }
+  // }
 }
 
 export async function updateContractor(data: Partial<LegalEntity>) {
