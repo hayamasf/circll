@@ -75,10 +75,10 @@ export default function LegalEntitySelector({
         </div>
       </div>
       {selectedType?.id === 1 && (
-        <CorporateEntityInputs register={register} errors={errors} />
+        <CorporateEntityInputs />
       )}
       {selectedType?.id === 2 && (
-        <SoleProprietorInputs register={register} errors={errors} />
+        <SoleProprietorInputs />
       )}
     </>
   );
