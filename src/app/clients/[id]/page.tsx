@@ -3,6 +3,7 @@ import LegalEntityProfile from "@/components/LegalEntityProfile";
 import fetchClientById from "@/utils/fetchClientById";
 import LinkButton from "@/components/LinkButton";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import SectionHeader from "@/components/SectionHeader";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
@@ -18,6 +19,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             事業所を登録
           </LinkButton>
         </div>
+        <SectionHeader title={"事業所一覧"} />
       </div>
     );
   }
