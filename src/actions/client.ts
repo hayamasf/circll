@@ -8,48 +8,48 @@ import { getSession } from "@auth0/nextjs-auth0";
 import { LegalEntity } from "@/types/types";
 
 export async function createClient(data: LegalEntity) {
-  // let newClientId: number | undefined;
+  let newClientId: number | undefined;
 
-  // try {
-  //   const session = await getSession();
-  //   const userId = session?.user.sub;
+  try {
+    const session = await getSession();
+    const userId = session?.user.sub;
 
-  //   if (!userId) {
-  //     throw new Error("ユーザーIDを確認してください.");
-  //   }
+    if (!userId) {
+      throw new Error("ユーザーIDを確認してください.");
+    }
 
-  //   const newClient = await prisma.client.create({
-  //     data: {
-  //       createdBy: userId,
-  //       ...(data.entityType && { entityType: data.entityType }),
-  //       ...(data.isPrefixEntityType && {
-  //         isPrefixEntityType: data.isPrefixEntityType,
-  //       }),
-  //       name: data.name,
-  //       ...(data.title && { title: data.title }),
-  //       ...(data.representative && { representative: data.representative }),
-  //       ...(data.tradeName && { tradeName: data.tradeName }),
-  //       postalCode: data.postalCode,
-  //       prefecture: data.prefecture,
-  //       city: data.city,
-  //       town: data.town,
-  //       address: data.address,
-  //       ...(data.address2 && { address2: data.address2 }),
-  //     },
-  //   });
+    const newClient = await prisma.client.create({
+      data: {
+        createdBy: userId,
+        ...(data.entityType && { entityType: data.entityType }),
+        ...(data.isPrefixEntityType && {
+          isPrefixEntityType: data.isPrefixEntityType,
+        }),
+        name: data.name,
+        ...(data.title && { title: data.title }),
+        ...(data.representative && { representative: data.representative }),
+        ...(data.tradeName && { tradeName: data.tradeName }),
+        postalCode: data.postalCode,
+        prefecture: data.prefecture,
+        city: data.city,
+        town: data.town,
+        address: data.address,
+        ...(data.address2 && { address2: data.address2 }),
+      },
+    });
 
-  //   newClientId = newClient.id;
+    newClientId = newClient.id;
 
-  console.log(data);
-  //   revalidatePath(`/clients/${newClientId}`);
-  // } catch (error) {
-  //   console.error("データの更新に失敗しました.", error);
-  //   throw new Error("データの更新に失敗しました.");
-  // } finally {
-  //   if (newClientId !== undefined) {
-  //     redirect(`/clients/${newClientId}`);
-  //   }
-  // }
+    console.log(data);
+    revalidatePath(`/clients/${newClientId}`);
+  } catch (error) {
+    console.error("データの更新に失敗しました.", error);
+    throw new Error("データの更新に失敗しました.");
+  } finally {
+    if (newClientId !== undefined) {
+      redirect(`/clients/${newClientId}`);
+    }
+  }
 }
 
 export async function updateClient(data: Partial<LegalEntity>) {

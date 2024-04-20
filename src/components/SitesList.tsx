@@ -8,7 +8,7 @@ export default async function SitesList({ sites }: { sites: Site[] }) {
     <ul role="list" className="divide-y divide-gray-100">
       {sites.map((site) => (
         <li key={site.id} className="relative py-5 hover:bg-gray-50">
-          <div className="px-4 sm:px-6 lg:px-8">
+          <div className="px-2 sm:px-4 lg:px-6">
             <div className="mx-auto flex max-w-4xl justify-between gap-x-6">
               <div className="flex min-w-0 gap-x-4">
                 <div className="min-w-0 flex-auto">
