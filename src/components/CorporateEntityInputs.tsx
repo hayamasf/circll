@@ -5,11 +5,15 @@ import { useFormContext } from "react-hook-form";
 import { LegalEntity } from "@/types/types";
 
 export default function CorporateEntityInputs() {
-  const { register, unregister, formState: { errors }, } = useFormContext<LegalEntity>();
+  const {
+    register,
+    unregister,
+    formState: { errors },
+  } = useFormContext<LegalEntity>();
 
   useEffect(() => {
     unregister("tradeName");
-  }, [])
+  }, []);
 
   return (
     <>

@@ -74,12 +74,8 @@ export default function LegalEntitySelector({
           </nav>
         </div>
       </div>
-      {selectedType?.id === 1 && (
-        <CorporateEntityInputs />
-      )}
-      {selectedType?.id === 2 && (
-        <SoleProprietorInputs />
-      )}
+      {selectedType?.id === 1 && <CorporateEntityInputs />}
+      {selectedType?.id === 2 && <SoleProprietorInputs />}
     </>
   );
 }

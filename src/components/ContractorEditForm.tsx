@@ -185,7 +185,9 @@ export default function ContractorEditForm({
             ← ハイフンなし、7桁
           </div>
           {errors.postalCode?.message && (
-            <p className="text-xs text-red-500 p-1">{errors.postalCode.message}</p>
+            <p className="text-xs text-red-500 p-1">
+              {errors.postalCode.message}
+            </p>
           )}
         </div>
 

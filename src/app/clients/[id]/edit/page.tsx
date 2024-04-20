@@ -5,7 +5,6 @@ import fetchClientById from "@/utils/fetchClientById";
 import { updateClient } from "@/actions/client";
 
 export default async function Page({ params }: { params: { id: string } }) {
-
   const id = Number(params.id);
   // await new Promise((resolve) => setTimeout(resolve, 3000));
 

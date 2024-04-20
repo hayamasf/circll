@@ -9,7 +9,6 @@ import { LegalEntity } from "@/types/types";
 import { createContractor } from "@/actions/contractor";
 
 export default function Page() {
-
   const searchParams = useSearchParams();
   const type = searchParams.get("type") as "corporate" | "sole-proprietor";
 

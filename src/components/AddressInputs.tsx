@@ -5,7 +5,12 @@ import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
 import { Address } from "@/types/types";
 
 export default function AddressInputs() {
-  const { register, setValue, watch, formState: { errors }, } = useFormContext<Address>();
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useFormContext<Address>();
 
   const postalCode = watch("postalCode");
 
@@ -24,25 +29,24 @@ export default function AddressInputs() {
   };
 
   const handleFetchAddress = async () => {
-    const isValidPostalCode = /^\d{7}$/.test(postalCode)
+    const isValidPostalCode = /^\d{7}$/.test(postalCode);
 
     if (isValidPostalCode) {
       try {
-        const prefCityTown = await fetchPrefCityTown(postalCode)
+        const prefCityTown = await fetchPrefCityTown(postalCode);
         if (prefCityTown) {
-          setPrefCityTown(prefCityTown)
-
+          setPrefCityTown(prefCityTown);
         } else {
-          alert("郵便番号に該当する住所が見つかりませんでした.")
+          alert("郵便番号に該当する住所が見つかりませんでした.");
         }
       } catch (error) {
-        console.error("住所情報の取得に失敗しました.", error)
-        alert("住所情報の取得中にエラーが発生しました.")
+        console.error("住所情報の取得に失敗しました.", error);
+        alert("住所情報の取得中にエラーが発生しました.");
       }
     } else {
-      alert("数字のみ7桁の郵便番号を入力してください.")
+      alert("数字のみ7桁の郵便番号を入力してください.");
     }
-  }
+  };
 
   return (
     <>
@@ -64,10 +68,18 @@ export default function AddressInputs() {
           />
         </div>
         <div className="col-span-2 ml-3 place-content-center">
-          <button type="button" className="py-1.5 px-1 rounded-md bg-gray-500 text-white text-xs" onClick={handleFetchAddress}>郵便番号から住所を入力</button>
+          <button
+            type="button"
+            className="py-1.5 px-1 rounded-md bg-gray-500 text-white text-xs"
+            onClick={handleFetchAddress}
+          >
+            郵便番号から住所を入力
+          </button>
         </div>
         {errors.postalCode?.message && (
-          <p className="text-xs text-red-500 p-1">{errors.postalCode.message}</p>
+          <p className="text-xs text-red-500 p-1">
+            {errors.postalCode.message}
+          </p>
         )}
       </div>
       <div className="grid grid-cols-2 gap-x-1">

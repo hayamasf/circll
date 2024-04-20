@@ -5,14 +5,18 @@ import { useFormContext } from "react-hook-form";
 import { LegalEntity } from "@/types/types";
 
 export default function SoleProprietorInputs() {
-  const { register, unregister, formState: { errors } } = useFormContext<LegalEntity>();
+  const {
+    register,
+    unregister,
+    formState: { errors },
+  } = useFormContext<LegalEntity>();
 
   useEffect(() => {
     unregister("entityType");
     unregister("isPrefixEntityType");
     unregister("title");
     unregister("representative");
-  }, [])
+  }, []);
 
   return (
     <>

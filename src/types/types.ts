@@ -26,7 +26,7 @@ export type Address = {
   town: string;
   address: string;
   address2?: string | null;
-}
+};
 
 export type LegalEntity = {
   id: number;

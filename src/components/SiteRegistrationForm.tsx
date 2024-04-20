@@ -10,7 +10,6 @@ import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
 export default function SiteRegistrationForm({ id }: { id: number }) {
-
   const methods = useForm<Site>({
     defaultValues: {
       clientId: id,
@@ -35,9 +34,6 @@ export default function SiteRegistrationForm({ id }: { id: number }) {
     console.log(data);
     const result = await createSite(data);
 
-    if (result.success) {
-      console.log(result.message);
-    }
   };
 
   return (
@@ -59,7 +55,9 @@ export default function SiteRegistrationForm({ id }: { id: number }) {
               placeholder="東京中央営業所"
             />
             {methods.formState.errors.name?.message && (
-              <p className="text-xs text-red-500 p-1">{methods.formState.errors.name?.message}</p>
+              <p className="text-xs text-red-500 p-1">
+                {methods.formState.errors.name?.message}
+              </p>
             )}
           </div>
           <AddressInputs />
