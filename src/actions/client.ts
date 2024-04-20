@@ -40,7 +40,7 @@ export async function createClient(data: LegalEntity) {
 
   //   newClientId = newClient.id;
 
-    console.log(data);
+  console.log(data);
   //   revalidatePath(`/clients/${newClientId}`);
   // } catch (error) {
   //   console.error("データの更新に失敗しました.", error);
