@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 
 import SubmitButton from "./SubmitButton";
