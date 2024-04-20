@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Site } from "@/types/types";
 
 export default async function SitesList({ sites }: { sites: Site[] }) {
-
   return (
     <ul role="list" className="divide-y divide-gray-100">
       {sites.map((site) => (
@@ -14,7 +13,9 @@ export default async function SitesList({ sites }: { sites: Site[] }) {
               <div className="flex min-w-0 gap-x-4">
                 <div className="min-w-0 flex-auto">
                   <p className="text-sm font-semibold leading-6 text-gray-900">
-                    <Link href={"/clients/" + site.clientId + "/sites/" + site.id}>
+                    <Link
+                      href={"/clients/" + site.clientId + "/sites/" + site.id}
+                    >
                       <span className="absolute inset-x-0 -top-px bottom-0" />
                       {site.name}
                     </Link>
@@ -43,11 +44,8 @@ export default async function SitesList({ sites }: { sites: Site[] }) {
               </div>
             </div>
           </div>
-
         </li>
       ))}
     </ul>
-  )
-
-
+  );
 }

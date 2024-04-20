@@ -33,7 +33,6 @@ export default function SiteRegistrationForm({ id }: { id: number }) {
 
     console.log(data);
     const result = await createSite(data);
-
   };
 
   return (

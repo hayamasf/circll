@@ -21,8 +21,5 @@ export default async function Page() {
         <SitesList sites={sites} />
       </Suspense>
     </div>
-
-
-  )
-
+  );
 }
