@@ -1,18 +1,20 @@
 "use client";
 
-import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
-import { EllipsisVerticalIcon, StarIcon, PencilSquareIcon } from '@heroicons/react/20/solid'
-import { classNames } from '@/utils/classNames'
+import { Fragment } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import {
+  EllipsisVerticalIcon,
+  StarIcon,
+  PencilSquareIcon,
+} from "@heroicons/react/20/solid";
+import { classNames } from "@/utils/classNames";
 
 export default function SiteDetail({ site }: any) {
   return (
     <div className="bg-gray-50 rounded-md px-4 py-5 sm:px-6">
       <div className="flex space-x-3">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-semibold text-gray-900">
-            {site.name}
-          </p>
+          <p className="text-sm font-semibold text-gray-900">{site.name}</p>
         </div>
         <div className="flex flex-shrink-0 self-center">
           <Menu as="div" className="relative inline-block text-left">
@@ -39,11 +41,16 @@ export default function SiteDetail({ site }: any) {
                       <a
                         href="#"
                         className={classNames(
-                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                          'flex px-4 py-2 text-sm'
+                          active
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700",
+                          "flex px-4 py-2 text-sm",
                         )}
                       >
-                        <StarIcon className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                        <StarIcon
+                          className="mr-3 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
                         <span>Add to favorites</span>
                       </a>
                     )}
@@ -53,11 +60,16 @@ export default function SiteDetail({ site }: any) {
                       <a
                         href="#"
                         className={classNames(
-                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                          'flex px-4 py-2 text-sm'
+                          active
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700",
+                          "flex px-4 py-2 text-sm",
                         )}
                       >
-                        <PencilSquareIcon className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                        <PencilSquareIcon
+                          className="mr-3 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
                         <span>編集する</span>
                       </a>
                     )}
@@ -69,5 +81,5 @@ export default function SiteDetail({ site }: any) {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 
-export default async function fetchClientById(id: number) {
+export default async function getClientById(id: number) {
   try {
     const client = await prisma.client.findUnique({
       where: { id },

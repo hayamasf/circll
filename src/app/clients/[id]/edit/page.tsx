@@ -1,7 +1,7 @@
 import React from "react";
 import PageHeader from "@/components/PageHeader";
 import LegalEntityEditForm from "@/components/LegalEntityEditForm";
-import fetchClientById from "@/utils/fetchClientById";
+import fetchClientById from "@/utils/getClientById";
 import { updateClient } from "@/actions/client";
 
 export default async function Page({ params }: { params: { id: string } }) {
