@@ -1,18 +1,18 @@
 import React from "react";
 
 import ClientCounterCard from "./ClientCounterCard";
+import SiteCounterCard from "./SiteCounterCard";
 import ContractorCounterCard from "./ContractorCounterCard";
 
-const stats = [
-  { name: "Total Subscribers", stat: "71,897" },
-  { name: "Avg. Open Rate", stat: "58.16%" },
-];
+const stats = [{ name: "Total Subscribers", stat: "71,897" }];
 
 export default function Stats() {
   return (
     <div>
       <dl className="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-4">
         <ClientCounterCard />
+        <SiteCounterCard />
+        <ContractorCounterCard />
         {stats.map((item) => (
           <div
             key={item.name}
@@ -26,7 +26,6 @@ export default function Stats() {
             </dd>
           </div>
         ))}
-        <ContractorCounterCard />
       </dl>
     </div>
   );

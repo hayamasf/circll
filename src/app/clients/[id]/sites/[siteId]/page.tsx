@@ -18,7 +18,7 @@ export default async function Page({
   if (!client) {
     return <div>排出事業者が登録されていません.</div>;
   } else if (!site) {
-    return <div>事業所の登録がありません.</div>
+    return <div>事業所の登録がありません.</div>;
   } else {
     return (
       <div className="mx-auto max-w-xl">
