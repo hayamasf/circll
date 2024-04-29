@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import getClientById from "@/utils/getClientById";
 import getSiteById from "@/utils/getSiteById";
 import PageHeader from "@/components/PageHeader";
@@ -23,9 +24,17 @@ export default async function Page({
     return (
       <div className="mx-auto max-w-xl">
         <PageHeader title={"事業所情報"} />
-        <div>{client.name}</div>
-
-        <div className="my-10">
+        <div className="my-3 bg-gray-50 rounded-md px-4 py-5 sm:px-6 text-sm text-gray-800">
+          <Link href={"/clients/" + client.id} className="font-bold text-base">
+            {client.isPrefixEntityType && client.entityType}
+            {client.name}
+            {client.entityType &&
+              !client.isPrefixEntityType &&
+              client.entityType}
+          </Link>
+          の事業所
+        </div>
+        <div className="my-3">
           <SiteDetail site={site} />
         </div>
       </div>
