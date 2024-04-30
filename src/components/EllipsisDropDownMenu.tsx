@@ -1,12 +1,22 @@
 "use client";
 
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import Link from "next/link";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { classNames } from "@/utils/classNames";
 
-export default function EllipsisDropDownMenu({ menuItems }: any) {
+type menuItems = {
+  id: number,
+  text: string,
+  href: string,
+}
+
+type EllipsisDropDownMenuProps = {
+  menuItems: menuItems[];
+}
+
+export default function EllipsisDropDownMenu({ menuItems }: EllipsisDropDownMenuProps) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -27,7 +37,7 @@ export default function EllipsisDropDownMenu({ menuItems }: any) {
       >
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            {menuItems.map((item: any) => (
+            {menuItems.map((item) => (
               <Menu.Item key={item.id}>
                 {({ active }) => (
                   <Link
