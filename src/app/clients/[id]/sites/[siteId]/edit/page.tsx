@@ -1,6 +1,7 @@
 import React from "react";
 import PageHeader from "@/components/PageHeader";
 import getSiteById from "@/utils/getSiteById";
+import SiteEditForm from "@/components/SiteEditForm";
 
 export default async function Page({ params }: { params: { siteId: string } }) {
   const siteId = Number(params.siteId);
@@ -9,7 +10,7 @@ export default async function Page({ params }: { params: { siteId: string } }) {
   return (
     <div className="mx-auto max-w-lg">
       <PageHeader title="事業所情報の編集" />
-      {siteId}
+      <SiteEditForm />
     </div>
   );
 }
