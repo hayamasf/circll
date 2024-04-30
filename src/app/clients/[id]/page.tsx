@@ -18,6 +18,7 @@ async function getSites(clientId: number) {
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
+
   const client = await fetchClientById(id);
   const sites = await getSites(id);
 
@@ -28,7 +29,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <div className="flex my-10 items-center justify-between">
           <SectionHeader title={"事業所一覧"} />
           <Link
-            href={"/"}
+            href={id + "/sites/register"}
             className="flex text-sm items-center hover:underline"
           >
             <PlusIcon className="h-5 w-5 mr-2" />
