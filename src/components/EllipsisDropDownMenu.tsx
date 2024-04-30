@@ -3,19 +3,10 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import { Menu, Transition } from "@headlessui/react";
-import {
-  EllipsisVerticalIcon,
-  StarIcon,
-  PencilSquareIcon,
-} from "@heroicons/react/20/solid";
+import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { classNames } from "@/utils/classNames";
 
-const menuItems = [
-  { id: 1, text: "これ", icon: StarIcon, href: "/" },
-  { id: 2, text: "情報を更新する", icon: PencilSquareIcon, href: "./" },
-];
-
-export default function EllipsisDropDownMenu() {
+export default function EllipsisDropDownMenu({ menuItems }: any) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -36,7 +27,7 @@ export default function EllipsisDropDownMenu() {
       >
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            {menuItems.map((item) => (
+            {menuItems.map((item: any) => (
               <Menu.Item key={item.id}>
                 {({ active }) => (
                   <Link
@@ -46,10 +37,10 @@ export default function EllipsisDropDownMenu() {
                       "flex px-4 py-2 text-sm",
                     )}
                   >
-                    <item.icon
+                    {/* <item.icon
                       className="mr-3 h-5 w-5 text-gray-400"
                       aria-hidden="true"
-                    />
+                    /> */}
                     <span>{item.text}</span>
                   </Link>
                 )}

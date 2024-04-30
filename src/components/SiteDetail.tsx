@@ -1,8 +1,13 @@
+import React from "react";
 import { formatPostalCode } from "@/utils/formatPostalCode";
 import { Site } from "@/types/types";
 import EllipsisDropDownMenu from "./EllipsisDropDownMenu";
 
 export default function SiteDetail({ site }: { site: Site }) {
+  const menuItems = [
+    { id: 1, text: "情報を更新する", href: "./" + site.id + "/edit" },
+  ];
+
   return (
     <div className="bg-gray-50 rounded-md px-4 py-5 sm:px-6">
       <div className="flex space-x-3">
@@ -23,7 +28,7 @@ export default function SiteDetail({ site }: { site: Site }) {
             </p>
           )}
         </div>
-        <EllipsisDropDownMenu />
+        <EllipsisDropDownMenu menuItems={menuItems} />
       </div>
     </div>
   );

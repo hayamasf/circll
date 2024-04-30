@@ -3,7 +3,10 @@ import { useFormContext } from "react-hook-form";
 import { Site } from "@/types/types";
 
 export default function SiteInputs() {
-  const { register, formState: { errors } } = useFormContext<Site>();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<Site>();
 
   return (
     <div className="relative">
@@ -21,11 +24,8 @@ export default function SiteInputs() {
         placeholder="東京中央営業所"
       />
       {errors.name?.message && (
-        <p className="text-xs text-red-500 p-1">
-          {errors.name?.message}
-        </p>
+        <p className="text-xs text-red-500 p-1">{errors.name?.message}</p>
       )}
     </div>
-
-  )
+  );
 }
