@@ -51,7 +51,7 @@ export async function createContractor(data: LegalEntity) {
     newContractorId = newContractor.id;
 
     console.log(data);
-    revalidatePath(`/contractors/${newContractorId}`);
+    revalidatePath("/contractors", "layout");
   } catch (error) {
     console.error("データの登録に失敗しました.", error);
     throw new Error("データの登録に失敗しました.");
