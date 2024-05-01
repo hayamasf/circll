@@ -1,16 +1,20 @@
 import React from "react";
-import EditLink from "./EditLink";
-import { formatDateTime } from "@/utils/dateUtils";
 import { formatPostalCode } from "@/utils/formatPostalCode";
 import { LegalEntity } from "@/types/types";
+import EllipsisDropDownMenu from "./EllipsisDropDownMenu";
 
 export default function LegalEntityProfile({
   entity,
 }: {
   entity: LegalEntity;
 }) {
+
+  const menuItems = [
+    { id: 1, text: "情報を更新する", href: "./" + entity.id + "/edit", },
+  ]
+
   return (
-    <div className="container mx-auto max-w-3xl">
+    <div className="container my-10 mx-auto max-w-3xl">
       <div className="px-4 sm:px-0">
         <div className="flex items-center justify-between">
           <h3 className="text-base font-semibold leading-7 text-gray-900">
@@ -20,7 +24,7 @@ export default function LegalEntityProfile({
               !entity.isPrefixEntityType &&
               entity.entityType}
           </h3>
-          <EditLink href={`./${entity.id}/edit`} />
+          <EllipsisDropDownMenu menuItems={menuItems} />
         </div>
         <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
           {entity.entityType && entity.title + " " + entity.representative}

@@ -2,8 +2,8 @@ import React from "react";
 import LegalEntityProfile from "@/components/LegalEntityProfile";
 import fetchClientById from "@/utils/getClientById";
 import { prisma } from "@/lib/prisma";
-import Link from "next/link";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import PageHeader from "@/components/PageHeader";
+import LinkButton from "@/components/LinkButton";
 import SectionHeader from "@/components/SectionHeader";
 import SitesList from "@/components/SitesList";
 
@@ -25,16 +25,11 @@ export default async function Page({ params }: { params: { id: string } }) {
   if (client) {
     return (
       <div className="mx-auto max-w-3xl">
+        <PageHeader title="排出事業者" />
         <LegalEntityProfile entity={client} />
         <div className="flex my-10 items-center justify-between">
           <SectionHeader title={"事業所一覧"} />
-          <Link
-            href={id + "/sites/register"}
-            className="flex text-sm items-center hover:underline"
-          >
-            <PlusIcon className="h-5 w-5 mr-2" />
-            事業所を追加
-          </Link>
+          <LinkButton href={id + "/sites/register"}>事業所を登録</LinkButton>
         </div>
         {sites && <SitesList sites={sites} />}
       </div>
