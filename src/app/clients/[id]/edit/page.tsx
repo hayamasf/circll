@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   if (client) {
     return (
       <div className="container mx-auto max-w-md">
-        <PageHeader title="顧客情報の編集" />
+        <PageHeader title="排出事業者情報の編集" />
         <LegalEntityEditForm entity={client} action={updateClient} />
       </div>
     );
