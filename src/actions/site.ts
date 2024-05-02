@@ -33,7 +33,7 @@ export async function createSite(data: Site) {
       },
     });
     newSiteId = newSite.id;
-    revalidatePath(`/clients/${data.clientId}/sites/${newSiteId}`);
+    revalidatePath("/sites");
   } catch (error) {
     console.error("データの登録に失敗しました.", error);
     throw new Error("データの登録に失敗しました.");
