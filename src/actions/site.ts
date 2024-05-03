@@ -43,3 +43,11 @@ export async function createSite(data: Site) {
     }
   }
 }
+
+export async function updateSite(data: Site) {
+  try {
+    console.log(data);
+  } catch (error) {
+  } finally {
+  }
+}

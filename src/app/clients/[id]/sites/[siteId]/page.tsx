@@ -22,9 +22,9 @@ export default async function Page({
     return <div>事業所の登録がありません.</div>;
   } else {
     return (
-      <div className="mx-auto max-w-xl">
+      <div className="mx-auto max-w-lg">
         <PageHeader title={"事業所情報"} />
-        <div className="my-3 bg-gray-50 rounded-md px-4 py-5 sm:px-6 text-sm text-gray-800">
+        <div className="my-3 bg-gray-50 rounded-md px-4 py-5 sm:px-6 text-xs text-gray-800">
           <Link
             href={"/clients/" + client.id}
             className="font-bold text-base hover:underline"

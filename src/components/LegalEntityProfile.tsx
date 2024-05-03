@@ -8,10 +8,9 @@ export default function LegalEntityProfile({
 }: {
   entity: LegalEntity;
 }) {
-
   const menuItems = [
-    { id: 1, text: "情報を更新する", href: "./" + entity.id + "/edit", },
-  ]
+    { id: 1, text: "情報を更新する", href: "./" + entity.id + "/edit" },
+  ];
 
   return (
     <div className="container my-10 mx-auto max-w-3xl">

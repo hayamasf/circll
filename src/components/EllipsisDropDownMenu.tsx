@@ -7,16 +7,18 @@ import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { classNames } from "@/utils/classNames";
 
 type menuItems = {
-  id: number,
-  text: string,
-  href: string,
-}
+  id: number;
+  text: string;
+  href: string;
+};
 
 type EllipsisDropDownMenuProps = {
   menuItems: menuItems[];
-}
+};
 
-export default function EllipsisDropDownMenu({ menuItems }: EllipsisDropDownMenuProps) {
+export default function EllipsisDropDownMenu({
+  menuItems,
+}: EllipsisDropDownMenuProps) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
