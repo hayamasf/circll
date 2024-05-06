@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { Site } from "@/types/types";
 import SiteInputs from "./SiteInputs";
 import AddressInputs from "./AddressInputs";
@@ -10,7 +11,7 @@ import CancelButton from "./CancelButton";
 import { updateSite } from "@/actions/site";
 
 export default function SiteEditForm({ site }: { site: Site }) {
-  const methods = useForm({
+  const methods = useForm<Site>({
     defaultValues: {
       name: site.name,
       postalCode: site.postalCode,
@@ -22,9 +23,35 @@ export default function SiteEditForm({ site }: { site: Site }) {
     },
   });
 
-  const onSubmit = async (formData: any) => {
-    console.log(formData);
-    const result = await updateSite(formData);
+  const router = useRouter();
+
+  const getDirtyFieldValues = () => {
+    const dirtyFieldValues: Partial<Site> = {};
+
+    Object.keys(methods.formState.dirtyFields).forEach((fieldName) => {
+      if (methods.formState.dirtyFields[fieldName]) {
+        dirtyFieldValues[fieldName] = methods.getValues(fieldName);
+      }
+    });
+    return dirtyFieldValues;
+  };
+
+  const onSubmit = async () => {
+    try {
+      const dirtyData = getDirtyFieldValues();
+      const data = { ...dirtyData, id: Number(site.id) };
+      console.log(data);
+      const result = await updateSite(data);
+
+      if (result.success) {
+        console.log(result.message);
+        router.push("./");
+      } else {
+        console.error(result.message);
+      }
+    } catch (error) {
+      console.error("データ更新時にエラーが発生しました.", error);
+    }
   };
 
   return (
@@ -33,7 +60,7 @@ export default function SiteEditForm({ site }: { site: Site }) {
         <div className="grid gap-y-8">
           <SiteInputs />
           <AddressInputs />
-          <SubmitButton label="送信" />
+          <SubmitButton label="送信" disabled={!methods.formState.isDirty} />
           <CancelButton label="キャンセル" onClick={() => methods.reset()} />
         </div>
       </form>

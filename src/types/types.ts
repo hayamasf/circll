@@ -63,4 +63,5 @@ export type Site = {
   town: string;
   address: string;
   address2?: string | null;
+  [key: string]: any;
 };

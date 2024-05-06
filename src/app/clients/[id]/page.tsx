@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   if (client) {
     return (
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-2xl">
         <PageHeader title="排出事業者の詳細" />
         <LegalEntityProfile entity={client} />
         <div className="flex my-10 items-center justify-between">
