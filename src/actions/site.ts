@@ -59,7 +59,6 @@ export async function updateSite(data: Partial<Site>) {
     });
 
     return { success: true, message: "事業所情報を更新しました！" };
-    
   } catch (error) {
     console.error("データの更新に失敗しました.", error);
     throw new Error("データの更新に失敗しました.");

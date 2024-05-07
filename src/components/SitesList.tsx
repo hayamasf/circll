@@ -20,23 +20,21 @@ export default async function SitesList({ sites }: { sites: Site[] }) {
                       {site.name}
                     </Link>
                   </p>
-                  {/* <p className="mt-1 flex text-xs leading-5 text-gray-500">
-                    {entity.entityType &&
-                      entity.title + " " + entity.representative}
-                    {entity.tradeName && entity.tradeName}
-                  </p> */}
                 </div>
               </div>
               <div className="flex shrink-0 items-center gap-x-4">
-                <div className="hidden sm:flex sm:flex-col sm:items-end">
+                <div className="flex flex-col items-end">
+                  {/* <div className="hidden sm:flex sm:flex-col sm:items-end"> */}
                   <p className="text-sm leading-6 text-gray-900">
                     {site.prefecture}
                     {site.city}
-                    {site.town}
-                    {site.address}
+                    <span className="hidden sm:inline">
+                      {site.town}
+                      {site.address}
+                    </span>
                   </p>
                   {site.address2 && (
-                    <p className="text-sm leading-6 text-gray-900">
+                    <p className="hidden text-sm leading-6 text-gray-900 sm:block">
                       {site.address2}
                     </p>
                   )}
