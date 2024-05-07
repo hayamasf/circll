@@ -50,17 +50,16 @@ export async function updateSite(data: Partial<Site>) {
     const session = await getSession();
     const userId = session?.user.sub;
 
-    // await prisma.site.update({
-    //   where: {id},
-    //   data: {
-    //     ...data,
-    //     updatedBy: userId
-    //   }
-    // })
+    await prisma.site.update({
+      where: { id },
+      data: {
+        ...data,
+        updatedBy: userId,
+      },
+    });
 
-    console.log(userId);
-    console.log(data);
     return { success: true, message: "事業所情報を更新しました！" };
+    
   } catch (error) {
     console.error("データの更新に失敗しました.", error);
     throw new Error("データの更新に失敗しました.");
