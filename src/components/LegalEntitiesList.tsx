@@ -36,12 +36,14 @@ export default function LegalEntitiesList({
                 </div>
               </div>
               <div className="flex shrink-0 items-center gap-x-4">
-                <div className="hidden sm:flex sm:flex-col sm:items-end">
+                <div className="flex flex-col items-end">
                   <p className="text-sm leading-6 text-gray-900">
                     {entity.prefecture}
                     {entity.city}
-                    {entity.town}
-                    {entity.address}
+                    <span className="hidden sm:inline">
+                      {entity.town}
+                      {entity.address}
+                    </span>
                   </p>
                   {entity.address2 && (
                     <p className="text-sm leading-6 text-gray-900">

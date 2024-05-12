@@ -49,8 +49,6 @@ export async function createContractor(data: LegalEntity) {
     });
 
     newContractorId = newContractor.id;
-
-    console.log(data);
     revalidatePath("/contractors");
   } catch (error) {
     console.error("データの登録に失敗しました.", error);
