@@ -42,7 +42,10 @@ export default function SiteRegistrationForm({ id }: { id: number }) {
         <div className="grid gap-y-8">
           <SiteInputs />
           <AddressInputs />
-          <SubmitButton label="登録" />
+          <SubmitButton
+            label="登録"
+            disabled={methods.formState.isSubmitting}
+          />
           <CancelButton label="キャンセル" onClick={() => methods.reset()} />
         </div>
       </form>

@@ -44,7 +44,10 @@ export default function LegalEntityRegistrationForm({
           <AddressInputs />
         </div>
         <div className="mt-10 grid gap-y-5">
-          <SubmitButton label="登録" />
+          <SubmitButton
+            label="登録"
+            disabled={methods.formState.isSubmitting}
+          />
           <CancelButton label="キャンセル" onClick={() => methods.reset()} />
         </div>
       </form>
