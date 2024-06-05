@@ -5,9 +5,19 @@ import { redirect } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@auth0/nextjs-auth0";
+import convertToBoolean from "@/utils/convertToBoolean";
 import { LegalEntity } from "@/types/types";
 
 export async function createClient(data: LegalEntity) {
+  let isPrefixEntityType;
+
+  if (
+    data.isPrefixEntityType !== undefined &&
+    data.isPrefixEntityType !== null
+  ) {
+    isPrefixEntityType = convertToBoolean(data.isPrefixEntityType);
+  }
+
   let newClientId: number | undefined;
 
   try {
