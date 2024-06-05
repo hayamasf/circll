@@ -31,7 +31,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <SectionHeader title={"事業所一覧"} />
           <LinkButton href={id + "/sites/register"}>事業所を登録</LinkButton>
         </div>
-        {sites && <SitesList sites={sites} />}
+        {sites && <SitesList />}
       </div>
     );
   }
