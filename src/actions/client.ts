@@ -33,7 +33,7 @@ export async function createClient(data: LegalEntity) {
         createdBy: userId,
         ...(data.entityType && { entityType: data.entityType }),
         ...(data.isPrefixEntityType && {
-          isPrefixEntityType: data.isPrefixEntityType,
+          isPrefixEntityType: isPrefixEntityType,
         }),
         name: data.name,
         ...(data.title && { title: data.title }),
