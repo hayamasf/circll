@@ -31,8 +31,6 @@ export default function SiteRegistrationForm({ id }: { id: number }) {
       ...rest,
       ...(address2 ? { address2 } : {}),
     };
-
-    console.log(data);
     const result = await createSite(data);
   };
 

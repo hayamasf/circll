@@ -1,6 +1,9 @@
 import React from "react";
 
-import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
+import {
+  ArrowLongLeftIcon,
+  ArrowLongRightIcon,
+} from "@heroicons/react/20/solid";
 
 export default function Pagination() {
   return (
@@ -10,7 +13,10 @@ export default function Pagination() {
           href="#"
           className="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
         >
-          <ArrowLongLeftIcon className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+          <ArrowLongLeftIcon
+            className="mr-3 h-5 w-5 text-gray-400"
+            aria-hidden="true"
+          />
           前へ
         </a>
       </div>
@@ -63,9 +69,12 @@ export default function Pagination() {
           className="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
         >
           次へ
-          <ArrowLongRightIcon className="ml-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+          <ArrowLongRightIcon
+            className="ml-3 h-5 w-5 text-gray-400"
+            aria-hidden="true"
+          />
         </a>
       </div>
     </nav>
-  )
+  );
 }
