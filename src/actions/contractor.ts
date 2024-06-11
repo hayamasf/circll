@@ -8,7 +8,7 @@ import { getSession } from "@auth0/nextjs-auth0";
 import { LegalEntity } from "@/types/types";
 import convertToBoolean from "@/utils/convertToBoolean";
 
-export async function createContractor(data: LegalEntity) {
+export async function createContractor(data: LegalEntity): Promise<void> {
   let isPrefixEntityType;
 
   if (

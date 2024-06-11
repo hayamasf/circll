@@ -12,10 +12,10 @@ import AddressInputs from "./AddressInputs";
 
 export default function LegalEntityRegistrationForm({
   type,
-  onSubmit,
+  action,
 }: {
   type: "corporate" | "sole-proprietor";
-  onSubmit: (formData: LegalEntity) => void;
+  action: (formData: LegalEntity) => Promise<void>;
 }) {
   const methods = useForm<LegalEntity>({
     defaultValues: {
@@ -33,6 +33,19 @@ export default function LegalEntityRegistrationForm({
       address2: "",
     },
   });
+
+  const onSubmit = async (formData: LegalEntity) => {
+    const { address2, tradeName, ...rest } = formData;
+
+    const data = {
+      ...rest,
+      ...(address2 ? { address2 } : {}),
+      ...(tradeName ? { tradeName } : {}),
+    };
+
+    console.log(data);
+    const result = await action(data);
+  };
 
   return (
     <FormProvider {...methods}>
