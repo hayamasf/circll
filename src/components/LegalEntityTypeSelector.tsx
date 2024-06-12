@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { UserIcon, BuildingOfficeIcon } from "@heroicons/react/24/outline";
 
-export default function LegalEntityTypeSelector() {
+export default function LegalEntityTypeSelector({ type }: { type: string }) {
   return (
     <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
       <Link
