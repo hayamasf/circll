@@ -70,7 +70,7 @@ export default function AddressInputs() {
         <div className="col-span-2 ml-3 place-content-center">
           <button
             type="button"
-            className="py-1.5 px-1 rounded-md bg-gray-500 text-white text-xs"
+            className="py-1.5 px-1 rounded-md shadow-lg bg-gray-500 text-white text-xs"
             onClick={handleFetchAddress}
           >
             郵便番号から住所を入力
