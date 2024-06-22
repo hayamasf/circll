@@ -1,13 +1,19 @@
-// "use client";
-
 import React from "react";
 
 import Link from "next/link";
 import Pagination from "./Pagination";
 import getSites from "@/utils/getSites";
 
-export default async function SitesList({ clientId }: { clientId?: number }) {
-  const sites = await getSites(clientId);
+export default async function SitesList({
+  offset,
+  limit,
+  clientId,
+}: {
+  offset: number;
+  limit: number;
+  clientId?: number;
+}) {
+  const sites = await getSites(offset, limit, clientId);
 
   if (sites.length === 0) {
     return <p className="text-sm text-center">事業所の登録がありません.</p>;
@@ -56,7 +62,7 @@ export default async function SitesList({ clientId }: { clientId?: number }) {
             </li>
           ))}
         </ul>
-        <Pagination />
+        <Pagination currentPage={offset} limit={limit} />
       </>
     );
   }
