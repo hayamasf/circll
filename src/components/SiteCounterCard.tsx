@@ -1,9 +1,8 @@
 import React from "react";
-
-import { prisma } from "@/lib/prisma";
+import getTotalSitesCount from "@/utils/getTotalSitesCount";
 
 export default async function SiteCounterCard() {
-  const count = await prisma.site.count();
+  const count = await getTotalSitesCount()
 
   return (
     <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
