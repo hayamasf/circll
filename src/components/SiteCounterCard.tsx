@@ -2,7 +2,7 @@ import React from "react";
 import getTotalSitesCount from "@/utils/getTotalSitesCount";
 
 export default async function SiteCounterCard() {
-  const count = await getTotalSitesCount()
+  const count = await getTotalSitesCount();
 
   return (
     <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">

@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Pagination from "./Pagination";
 import getSites from "@/utils/getSites";
+import getTotalSitesCount from "@/utils/getTotalSitesCount";
 
 export default async function SitesList({
   offset,
@@ -14,6 +15,8 @@ export default async function SitesList({
   clientId?: number;
 }) {
   const sites = await getSites(offset, limit, clientId);
+  const totalSites = await getTotalSitesCount(clientId);
+  const totalPages = Math.ceil(totalSites / limit);
 
   if (sites.length === 0) {
     return <p className="text-sm text-center">事業所の登録がありません.</p>;
@@ -62,7 +65,11 @@ export default async function SitesList({
             </li>
           ))}
         </ul>
-        <Pagination currentPage={offset} limit={limit} />
+        <Pagination
+          currentPage={offset}
+          limit={limit}
+          totalPages={totalPages}
+        />
       </>
     );
   }
