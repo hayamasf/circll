@@ -1,11 +1,10 @@
 import React from "react";
-
-import { prisma } from "@/lib/prisma";
+import getTotalClientsCount from "@/utils/getTotalClientsCount";
 
 export default async function ClientCounterCard() {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  // await new Promise((resolve) => setTimeout(resolve, 3000));
+  const count = await getTotalClientsCount();
 
-  const count = await prisma.client.count();
   return (
     <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
       <dt className="truncate text-sm font-medium text-gray-500">
