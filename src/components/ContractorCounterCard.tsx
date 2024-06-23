@@ -1,9 +1,8 @@
 import React from "react";
-
-import { prisma } from "@/lib/prisma";
+import getTotalContractorsCount from "@/utils/getTotalContractorsCount";
 
 export default async function ContractorCounterCard() {
-  const count = await prisma.contractor.count();
+  const count = await getTotalContractorsCount();
 
   return (
     <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">

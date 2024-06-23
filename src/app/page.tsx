@@ -5,7 +5,6 @@ import Loading from "./loading";
 export default function Page() {
   return (
     <>
-      <div>これは</div>
       <Suspense fallback={<Loading />}>
         <Stats />
       </Suspense>
