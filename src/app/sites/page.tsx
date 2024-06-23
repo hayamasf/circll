@@ -9,7 +9,7 @@ export default async function Page({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const offset = Number(searchParams.offset ?? 1);
-  const limit = Number(searchParams.limit ?? 5);
+  const limit = Number(searchParams.limit ?? 10);
 
   return (
     <div className="container mx-auto max-w-3xl">
