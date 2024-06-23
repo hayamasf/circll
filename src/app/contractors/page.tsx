@@ -1,19 +1,17 @@
 import React from "react";
-import { prisma } from "@/lib/prisma";
 import PageHeader from "@/components/PageHeader";
 import LinkButton from "@/components/LinkButton";
-import LegalEntitiesList from "@/components/LegalEntitiesList";
+import Loading from "../loading";
 import { Suspense } from "react";
+import ContractorsList from "@/components/ContractorsList";
 
-async function getContractors() {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-
-  const contractors = await prisma.contractor.findMany();
-  return contractors;
-}
-
-export default async function Page() {
-  const contractors = await getContractors();
+export default function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const offset = Number(searchParams.offset ?? 1);
+  const limit = Number(searchParams.limit ?? 10);
 
   return (
     <div className="container mx-auto max-w-3xl">
@@ -21,8 +19,8 @@ export default async function Page() {
         <PageHeader title="業者" />
         <LinkButton href="/contractors/register">新規登録</LinkButton>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <LegalEntitiesList entities={contractors} path={"contractors"} />
+      <Suspense fallback={<Loading />}>
+        <ContractorsList offset={offset} limit={limit} />
       </Suspense>
     </div>
   );
