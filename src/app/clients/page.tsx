@@ -1,11 +1,17 @@
 import React from "react";
-import { prisma } from "@/lib/prisma";
 import PageHeader from "@/components/PageHeader";
 import LinkButton from "@/components/LinkButton";
-import LegalEntitiesList from "@/components/LegalEntitiesList";
+import { Suspense } from "react";
+import Loading from "../loading";
+import ClientsList from "@/components/ClientsList";
 
-export default async function Page() {
-  const clients = await prisma.client.findMany();
+export default function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const offset = Number(searchParams.offset ?? 1);
+  const limit = Number(searchParams.limit ?? 10);
 
   return (
     <div className="container mx-auto max-w-3xl">
@@ -13,7 +19,9 @@ export default async function Page() {
         <PageHeader title="排出事業者" />
         <LinkButton href="/clients/register">新規登録</LinkButton>
       </div>
-      <LegalEntitiesList entities={clients} path={"clients"} />
+      <Suspense fallback={<Loading />}>
+        <ClientsList offset={offset} limit={limit} />
+      </Suspense>
     </div>
   );
 }
