@@ -69,6 +69,14 @@ model Site {
 }
 
 model Prefecture {
-  id               Int    @id
-  prefecture       String
+  id         Int    @id
+  name       String
+  municipalities  Municipality[]
+}
+
+model Municipality {
+  id              Int     @id
+  name            String
+  prefectureId    Int
+  prefecture Prefecture @relation(fields: [prefectureId], references: [id])
 }
