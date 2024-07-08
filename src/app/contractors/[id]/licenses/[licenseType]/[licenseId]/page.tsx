@@ -5,5 +5,5 @@ export default async function page(params: any) {
     <>
       <div>許可証の個別ページ</div>
     </>
-  )
+  );
 }

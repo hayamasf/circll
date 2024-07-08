@@ -5,6 +5,5 @@ export default async function MswLicenseRegistrationForm(params: any) {
     <form>
       <div>一般</div>
     </form>
-  )
-
+  );
 }

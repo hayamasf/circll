@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       {contractor ? (
         <>
           <LegalEntityProfile entity={contractor} />
-          <Link href={"./" + contractor.id + "/licenses"} >許可証一覧</Link>
+          <Link href={"./" + contractor.id + "/licenses"}>許可証一覧</Link>
         </>
       ) : (
         "該当する業者が見つかりません..."
