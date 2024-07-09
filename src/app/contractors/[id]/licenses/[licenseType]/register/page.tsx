@@ -1,5 +1,7 @@
 import React from "react";
 import PageHeader from "@/components/PageHeader";
+import MswLicenseRegistrationForm from "@/components/MswLicenseRegistrationForm";
+import IndustrialWasteLicenseRegistrationForm from "@/components/IndustrialWasteLicenseRegistrationForm";
 
 export default async function Page({
   params,
@@ -12,7 +14,10 @@ export default async function Page({
   return (
     <div className="mx-auto max-w-lg">
       <PageHeader title="許可情報の登録" />
-      <div>許可証の登録 {licenseType}</div>
+      {licenseType === "msw" && <MswLicenseRegistrationForm />}
+      {licenseType === "industrial-waste" && (
+        <IndustrialWasteLicenseRegistrationForm />
+      )}
     </div>
   );
 }
