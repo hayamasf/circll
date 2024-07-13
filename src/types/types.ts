@@ -65,3 +65,8 @@ export type Site = {
   address2?: string | null;
   [key: string]: any;
 };
+
+export type RadioOption = {
+  id: string;
+  title: string;
+};

@@ -12,7 +12,7 @@ export default async function Page({
   const licenseType = params.licenseType;
 
   return (
-    <div className="mx-auto max-w-lg">
+    <div className="mx-auto max-w-md">
       <PageHeader title="許可情報の登録" />
       {licenseType === "msw" && <MswLicenseRegistrationForm />}
       {licenseType === "industrial-waste" && (
