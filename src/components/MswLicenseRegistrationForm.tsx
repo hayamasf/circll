@@ -4,8 +4,10 @@ import React from "react";
 
 import { useForm, FormProvider } from "react-hook-form";
 import RadioGroup from "./RadioGroup";
+import DateInput from "./DateInput";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
+import getTodayDate from "@/utils/getTodayDate";
 
 const options = [
   { id: "1", title: "収集運搬" },
@@ -14,6 +16,7 @@ const options = [
 
 export default function MswLicenseRegistrationForm() {
   const methods = useForm();
+  const minDate = getTodayDate();
 
   const onSubmit = async (formData: any) => {
     console.log(formData);
@@ -31,24 +34,8 @@ export default function MswLicenseRegistrationForm() {
               groupName={"type"}
               options={options}
             />
-            <div>
-              <div className="relative">
-                <label
-                  htmlFor="expirationDate"
-                  className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
-                >
-                  許可期限
-                </label>
-                <input
-                  type="date"
-                  id="expirationDate"
-                  {...methods.register("expirationDate")}
-                  className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-                />
-              </div>
-            </div>
+            <DateInput name={"expirationDate"} label={"許可期限"} min={minDate} />
           </div>
-
           <div className="mt-10 grid gap-y-5">
             <SubmitButton
               label="登録"
