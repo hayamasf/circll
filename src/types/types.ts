@@ -70,3 +70,8 @@ export type RadioOption = {
   id: string;
   title: string;
 };
+
+export type Prefecture = {
+  id: number;
+  name: string;
+}

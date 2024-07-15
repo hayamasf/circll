@@ -3,11 +3,13 @@
 import React from "react";
 
 import { useForm, FormProvider } from "react-hook-form";
+import PrefectureMunicipalitySelect from "./PrefectureMunicipalitySelect";
 import RadioGroup from "./RadioGroup";
 import DateInput from "./DateInput";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 import getTodayDate from "@/utils/getTodayDate";
+import TextInput from "./TextInput";
 
 const options = [
   { id: "1", title: "収集運搬" },
@@ -15,7 +17,11 @@ const options = [
 ];
 
 export default function MswLicenseRegistrationForm() {
-  const methods = useForm();
+  const methods = useForm({
+    defaultValues: {
+      prefectureId: "",
+    }
+  });
   const minDate = getTodayDate();
 
   const onSubmit = async (formData: any) => {
@@ -34,7 +40,9 @@ export default function MswLicenseRegistrationForm() {
               groupName={"type"}
               options={options}
             />
+            <PrefectureMunicipalitySelect />
             <DateInput name={"expirationDate"} label={"許可期限"} min={minDate} />
+            <TextInput label={"許可証のURL"} name={"licenseUrl"} placeholder={"https://www.example.com/fgh/ijk.pdf"} />
           </div>
           <div className="mt-10 grid gap-y-5">
             <SubmitButton
