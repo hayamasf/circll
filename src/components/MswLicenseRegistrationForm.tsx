@@ -20,6 +20,7 @@ export default function MswLicenseRegistrationForm() {
   const methods = useForm({
     defaultValues: {
       prefectureId: "",
+      municipality: "",
     }
   });
   const minDate = getTodayDate();

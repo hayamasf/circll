@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { getPrefectures } from "@/actions/prefecture";
+import { getMunicipalites } from "@/actions/municipality";
 import { Prefecture } from "@/types/types";
+import { Municipality } from "@/types/types";
 
 export default function PrefectureMunicipalitySelect() {
 
@@ -9,6 +11,7 @@ export default function PrefectureMunicipalitySelect() {
 
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
   const [selectedPrefecture, setSelectedPrefecture] = useState<number | null>(null);
+  const [municipalities, setMunicipalities] = useState<Municipality[]>([])
 
   useEffect(() => {
     const fetchPrefectures = async () => {
@@ -17,6 +20,18 @@ export default function PrefectureMunicipalitySelect() {
     }
     fetchPrefectures();
   }, [])
+
+  useEffect(() => {
+    if (selectedPrefecture !== null) {
+      const fetchMunicipalities = async (selectedPrefecture: number) => {
+        const municipalities = await getMunicipalites(selectedPrefecture);
+        setMunicipalities(municipalities);
+      }
+      fetchMunicipalities(selectedPrefecture);
+    } else {
+      setMunicipalities([])
+    }
+  }, [selectedPrefecture])
 
   return (
     <>
@@ -50,14 +65,15 @@ export default function PrefectureMunicipalitySelect() {
         </label>
         <select
           id="municipalityId"
-          // {...register("")}
-          onChange={e => setSelectedPrefecture(Number(e.target.value))}
+          {...register("municipality")}
           className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
         >
           <option value="" disabled>-- 選択してください --</option>
+          {municipalities.map(municipality => (
+            <option key={municipality.id} value={municipality.id}>{municipality.name}</option>
+          ))}
         </select>
       </div>
-
     </>
   );
 }

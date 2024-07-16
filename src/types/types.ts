@@ -75,3 +75,9 @@ export type Prefecture = {
   id: number;
   name: string;
 }
+
+export type Municipality = {
+  id: number;
+  name: string;
+  prefectureId: number;
+}
