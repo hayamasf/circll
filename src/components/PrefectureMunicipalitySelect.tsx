@@ -6,32 +6,33 @@ import { Prefecture } from "@/types/types";
 import { Municipality } from "@/types/types";
 
 export default function PrefectureMunicipalitySelect() {
-
   const { register } = useFormContext();
 
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
-  const [selectedPrefecture, setSelectedPrefecture] = useState<number | null>(null);
-  const [municipalities, setMunicipalities] = useState<Municipality[]>([])
+  const [selectedPrefecture, setSelectedPrefecture] = useState<number | null>(
+    null,
+  );
+  const [municipalities, setMunicipalities] = useState<Municipality[]>([]);
 
   useEffect(() => {
     const fetchPrefectures = async () => {
       const prefectures = await getPrefectures();
       setPrefectures(prefectures);
-    }
+    };
     fetchPrefectures();
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (selectedPrefecture !== null) {
       const fetchMunicipalities = async (selectedPrefecture: number) => {
         const municipalities = await getMunicipalites(selectedPrefecture);
         setMunicipalities(municipalities);
-      }
+      };
       fetchMunicipalities(selectedPrefecture);
     } else {
-      setMunicipalities([])
+      setMunicipalities([]);
     }
-  }, [selectedPrefecture])
+  }, [selectedPrefecture]);
 
   return (
     <>
@@ -45,11 +46,13 @@ export default function PrefectureMunicipalitySelect() {
         <select
           id="prefectureId"
           {...register("prefectureId")}
-          onChange={e => setSelectedPrefecture(Number(e.target.value))}
+          onChange={(e) => setSelectedPrefecture(Number(e.target.value))}
           className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
         >
-          <option value="" disabled>-- 選択してください --</option>
-          {prefectures.map(prefecture => (
+          <option value="" disabled>
+            -- 選択してください --
+          </option>
+          {prefectures.map((prefecture) => (
             <option key={prefecture.id} value={prefecture.id}>
               {prefecture.name}
             </option>
@@ -65,12 +68,16 @@ export default function PrefectureMunicipalitySelect() {
         </label>
         <select
           id="municipalityId"
-          {...register("municipality")}
+          {...register("municipalityId")}
           className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
         >
-          <option value="" disabled>-- 選択してください --</option>
-          {municipalities.map(municipality => (
-            <option key={municipality.id} value={municipality.id}>{municipality.name}</option>
+          <option value="" disabled>
+            -- 選択してください --
+          </option>
+          {municipalities.map((municipality) => (
+            <option key={municipality.id} value={municipality.id}>
+              {municipality.name}
+            </option>
           ))}
         </select>
       </div>

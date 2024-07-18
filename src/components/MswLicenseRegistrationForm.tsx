@@ -10,6 +10,7 @@ import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 import getTodayDate from "@/utils/getTodayDate";
 import TextInput from "./TextInput";
+import { createLicense } from "@/actions/mswLicense";
 
 const options = [
   { id: "1", title: "収集運搬" },
@@ -20,13 +21,17 @@ export default function MswLicenseRegistrationForm() {
   const methods = useForm({
     defaultValues: {
       prefectureId: "",
-      municipality: "",
-    }
+      municipalityId: "",
+      type: 1,
+      expirationDate: "",
+      licenseUrl: "",
+    },
   });
   const minDate = getTodayDate();
 
   const onSubmit = async (formData: any) => {
     console.log(formData);
+    const result = await createLicense(formData);
   };
 
   return (
@@ -42,8 +47,16 @@ export default function MswLicenseRegistrationForm() {
               options={options}
             />
             <PrefectureMunicipalitySelect />
-            <DateInput name={"expirationDate"} label={"許可期限"} min={minDate} />
-            <TextInput label={"許可証のURL"} name={"licenseUrl"} placeholder={"https://www.example.com/fgh/ijk.pdf"} />
+            <DateInput
+              name={"expirationDate"}
+              label={"許可期限"}
+              min={minDate}
+            />
+            <TextInput
+              label={"許可証のURL"}
+              name={"licenseUrl"}
+              placeholder={"https://www.example.com/license/copy.pdf"}
+            />
           </div>
           <div className="mt-10 grid gap-y-5">
             <SubmitButton

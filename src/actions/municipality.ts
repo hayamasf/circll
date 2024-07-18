@@ -2,9 +2,9 @@
 
 import { prisma } from "@/lib/prisma";
 
-export async function getMunicipalites(prefectureId:number) {
+export async function getMunicipalites(prefectureId: number) {
   const municipalities = await prisma.municipality.findMany({
-    where: {prefectureId}
+    where: { prefectureId },
   });
   return municipalities;
 }

@@ -5,7 +5,11 @@ export default function TextInput({
   label,
   name,
   placeholder,
-}: { label: string, name: string, placeholder: string }) {
+}: {
+  label: string;
+  name: string;
+  placeholder: string;
+}) {
   const { register } = useFormContext();
 
   return (
