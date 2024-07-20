@@ -80,3 +80,17 @@ model Municipality {
   prefectureId    Int
   prefecture Prefecture @relation(fields: [prefectureId], references: [id])
 }
+
+model mswLicense {
+  id                Int @id @default(autoincrement())
+  createdAt         DateTime @default(now())
+  createdBy         String
+  updatedAt         DateTime @updatedAt
+  updatedBy         String?
+  contractorId      Int
+  prefectureId      Int
+  municipalityId    Int
+  type              Int
+  expirationDate    DateTime  @db.Date
+  licenseUrl        String
+}
