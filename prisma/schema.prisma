@@ -57,6 +57,8 @@ model Site {
   createdBy         String
   updatedAt         DateTime @updatedAt
   updatedBy         String?
+  clientId          Int
+  client            Client @relation(fields: [clientId], references: [id])
   name              String
   postalCode        String
   prefecture        String
@@ -64,8 +66,6 @@ model Site {
   town              String
   address           String
   address2          String?
-  clientId          Int
-  client            Client @relation(fields: [clientId], references: [id])
 }
 
 model Prefecture {
