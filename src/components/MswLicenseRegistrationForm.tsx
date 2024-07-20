@@ -17,9 +17,10 @@ const options = [
   { id: "2", title: "処分" },
 ];
 
-export default function MswLicenseRegistrationForm() {
+export default function MswLicenseRegistrationForm({ id }: { id: number }) {
   const methods = useForm({
     defaultValues: {
+      contractorId: id,
       prefectureId: "",
       municipalityId: "",
       type: 1,

@@ -14,7 +14,7 @@ export default async function Page({
   return (
     <div className="mx-auto max-w-md">
       <PageHeader title="許可情報の登録" />
-      {licenseType === "msw" && <MswLicenseRegistrationForm />}
+      {licenseType === "msw" && <MswLicenseRegistrationForm id={id} />}
       {licenseType === "industrial-waste" && (
         <IndustrialWasteLicenseRegistrationForm />
       )}
