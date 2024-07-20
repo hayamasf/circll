@@ -76,9 +76,9 @@ model Prefecture {
 
 model Municipality {
   id              Int     @id
-  name            String
   prefectureId    Int
   prefecture Prefecture @relation(fields: [prefectureId], references: [id])
+  name            String
 }
 
 model mswLicense {
