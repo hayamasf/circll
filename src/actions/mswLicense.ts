@@ -2,9 +2,10 @@
 
 import { getSession } from "@auth0/nextjs-auth0";
 import { prisma } from "@/lib/prisma";
+import { MswLicense } from "@/types/types";
 import { redirect } from "next/navigation";
 
-export async function createLicense(data: any) {
+export async function createLicense(data: MswLicense) {
 
   let newLicenseId: number | undefined;
 

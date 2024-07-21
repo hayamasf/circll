@@ -81,3 +81,17 @@ export type Municipality = {
   name: string;
   prefectureId: number;
 };
+
+export type MswLicense = {
+  id: number;
+  createdAt: Date;
+  createdBy: string;
+  updatedAt: Date;
+  updatedBy: string | null;
+  contractorId: number;
+  prefectureId: number;
+  municipalityId: number;
+  type: number;
+  expirationDate: Date;
+  licenseUrl: string;
+}
