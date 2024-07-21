@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
+import SectionHeader from "@/components/SectionHeader";
 import LegalEntityProfile from "@/components/LegalEntityProfile";
 import fetchContractorById from "@/utils/fetchContractorById";
+import MswLicensesList from "@/components/MswLicensesList";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
@@ -14,6 +16,9 @@ export default async function Page({ params }: { params: { id: string } }) {
       {contractor ? (
         <>
           <LegalEntityProfile entity={contractor} />
+          <SectionHeader title="許可証" />
+          <MswLicensesList contractorId={contractor.id} />
+
           <Link href={"./" + contractor.id + "/licenses"}>許可証一覧</Link>
         </>
       ) : (
