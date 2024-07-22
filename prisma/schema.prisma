@@ -77,8 +77,9 @@ model Prefecture {
 model Municipality {
   id              Int     @id
   prefectureId    Int
-  prefecture Prefecture @relation(fields: [prefectureId], references: [id])
+  prefecture Prefecture @relation(fields: [prefectureId], references: [id], onDelete: Cascade)
   name            String
+  mswLicenses     MswLicense[]
 }
 
 model MswLicense {
@@ -90,6 +91,7 @@ model MswLicense {
   contractorId      Int
   prefectureId      Int
   municipalityId    Int
+  municipality      Municipality @relation(fields: [municipalityId], references: [id])
   type              Int
   expirationDate    DateTime  @db.Date
   licenseUrl        String

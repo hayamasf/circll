@@ -50,7 +50,7 @@ export default async function MswLicensesList({
                     有効期限
                   </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                    <span className="sr-only">Edit</span>
+                    <span className="sr-only">編集</span>
                   </th>
                 </tr>
               </thead>
@@ -58,7 +58,7 @@ export default async function MswLicensesList({
                 {licenses.map((license) => (
                   <tr key={license.id}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                      {license.prefectureId}
+                      {license.municipality.name}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {license.type === 1 ? (

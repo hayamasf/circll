@@ -94,4 +94,8 @@ export type MswLicense = {
   type: number;
   expirationDate: Date;
   licenseUrl: string;
+  municipality: {
+    id: number,
+    name: string,
+  };
 };
