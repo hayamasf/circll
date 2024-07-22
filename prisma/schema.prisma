@@ -81,7 +81,7 @@ model Municipality {
   name            String
 }
 
-model mswLicense {
+model MswLicense {
   id                Int @id @default(autoincrement())
   createdAt         DateTime @default(now())
   createdBy         String
