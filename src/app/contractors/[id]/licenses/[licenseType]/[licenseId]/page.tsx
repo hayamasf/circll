@@ -2,8 +2,11 @@ import React from "react";
 import PageHeader from "@/components/PageHeader";
 import MswLicenseDetail from "@/components/MswLicenseDetail";
 
-export default async function Page({ params }: { params: { licenseType: string, licenseId: string } }) {
-
+export default async function Page({
+  params,
+}: {
+  params: { licenseType: string; licenseId: string };
+}) {
   const licenseType = params.licenseType;
   const licenseId = Number(params.licenseId);
 
