@@ -3,6 +3,7 @@ import React from "react";
 import LinkButton from "./LinkButton";
 import getMswLicenses from "@/utils/getMswLicenses";
 import { formatDate } from "@/utils/dateUtils";
+import { PaperClipIcon } from "@heroicons/react/24/outline";
 
 export default async function MswLicensesList({
   contractorId,
@@ -13,8 +14,8 @@ export default async function MswLicensesList({
 
   return (
     <div className="py-5">
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
+      <div className="flex items-center">
+        <div className="flex-auto">
           <h2 className="text-lg font-semibold leading-6 text-gray-900">
             一般<span className="text-sm font-light">廃棄物処理業許可</span>
           </h2>
@@ -35,7 +36,7 @@ export default async function MswLicensesList({
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                   >
-                    許可自治体
+                    許可区域
                   </th>
                   <th
                     scope="col"
@@ -49,6 +50,13 @@ export default async function MswLicensesList({
                   >
                     有効期限
                   </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    写し
+                  </th>
+
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
                     <span className="sr-only">編集</span>
                   </th>
@@ -72,6 +80,12 @@ export default async function MswLicensesList({
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {formatDate(license.expirationDate)}
                     </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      <a href={license.licenseUrl} target="_blank" rel="noopener noreferrer" className="relative inline-block group">
+                        <PaperClipIcon className="h-5 w-5 group-hover:border group-hover:border-gray-500 group-hover:rounded-md" />
+                      </a>
+                    </td>
+
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                       <a
                         href="#"
