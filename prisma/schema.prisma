@@ -28,6 +28,7 @@ model Contractor {
   town              String
   address           String
   address2          String?
+  mswLicenses[]
 }
 
 model Client {
@@ -89,6 +90,7 @@ model MswLicense {
   updatedAt         DateTime @updatedAt
   updatedBy         String?
   contractorId      Int
+  contractor        Contractor @relation(fields: [contractorId], references: [id], onDelete: Cascade)
   prefectureId      Int
   municipalityId    Int
   municipality      Municipality @relation(fields: [municipalityId], references: [id])
