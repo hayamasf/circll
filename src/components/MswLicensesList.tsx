@@ -81,14 +81,19 @@ export default async function MswLicensesList({
                       {formatDate(license.expirationDate)}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      <a href={license.licenseUrl} target="_blank" rel="noopener noreferrer" className="relative inline-block group">
+                      <a
+                        href={license.licenseUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative inline-block group"
+                      >
                         <PaperClipIcon className="h-5 w-5 group-hover:border group-hover:border-gray-500 group-hover:rounded-md" />
                       </a>
                     </td>
 
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                       <a
-                        href="#"
+                        href={`./${license.contractorId}/licenses/msw/${license.id}/edit`}
                         className="text-indigo-600 hover:text-indigo-900"
                       >
                         編集<span className="sr-only">, {license.id}</span>

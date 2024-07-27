@@ -33,15 +33,12 @@ export async function createLicense(data: MswLicense) {
 
     newLicenseId = newLicense.id;
     revalidatePath(`/contractors/${data.contractorId}`);
-
   } catch (error) {
     console.error("データの登録に失敗しました.", error);
     throw new Error("データの登録に失敗しました.");
   } finally {
     if (newLicenseId) {
-      redirect(
-        `/contractors/${data.contractorId}`,
-      );
+      redirect(`/contractors/${data.contractorId}`);
     }
   }
 }
