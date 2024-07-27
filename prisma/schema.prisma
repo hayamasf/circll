@@ -28,7 +28,7 @@ model Contractor {
   town              String
   address           String
   address2          String?
-  mswLicenses[]
+  mswLicenses       MswLicense[]
 }
 
 model Client {
