@@ -10,24 +10,23 @@ import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 import getTodayDate from "@/utils/getTodayDate";
 import TextInput from "./TextInput";
-import { createLicense } from "@/actions/mswLicense";
-import getContractorById from "@/utils/getContractorById";
+import { formatDate } from "@/utils/dateUtils";
 
 const options = [
   { id: "1", title: "収集運搬" },
   { id: "2", title: "処分" },
 ];
 
-export default function MswLicenseEditForm({ props }: any) {
+export default function MswLicenseEditForm({ license }: any) {
 
   const methods = useForm({
     defaultValues: {
-      contractorId: props.id,
-      prefectureId: "",
-      municipalityId: "",
-      type: 1,
-      expirationDate: "",
-      licenseUrl: "",
+      contractorId: license.contractorId,
+      prefectureId: license.prefectureId,
+      municipalityId: license.municipalityId,
+      type: String(license.type),
+      expirationDate: formatDate(license.expirationDate),
+      licenseUrl: license.licenseUrl,
     },
   });
   const minDate = getTodayDate();
@@ -39,7 +38,7 @@ export default function MswLicenseEditForm({ props }: any) {
 
   return (
     <>
-      <div className="mt-2 mb-8">{props.name}</div>
+      <div className="mt-2 mb-8">{""}</div>
 
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -48,8 +47,9 @@ export default function MswLicenseEditForm({ props }: any) {
               legendTitle={"業の種類"}
               groupName={"type"}
               options={options}
+              defaultValue={methods.getValues("type")}
             />
-            <PrefectureMunicipalitySelect />
+            <PrefectureMunicipalitySelect disabled={true} />
             <DateInput
               name={"expirationDate"}
               label={"許可期限"}

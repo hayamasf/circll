@@ -6,10 +6,12 @@ export default function RadioGroup({
   legendTitle,
   groupName,
   options,
+  defaultValue,
 }: {
   legendTitle: string;
   groupName: string;
   options: RadioOption[];
+  defaultValue: string;
 }) {
   const { register } = useFormContext();
 
@@ -22,8 +24,8 @@ export default function RadioGroup({
         {options.map((option) => (
           <div key={option.id} className="flex items-center">
             <input
-              defaultChecked={option.id === "1"}
               id={option.id}
+              defaultChecked={option.id === defaultValue}
               {...register(groupName)}
               value={option.id}
               type="radio"

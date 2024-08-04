@@ -23,7 +23,7 @@ export default function MswLicenseRegistrationForm({ id }: { id: number }) {
       contractorId: id,
       prefectureId: "",
       municipalityId: "",
-      type: 1,
+      type: "1",
       expirationDate: "",
       licenseUrl: "",
     },
@@ -46,6 +46,7 @@ export default function MswLicenseRegistrationForm({ id }: { id: number }) {
               legendTitle={"業の種類"}
               groupName={"type"}
               options={options}
+              defaultValue={methods.getValues("type")}
             />
             <PrefectureMunicipalitySelect />
             <DateInput

@@ -5,8 +5,8 @@ import { getMunicipalites } from "@/actions/municipality";
 import { Prefecture } from "@/types/types";
 import { Municipality } from "@/types/types";
 
-export default function PrefectureMunicipalitySelect() {
-  const { register } = useFormContext();
+export default function PrefectureMunicipalitySelect({ disabled }: { disabled?: boolean }) {
+  const { register, reset, watch } = useFormContext();
 
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
   const [selectedPrefecture, setSelectedPrefecture] = useState<number | null>(
@@ -14,20 +14,32 @@ export default function PrefectureMunicipalitySelect() {
   );
   const [municipalities, setMunicipalities] = useState<Municipality[]>([]);
 
+  const prefectureId = watch("prefectureId");
+  const municipalityId = watch("municipalityId");
+
   useEffect(() => {
     const fetchPrefectures = async () => {
       const prefectures = await getPrefectures();
       setPrefectures(prefectures);
+
+      if (prefectureId && municipalityId) {
+        console.log(prefectureId);
+        setSelectedPrefecture(Number(prefectureId));
+        const municipalities = await getMunicipalites(Number(prefectureId));
+        setMunicipalities(municipalities);
+        reset({ prefectureId, municipalityId });
+      }
     };
     fetchPrefectures();
   }, []);
 
   useEffect(() => {
+    const fetchMunicipalities = async (selectedPrefecture: number) => {
+      const municipalities = await getMunicipalites(selectedPrefecture);
+      setMunicipalities(municipalities);
+    };
+
     if (selectedPrefecture !== null) {
-      const fetchMunicipalities = async (selectedPrefecture: number) => {
-        const municipalities = await getMunicipalites(selectedPrefecture);
-        setMunicipalities(municipalities);
-      };
       fetchMunicipalities(selectedPrefecture);
     } else {
       setMunicipalities([]);
@@ -47,6 +59,7 @@ export default function PrefectureMunicipalitySelect() {
           id="prefectureId"
           {...register("prefectureId")}
           onChange={(e) => setSelectedPrefecture(Number(e.target.value))}
+          disabled={disabled}
           className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
         >
           <option value="" disabled>
@@ -69,6 +82,7 @@ export default function PrefectureMunicipalitySelect() {
         <select
           id="municipalityId"
           {...register("municipalityId")}
+          disabled={disabled}
           className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
         >
           <option value="" disabled>
