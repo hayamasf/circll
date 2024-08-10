@@ -7,11 +7,13 @@ export default function RadioGroup({
   groupName,
   options,
   defaultValue,
+  disabled,
 }: {
-  legendTitle: string;
-  groupName: string;
-  options: RadioOption[];
-  defaultValue: string;
+  legendTitle: string,
+  groupName: string,
+  options: RadioOption[],
+  defaultValue: string,
+  disabled?: boolean,
 }) {
   const { register } = useFormContext();
 
@@ -28,6 +30,7 @@ export default function RadioGroup({
               {...register(groupName)}
               defaultChecked={option.id === defaultValue}
               value={option.id}
+              disabled={disabled}
               type="radio"
               className="h-4 w-4 border-gray-300 text-gray-600 focus:ring-gray-600"
             />

@@ -48,6 +48,7 @@ export default function MswLicenseEditForm({ license }: any) {
               groupName={"type"}
               options={options}
               defaultValue={defaultType}
+              disabled={true}
             />
             <PrefectureMunicipalitySelect disabled={true} editForm={true} />
             <DateInput
