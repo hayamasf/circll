@@ -69,12 +69,15 @@ export default async function MswLicensesList({
                       {license.municipality.name}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {license.type === 1 ? (
+                      {license.type === 1 && (
                         <span className="text-xs p-1 rounded-md border border-gray-800">
                           収集運搬
                         </span>
-                      ) : (
-                        "処分"
+                      )}
+                      {license.type === 2 && (
+                        <span className="text-xs text-white p-1 rounded-md bg-gray-800">
+                          処分
+                        </span>
                       )}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

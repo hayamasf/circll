@@ -9,11 +9,11 @@ export default function RadioGroup({
   defaultValue,
   disabled,
 }: {
-  legendTitle: string,
-  groupName: string,
-  options: RadioOption[],
-  defaultValue: string,
-  disabled?: boolean,
+  legendTitle: string;
+  groupName: string;
+  options: RadioOption[];
+  defaultValue: string;
+  disabled?: boolean;
 }) {
   const { register } = useFormContext();
 

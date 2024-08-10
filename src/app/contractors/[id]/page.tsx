@@ -5,6 +5,7 @@ import SectionHeader from "@/components/SectionHeader";
 import LegalEntityProfile from "@/components/LegalEntityProfile";
 import fetchContractorById from "@/utils/fetchContractorById";
 import MswLicensesList from "@/components/MswLicensesList";
+import IndustrialWasteLicensesList from "@/components/IndustrialWasteLicensesList";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
@@ -17,6 +18,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <>
           <LegalEntityProfile entity={contractor} />
           <MswLicensesList contractorId={contractor.id} />
+          <IndustrialWasteLicensesList contractorId={contractor.id} />
         </>
       ) : (
         "該当する業者が見つかりません..."
