@@ -4,8 +4,15 @@ import getContractorById from "@/utils/getContractorById";
 import MswLicenseEditForm from "@/components/MswLicenseEditForm";
 import getMswLicenseById from "@/utils/getMswLicenseById";
 
-export default async function Page({ params }: { params: { id: string, licenseType: "msw" | "industrial-waste", licenseId: string } }) {
-
+export default async function Page({
+  params,
+}: {
+  params: {
+    id: string;
+    licenseType: "msw" | "industrial-waste";
+    licenseId: string;
+  };
+}) {
   const id = Number(params.id);
   const licenseType = params.licenseType;
   const licenseId = Number(params.licenseId);

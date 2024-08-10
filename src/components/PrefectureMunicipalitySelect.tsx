@@ -5,7 +5,13 @@ import { getMunicipalites } from "@/actions/municipality";
 import { Prefecture } from "@/types/types";
 import { Municipality } from "@/types/types";
 
-export default function PrefectureMunicipalitySelect({ disabled, editForm }: { disabled?: boolean, editForm?: boolean }) {
+export default function PrefectureMunicipalitySelect({
+  disabled,
+  editForm,
+}: {
+  disabled?: boolean;
+  editForm?: boolean;
+}) {
   const { register, reset, watch } = useFormContext();
 
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
@@ -40,7 +46,7 @@ export default function PrefectureMunicipalitySelect({ disabled, editForm }: { d
 
     if (selectedPrefecture !== null) {
       console.log(selectedPrefecture);
-      console.log("走る？")
+      console.log("走る？");
       fetchMunicipalities(selectedPrefecture);
     } else {
       setMunicipalities([]);

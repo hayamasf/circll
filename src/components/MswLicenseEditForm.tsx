@@ -18,7 +18,6 @@ const options = [
 ];
 
 export default function MswLicenseEditForm({ license }: any) {
-
   const methods = useForm({
     defaultValues: {
       contractorId: license.contractorId,
