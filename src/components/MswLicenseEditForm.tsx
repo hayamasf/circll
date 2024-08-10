@@ -30,6 +30,7 @@ export default function MswLicenseEditForm({ license }: any) {
     },
   });
   const minDate = getTodayDate();
+  const defaultType = methods.watch("type");
 
   const onSubmit = async (formData: any) => {
     console.log(formData);
@@ -47,9 +48,9 @@ export default function MswLicenseEditForm({ license }: any) {
               legendTitle={"業の種類"}
               groupName={"type"}
               options={options}
-              defaultValue={methods.getValues("type")}
+              defaultValue={defaultType}
             />
-            <PrefectureMunicipalitySelect disabled={true} />
+            <PrefectureMunicipalitySelect disabled={true} editForm={true} />
             <DateInput
               name={"expirationDate"}
               label={"許可期限"}

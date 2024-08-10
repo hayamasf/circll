@@ -42,8 +42,6 @@ export default function LegalEntityRegistrationForm({
       ...(address2 ? { address2 } : {}),
       ...(tradeName ? { tradeName } : {}),
     };
-
-    console.log(data);
     const result = await action(data);
   };
 

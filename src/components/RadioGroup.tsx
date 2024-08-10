@@ -25,8 +25,8 @@ export default function RadioGroup({
           <div key={option.id} className="flex items-center">
             <input
               id={option.id}
-              defaultChecked={option.id === defaultValue}
               {...register(groupName)}
+              defaultChecked={option.id === defaultValue}
               value={option.id}
               type="radio"
               className="h-4 w-4 border-gray-300 text-gray-600 focus:ring-gray-600"

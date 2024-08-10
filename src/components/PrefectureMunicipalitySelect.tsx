@@ -5,7 +5,7 @@ import { getMunicipalites } from "@/actions/municipality";
 import { Prefecture } from "@/types/types";
 import { Municipality } from "@/types/types";
 
-export default function PrefectureMunicipalitySelect({ disabled }: { disabled?: boolean }) {
+export default function PrefectureMunicipalitySelect({ disabled, editForm }: { disabled?: boolean, editForm?: boolean }) {
   const { register, reset, watch } = useFormContext();
 
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
@@ -14,20 +14,17 @@ export default function PrefectureMunicipalitySelect({ disabled }: { disabled?: 
   );
   const [municipalities, setMunicipalities] = useState<Municipality[]>([]);
 
-  const prefectureId = watch("prefectureId");
-  const municipalityId = watch("municipalityId");
-
   useEffect(() => {
     const fetchPrefectures = async () => {
       const prefectures = await getPrefectures();
       setPrefectures(prefectures);
 
-      if (prefectureId && municipalityId) {
-        console.log(prefectureId);
+      if (editForm) {
+        const prefectureId = watch("prefectureId");
         setSelectedPrefecture(Number(prefectureId));
         const municipalities = await getMunicipalites(Number(prefectureId));
         setMunicipalities(municipalities);
-        reset({ prefectureId, municipalityId });
+        reset();
       }
     };
     fetchPrefectures();
@@ -39,7 +36,11 @@ export default function PrefectureMunicipalitySelect({ disabled }: { disabled?: 
       setMunicipalities(municipalities);
     };
 
+    if (editForm) return;
+
     if (selectedPrefecture !== null) {
+      console.log(selectedPrefecture);
+      console.log("走る？")
       fetchMunicipalities(selectedPrefecture);
     } else {
       setMunicipalities([]);
@@ -51,7 +52,7 @@ export default function PrefectureMunicipalitySelect({ disabled }: { disabled?: 
       <div className="relative">
         <label
           htmlFor="prefectureId"
-          className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+          className="absolute z-10 -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
         >
           都道府県
         </label>
@@ -75,7 +76,7 @@ export default function PrefectureMunicipalitySelect({ disabled }: { disabled?: 
       <div className="relative">
         <label
           htmlFor="municipalityId"
-          className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+          className="absolute z-10 -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
         >
           市区町村
         </label>
