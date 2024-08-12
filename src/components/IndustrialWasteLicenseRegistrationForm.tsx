@@ -7,6 +7,7 @@ import DateInput from "./DateInput";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 import getTodayDate from "@/utils/getTodayDate";
+import Input from "./Input";
 import TextInput from "./TextInput";
 
 const options = [
@@ -50,12 +51,7 @@ export default function IndustrialWasteLicenseRegistrationForm({
               min={minDate}
               required={true}
             />
-            <TextInput
-              label={"許可証のURL"}
-              name={"licenseUrl"}
-              placeholder={"https://www.example.com/license/copy.pdf"}
-              required={true}
-            />
+            <Input label="許可証のURL" name="licenseUrl" type="url" placeholder="https://www.example.com/license/copy.pdf" required={true} />
           </div>
           <div className="mt-10 grid gap-y-5">
             <SubmitButton
