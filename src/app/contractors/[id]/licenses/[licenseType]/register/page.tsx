@@ -16,7 +16,7 @@ export default async function Page({
       <PageHeader title="許可情報の登録" />
       {licenseType === "msw" && <MswLicenseRegistrationForm id={id} />}
       {licenseType === "industrial-waste" && (
-        <IndustrialWasteLicenseRegistrationForm />
+        <IndustrialWasteLicenseRegistrationForm id={id} />
       )}
     </div>
   );
