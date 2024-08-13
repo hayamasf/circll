@@ -1,14 +1,19 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-export default function Input({ label, name, type = "text", placeholder, required }: {
-  label: string,
-  name: string,
-  type?: string,
-  placeholder: string,
-  required?: boolean,
+export default function Input({
+  label,
+  name,
+  type = "text",
+  placeholder,
+  required,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  placeholder: string;
+  required?: boolean;
 }) {
-
   const { register } = useFormContext();
 
   return (
@@ -28,6 +33,5 @@ export default function Input({ label, name, type = "text", placeholder, require
         required={required}
       />
     </div>
-  )
-
+  );
 }

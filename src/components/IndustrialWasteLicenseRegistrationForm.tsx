@@ -8,12 +8,7 @@ import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 import getTodayDate from "@/utils/getTodayDate";
 import Input from "./Input";
-import TextInput from "./TextInput";
-
-const options = [
-  { id: "1", title: "収集運搬" },
-  { id: "2", title: "処分" },
-];
+import { createLicense } from "@/actions/industrialWasteLicense";
 
 export default function IndustrialWasteLicenseRegistrationForm({
   id,
@@ -35,6 +30,8 @@ export default function IndustrialWasteLicenseRegistrationForm({
 
   const onSubmit = async (formData: any) => {
     console.log(formData);
+    const result = await createLicense(formData);
+
   };
 
   return (
@@ -51,7 +48,13 @@ export default function IndustrialWasteLicenseRegistrationForm({
               min={minDate}
               required={true}
             />
-            <Input label="許可証のURL" name="licenseUrl" type="url" placeholder="https://www.example.com/license/copy.pdf" required={true} />
+            <Input
+              label="許可証のURL"
+              name="licenseUrl"
+              type="url"
+              placeholder="https://www.example.com/license/copy.pdf"
+              required={true}
+            />
           </div>
           <div className="mt-10 grid gap-y-5">
             <SubmitButton
