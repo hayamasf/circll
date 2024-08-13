@@ -98,3 +98,8 @@ model MswLicense {
   expirationDate    DateTime  @db.Date
   licenseUrl        String
 }
+
+model WasteItem {
+  id            Int @id
+  name          String
+}
