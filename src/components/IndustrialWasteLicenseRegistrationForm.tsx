@@ -31,7 +31,6 @@ export default function IndustrialWasteLicenseRegistrationForm({
   const onSubmit = async (formData: any) => {
     console.log(formData);
     const result = await createLicense(formData);
-
   };
 
   return (
