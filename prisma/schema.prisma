@@ -5,9 +5,13 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// how to quickly connect the Postgres database provided by Supabase to a Prisma project.
+// https://supabase.com/partners/integrations/prisma
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Contractor {

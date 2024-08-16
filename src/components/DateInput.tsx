@@ -24,7 +24,7 @@ export default function DateInput({
       </label>
       <input
         type="date"
-        id="expirationDate"
+        id={name}
         {...register(name)}
         min={min}
         required={required}

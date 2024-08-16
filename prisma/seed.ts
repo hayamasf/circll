@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
+// npx ts-node prisma/seed.ts
+
 const prisma = new PrismaClient();
 
 const prefectures = [
@@ -76,13 +78,41 @@ const wasteItems = [
 ];
 
 async function main() {
-  for (const prefecture of prefectures) {
-    await prisma.prefecture.upsert({
-      where: { id: prefecture.id },
-      update: {},
-      create: prefecture,
-    });
-  };
+  await Promise.all(
+    prefectures.map(async (prefecture) => {
+      await prisma.prefecture.upsert({
+        where: { id: prefecture.id },
+        update: {},
+        create: prefecture,
+      });
+    }),
+  );
+
+  await Promise.all(
+    wasteItems.map(async (item) => {
+      await prisma.wasteItem.upsert({
+        where: { id: item.id },
+        update: {},
+        create: item,
+      });
+    }),
+  );
+
+  // for (const prefecture of prefectures) {
+  //   await prisma.prefecture.upsert({
+  //     where: { id: prefecture.id },
+  //     update: {},
+  //     create: prefecture,
+  //   });
+  // };
+
+  // for (const item of wasteItems) {
+  //   await prisma.wasteItem.upsert({
+  //     where: { id: item.id},
+  //     update: {},
+  //     create: item,
+  //   })
+  // }
 }
 
 main()

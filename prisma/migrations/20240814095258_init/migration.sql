@@ -81,7 +81,7 @@ CREATE TABLE "Municipality" (
 );
 
 -- CreateTable
-CREATE TABLE "mswLicense" (
+CREATE TABLE "MswLicense" (
     "id" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "createdBy" TEXT NOT NULL,
@@ -94,11 +94,25 @@ CREATE TABLE "mswLicense" (
     "expirationDate" DATE NOT NULL,
     "licenseUrl" TEXT NOT NULL,
 
-    CONSTRAINT "mswLicense_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "MswLicense_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "WasteItem" (
+    "id" INTEGER NOT NULL,
+    "name" TEXT NOT NULL,
+
+    CONSTRAINT "WasteItem_pkey" PRIMARY KEY ("id")
 );
 
 -- AddForeignKey
 ALTER TABLE "Site" ADD CONSTRAINT "Site_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "Client"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Municipality" ADD CONSTRAINT "Municipality_prefectureId_fkey" FOREIGN KEY ("prefectureId") REFERENCES "Prefecture"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Municipality" ADD CONSTRAINT "Municipality_prefectureId_fkey" FOREIGN KEY ("prefectureId") REFERENCES "Prefecture"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MswLicense" ADD CONSTRAINT "MswLicense_contractorId_fkey" FOREIGN KEY ("contractorId") REFERENCES "Contractor"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MswLicense" ADD CONSTRAINT "MswLicense_municipalityId_fkey" FOREIGN KEY ("municipalityId") REFERENCES "Municipality"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
