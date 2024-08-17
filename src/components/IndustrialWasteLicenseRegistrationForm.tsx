@@ -21,7 +21,7 @@ export default function IndustrialWasteLicenseRegistrationForm({
       issuingAuthorityCode: "",
       typeCode: "",
       authorityCode: "",
-      contractorUniqueNumber: "",
+      contractorUniqueCode: "",
       expirationDate: "",
       licenseUrl: "",
     },
@@ -40,7 +40,7 @@ export default function IndustrialWasteLicenseRegistrationForm({
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid gap-y-10">
-            {/* <IndustrialWasteLicenseNumberSelect /> */}
+            <IndustrialWasteLicenseNumberSelect />
             <DateInput
               name={"expirationDate"}
               label={"許可期限"}

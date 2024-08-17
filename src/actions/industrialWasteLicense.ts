@@ -5,6 +5,6 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-export async function createLicense(data: any) {
-  console.log(data);
+export async function createLicense(formData: FormData) {
+  console.log(formData);
 }
