@@ -99,3 +99,8 @@ export type MswLicense = {
     name: string;
   };
 };
+
+export type WasteItem = {
+  id: number;
+  name: string;
+}

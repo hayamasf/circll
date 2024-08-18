@@ -8,12 +8,15 @@ import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 import getTodayDate from "@/utils/getTodayDate";
 import Input from "./Input";
+import IndustrialWasteItemCheckbox from "./IndustrialWasteItemCheckbox";
 import { createLicense } from "@/actions/industrialWasteLicense";
+import { WasteItem } from "@/types/types";
 
 export default function IndustrialWasteLicenseRegistrationForm({
-  id,
+  id, items
 }: {
   id: number;
+  items: WasteItem[]
 }) {
   const methods = useForm({
     defaultValues: {
@@ -54,6 +57,7 @@ export default function IndustrialWasteLicenseRegistrationForm({
               placeholder="https://www.example.com/license/copy.pdf"
               required={true}
             />
+            <IndustrialWasteItemCheckbox items={items} />
           </div>
           <div className="mt-10 grid gap-y-5">
             <SubmitButton
