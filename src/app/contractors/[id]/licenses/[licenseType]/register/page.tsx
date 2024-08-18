@@ -20,7 +20,7 @@ export default async function Page({
         <PageHeader title="許可情報の登録" />
         <IndustrialWasteLicenseRegistrationForm id={id} items={items} />
       </div>
-    )
+    );
   } else if (licenseType === "msw") {
     return (
       <div className="mx-auto max-w-md">

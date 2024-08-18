@@ -33,6 +33,7 @@ model Contractor {
   address           String
   address2          String?
   mswLicenses       MswLicense[]
+  industrialWasteLicenses IndustrialWasteLicense[]
 }
 
 model Client {
@@ -101,9 +102,31 @@ model MswLicense {
   type              Int
   expirationDate    DateTime  @db.Date
   licenseUrl        String
+
+  @@unique([contractorId, municipalityId, type])
 }
 
 model WasteItem {
   id            Int @id
   name          String
+  industrialWasteLicenses IndustrialWasteLicense[]
+}
+
+model IndustrialWasteLicense {
+  id                Int @ id @default(autoincrement())
+  createdAt         DateTime @default(now())
+  createdBy         String
+  updatedAt         DateTime @updatedAt
+  updatedBy         String?
+  contractorId      Int
+  contractor        Contractor @relation(fields: [contractorId], references: [id], onDelete: Cascade)
+  issuingAuthority  Int
+  typeCode          Int
+  authorityCode     Int
+  contractorCode    Int
+  expirationDate    DateTime  @db.Date
+  licenseUrl        String
+  wasteItems        WasteItem[]
+
+  @@unique([issuingAuthority, typeCode, authorityCode, contractorCode])
 }

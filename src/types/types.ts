@@ -103,4 +103,4 @@ export type MswLicense = {
 export type WasteItem = {
   id: number;
   name: string;
-}
+};

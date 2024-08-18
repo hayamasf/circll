@@ -45,8 +45,6 @@ export default function PrefectureMunicipalitySelect({
     if (editForm) return;
 
     if (selectedPrefecture !== null) {
-      console.log(selectedPrefecture);
-      console.log("走る？");
       fetchMunicipalities(selectedPrefecture);
     } else {
       setMunicipalities([]);

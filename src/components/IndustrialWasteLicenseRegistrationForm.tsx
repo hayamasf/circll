@@ -13,18 +13,19 @@ import { createLicense } from "@/actions/industrialWasteLicense";
 import { WasteItem } from "@/types/types";
 
 export default function IndustrialWasteLicenseRegistrationForm({
-  id, items
+  id,
+  items,
 }: {
   id: number;
-  items: WasteItem[]
+  items: WasteItem[];
 }) {
   const methods = useForm({
     defaultValues: {
       contractorId: id,
-      issuingAuthorityCode: "",
+      issuingAuthority: "",
       typeCode: "",
       authorityCode: "",
-      contractorUniqueCode: "",
+      contractorCode: "",
       expirationDate: "",
       licenseUrl: "",
     },

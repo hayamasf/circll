@@ -12,15 +12,17 @@ export default function IndustrialWasteLicenseNumberSelect() {
   return (
     <>
       <fieldset className="relative">
-        <legend className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900">許可番号 ※11桁（東京都は10桁）の数字</legend>
+        <legend className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900">
+          許可番号 ※11桁（東京都は10桁）の数字
+        </legend>
         <div className="flex border-0 px-1 py-1 ring-1 ring-inset ring-gray-300 rounded-md">
           <div className="">
-            <label htmlFor="issuingAuthorityCode" className="sr-only">
+            <label htmlFor="issuingAuthority" className="sr-only">
               都道府県/政令市番号
             </label>
             <select
-              id="issuingAuthorityCode"
-              {...register("issuingAuthorityCode", { required: true })}
+              id="issuingAuthority"
+              {...register("issuingAuthority", { required: true })}
               required
               className={`w-fit border-0 border-b text-gray-900 focus:ring-0 sm:text-sm`}
             >
@@ -75,7 +77,7 @@ export default function IndustrialWasteLicenseNumberSelect() {
             </select>
           </div>
           <div className="">
-            <label htmlFor={"contractorUniqueCode"} className="sr-only">
+            <label htmlFor={"contractorCode"} className="sr-only">
               業者の固有番号
             </label>
             <input
@@ -86,7 +88,7 @@ export default function IndustrialWasteLicenseNumberSelect() {
               minLength={6}
               maxLength={6}
               inputMode="numeric"
-              {...register("contractorUniqueCode", {
+              {...register("contractorCode", {
                 required: "業者の固有番号は必須です.",
               })}
               required
