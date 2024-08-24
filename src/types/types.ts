@@ -104,3 +104,19 @@ export type WasteItem = {
   id: number;
   name: string;
 };
+
+export type IndustrialWasteLicense = {
+  id: number;
+  createdAt: Date;
+  createdBy: string;
+  updatedAt: Date;
+  updatedBy: string | null;
+  contractorId: number;
+  issuingAuthority: number;
+  typeCode: number;
+  authorityCode: number;
+  contractorCode: number;
+  expirationDate: Date;
+  licenseUrl: string;
+  wasteItems: WasteItem[];
+};

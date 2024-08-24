@@ -135,3 +135,11 @@ export const authorities = [
   { id: 128, code: "128", name: "鳥取市" },
   { id: 129, code: "129", name: "松江市" },
 ];
+
+export const industrialWasteLicenseTypeCodes = [
+  { id: 0, name: "収集運搬" },
+  { id: 1, name: "収集運搬(積替含む)" },
+  { id: 2, name: "中間処分" },
+  { id: 3, name: "最終処分" },
+  { id: 4, name: "中間、最終処分" },
+];
