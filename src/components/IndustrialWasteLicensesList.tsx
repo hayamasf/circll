@@ -2,8 +2,10 @@ import React from "react";
 
 import LinkButton from "./LinkButton";
 import { getIndustrialWasteLicenses } from "@/utils/getIndustrialWasteLicenses";
-import { formatDate } from "@/utils/dateUtils";
+import { getDaysUntilExpiration } from "@/utils/dateUtils";
 import { PaperClipIcon } from "@heroicons/react/24/outline";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import { XCircleIcon } from "@heroicons/react/24/solid";
 import { getIndustrialLicenseTypeName } from "@/utils/getIndustrialWasteLicenseTypeName";
 import { getIndustrialWasteLicenseIssuingAuthorityName } from "@/utils/getIndustrialWasteLiceseIssuingAuthorityName";
 
@@ -52,7 +54,7 @@ export default async function IndustrialWasteLicensesList({
                     scope="col"
                     className="px-3 py-3.5 text-left font-semibold text-gray-900"
                   >
-                    有効期限
+                    期限まで
                   </th>
                   <th
                     scope="col"
@@ -63,29 +65,38 @@ export default async function IndustrialWasteLicensesList({
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {licenses.map((license) => (
-                  <tr key={license.id}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                      {getIndustrialWasteLicenseIssuingAuthorityName(license.issuingAuthority) || "?"}
-                    </td>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                      {getIndustrialLicenseTypeName(license.typeCode) || "?"}
-                    </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {formatDate(license.expirationDate)}
-                    </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      <a
-                        href={license.licenseUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="relative inline-block group"
-                      >
-                        <PaperClipIcon className="h-5 w-5 group-hover:border group-hover:border-gray-500 group-hover:rounded-md" />
-                      </a>
-                    </td>
-                  </tr>
-                ))}
+                {licenses.map((license) => {
+                  const daysLeft = getDaysUntilExpiration(license.expirationDate);
+
+                  return (
+                    <tr key={license.id}>
+                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                        {getIndustrialWasteLicenseIssuingAuthorityName(license.issuingAuthority) || "?"}
+                      </td>
+                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                        {getIndustrialLicenseTypeName(license.typeCode) || "?"}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {daysLeft >= 91 && "90日+"}
+                        {daysLeft <= 90 && daysLeft >= 1 && (
+                          <>
+                            <ExclamationTriangleIcon className="h-6 w-6 inline text-yellow-600" /> {daysLeft}日
+                          </>)}
+                        {daysLeft <= 0 && <XCircleIcon className="h-6 w-6 text-red-600" />}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        <a
+                          href={license.licenseUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="relative inline-block group"
+                        >
+                          <PaperClipIcon className="h-5 w-5 group-hover:border group-hover:border-gray-500 group-hover:rounded-md" />
+                        </a>
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
