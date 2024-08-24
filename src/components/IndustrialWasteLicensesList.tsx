@@ -5,6 +5,7 @@ import { getIndustrialWasteLicenses } from "@/utils/getIndustrialWasteLicenses";
 import { formatDate } from "@/utils/dateUtils";
 import { PaperClipIcon } from "@heroicons/react/24/outline";
 import { getIndustrialLicenseTypeName } from "@/utils/getIndustrialWasteLicenseTypeName";
+import { getIndustrialWasteLicenseIssuingAuthorityName } from "@/utils/getIndustrialWasteLiceseIssuingAuthorityName";
 
 export default async function IndustrialWasteLicensesList({
   contractorId,
@@ -18,7 +19,7 @@ export default async function IndustrialWasteLicensesList({
       <div className="flex items-center">
         <div className="flex-auto">
           <h2 className="text-lg font-semibold leading-6 text-gray-900">
-            産業<span className="text-sm font-light"> 廃棄物処理業許可</span>
+            産業<span className="text-sm font-light">廃棄物処理業許可</span>
           </h2>
         </div>
         <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
@@ -65,10 +66,10 @@ export default async function IndustrialWasteLicensesList({
                 {licenses.map((license) => (
                   <tr key={license.id}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                      {license.id}
+                      {getIndustrialWasteLicenseIssuingAuthorityName(license.issuingAuthority) || "?"}
                     </td>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                      {getIndustrialLicenseTypeName(license.typeCode) || "不明"}
+                      {getIndustrialLicenseTypeName(license.typeCode) || "?"}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {formatDate(license.expirationDate)}
