@@ -21,7 +21,7 @@ export default async function ContractorsList({
       <ul role="list" className="divide-y divide-gray-100">
         {contractors.map((contractor) => (
           <li key={contractor.id} className="relative py-5 hover:bg-gray-50">
-            <div className="px-4 sm:px-6 lg:px-8">
+            <div className="sm:px-6 lg:px-8">
               <div className="mx-auto flex max-w-4xl justify-between gap-x-6">
                 <div className="flex min-w-0 gap-x-4">
                   <div className="min-w-0 flex-auto">

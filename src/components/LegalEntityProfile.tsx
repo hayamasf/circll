@@ -13,7 +13,7 @@ export default function LegalEntityProfile({
   ];
 
   return (
-    <div className="container my-10 mx-auto max-w-3xl">
+    <div className="my-10 mx-auto max-w-3xl">
       <div className="px-4 sm:px-0">
         <div className="flex items-center justify-between">
           <h3 className="text-base font-semibold leading-7 text-gray-900">
