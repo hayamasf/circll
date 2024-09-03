@@ -17,14 +17,13 @@ export function formatDate(date: Date) {
   return `${year}-${month}-${day}`;
 }
 
-export function getDaysUntilExpiration(expirationDate:Date): number {
-
+export function getDaysUntilExpiration(expirationDate: Date): number {
   const today = new Date();
   const expiration = new Date(expirationDate);
 
   const timeDiff = expiration.getTime() - today.getTime();
 
-  const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24))
+  const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
   return daysDiff;
 }

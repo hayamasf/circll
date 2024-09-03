@@ -1,15 +1,15 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import Navigation from "@/components/Navigation";
 
-import { Inter as FontSans } from "next/font/google"
+import { Inter as FontSans } from "next/font/google";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-})
+});
 
 export const metadata: Metadata = {
   title: "サークル | circll",
@@ -22,13 +22,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-
     // <html lang="ja" className="h-full">
     <html lang="ja">
-      <body className={cn(
-        "min-h-screen bg-background font-sans antialiased",
-        fontSans.variable
-      )}>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable,
+        )}
+      >
         <UserProvider>
           <div>
             <Navigation />

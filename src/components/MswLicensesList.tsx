@@ -4,6 +4,10 @@ import LinkButton from "./LinkButton";
 import getMswLicenses from "@/utils/getMswLicenses";
 import { formatDate } from "@/utils/dateUtils";
 import { PaperClipIcon } from "@heroicons/react/24/outline";
+import { getDaysUntilExpiration } from "@/utils/dateUtils";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import { XCircleIcon } from "@heroicons/react/24/solid";
 
 export default async function MswLicensesList({
   contractorId,
@@ -26,48 +30,75 @@ export default async function MswLicensesList({
           </LinkButton>
         </div>
       </div>
-      <div className="mt-8 flow-root">
+
+      <ul role="list" className="mt-7 divide-y divide-gray-100">
+        {licenses.map((license) => {
+          const daysLeft = getDaysUntilExpiration(license.expirationDate);
+
+          return (
+            <li
+              key={license.id}
+              className="relative flex justify-between gap-x-6 py-5"
+            >
+              <div className="flex min-w-0 gap-x-4">
+                <div className="min-w-0 flex-auto">
+                  <p className="text-sm font-semibold leading-6 text-gray-900">
+                    {license.municipality.name}
+                  </p>
+                  <p className="mt-1 flex text-xs leading-5 text-gray-500">
+                    {license.type === 1 && (
+                      <span className="text-xs p-1">収集運搬</span>
+                    )}
+                    {license.type === 2 && (
+                      <span className="text-xs p-1 rounded-md border border-gray-800">
+                        処分
+                      </span>
+                    )}
+                  </p>
+                </div>
+              </div>
+              <div className="flex shrink-0 items-center gap-x-4">
+                <div className="flex flex-col items-end">
+                  <p className="text-sm leading-6 text-gray-900">
+                    {daysLeft <= 30 && daysLeft > 0 && (
+                      <>
+                        <ExclamationCircleIcon className="h-6 w-6 inline text-yellow-500" />{" "}
+                        {daysLeft}日
+                      </>
+                    )}
+                    {daysLeft < 0 && (
+                      <>
+                        <XCircleIcon className="h-6 w-6 inline text-red-600" />{" "}
+                        期限切れ
+                      </>
+                    )}
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-gray-500">
+                    {daysLeft < 0
+                      ? ""
+                      : formatDate(license.expirationDate) + "まで"}
+                  </p>
+                </div>
+                <a
+                  href={license.licenseUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative inline-block group ml-5"
+                >
+                  <PaperClipIcon className="h-5 w-5 group-hover:border group-hover:border-gray-500 group-hover:rounded-md" />
+                </a>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+      {/* <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <table className="min-w-full divide-y divide-gray-300">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                  >
-                    許可区域
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    種類
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    有効期限
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    写し
-                  </th>
-
-                  <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                    <span className="sr-only">編集</span>
-                  </th>
-                </tr>
-              </thead>
               <tbody className="divide-y divide-gray-200">
                 {licenses.map((license) => (
                   <tr key={license.id}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                      {license.municipality.name}
-                    </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {license.type === 1 && (
                         <span className="text-xs p-1 rounded-md border border-gray-800">
@@ -108,7 +139,7 @@ export default async function MswLicensesList({
             </table>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
