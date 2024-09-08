@@ -52,11 +52,11 @@ export default async function IndustrialWasteLicenseDetail({
             className="flex items-center gap-x-2 group"
           >
             <PaperClipIcon className="h-5 w-5 group-hover:rounded-md group-hover:border group-hover:border-gray-500" />
-            <p className="group-hover:underline">許可証の写し</p>
+            <p className="text-sm group-hover:underline">許可証の写し</p>
           </a>
         </div>
         <div className="my-5">
-          <IndustrialWasteItemList />
+          <IndustrialWasteItemList licensedItems={license.wasteItems} />
         </div>
       </div>
     );
