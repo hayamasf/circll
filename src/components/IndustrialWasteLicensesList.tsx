@@ -8,8 +8,8 @@ import { PaperClipIcon } from "@heroicons/react/24/outline";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import { formatDate } from "@/utils/dateUtils";
-import { getIndustrialLicenseTypeName } from "@/utils/getIndustrialWasteLicenseTypeName";
-import { getIndustrialWasteLicenseIssuingAuthorityName } from "@/utils/getIndustrialWasteLiceseIssuingAuthorityName";
+import getIndustrialLicenseTypeName from "@/utils/getIndustrialWasteLicenseTypeName";
+import getIndustrialWasteLicenseIssuingAuthorityName from "@/utils/getIndustrialWasteLiceseIssuingAuthorityName";
 
 export default async function IndustrialWasteLicensesList({
   contractorId,
@@ -47,12 +47,13 @@ export default async function IndustrialWasteLicensesList({
               <div className="flex min-w-0 gap-x-4">
                 <div className="min-w-0 flex-auto">
                   <p className="text-sm font-semibold leading-6 text-gray-900">
-                    <Link href={`./${contractorId}/licenses/industrial-waste/${license.id}`}>
+                    <Link
+                      href={`./${contractorId}/licenses/industrial-waste/${license.id}`}
+                    >
                       <span className="absolute inset-x-0 -top-px bottom-0" />
                       {getIndustrialWasteLicenseIssuingAuthorityName(
                         license.issuingAuthority,
                       ) || "?"}
-
                     </Link>
                   </p>
                   <p className="mt-1 flex text-xs leading-5 text-gray-500">

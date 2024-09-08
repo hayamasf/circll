@@ -1,6 +1,6 @@
 import { industrialWasteLicenseTypeCodes } from "@/data/constants";
 
-export function getIndustrialLicenseTypeName(
+export default function getIndustrialLicenseTypeName(
   typeCode: number,
 ): string | undefined {
   const type = industrialWasteLicenseTypeCodes.find(

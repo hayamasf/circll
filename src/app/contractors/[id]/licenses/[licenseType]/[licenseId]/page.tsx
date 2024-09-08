@@ -11,12 +11,12 @@ export default async function Page({
   const licenseType = params.licenseType;
   const licenseId = Number(params.licenseId);
 
-
   return (
     <div className="mx-auto max-w-lg">
       {licenseType === "msw" && <MswLicenseDetail id={licenseId} />}
-      {licenseType === "industrial-waste" && <IndustrialWasteLicenseDetail id={licenseId} />}
-
+      {licenseType === "industrial-waste" && (
+        <IndustrialWasteLicenseDetail id={licenseId} />
+      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { authorities } from "@/data/constants";
 
-export function getIndustrialWasteLicenseIssuingAuthorityName(
+export default function getIndustrialWasteLicenseIssuingAuthorityName(
   issuingAuthorityCode: number,
 ) {
   const issuingAuthority = authorities.find(
