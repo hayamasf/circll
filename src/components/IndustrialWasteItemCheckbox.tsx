@@ -28,16 +28,8 @@ export default function IndustrialWasteItemCheckbox({
 
         <div className="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200">
           {items.map((item) => (
-            <div key={item.id} className="relative flex items-start py-4">
-              <div className="min-w-0 flex-1 text-sm leading-6">
-                <label
-                  htmlFor={String(item.id)}
-                  className="select-none font-medium text-gray-900"
-                >
-                  {item.name}
-                </label>
-              </div>
-              <div className="ml-3 flex h-6 items-center">
+            <div key={item.id} className="relative flex items-start py-4 gap-x-4">
+              <div className="flex h-6 items-center">
                 <input
                   id={String(item.id)}
                   type="checkbox"
@@ -47,9 +39,21 @@ export default function IndustrialWasteItemCheckbox({
                       "許可品目を選択してください.",
                   })}
                   value={item.id}
-                  className="h-4 w-4 rounded border-gray-300 text-gray-600 focus:ring-gray-600"
+                  className="h-4 w-4 rounded border-gray-300 focus:ring-0 checked:text-gray-800"
                 />
               </div>
+
+              {/* ---- */}
+              <div className="min-w-0 flex-1 text-sm leading-6">
+                <label
+                  htmlFor={String(item.id)}
+                  className="select-none font-medium text-gray-900"
+                >
+                  {item.name}
+                </label>
+              </div>
+              {/* ---- */}
+
             </div>
           ))}
         </div>

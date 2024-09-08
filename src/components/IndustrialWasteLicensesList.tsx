@@ -42,7 +42,7 @@ export default async function IndustrialWasteLicensesList({
           return (
             <li
               key={license.id}
-              className="relative flex justify-between gap-x-6 py-5"
+              className="relative flex justify-between gap-x-6 py-5 hover:bg-gray-50"
             >
               <div className="flex min-w-0 gap-x-4">
                 <div className="min-w-0 flex-auto">
