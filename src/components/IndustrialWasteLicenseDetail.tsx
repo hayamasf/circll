@@ -5,6 +5,7 @@ import getIndustrialLicenseTypeName from "@/utils/getIndustrialWasteLicenseTypeN
 import { formatDate } from "@/utils/dateUtils";
 import { PaperClipIcon } from "@heroicons/react/24/outline";
 import IndustrialWasteItemList from "./IndustrialWasteItemList";
+import EllipsisDropDownMenu from "./EllipsisDropDownMenu";
 
 export default async function IndustrialWasteLicenseDetail({
   id,
@@ -12,6 +13,8 @@ export default async function IndustrialWasteLicenseDetail({
   id: number;
 }) {
   const license = await getIndustrialWasteLicenseById(id);
+  const menuItems = [{ id: 1, text: "情報を更新", href: "./" + id + "/edit" }];
+
   if (license) {
     return (
       <div>
@@ -24,13 +27,16 @@ export default async function IndustrialWasteLicenseDetail({
             license.contractor.entityType}
         </h1>
         <div className="grid gap-y-3">
-          <h2 className="mt-1 font-semibold">
-            {getIndustrialWasteLicenseIssuingAuthorityName(
-              license.issuingAuthority,
-            )}
-            <span className="text-xs font-normal">の</span>
-            産業廃棄物 {getIndustrialLicenseTypeName(license.typeCode)}
-          </h2>
+          <div className="bg-red-300 flex items-center justify-between">
+            <h2 className="mt-1 font-semibold">
+              {getIndustrialWasteLicenseIssuingAuthorityName(
+                license.issuingAuthority,
+              )}
+              <span className="text-xs font-normal">の</span>
+              産業廃棄物 {getIndustrialLicenseTypeName(license.typeCode)}
+            </h2>
+            <EllipsisDropDownMenu menuItems={menuItems} />
+          </div>
           <p className="text-sm">
             許可番号 第{" "}
             <span className="text-lg font-semibold">

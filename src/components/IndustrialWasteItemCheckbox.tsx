@@ -28,7 +28,10 @@ export default function IndustrialWasteItemCheckbox({
 
         <div className="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200">
           {items.map((item) => (
-            <div key={item.id} className="relative flex items-start py-4 gap-x-4">
+            <div
+              key={item.id}
+              className="relative flex items-start py-4 gap-x-4"
+            >
               <div className="flex h-6 items-center">
                 <input
                   id={String(item.id)}
@@ -53,7 +56,6 @@ export default function IndustrialWasteItemCheckbox({
                 </label>
               </div>
               {/* ---- */}
-
             </div>
           ))}
         </div>
