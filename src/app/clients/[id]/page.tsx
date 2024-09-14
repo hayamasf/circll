@@ -22,7 +22,7 @@ export default async function Page({
   if (client) {
     return (
       <div className="mx-auto max-w-2xl">
-        <PageHeader title="排出事業者の詳細" />
+        <PageHeader title="排出事業者" />
         <LegalEntityProfile entity={client} />
         <div className="flex my-10 items-center justify-between">
           <SectionHeader title={"事業所一覧"} />
