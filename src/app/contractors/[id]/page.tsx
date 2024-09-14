@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <PageHeader title="業者の詳細" />
+      <PageHeader title="業者" />
       {contractor ? (
         <>
           <LegalEntityProfile entity={contractor} />
