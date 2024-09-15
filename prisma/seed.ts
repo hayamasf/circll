@@ -97,22 +97,6 @@ async function main() {
       });
     }),
   );
-
-  // for (const prefecture of prefectures) {
-  //   await prisma.prefecture.upsert({
-  //     where: { id: prefecture.id },
-  //     update: {},
-  //     create: prefecture,
-  //   });
-  // };
-
-  // for (const item of wasteItems) {
-  //   await prisma.wasteItem.upsert({
-  //     where: { id: item.id},
-  //     update: {},
-  //     create: item,
-  //   })
-  // }
 }
 
 main()
