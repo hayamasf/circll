@@ -1,20 +1,20 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { WasteItem } from "@/types/types";
+import { WasteItem } from "@prisma/client";
 
 export default function IndustrialWasteItemCheckbox({
-  items,
+  wasteItems,
 }: {
-  items: WasteItem[];
+  wasteItems: WasteItem[];
 }) {
   const {
     register,
     watch,
     formState: { errors },
   } = useFormContext();
-  const selectedItems = watch("wasteItems");
 
-  if (items) {
+  if (wasteItems) {
+
     return (
       <fieldset>
         <legend className="text-base font-semibold leading-6 text-gray-900">
@@ -27,21 +27,21 @@ export default function IndustrialWasteItemCheckbox({
         )}
 
         <div className="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200">
-          {items.map((item) => (
+          {wasteItems.map((wasteItem) => (
             <div
-              key={item.id}
+              key={wasteItem.id}
               className="relative flex items-start py-4 gap-x-4"
             >
               <div className="flex h-6 items-center">
                 <input
-                  id={String(item.id)}
+                  id={String(wasteItem.id)}
                   type="checkbox"
                   {...register("wasteItems", {
                     validate: (value) =>
                       (Array.isArray(value) && value.length > 0) ||
                       "許可品目を選択してください.",
                   })}
-                  value={item.id}
+                  value={wasteItem.id}
                   className="h-4 w-4 rounded border-gray-300 focus:ring-0 checked:text-gray-800"
                 />
               </div>
@@ -49,10 +49,10 @@ export default function IndustrialWasteItemCheckbox({
               {/* ---- */}
               <div className="min-w-0 flex-1 text-sm leading-6">
                 <label
-                  htmlFor={String(item.id)}
+                  htmlFor={String(wasteItem.id)}
                   className="select-none font-medium text-gray-900"
                 >
-                  {item.name}
+                  {wasteItem.name}
                 </label>
               </div>
               {/* ---- */}

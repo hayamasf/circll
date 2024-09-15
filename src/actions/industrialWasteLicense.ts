@@ -50,12 +50,7 @@ export async function createLicense(formData: IndustrialWasteLicense) {
 }
 
 export async function updateLicense(formData: any) {
-
   try {
-    console.log(formData)
-
-  } catch(error) {
-
-  }
-  
+    console.log(formData);
+  } catch (error) {}
 }

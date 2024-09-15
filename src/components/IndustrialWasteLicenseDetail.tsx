@@ -23,7 +23,10 @@ export default async function IndustrialWasteLicenseDetail({
       <>
         <PageHeader title="許可情報" />
         <Card>
-          <Link className="hover:underline" href={"/contractors/" + license.contractorId}>
+          <Link
+            className="hover:underline"
+            href={"/contractors/" + license.contractorId}
+          >
             <h2>
               {license.contractor.isPrefixEntityType &&
                 license.contractor.entityType}

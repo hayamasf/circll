@@ -14,10 +14,10 @@ import { WasteItem } from "@/types/types";
 
 export default function IndustrialWasteLicenseRegistrationForm({
   id,
-  items,
+  wasteItems,
 }: {
   id: number;
-  items: WasteItem[];
+  wasteItems: WasteItem[];
 }) {
   const methods = useForm({
     defaultValues: {
@@ -58,7 +58,7 @@ export default function IndustrialWasteLicenseRegistrationForm({
               placeholder="https://www.example.com/license/copy.pdf"
               required={true}
             />
-            <IndustrialWasteItemCheckbox items={items} />
+            <IndustrialWasteItemCheckbox wasteItems={wasteItems} />
           </div>
           <div className="mt-10 grid gap-y-5">
             <SubmitButton
