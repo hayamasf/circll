@@ -23,7 +23,6 @@ export async function createLicense(data: MswLicense) {
       data: {
         createdBy: userId,
         contractorId: Number(data.contractorId),
-        prefectureId: Number(data.prefectureId),
         municipalityId: Number(data.municipalityId),
         type: Number(data.type),
         expirationDate: new Date(data.expirationDate),

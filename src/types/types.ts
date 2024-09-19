@@ -89,7 +89,6 @@ export type MswLicense = {
   updatedAt: Date;
   updatedBy: string | null;
   contractorId: number;
-  prefectureId: number;
   municipalityId: number;
   type: number;
   expirationDate: Date;

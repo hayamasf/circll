@@ -64,18 +64,24 @@ export default async function IndustrialWasteLicensesList({
               <div className="flex shrink-0 items-center gap-x-4">
                 <div className="flex flex-col items-end">
                   <p className="text-sm leading-6 text-gray-900">
-                    {license.wasteItems.length}{" 品目"}
+                    {license.wasteItems.length}
+                    {" 品目"}
                   </p>
                   <p className="mt-1 text-xs leading-5 text-gray-500">
-                    {daysLeft < 0
-                      ? (<><XCircleIcon className="h-6 w-6 inline text-red-600" />{" "}期限切れ</>) :
-                      daysLeft <= 30 && daysLeft > 0 ? (<>
+                    {daysLeft < 0 ? (
+                      <>
+                        <XCircleIcon className="h-6 w-6 inline text-red-600" />{" "}
+                        期限切れ
+                      </>
+                    ) : daysLeft <= 30 && daysLeft > 0 ? (
+                      <>
                         <ExclamationTriangleIcon className="h-6 w-6 inline text-yellow-600" />{" "}
                         期限まで
                         {daysLeft}日
-
-                      </>)
-                        : formatDate(license.expirationDate) + "まで"}
+                      </>
+                    ) : (
+                      formatDate(license.expirationDate) + "まで"
+                    )}
                   </p>
                 </div>
                 <a

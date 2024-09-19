@@ -62,21 +62,25 @@ export async function createClient(data: LegalEntity) {
   }
 }
 
-export async function updateClient(data: Partial<LegalEntity>) {
+export async function updateClient(formData: Partial<LegalEntity>) {
   try {
-    const id = data.id;
+    const id = formData.id;
     const session = await getSession();
     const userId = session?.user.sub;
+
+    if (typeof formData.isPrefixEntityType === "string") {
+      formData.isPrefixEntityType = formData.isPrefixEntityType === "true";
+    }
 
     await prisma.client.update({
       where: { id: id },
       data: {
-        ...data,
+        ...formData,
         updatedBy: userId,
       },
     });
 
-    console.log(data);
+    console.log(formData);
     return { success: true, message: "更新が成功しました." };
   } catch (error) {
     console.error("データの更新に失敗しました.", error);

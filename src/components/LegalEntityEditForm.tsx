@@ -55,8 +55,8 @@ export default function LegalEntityEditForm({
   const onSubmit = async () => {
     try {
       const dirtyData = getDirtyFieldValues();
-      const data = { ...dirtyData, id: Number(entity.id) };
-      const result = await action(data);
+      const formData = { ...dirtyData, id: Number(entity.id) };
+      const result = await action(formData);
 
       if (result.success) {
         console.log(result.message);

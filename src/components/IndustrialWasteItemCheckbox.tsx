@@ -14,7 +14,6 @@ export default function IndustrialWasteItemCheckbox({
   } = useFormContext();
 
   if (wasteItems) {
-
     return (
       <fieldset>
         <legend className="text-base font-semibold leading-6 text-gray-900">

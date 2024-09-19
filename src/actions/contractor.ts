@@ -60,16 +60,20 @@ export async function createContractor(data: LegalEntity): Promise<void> {
   }
 }
 
-export async function updateContractor(data: Partial<LegalEntity>) {
+export async function updateContractor(formData: Partial<LegalEntity>) {
   try {
-    const id = data.id;
+    const id = formData.id;
     const session = await getSession();
     const userId = session?.user.sub;
+
+    if (typeof formData.isPrefixEntityType === "string") {
+      formData.isPrefixEntityType = formData.isPrefixEntityType === "true";
+    }
 
     await prisma.contractor.update({
       where: { id: id },
       data: {
-        ...data,
+        ...formData,
         updatedBy: userId,
       },
     });

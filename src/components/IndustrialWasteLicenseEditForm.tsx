@@ -91,7 +91,9 @@ export default function IndustrialWasteLicenseEditForm({
           <IndustrialWasteItemCheckbox wasteItems={wasteItems} />
           <SubmitButton
             label="登録"
-            disabled={methods.formState.isSubmitting || !methods.formState.isDirty}
+            disabled={
+              methods.formState.isSubmitting || !methods.formState.isDirty
+            }
           />
           <CancelButton label="キャンセル" onClick={() => methods.reset()} />
         </div>

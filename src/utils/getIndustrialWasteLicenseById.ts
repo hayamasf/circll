@@ -4,7 +4,7 @@ export default async function getIndustrialWasteLicenseById(id: number) {
   try {
     const license = await prisma.industrialWasteLicense.findUnique({
       where: { id },
-      include: { contractor: true, wasteItems: true },
+      include: { contractor: true },
     });
     return license;
   } catch (error) {
