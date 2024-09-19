@@ -1,102 +1,71 @@
-import { PrismaClient } from "@prisma/client";
-
 // npx ts-node prisma/seed.ts
+
+import { PrismaClient } from "@prisma/client";
+import fs from "fs";
+import path from "path";
 
 const prisma = new PrismaClient();
 
-const prefectures = [
-  { id: 1, name: "北海道" },
-  { id: 2, name: "青森県" },
-  { id: 3, name: "岩手県" },
-  { id: 4, name: "宮城県" },
-  { id: 5, name: "秋田県" },
-  { id: 6, name: "山形県" },
-  { id: 7, name: "福島県" },
-  { id: 8, name: "茨城県" },
-  { id: 9, name: "栃木県" },
-  { id: 10, name: "群馬県" },
-  { id: 11, name: "埼玉県" },
-  { id: 12, name: "千葉県" },
-  { id: 13, name: "東京都" },
-  { id: 14, name: "神奈川県" },
-  { id: 15, name: "新潟県" },
-  { id: 16, name: "富山県" },
-  { id: 17, name: "石川県" },
-  { id: 18, name: "福井県" },
-  { id: 19, name: "山梨県" },
-  { id: 20, name: "長野県" },
-  { id: 21, name: "岐阜県" },
-  { id: 22, name: "静岡県" },
-  { id: 23, name: "愛知県" },
-  { id: 24, name: "三重県" },
-  { id: 25, name: "滋賀県" },
-  { id: 26, name: "京都府" },
-  { id: 27, name: "大阪府" },
-  { id: 28, name: "兵庫県" },
-  { id: 29, name: "奈良県" },
-  { id: 30, name: "和歌山県" },
-  { id: 31, name: "鳥取県" },
-  { id: 32, name: "島根県" },
-  { id: 33, name: "岡山県" },
-  { id: 34, name: "広島県" },
-  { id: 35, name: "山口県" },
-  { id: 36, name: "徳島県" },
-  { id: 37, name: "香川県" },
-  { id: 38, name: "愛媛県" },
-  { id: 39, name: "高知県" },
-  { id: 40, name: "福岡県" },
-  { id: 41, name: "佐賀県" },
-  { id: 42, name: "長崎県" },
-  { id: 43, name: "熊本県" },
-  { id: 44, name: "大分県" },
-  { id: 45, name: "宮崎県" },
-  { id: 46, name: "鹿児島県" },
-  { id: 47, name: "沖縄県" },
-];
+type Prefecture = {
+  id: number;
+  name: string;
+};
 
-const wasteItems = [
-  { id: 1, name: "燃え殻" },
-  { id: 2, name: "汚泥" },
-  { id: 3, name: "廃油" },
-  { id: 4, name: "廃酸" },
-  { id: 5, name: "廃アルカリ" },
-  { id: 6, name: "廃プラスチック" },
-  { id: 7, name: "紙くず" },
-  { id: 8, name: "木くず" },
-  { id: 9, name: "繊維くず" },
-  { id: 10, name: "動・植物性残渣" },
-  { id: 11, name: "ゴムくず" },
-  { id: 12, name: "金属くず" },
-  { id: 13, name: "ガラスくず、コンクリートくず及び陶磁器くず" },
-  { id: 14, name: "鉱さい" },
-  { id: 15, name: "がれき類" },
-  { id: 16, name: "動物のふん尿" },
-  { id: 17, name: "動物の死体" },
-  { id: 18, name: "ばいじん" },
-  { id: 19, name: "処分するために処理したもの" },
-  { id: 40, name: "動物系固形不用物" },
-];
+type Municipality = {
+  id: number;
+  prefectureId: number;
+  name: string;
+};
+
+type IndustrialWasteCategories = {
+  id: number;
+  name: string;
+};
 
 async function main() {
-  await Promise.all(
-    prefectures.map(async (prefecture) => {
-      await prisma.prefecture.upsert({
-        where: { id: prefecture.id },
-        update: {},
-        create: prefecture,
-      });
-    }),
+  const prefectureData = fs.readFileSync(
+    path.join(__dirname, "prefectures.json"),
+    "utf-8",
+  );
+  const prefectures: Prefecture[] = JSON.parse(prefectureData);
+
+  const industrialWasteCategoriesData = fs.readFileSync(
+    path.join(__dirname, "industrialWasteCategories.json"),
+    "utf-8",
+  );
+  const industrialWasteCategories: IndustrialWasteCategories[] = JSON.parse(
+    industrialWasteCategoriesData,
   );
 
-  await Promise.all(
-    wasteItems.map(async (item) => {
-      await prisma.wasteItem.upsert({
-        where: { id: item.id },
-        update: {},
-        create: item,
-      });
-    }),
+  const municipalitiesData = fs.readFileSync(
+    path.join(__dirname, "municipalities20240101.json"),
+    "utf-8",
   );
+  const municipalities: Municipality[] = JSON.parse(municipalitiesData);
+
+  for (const prefecture of prefectures) {
+    await prisma.prefecture.upsert({
+      where: { id: prefecture.id },
+      update: {},
+      create: prefecture,
+    });
+  }
+
+  for (const category of industrialWasteCategories) {
+    await prisma.industrialWasteCategory.upsert({
+      where: { id: category.id },
+      update: {},
+      create: category,
+    });
+  }
+
+  for (const municipality of municipalities) {
+    await prisma.municipality.upsert({
+      where: { id: municipality.id },
+      update: {},
+      create: municipality,
+    });
+  }
 }
 
 main()
