@@ -16,6 +16,10 @@ export default async function ContractorsList({
   const totalContractors = await getTotalContractorsCount();
   const totalPages = Math.ceil(totalContractors / limit);
 
+  if (contractors.length === 0) {
+    return <div className="text-center">業者の登録がありません.</div>
+  }
+
   return (
     <>
       <ul role="list" className="divide-y divide-gray-100">

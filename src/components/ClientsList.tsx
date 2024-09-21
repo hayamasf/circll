@@ -16,6 +16,10 @@ export default async function ClientsList({
   const totalClients = await getTotalClientsCount();
   const totalPages = Math.ceil(totalClients / limit);
 
+  if (clients.length === 0) {
+    return <div className="text-center">排出事業者の登録がありません.</div>
+  }
+
   return (
     <>
       <ul role="list" className="divide-y divide-gray-100">

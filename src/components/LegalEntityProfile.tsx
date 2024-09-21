@@ -24,7 +24,7 @@ export default function LegalEntityProfile({
         <EllipsisDropDownMenu menuItems={menuItems} />
       </div>
       <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-        {entity.entityType && entity.title + " " + entity.representative}
+        {entity.entityType && entity.representativeTitle + " " + entity.representativeName}
         {entity.tradeName && entity.tradeName}
       </p>
       <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
