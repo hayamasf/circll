@@ -4,7 +4,7 @@ import MswLicenseEditForm from "@/components/MswLicenseEditForm";
 import getMswLicenseById from "@/utils/getMswLicenseById";
 import IndustrialWasteLicenseEditForm from "@/components/IndustrialWasteLicenseEditForm";
 import getIndustrialWasteLicenseById from "@/utils/getIndustrialWasteLicenseById";
-import getIndustrialWasteItems from "@/utils/getIndustrialWasteItems";
+import getIndustrialWasteCategories from "@/utils/getIndustrialWasteCategories";
 
 export default async function Page({
   params,
@@ -26,11 +26,11 @@ export default async function Page({
       break;
     case "industrial-waste":
       license = await getIndustrialWasteLicenseById(Number(licenseId));
-      const wasteItems = await getIndustrialWasteItems();
+      const industrialWasteCategories = await getIndustrialWasteCategories();
       formComponent = (
         <IndustrialWasteLicenseEditForm
           license={license}
-          wasteItems={wasteItems}
+          industrialWasteCategories={industrialWasteCategories}
         />
       );
       break;

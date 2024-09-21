@@ -18,7 +18,6 @@ import CancelButton from "./CancelButton";
 
 type IndustrialWasteLicenseWithRelations = IndustrialWasteLicense & {
   contractor: Contractor;
-  IndustrialWasteCategories: IndustrialWasteCategory[];
 };
 
 export default function IndustrialWasteLicenseEditForm({
@@ -39,7 +38,7 @@ export default function IndustrialWasteLicenseEditForm({
         ? formatDate(license?.expirationDate)
         : "",
       licenseUrl: license?.licenseUrl,
-      // licensedCatrgories: license?.licensedCategories.map((category) => category.id) || [],
+      // licensedCategories: license?.licensedCategories.map((category) => category.id) || [],
     },
   });
 
