@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
-import { LegalEntity } from "@/types/types";
+import { LegalEntityFormData } from "@/types/types";
 import { updateContractor } from "@/actions/contractor";
 import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
 import { useParams } from "next/navigation";
@@ -15,7 +15,7 @@ import { useParams } from "next/navigation";
 export default function ContractorEditForm({
   contractor,
 }: {
-  contractor: LegalEntity;
+  contractor: LegalEntityFormData;
 }) {
   const router = useRouter();
 
@@ -29,7 +29,7 @@ export default function ContractorEditForm({
     reset,
     formState: { errors, dirtyFields, isDirty },
     setValue,
-  } = useForm<LegalEntity>({
+  } = useForm<LegalEntityFormData>({
     defaultValues: {
       name: contractor.name,
       title: contractor.title,
@@ -127,34 +127,36 @@ export default function ContractorEditForm({
             <input
               type="text"
               id="title"
-              {...register("title", { required: "代表者役職名は必須です" })}
+              {...register("representativeTitle", {
+                required: "代表者役職名は必須です",
+              })}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             />
             {errors.title?.message && (
               <p className="text-xs text-red-500 p-1">
-                {errors.title?.message}
+                {errors.representativeTitle?.message}
               </p>
             )}
           </div>
 
           <div className="relative">
             <label
-              htmlFor="representative"
+              htmlFor="representativeName"
               className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
             >
               代表者氏名
             </label>
             <input
               type="text"
-              id="representative"
-              {...register("representative", {
+              id="representativeName"
+              {...register("representativeName", {
                 required: "代表者氏名は必須です",
               })}
               className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
             />
-            {errors.representative?.message && (
+            {errors.representativeName?.message && (
               <p className="text-xs text-red-500 p-1">
-                {errors.representative?.message}
+                {errors.representativeName?.message}
               </p>
             )}
           </div>

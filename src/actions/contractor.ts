@@ -8,7 +8,9 @@ import { getSession } from "@auth0/nextjs-auth0";
 import { LegalEntityFormData } from "@/types/types";
 import convertToBoolean from "@/utils/convertToBoolean";
 
-export async function createContractor(formData: LegalEntityFormData): Promise<void> {
+export async function createContractor(
+  formData: LegalEntityFormData,
+): Promise<void> {
   let isPrefixEntityType;
 
   if (

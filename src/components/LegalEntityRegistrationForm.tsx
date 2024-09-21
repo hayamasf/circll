@@ -36,17 +36,16 @@ export default function LegalEntityRegistrationForm({
   });
 
   const onSubmit = async (formData: LegalEntityFormData) => {
-
     try {
       if (entity === "client") {
         const result = await createClient(formData);
       } else if (entity === "contractor") {
-        const result = await createContractor(formData)
+        const result = await createContractor(formData);
       }
     } catch (error) {
-      console.error("エラーです:", error)
+      console.error("エラーです:", error);
     }
-  }
+  };
 
   const searchParams = useSearchParams();
   const type = searchParams.get("type") as "corporate" | "sole-proprietor";
