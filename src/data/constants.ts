@@ -143,26 +143,3 @@ export const industrialWasteLicenseTypeCodes = [
   { id: 3, name: "最終処分" },
   { id: 4, name: "中間、最終処分" },
 ];
-
-export const wasteItems = [
-  { id: 1, name: "燃え殻" },
-  { id: 2, name: "汚泥" },
-  { id: 3, name: "廃油" },
-  { id: 4, name: "廃酸" },
-  { id: 5, name: "廃アルカリ" },
-  { id: 6, name: "廃プラスチック" },
-  { id: 7, name: "紙くず" },
-  { id: 8, name: "木くず" },
-  { id: 9, name: "繊維くず" },
-  { id: 10, name: "動・植物性残渣" },
-  { id: 11, name: "ゴムくず" },
-  { id: 12, name: "金属くず" },
-  { id: 13, name: "ガラスくず、コンクリートくず及び陶磁器くず" },
-  { id: 14, name: "鉱さい" },
-  { id: 15, name: "がれき類" },
-  { id: 16, name: "動物のふん尿" },
-  { id: 17, name: "動物の死体" },
-  { id: 18, name: "ばいじん" },
-  { id: 19, name: "処分するために処理したもの" },
-  { id: 40, name: "動物系固形不用物" },
-];

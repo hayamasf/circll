@@ -4,7 +4,7 @@ import getIndustrialWasteLicenseIssuingAuthorityName from "@/utils/getIndustrial
 import getIndustrialLicenseTypeName from "@/utils/getIndustrialWasteLicenseTypeName";
 import { formatDate } from "@/utils/dateUtils";
 import { PaperClipIcon } from "@heroicons/react/24/outline";
-import IndustrialWasteItemList from "./IndustrialWasteItemList";
+import IndustrialWasteCategoryList from "./IndustrialWasteCategoryList";
 import EllipsisDropDownMenu from "./EllipsisDropDownMenu";
 import PageHeader from "./PageHeader";
 import Card from "./Card";
@@ -72,7 +72,7 @@ export default async function IndustrialWasteLicenseDetail({
             </a>
           </div>
           <div className="my-5">
-            <IndustrialWasteItemList licensedItems={license.wasteItems} />
+            <IndustrialWasteCategoryList licensedCategories={license.licensedCategories} />
           </div>
         </Card>
       </>
