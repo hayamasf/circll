@@ -6,7 +6,7 @@ import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 import { useRouter } from "next/navigation";
 
-import { LegalEntity } from "@/types/types";
+import { LegalEntityFormData } from "@/types/types";
 import CorporateEntityInputs from "./CorporateEntityInputs";
 import SoleProprietorInputs from "./SoleProprietorInputs";
 import AddressInputs from "./AddressInputs";
@@ -15,15 +15,15 @@ export default function LegalEntityEditForm({
   entity,
   action,
 }: {
-  entity: LegalEntity;
+  entity: LegalEntityFormData;
   action: (
-    data: Partial<LegalEntity>,
+    data: Partial<LegalEntityFormData>,
   ) => Promise<{ success: boolean; message: string }>;
   // action: (formData: LegalEntity) => Promise<void>;
 }) {
   const router = useRouter();
 
-  const methods = useForm<LegalEntity>({
+  const methods = useForm<LegalEntityFormData>({
     defaultValues: {
       id: entity.id,
       entityType: entity.entityType,
