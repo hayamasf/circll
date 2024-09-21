@@ -4,6 +4,7 @@ import getClientById from "@/utils/getClientById";
 import getSiteById from "@/utils/getSiteById";
 import PageHeader from "@/components/PageHeader";
 import SiteDetail from "@/components/SiteDetail";
+import CardWithHeader from "@/components/CardWithHeader";
 
 export default async function Page({
   params,
@@ -12,35 +13,40 @@ export default async function Page({
 }) {
   const clientId = Number(params.id);
   const siteId = Number(params.siteId);
-  const client = await getClientById(clientId);
 
-  const site = await getSiteById(siteId);
+  let client, site;
+
+  try {
+    client = await getClientById(clientId);
+    site = await getSiteById(siteId);
+  } catch (error) {
+    console.error("データ取得中にエラー: ", error);
+    return <div>データの取得中にエラーが発生しました.</div>;
+  }
 
   if (!client) {
     return <div>排出事業者が登録されていません.</div>;
-  } else if (!site) {
+  }
+  if (!site) {
     return <div>事業所の登録がありません.</div>;
-  } else {
-    return (
-      <div className="mx-auto max-w-lg">
-        <PageHeader title={"事業所情報"} />
-        <div className="my-3 bg-gray-50 rounded-md px-4 py-5 sm:px-6 text-xs text-gray-800">
+  }
+  return (
+    <div className="mx-auto max-w-lg">
+      <PageHeader title={"事業所"} />
+      <CardWithHeader
+        header={
           <Link
             href={"/clients/" + client.id}
             className="font-bold text-base hover:underline"
           >
-            {client.isPrefixEntityType && client.entityType}
+            {client.isPrefixEntityType ? client.entityType : ""}
             {client.name}
-            {client.entityType &&
-              !client.isPrefixEntityType &&
-              client.entityType}
+            {!client.isPrefixEntityType ? client.entityType : ""}
           </Link>
-          の事業所
-        </div>
-        <div className="my-3">
-          <SiteDetail site={site} />
-        </div>
-      </div>
-    );
-  }
+        }
+      >
+        <SiteDetail site={site} />
+      </CardWithHeader>
+    </div>
+  );
 }

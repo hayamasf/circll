@@ -21,16 +21,14 @@ export default async function Page({
     <div className="mx-auto max-w-lg">
       <PageHeader title="事業所情報の編集" />
       {client && (
-        <div className="my-3 bg-gray-50 rounded-md px-4 py-5 sm:px-6 text-xs text-gray-800">
+        <div className="py-5 text-xs text-gray-800">
           <Link
             href={"/clients/" + client.id}
             className="font-bold text-base hover:underline"
           >
-            {client.isPrefixEntityType && client.entityType}
+            {client.isPrefixEntityType ? client.entityType : ""}
             {client.name}
-            {client.entityType &&
-              !client.isPrefixEntityType &&
-              client.entityType}
+            {!client.isPrefixEntityType ? client.entityType : ""}
           </Link>
           の事業所
         </div>
