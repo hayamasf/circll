@@ -37,7 +37,7 @@ export default async function ContractorsList({
                     </p>
                     <p className="mt-1 flex text-xs leading-5 text-gray-500">
                       {contractor.entityType &&
-                        contractor.title + " " + contractor.representative}
+                        contractor.representativeTitle + " " + contractor.representativeName}
                       {contractor.tradeName && contractor.tradeName}
                     </p>
                   </div>
