@@ -1,13 +1,13 @@
 import React from "react";
 import { formatPostalCode } from "@/utils/formatPostalCode";
-import { LegalEntity } from "@/types/types";
+import { Client, Contractor } from "@prisma/client";
 import Card from "./Card";
 import EllipsisDropDownMenu from "./EllipsisDropDownMenu";
 
 export default function LegalEntityProfile({
   entity,
 }: {
-  entity: LegalEntity;
+  entity: Client | Contractor;
 }) {
   const menuItems = [
     { id: 1, text: "情報を更新する", href: "./" + entity.id + "/edit" },
