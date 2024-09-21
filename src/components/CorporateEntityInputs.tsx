@@ -2,14 +2,14 @@
 
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { LegalEntity } from "@/types/types";
+import { LegalEntityFormData } from "@/types/types";
 
 export default function CorporateEntityInputs() {
   const {
     register,
     unregister,
     formState: { errors },
-  } = useFormContext<LegalEntity>();
+  } = useFormContext<LegalEntityFormData>();
 
   useEffect(() => {
     unregister("tradeName");
@@ -90,7 +90,7 @@ export default function CorporateEntityInputs() {
             placeholder="代表取締役"
           />
           {errors.representativeTitle?.message && (
-            <p className="text-xs text-red-500 p-1">{errors.title?.message}</p>
+            <p className="text-xs text-red-500 p-1">{errors.representativeTitle?.message}</p>
           )}
         </div>
 
