@@ -30,9 +30,15 @@ export default function SoleProprietorInputs() {
         <input
           type="text"
           id="name"
-          {...register("name", { required: "氏名は必須です" })}
+          {...register("name", {
+            required: "氏名は必須です",
+            pattern: {
+              value: /^[^\s　]+[ 　]+[^\s　]+$/,
+              message: "苗字と名前の間にスペースを入れてください.",
+            },
+          })}
           className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-          placeholder="与島大五郎"
+          placeholder="与島 大五郎"
         />
         {errors.name?.message && (
           <p className="text-xs text-red-500 p-1">{errors.name?.message}</p>
