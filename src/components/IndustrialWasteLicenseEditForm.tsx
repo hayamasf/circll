@@ -1,7 +1,11 @@
 "use client";
 
 import React from "react";
-import { IndustrialWasteLicense, Contractor, WasteItem } from "@prisma/client";
+import {
+  IndustrialWasteLicense,
+  Contractor,
+  IndustrialWasteCategory,
+} from "@prisma/client";
 import { useForm, FormProvider } from "react-hook-form";
 import getTodayDate from "@/utils/getTodayDate";
 import { updateLicense } from "@/actions/industrialWasteLicense";
@@ -14,15 +18,15 @@ import CancelButton from "./CancelButton";
 
 type IndustrialWasteLicenseWithRelations = IndustrialWasteLicense & {
   contractor: Contractor;
-  wasteItems: WasteItem[];
+  IndustrialWasteCategories: IndustrialWasteCategory[];
 };
 
 export default function IndustrialWasteLicenseEditForm({
   license,
-  wasteItems,
+  industrialWasteCategories,
 }: {
   license: IndustrialWasteLicenseWithRelations | null;
-  wasteItems: WasteItem[];
+  industrialWasteCategories: IndustrialWasteCategory[];
 }) {
   const methods = useForm({
     defaultValues: {
@@ -35,7 +39,7 @@ export default function IndustrialWasteLicenseEditForm({
         ? formatDate(license?.expirationDate)
         : "",
       licenseUrl: license?.licenseUrl,
-      wasteItems: license?.wasteItems.map((wasteItem) => wasteItem.id) || [],
+      // licensedCatrgories: license?.licensedCategories.map((category) => category.id) || [],
     },
   });
 
@@ -88,7 +92,9 @@ export default function IndustrialWasteLicenseEditForm({
             placeholder="https://www.example.com/license/copy.pdf"
             required={true}
           />
-          <IndustrialWasteItemCheckbox wasteItems={wasteItems} />
+          <IndustrialWasteItemCheckbox
+            industrialWasteCategories={industrialWasteCategories}
+          />
           <SubmitButton
             label="登録"
             disabled={

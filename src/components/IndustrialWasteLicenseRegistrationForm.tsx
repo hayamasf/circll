@@ -11,13 +11,14 @@ import Input from "./Input";
 import IndustrialWasteItemCheckbox from "./IndustrialWasteItemCheckbox";
 import { createLicense } from "@/actions/industrialWasteLicense";
 import { WasteItem } from "@/types/types";
+import { IndustrialWasteCategory } from "@prisma/client";
 
 export default function IndustrialWasteLicenseRegistrationForm({
   id,
-  wasteItems,
+  industrialWasteCategories,
 }: {
   id: number;
-  wasteItems: WasteItem[];
+  industrialWasteCategories: IndustrialWasteCategory[];
 }) {
   const methods = useForm({
     defaultValues: {
@@ -28,6 +29,7 @@ export default function IndustrialWasteLicenseRegistrationForm({
       contractorCode: "",
       expirationDate: "",
       licenseUrl: "",
+      licensedCategoris: [],
     },
   });
   const minDate = getTodayDate();
@@ -58,7 +60,9 @@ export default function IndustrialWasteLicenseRegistrationForm({
               placeholder="https://www.example.com/license/copy.pdf"
               required={true}
             />
-            <IndustrialWasteItemCheckbox wasteItems={wasteItems} />
+            <IndustrialWasteItemCheckbox
+              industrialWasteCategories={industrialWasteCategories}
+            />
           </div>
           <div className="mt-10 grid gap-y-5">
             <SubmitButton

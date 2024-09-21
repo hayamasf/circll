@@ -4,9 +4,18 @@ import { getSession } from "@auth0/nextjs-auth0";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { IndustrialWasteLicense } from "@/types/types";
+import {
+  IndustrialWasteLicense,
+  IndustrialWasteCategory,
+} from "@prisma/client";
 
-export async function createLicense(formData: IndustrialWasteLicense) {
+type IndustrialWasteLicenseWithRelations = IndustrialWasteLicense & {
+  licensedCategories: IndustrialWasteCategory[];
+};
+
+export async function createLicense(
+  formData: IndustrialWasteLicenseWithRelations,
+) {
   let newLicenseId: number | undefined;
 
   try {
@@ -31,8 +40,10 @@ export async function createLicense(formData: IndustrialWasteLicense) {
         contractorCode: Number(formData.contractorCode),
         expirationDate: new Date(formData.expirationDate),
         licenseUrl: formData.licenseUrl,
-        wasteItems: {
-          connect: formData.wasteItems.map((id) => ({ id: Number(id) })),
+        licensedCategories: {
+          connect: formData.licensedCategories.map((id) => ({
+            id: Number(id),
+          })),
         },
       },
     });

@@ -2,7 +2,7 @@ import React from "react";
 import PageHeader from "@/components/PageHeader";
 import MswLicenseRegistrationForm from "@/components/MswLicenseRegistrationForm";
 import IndustrialWasteLicenseRegistrationForm from "@/components/IndustrialWasteLicenseRegistrationForm";
-import getIndustrialWasteItems from "@/utils/getIndustrialWasteItems";
+import getIndustrialWasteCategories from "@/utils/getIndustrialWasteCategories";
 
 export default async function Page({
   params,
@@ -13,12 +13,15 @@ export default async function Page({
   const licenseType = params.licenseType;
 
   if (licenseType === "industrial-waste") {
-    const items = await getIndustrialWasteItems();
+    const industrialWasteCategories = await getIndustrialWasteCategories();
 
     return (
       <div className="mx-auto max-w-md">
         <PageHeader title="許可情報の登録" />
-        <IndustrialWasteLicenseRegistrationForm id={id} items={items} />
+        <IndustrialWasteLicenseRegistrationForm
+          id={id}
+          industrialWasteCategories={industrialWasteCategories}
+        />
       </div>
     );
   } else if (licenseType === "msw") {
