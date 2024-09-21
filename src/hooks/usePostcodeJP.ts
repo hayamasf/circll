@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, } from "react";
 
 const usePostcodeJP = () => {
   const [postalCode, setPostalCode] = useState("");
@@ -37,17 +37,13 @@ const usePostcodeJP = () => {
       }
     };
     getPrefCityTown();
-  }, [postalCode]);
+  }, []);
 
-  const handleZipCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPostalCode(event.target.value);
-  };
   return {
     postalCode,
     prefecture,
     city,
     town,
-    handleZipCodeChange,
   };
 };
 

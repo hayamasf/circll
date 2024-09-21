@@ -3,27 +3,28 @@
 import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
-
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
-import { LegalEntity } from "@/types/types";
 import LegalEntityTypeSelector from "./LegalEntityTypeSelector";
 import CorporateEntityInputs from "./CorporateEntityInputs";
 import SoleProprietorInputs from "./SoleProprietorInputs";
 import AddressInputs from "./AddressInputs";
+import { createClient } from "@/actions/client";
+import { createContractor } from "@/actions/contractor";
+import { LegalEntityFormData } from "@/types/types";
 
 export default function LegalEntityRegistrationForm({
-  action,
+  entity,
 }: {
-  action: (formData: LegalEntity) => Promise<void>;
+  entity: string;
 }) {
-  const methods = useForm<LegalEntity>({
+  const methods = useForm<LegalEntityFormData>({
     defaultValues: {
       entityType: "株式会社",
       isPrefixEntityType: true,
       name: "",
-      title: "",
-      representative: "",
+      representativeTitle: "",
+      representativeName: "",
       tradeName: "",
       postalCode: "",
       prefecture: "",
@@ -34,16 +35,18 @@ export default function LegalEntityRegistrationForm({
     },
   });
 
-  const onSubmit = async (formData: LegalEntity) => {
-    const { address2, tradeName, ...rest } = formData;
+  const onSubmit = async (formData: LegalEntityFormData) => {
 
-    const data = {
-      ...rest,
-      ...(address2 ? { address2 } : {}),
-      ...(tradeName ? { tradeName } : {}),
-    };
-    const result = await action(data);
-  };
+    try {
+      if (entity === "client") {
+        const result = await createClient(formData);
+      } else if (entity === "contractor") {
+        const result = await createContractor(formData)
+      }
+    } catch (error) {
+      console.error("エラーです:", error)
+    }
+  }
 
   const searchParams = useSearchParams();
   const type = searchParams.get("type") as "corporate" | "sole-proprietor";
@@ -62,7 +65,7 @@ export default function LegalEntityRegistrationForm({
             </div>
             <div className="mt-10 grid gap-y-5">
               <SubmitButton
-                label="登録"
+                label={methods.formState.isSubmitting ? "送信中..." : "登録"}
                 disabled={methods.formState.isSubmitting}
               />
               <CancelButton

@@ -7,8 +7,9 @@ import { prisma } from "@/lib/prisma";
 import { getSession } from "@auth0/nextjs-auth0";
 import convertToBoolean from "@/utils/convertToBoolean";
 import { Client } from "@prisma/client";
+import { LegalEntityFormData } from "@/types/types";
 
-export async function createClient(formData: Client) {
+export async function createClient(formData: LegalEntityFormData) {
   let isPrefixEntityType;
 
   if (

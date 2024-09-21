@@ -28,18 +28,13 @@ export type Address = {
   address2?: string | null;
 };
 
-export type LegalEntity = {
-  id: number;
-  createdAt: Date;
-  createdBy: string;
-  updatedAt: Date;
-  updatedBy?: string | null;
+export type LegalEntityFormData = {
   entityType?: string | null;
   isPrefixEntityType?: boolean | null;
   name: string;
   tradeName?: string | null;
-  title?: string | null;
-  representative?: string | null;
+  representativeTitle?: string | null;
+  representativeName?: string | null;
   postalCode: string;
   prefecture: string;
   city: string;

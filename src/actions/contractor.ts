@@ -5,11 +5,10 @@ import { redirect } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@auth0/nextjs-auth0";
-import { LegalEntity } from "@/types/types";
-import { Contractor } from "@prisma/client";
+import { LegalEntityFormData } from "@/types/types";
 import convertToBoolean from "@/utils/convertToBoolean";
 
-export async function createContractor(formData: Contractor): Promise<void> {
+export async function createContractor(formData: LegalEntityFormData): Promise<void> {
   let isPrefixEntityType;
 
   if (
@@ -69,7 +68,7 @@ export async function createContractor(formData: Contractor): Promise<void> {
   }
 }
 
-export async function updateContractor(formData: Partial<LegalEntity>) {
+export async function updateContractor(formData: Partial<LegalEntityFormData>) {
   try {
     const id = formData.id;
     const session = await getSession();
