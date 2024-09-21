@@ -75,42 +75,42 @@ export default function CorporateEntityInputs() {
       <div className="grid grid-cols-2 gap-x-1">
         <div className="relative">
           <label
-            htmlFor="title"
+            htmlFor="representativeTitle"
             className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
           >
             代表者役職名
           </label>
           <input
             type="text"
-            id="title"
-            {...register("title", {
+            id="representativeTitle"
+            {...register("representativeTitle", {
               required: "代表者役職名は必須です",
             })}
             className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
             placeholder="代表取締役"
           />
-          {errors.title?.message && (
+          {errors.representativeTitle?.message && (
             <p className="text-xs text-red-500 p-1">{errors.title?.message}</p>
           )}
         </div>
 
         <div className="relative">
           <label
-            htmlFor="representative"
+            htmlFor="representativeName"
             className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
           >
             代表者氏名
           </label>
           <input
             type="text"
-            id="representative"
-            {...register("representative", {
+            id="representativeName"
+            {...register("representativeName", {
               required: "代表者氏名は必須です",
             })}
             className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
             placeholder="小松 武司"
           />
-          {errors.representative?.message && (
+          {errors.representativeName?.message && (
             <p className="text-xs text-red-500 p-1">
               {errors.representative?.message}
             </p>
