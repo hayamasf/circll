@@ -12,46 +12,46 @@ datasource db {
 }
 
 model Contractor {
-  id                Int  @id @default(autoincrement())
-  createdAt         DateTime @default(now())
-  createdBy         String
-  updatedAt         DateTime @updatedAt
-  updatedBy         String?
-  entityType        String?
+  id                  Int  @id @default(autoincrement())
+  createdAt           DateTime @default(now())
+  createdBy           String
+  updatedAt           DateTime @updatedAt
+  updatedBy           String?
+  entityType          String?
   isPrefixEntityType  Boolean?
-  name              String
-  title             String?
-  representative    String?
-  tradeName         String?
-  postalCode        String
-  prefecture        String
-  city              String
-  town              String
-  address           String
-  address2          String?
-  mswLicenses       MswLicense[]
+  name                String
+  representativeTitle String?
+  representativeName  String?
+  tradeName           String?
+  postalCode          String
+  prefecture          String
+  city                String
+  town                String
+  address             String
+  address2            String?
+  mswLicenses         MswLicense[]
   industrialWasteLicenses IndustrialWasteLicense[]
 }
 
 model Client {
-  id                Int  @id @default(autoincrement())
-  createdAt         DateTime @default(now())
-  createdBy         String
-  updatedAt         DateTime @updatedAt
-  updatedBy         String?
-  entityType        String?
+  id                  Int  @id @default(autoincrement())
+  createdAt           DateTime @default(now())
+  createdBy           String
+  updatedAt           DateTime @updatedAt
+  updatedBy           String?
+  entityType          String?
   isPrefixEntityType  Boolean?
-  name              String
-  title             String?
-  representative    String?
-  tradeName         String?
-  postalCode        String
-  prefecture        String
-  city              String
-  town              String
-  address           String
-  address2          String?
-  sites             Site[]
+  name                String
+  representativeTitle String?
+  representativeName  String?
+  tradeName           String?
+  postalCode          String
+  prefecture          String
+  city                String
+  town                String
+  address             String
+  address2            String?
+  sites               Site[]
 }
 
 model Site {
