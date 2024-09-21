@@ -17,7 +17,7 @@ export default async function ClientsList({
   const totalPages = Math.ceil(totalClients / limit);
 
   if (clients.length === 0) {
-    return <div className="text-center">排出事業者の登録がありません.</div>
+    return <div className="text-center">排出事業者の登録がありません.</div>;
   }
 
   return (
@@ -41,7 +41,9 @@ export default async function ClientsList({
                     </p>
                     <p className="mt-1 flex text-xs leading-5 text-gray-500">
                       {client.entityType &&
-                        client.representativeTitle + " " + client.representativeName}
+                        client.representativeTitle +
+                          " " +
+                          client.representativeName}
                       {client.tradeName && client.tradeName}
                     </p>
                   </div>

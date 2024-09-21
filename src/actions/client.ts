@@ -6,17 +6,21 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@auth0/nextjs-auth0";
 import convertToBoolean from "@/utils/convertToBoolean";
-import { LegalEntity } from "@/types/types";
+import { Client } from "@prisma/client";
 
-export async function createClient(data: LegalEntity) {
+export async function createClient(formData: Client) {
   let isPrefixEntityType;
 
   if (
-    data.isPrefixEntityType !== undefined &&
-    data.isPrefixEntityType !== null
+    formData.isPrefixEntityType !== undefined &&
+    formData.isPrefixEntityType !== null
   ) {
-    isPrefixEntityType = convertToBoolean(data.isPrefixEntityType);
+    isPrefixEntityType = convertToBoolean(formData.isPrefixEntityType);
   }
+
+  const normalisedRepresentativename = formData.representativeName
+    ? formData.representativeName.replace(/　/g, " ")
+    : formData.representativeName;
 
   let newClientId: number | undefined;
 
@@ -31,26 +35,30 @@ export async function createClient(data: LegalEntity) {
     const newClient = await prisma.client.create({
       data: {
         createdBy: userId,
-        ...(data.entityType && { entityType: data.entityType }),
-        ...(data.isPrefixEntityType && {
+        ...(formData.entityType && { entityType: formData.entityType }),
+        ...(formData.isPrefixEntityType && {
           isPrefixEntityType: isPrefixEntityType,
         }),
-        name: data.name,
-        ...(data.representativeTitle && { representativeTitle: data.representativeTitle }),
-        ...(data.representativeName && { representativeName: data.representativeName }),
-        ...(data.tradeName && { tradeName: data.tradeName }),
-        postalCode: data.postalCode,
-        prefecture: data.prefecture,
-        city: data.city,
-        town: data.town,
-        address: data.address,
-        ...(data.address2 && { address2: data.address2 }),
+        name: formData.name,
+        ...(formData.representativeTitle && {
+          representativeTitle: formData.representativeTitle,
+        }),
+        ...(normalisedRepresentativename && {
+          representativeName: normalisedRepresentativename,
+        }),
+        ...(formData.tradeName && { tradeName: formData.tradeName }),
+        postalCode: formData.postalCode,
+        prefecture: formData.prefecture,
+        city: formData.city,
+        town: formData.town,
+        address: formData.address,
+        ...(formData.address2 && { address2: formData.address2 }),
       },
     });
 
     newClientId = newClient.id;
 
-    console.log(data);
+    console.log(formData);
     revalidatePath(`/clients/${newClientId}`);
   } catch (error) {
     console.error("データの更新に失敗しました.", error);
@@ -62,7 +70,7 @@ export async function createClient(data: LegalEntity) {
   }
 }
 
-export async function updateClient(formData: Partial<LegalEntity>) {
+export async function updateClient(formData: Partial<Client>) {
   try {
     const id = formData.id;
     const session = await getSession();

@@ -72,7 +72,9 @@ export default async function IndustrialWasteLicenseDetail({
             </a>
           </div>
           <div className="my-5">
-            <IndustrialWasteCategoryList licensedCategories={license.licensedCategories} />
+            <IndustrialWasteCategoryList
+              licensedCategories={license.licensedCategories}
+            />
           </div>
         </Card>
       </>

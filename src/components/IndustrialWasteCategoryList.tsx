@@ -10,13 +10,11 @@ export default async function IndustrialWasteCategoryList({
   const industrialWasteCategories = await getIndustrialWasteCategories();
 
   if (!industrialWasteCategories) {
-    return <div>産業廃棄物の種類一覧を取得できませんでした.</div>
-
+    return <div>産業廃棄物の種類一覧を取得できませんでした.</div>;
   }
 
   return (
     <ul role="list" className="divide-y divide-gray-100">
-
       {industrialWasteCategories.map((category) => {
         const isIncluded = licensedCategories.some(
           (wasteItems) => wasteItems.id === category.id,

@@ -17,7 +17,7 @@ export default async function ContractorsList({
   const totalPages = Math.ceil(totalContractors / limit);
 
   if (contractors.length === 0) {
-    return <div className="text-center">業者の登録がありません.</div>
+    return <div className="text-center">業者の登録がありません.</div>;
   }
 
   return (
@@ -41,7 +41,9 @@ export default async function ContractorsList({
                     </p>
                     <p className="mt-1 flex text-xs leading-5 text-gray-500">
                       {contractor.entityType &&
-                        contractor.representativeTitle + " " + contractor.representativeName}
+                        contractor.representativeTitle +
+                          " " +
+                          contractor.representativeName}
                       {contractor.tradeName && contractor.tradeName}
                     </p>
                   </div>

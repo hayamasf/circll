@@ -6,17 +6,22 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@auth0/nextjs-auth0";
 import { LegalEntity } from "@/types/types";
+import { Contractor } from "@prisma/client";
 import convertToBoolean from "@/utils/convertToBoolean";
 
-export async function createContractor(data: LegalEntity): Promise<void> {
+export async function createContractor(formData: Contractor): Promise<void> {
   let isPrefixEntityType;
 
   if (
-    data.isPrefixEntityType !== undefined &&
-    data.isPrefixEntityType !== null
+    formData.isPrefixEntityType !== undefined &&
+    formData.isPrefixEntityType !== null
   ) {
-    isPrefixEntityType = convertToBoolean(data.isPrefixEntityType);
+    isPrefixEntityType = convertToBoolean(formData.isPrefixEntityType);
   }
+
+  const normalisedRepresentativename = formData.representativeName
+    ? formData.representativeName.replace(/　/g, " ")
+    : formData.representativeName;
 
   let newContractorId: number | undefined;
 
@@ -31,20 +36,24 @@ export async function createContractor(data: LegalEntity): Promise<void> {
     const newContractor = await prisma.contractor.create({
       data: {
         createdBy: userId,
-        ...(data.entityType && { entityType: data.entityType }),
-        ...(data.isPrefixEntityType && {
+        ...(formData.entityType && { entityType: formData.entityType }),
+        ...(formData.isPrefixEntityType && {
           isPrefixEntityType: isPrefixEntityType,
         }),
-        name: data.name,
-        ...(data.representativeTitle && { representativeTitle: data.representativeTitle }),
-        ...(data.representativeName && { representativeName: data.representativeName }),
-        ...(data.tradeName && { tradeName: data.tradeName }),
-        postalCode: data.postalCode,
-        prefecture: data.prefecture,
-        city: data.city,
-        town: data.town,
-        address: data.address,
-        ...(data.address2 && { address2: data.address2 }),
+        name: formData.name,
+        ...(formData.representativeTitle && {
+          representativeTitle: formData.representativeTitle,
+        }),
+        ...(normalisedRepresentativename && {
+          representativeName: normalisedRepresentativename,
+        }),
+        ...(formData.tradeName && { tradeName: formData.tradeName }),
+        postalCode: formData.postalCode,
+        prefecture: formData.prefecture,
+        city: formData.city,
+        town: formData.town,
+        address: formData.address,
+        ...(formData.address2 && { address2: formData.address2 }),
       },
     });
 
