@@ -17,11 +17,17 @@ export default async function MswLicensesList({
   const licenses = await getMswLicenses(contractorId);
 
   if (licenses.length === 0) {
-    return <div className="text-sm text-center">
-      許可情報を
-      <Link href={"./" + contractorId + "/licenses/msw/register"} className="font-bold hover:underline">登録</Link>
-      する.
-    </div>
+    return (
+      <div className="text-sm text-center">
+        <Link
+          href={"./" + contractorId + "/licenses/msw/register"}
+          className="font-bold hover:underline"
+        >
+          登録
+        </Link>
+        する.
+      </div>
+    );
   }
 
   return (

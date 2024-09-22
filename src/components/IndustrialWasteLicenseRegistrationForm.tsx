@@ -10,7 +10,6 @@ import getTodayDate from "@/utils/getTodayDate";
 import Input from "./Input";
 import IndustrialWasteItemCheckbox from "./IndustrialWasteItemCheckbox";
 import { createLicense } from "@/actions/industrialWasteLicense";
-import { WasteItem } from "@/types/types";
 import { IndustrialWasteCategory } from "@prisma/client";
 
 export default function IndustrialWasteLicenseRegistrationForm({
@@ -41,8 +40,6 @@ export default function IndustrialWasteLicenseRegistrationForm({
 
   return (
     <>
-      <div className="mt-2 mb-8">産業廃棄物</div>
-
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid gap-y-10">

@@ -9,7 +9,6 @@ import CorporateEntityInputs from "./CorporateEntityInputs";
 import SoleProprietorInputs from "./SoleProprietorInputs";
 
 export default function LegalEntitySelector() {
-
   const { unregister } = useFormContext();
 
   const [types, setTypes] = useState([

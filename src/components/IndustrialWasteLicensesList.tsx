@@ -17,13 +17,29 @@ export default async function IndustrialWasteLicensesList({
 }) {
   const licenses = await getIndustrialWasteLicenses(contractorId);
 
+  if (licenses.length === 0) {
+    return (
+      <div className="text-sm text-center">
+        <Link
+          href={"./" + contractorId + "/licenses/industrial-waste/register"}
+          className="font-bold hover:underline"
+        >
+          登録
+        </Link>
+        する.
+      </div>
+    );
+  }
+
   return (
     <div className="">
       <div className="text-right">
-        <Link href={"./" + contractorId + "/licenses/industrial-waste/register"} className="text-sm p-1 rounded-md hover:bg-gray-100">
+        <Link
+          href={"./" + contractorId + "/licenses/industrial-waste/register"}
+          className="text-sm p-1 rounded-md hover:bg-gray-100"
+        >
           登録する
         </Link>
-
       </div>
 
       <ul role="list" className="divide-y divide-gray-100">

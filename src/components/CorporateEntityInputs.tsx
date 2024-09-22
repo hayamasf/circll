@@ -90,7 +90,9 @@ export default function CorporateEntityInputs() {
             placeholder="代表取締役"
           />
           {errors.representativeTitle?.message && (
-            <p className="text-xs text-red-500 p-1">{errors.representativeTitle?.message}</p>
+            <p className="text-xs text-red-500 p-1">
+              {errors.representativeTitle?.message}
+            </p>
           )}
         </div>
 
