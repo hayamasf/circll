@@ -1,27 +1,17 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  UseFormRegister,
-  FieldErrors,
-  UseFormUnregister,
-} from "react-hook-form";
-import { LegalEntity } from "@/types/types";
-
+import { useFormContext } from "react-hook-form";
+import { Client, Contractor } from "@prisma/client";
 import { classNames } from "@/utils/classNames";
 
 import CorporateEntityInputs from "./CorporateEntityInputs";
 import SoleProprietorInputs from "./SoleProprietorInputs";
 
-export default function LegalEntitySelector({
-  register,
-  unregister,
-  errors,
-}: {
-  register: UseFormRegister<LegalEntity>;
-  unregister: UseFormUnregister<LegalEntity>;
-  errors: FieldErrors<LegalEntity>;
-}) {
+export default function LegalEntitySelector() {
+
+  const { unregister } = useFormContext();
+
   const [types, setTypes] = useState([
     { id: 1, name: "会社など法人", current: true },
     { id: 2, name: "個人事業主", current: false },
