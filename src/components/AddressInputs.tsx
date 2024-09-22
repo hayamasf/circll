@@ -8,11 +8,9 @@ export default function AddressInputs() {
   const {
     register,
     setValue,
-    watch,
+    getValues,
     formState: { errors },
   } = useFormContext<Address>();
-
-  const postalCode = watch("postalCode");
 
   const setPrefCityTown = ({
     pref,
@@ -29,6 +27,7 @@ export default function AddressInputs() {
   };
 
   const handleFetchAddress = async () => {
+    const postalCode = getValues("postalCode");
     const isValidPostalCode = /^\d{7}$/.test(postalCode);
 
     if (isValidPostalCode) {
