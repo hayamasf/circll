@@ -23,7 +23,7 @@ export default async function Page({
     const industrialWasteCategories = await getIndustrialWasteCategories();
 
     return (
-      <div className="mx-auto max-w-md">
+      <div className="mx-auto max-w-lg">
         <div className="flex pb-10 text-sm items-center">
           <Link
             href={"/contractors/" + contractor.id}
@@ -74,8 +74,49 @@ export default async function Page({
     );
   } else if (licenseType === "msw") {
     return (
-      <div className="mx-auto max-w-md">
-        <PageHeader title="許可情報の登録" />
+      <div className="mx-auto max-w-lg">
+        <div className="flex pb-10 text-sm items-center">
+          <Link
+            href={"/contractors/" + contractor.id}
+            className="hover:underline"
+          >
+            {contractor.isPrefixEntityType && contractor.entityType}
+            {contractor.name}
+            {contractor.entityType &&
+              !contractor.isPrefixEntityType &&
+              contractor.entityType}
+          </Link>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="h-4 w-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m8.25 4.5 7.5 7.5-7.5 7.5"
+            />
+          </svg>
+          {"許可情報の登録"}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="h-4 w-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m8.25 4.5 7.5 7.5-7.5 7.5"
+            />
+          </svg>
+          {"一般廃棄物"}
+        </div>
         <MswLicenseRegistrationForm id={id} />
       </div>
     );

@@ -37,8 +37,6 @@ export default function MswLicenseRegistrationForm({ id }: { id: number }) {
 
   return (
     <>
-      <div className="mt-2 mb-8">一般廃棄物</div>
-
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid gap-y-10">

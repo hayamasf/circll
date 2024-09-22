@@ -32,11 +32,11 @@ export default async function IndustrialWasteLicensesList({
   }
 
   return (
-    <div className="">
+    <div className="grid gap-y-2">
       <div className="text-right">
         <Link
           href={"./" + contractorId + "/licenses/industrial-waste/register"}
-          className="text-sm p-1 rounded-md hover:bg-gray-100"
+          className="text-xs font-semibold border border-gray-500 p-1 rounded-md hover:bg-gray-200"
         >
           登録する
         </Link>
@@ -49,7 +49,7 @@ export default async function IndustrialWasteLicensesList({
           return (
             <li
               key={license.id}
-              className="relative flex justify-between gap-x-6 py-5 hover:bg-gray-50"
+              className="relative flex justify-between gap-x-6 py-3 hover:bg-gray-50"
             >
               <div className="flex min-w-0 gap-x-4">
                 <div className="min-w-0 flex-auto">

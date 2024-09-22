@@ -31,11 +31,14 @@ export default async function MswLicensesList({
   }
 
   return (
-    <div className="py-5">
+    <div className="grid gap-y-2">
       <div className="text-right">
-        <LinkButton href={"./" + contractorId + "/licenses/msw/register"}>
-          登録
-        </LinkButton>
+        <Link
+          href={"./" + contractorId + "/licenses/msw/register"}
+          className="text-xs font-semibold p-1 border border-gray-500 rounded-md hover:bg-gray-200"
+        >
+          登録する
+        </Link>
       </div>
 
       <ul role="list" className="divide-y divide-gray-100">
@@ -45,7 +48,7 @@ export default async function MswLicensesList({
           return (
             <li
               key={license.id}
-              className="relative flex justify-between gap-x-6 py-5"
+              className="relative flex justify-between gap-x-6 py-3"
             >
               <div className="flex min-w-0 gap-x-4">
                 <div className="min-w-0 flex-auto">

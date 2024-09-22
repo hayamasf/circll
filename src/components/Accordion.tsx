@@ -50,7 +50,7 @@ function AccordionItem({ title, content }: AccordionItemProps) {
           </svg>
         </span>
       </button>
-      {isOpen && <div className="bg-blue-100 p-6">{content}</div>}
+      {isOpen && <div className="p-4">{content}</div>}
     </div>
   );
 }

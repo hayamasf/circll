@@ -14,7 +14,7 @@ export default function Page({
   const limit = Number(searchParams.limit ?? 10);
 
   return (
-    <div className="container mx-auto max-w-3xl">
+    <div className="mx-auto max-w-2xl">
       <div className="flex justify-between mb-10 items-center">
         <PageHeader title="業者" />
         <LinkButton href="/contractors/register">新規登録</LinkButton>
