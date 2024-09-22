@@ -7,6 +7,7 @@ import { PaperClipIcon } from "@heroicons/react/24/outline";
 import { getDaysUntilExpiration } from "@/utils/dateUtils";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { XCircleIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 export default async function MswLicensesList({
   contractorId,
@@ -15,14 +16,20 @@ export default async function MswLicensesList({
 }) {
   const licenses = await getMswLicenses(contractorId);
 
+  if (licenses.length === 0) {
+    return <div className="text-sm text-center">
+      許可情報を
+      <Link href={"./" + contractorId + "/licenses/msw/register"} className="font-bold hover:underline">登録</Link>
+      する.
+    </div>
+  }
+
   return (
     <div className="py-5">
-      <div className="flex items-center">
-        <div className="sm:flex-none">
-          <LinkButton href={"./" + contractorId + "/licenses/msw/register"}>
-            登録
-          </LinkButton>
-        </div>
+      <div className="text-right">
+        <LinkButton href={"./" + contractorId + "/licenses/msw/register"}>
+          登録
+        </LinkButton>
       </div>
 
       <ul role="list" className="divide-y divide-gray-100">

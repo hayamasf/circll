@@ -9,7 +9,7 @@ type AccordionItemProps = {
 
 export default function Accordion({ items }: { items: AccordionItemProps[] }) {
   return (
-    <div className="py-10">
+    <div className="py-8">
       {items.map((item, index) => (
         <AccordionItem key={index} title={item.title} content={item.content} />
       ))}

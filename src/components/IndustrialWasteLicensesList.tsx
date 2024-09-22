@@ -1,7 +1,6 @@
 import React from "react";
 
 import Link from "next/link";
-import LinkButton from "./LinkButton";
 import { getIndustrialWasteLicenses } from "@/utils/getIndustrialWasteLicenses";
 import { getDaysUntilExpiration } from "@/utils/dateUtils";
 import { PaperClipIcon } from "@heroicons/react/24/outline";
@@ -19,23 +18,15 @@ export default async function IndustrialWasteLicensesList({
   const licenses = await getIndustrialWasteLicenses(contractorId);
 
   return (
-    <div className="py-12">
-      <div className="flex items-center">
-        <div className="flex-auto">
-          <h2 className="text-lg font-semibold leading-6 text-gray-900">
-            産業<span className="text-sm font-light">廃棄物処理業許可</span>
-          </h2>
-        </div>
-        <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          <LinkButton
-            href={"./" + contractorId + "/licenses/industrial-waste/register"}
-          >
-            登録
-          </LinkButton>
-        </div>
+    <div className="">
+      <div className="text-right">
+        <Link href={"./" + contractorId + "/licenses/industrial-waste/register"} className="text-sm p-1 rounded-md hover:bg-gray-100">
+          登録する
+        </Link>
+
       </div>
 
-      <ul role="list" className="mt-7 divide-y divide-gray-100">
+      <ul role="list" className="divide-y divide-gray-100">
         {licenses.map((license) => {
           const daysLeft = getDaysUntilExpiration(license.expirationDate);
 
