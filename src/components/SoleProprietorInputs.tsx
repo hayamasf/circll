@@ -2,14 +2,14 @@
 
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { LegalEntity } from "@/types/types";
+import { LegalEntityFormData } from "@/types/types";
 
 export default function SoleProprietorInputs() {
   const {
     register,
     unregister,
     formState: { errors },
-  } = useFormContext<LegalEntity>();
+  } = useFormContext<LegalEntityFormData>();
 
   useEffect(() => {
     unregister("entityType");
