@@ -6,9 +6,9 @@ import { formatDate } from "@/utils/dateUtils";
 import { PaperClipIcon } from "@heroicons/react/24/outline";
 import IndustrialWasteCategoryList from "./IndustrialWasteCategoryList";
 import EllipsisDropDownMenu from "./EllipsisDropDownMenu";
-import PageHeader from "./PageHeader";
 import Card from "./Card";
 import Link from "next/link";
+import Breadcrumbs from "./Breadcrumbs";
 
 export default async function IndustrialWasteLicenseDetail({
   id,
@@ -17,40 +17,22 @@ export default async function IndustrialWasteLicenseDetail({
 }) {
   const license = await getIndustrialWasteLicenseById(id);
   const menuItems = [{ id: 1, text: "情報を更新", href: "./" + id + "/edit" }];
+  const contractoName = `${license?.contractor?.isPrefixEntityType ? license?.contractor.entityType : ""}${license?.contractor?.name}${license?.contractor?.entityType && !license.contractor.isPrefixEntityType ? license.contractor.entityType : ""}`
+
+  const pages = [
+    { name: '業者', href: '/contractors', current: false },
+    { name: contractoName || "", href: `/contractors/${license?.contractor.id}`, current: false },
+    { name: "許可", href: "", current: false },
+    { name: "産業廃棄物", href: "", current: false },
+  ]
+
 
   if (license) {
     return (
       <>
-        <h2 className="flex py-3 font-semibold items-center">
-          <Link
-            className="hover:underline"
-            href={"/contractors/" + license.contractorId}
-          >
-            {license.contractor.isPrefixEntityType &&
-              license.contractor.entityType}
-            {license.contractor.name}
-            {license.contractor.entityType &&
-              !license.contractor.isPrefixEntityType &&
-              license.contractor.entityType}
-          </Link>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="h-4 w-4 font-normal text-gray-500"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m8.25 4.5 7.5 7.5-7.5 7.5"
-            />
-          </svg>
-          {"許可情報"}
-
-        </h2>
-
+        <div className="pt-3 pb-10">
+          <Breadcrumbs pages={pages} />
+        </div>
         <Card>
           <div className="mt-2 grid gap-y-2">
             <div className="flex items-center justify-between">

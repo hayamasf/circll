@@ -9,7 +9,7 @@ import CancelButton from "./CancelButton";
 
 import { LegalEntityFormData } from "@/types/types";
 import { updateContractor } from "@/actions/contractor";
-import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
+import getPrefectureCityTown from "@/utils/getPrefectureCityTown";
 import { useParams } from "next/navigation";
 
 export default function ContractorEditForm({
@@ -88,7 +88,7 @@ export default function ContractorEditForm({
     const postalCode = e.target.value;
 
     if (postalCode.length === 7) {
-      const prefCityTown = await fetchPrefCityTown(postalCode);
+      const prefCityTown = await getPrefectureCityTown(postalCode);
       if (prefCityTown) {
         setPrefCityTown(prefCityTown);
       }
