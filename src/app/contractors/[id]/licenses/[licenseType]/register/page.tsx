@@ -1,10 +1,10 @@
 import React from "react";
-import PageHeader from "@/components/PageHeader";
 import Link from "next/link";
 import MswLicenseRegistrationForm from "@/components/MswLicenseRegistrationForm";
 import IndustrialWasteLicenseRegistrationForm from "@/components/IndustrialWasteLicenseRegistrationForm";
 import getIndustrialWasteCategories from "@/utils/getIndustrialWasteCategories";
 import getContractorById from "@/utils/getContractorById";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default async function Page({
   params,
@@ -14,6 +14,7 @@ export default async function Page({
   const id = Number(params.id);
   const licenseType = params.licenseType;
   const contractor = await getContractorById(id);
+  const contractoName = `${contractor?.isPrefixEntityType ? contractor.entityType : ""}${contractor?.name}${contractor?.entityType && !contractor.isPrefixEntityType ? contractor.entityType : ""}`
 
   if (!contractor) {
     return <div>業者の登録がありません.</div>;
@@ -22,8 +23,16 @@ export default async function Page({
   if (licenseType === "industrial-waste") {
     const industrialWasteCategories = await getIndustrialWasteCategories();
 
+    const pages = [
+      { name: '業者', href: '/contractors', current: false },
+      // { name: 'Project Nero', href: '#', current: true },
+    ]
+
     return (
       <div className="mx-auto max-w-lg">
+        <div>
+          <Breadcrumbs pages={pages} />
+        </div>
         <div className="flex pb-10 text-sm items-center">
           <Link
             href={"/contractors/" + contractor.id}
@@ -73,49 +82,19 @@ export default async function Page({
       </div>
     );
   } else if (licenseType === "msw") {
+
+    const pages = [
+      { name: '業者', href: '/contractors', current: false },
+      { name: contractoName || "", href: `/contractors/${contractor.id}`, current: false },
+      { name: "許可", href: "", current: false },
+      { name: "一般廃棄物", href: "", current: false },
+      { name: "登録", href: "", current: true },
+    ]
+
     return (
       <div className="mx-auto max-w-lg">
-        <div className="flex pb-10 text-sm items-center">
-          <Link
-            href={"/contractors/" + contractor.id}
-            className="hover:underline"
-          >
-            {contractor.isPrefixEntityType && contractor.entityType}
-            {contractor.name}
-            {contractor.entityType &&
-              !contractor.isPrefixEntityType &&
-              contractor.entityType}
-          </Link>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="h-4 w-4"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m8.25 4.5 7.5 7.5-7.5 7.5"
-            />
-          </svg>
-          {"許可情報の登録"}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="h-4 w-4"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m8.25 4.5 7.5 7.5-7.5 7.5"
-            />
-          </svg>
-          {"一般廃棄物"}
+        <div className="pt-3 pb-10">
+          <Breadcrumbs pages={pages} />
         </div>
         <MswLicenseRegistrationForm id={id} />
       </div>
