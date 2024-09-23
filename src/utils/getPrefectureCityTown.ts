@@ -22,9 +22,9 @@ export default async function getPrefectureCityTown(postalCode:string) {
       throw new Error("住所情報が見つかりませんでした.");
     }
 
-    const { prefecture, city, town } = data;
+    const { pref, city, town } = data;
 
-    return { prefecture, city, town };
+    return { pref, city, town };
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("エラーが発生しました.", error.message);

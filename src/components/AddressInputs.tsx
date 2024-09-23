@@ -12,15 +12,15 @@ export default function AddressInputs() {
   } = useFormContext<Address>();
 
   const setPrefectureCityTown = ({
-    prefecture,
+    pref,
     city,
     town,
   }: {
-    prefecture: string;
+    pref: string;
     city: string;
     town: string;
   }) => {
-    setValue("prefecture", prefecture);
+    setValue("prefecture", pref);
     setValue("city", city);
     setValue("town", town);
   };
