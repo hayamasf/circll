@@ -1,14 +1,14 @@
 import React from "react";
 import PageHeader from "@/components/PageHeader";
 import LegalEntityEditForm from "@/components/LegalEntityEditForm";
-import fetchContractorById from "@/utils/fetchContractorById";
+import getContractorById from "@/utils/getContractorById";
 import { updateContractor } from "@/actions/contractor";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
   await new Promise((resolve) => setTimeout(resolve, 3000));
 
-  const contractor = await fetchContractorById(id);
+  const contractor = await getContractorById(id);
 
   if (contractor) {
     return (
