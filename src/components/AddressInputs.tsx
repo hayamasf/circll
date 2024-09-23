@@ -1,8 +1,7 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import fetchPrefCityTown from "@/utils/fetchPrefCityTown";
-
 import { Address } from "@/types/types";
+import getPrefectureCityTown from "@/utils/getPrefectureCityTown";
 
 export default function AddressInputs() {
   const {
@@ -12,38 +11,38 @@ export default function AddressInputs() {
     formState: { errors },
   } = useFormContext<Address>();
 
-  const setPrefCityTown = ({
-    pref,
+  const setPrefectureCityTown = ({
+    prefecture,
     city,
     town,
   }: {
-    pref: string;
+    prefecture: string;
     city: string;
     town: string;
   }) => {
-    setValue("prefecture", pref);
+    setValue("prefecture", prefecture);
     setValue("city", city);
     setValue("town", town);
   };
 
-  const handleFetchAddress = async () => {
+  const postalcodeToPrefectureCityTown = async () => {
     const postalCode = getValues("postalCode");
     const isValidPostalCode = /^\d{7}$/.test(postalCode);
 
-    if (isValidPostalCode) {
-      try {
-        const prefCityTown = await fetchPrefCityTown(postalCode);
-        if (prefCityTown) {
-          setPrefCityTown(prefCityTown);
-        } else {
-          alert("郵便番号に該当する住所が見つかりませんでした.");
-        }
-      } catch (error) {
-        console.error("住所情報の取得に失敗しました.", error);
-        alert("住所情報の取得中にエラーが発生しました.");
+    if (!isValidPostalCode) {
+      return alert("数字のみ7桁の郵便番号を入力してください.");
+    }
+
+    try {
+      const prefectureCityTown = await getPrefectureCityTown(postalCode);
+      if (prefectureCityTown) {
+        setPrefectureCityTown(prefectureCityTown);
+      } else {
+        alert("郵便番号に該当する住所が見つかりませんでした.");
       }
-    } else {
-      alert("数字のみ7桁の郵便番号を入力してください.");
+    } catch (error) {
+      console.error("住所情報の取得に失敗しました.", error);
+      alert("住所情報の取得中にエラーが発生しました.");
     }
   };
 
@@ -69,10 +68,10 @@ export default function AddressInputs() {
         <div className="col-span-2 ml-3 place-content-center">
           <button
             type="button"
-            className="py-1.5 px-1 rounded-md shadow-lg bg-gray-500 text-white text-xs"
-            onClick={handleFetchAddress}
+            className="py-1.5 px-1 rounded-md shadow-lg bg-gray-800 text-white text-xs"
+            onClick={postalcodeToPrefectureCityTown}
           >
-            郵便番号から住所を入力
+            郵便番号→住所
           </button>
         </div>
         {errors.postalCode?.message && (

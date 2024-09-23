@@ -1,4 +1,5 @@
-const fetchPrefCityTown = async (postalCode: string) => {
+export default async function getPrefectureCityTown(postalCode:string) {
+  
   const API_KEY = process.env.POSTCODEJP_API_KEY;
 
   try {
@@ -21,9 +22,9 @@ const fetchPrefCityTown = async (postalCode: string) => {
       throw new Error("住所情報が見つかりませんでした.");
     }
 
-    const { pref, city, town } = data;
+    const { prefecture, city, town } = data;
 
-    return { pref, city, town };
+    return { prefecture, city, town };
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("エラーが発生しました.", error.message);
@@ -32,6 +33,4 @@ const fetchPrefCityTown = async (postalCode: string) => {
     }
     throw error;
   }
-};
-
-export default fetchPrefCityTown;
+}
