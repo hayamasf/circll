@@ -4,6 +4,7 @@ export default async function getSiteById(id: number) {
   try {
     const site = await prisma.site.findUnique({
       where: { id },
+      include: { client: true}
     });
     return site;
   } catch (error) {

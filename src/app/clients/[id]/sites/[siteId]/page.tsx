@@ -1,52 +1,46 @@
 import React from "react";
-import Link from "next/link";
-import getClientById from "@/utils/getClientById";
 import getSiteById from "@/utils/getSiteById";
-import PageHeader from "@/components/PageHeader";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import Card from "@/components/Card";
 import SiteDetail from "@/components/SiteDetail";
-import CardWithHeader from "@/components/CardWithHeader";
 
 export default async function Page({
   params,
 }: {
   params: { id: string; siteId: string };
 }) {
-  const clientId = Number(params.id);
   const siteId = Number(params.siteId);
 
-  let client, site;
+  let site;
 
   try {
-    client = await getClientById(clientId);
     site = await getSiteById(siteId);
   } catch (error) {
     console.error("データ取得中にエラー: ", error);
     return <div>データの取得中にエラーが発生しました.</div>;
   }
 
-  if (!client) {
-    return <div>排出事業者が登録されていません.</div>;
-  }
   if (!site) {
     return <div>事業所の登録がありません.</div>;
   }
+
+  const clientName = `${site.client?.isPrefixEntityType ? site.client.entityType : ""}${site.client?.name}${site.client?.entityType && !site.client.isPrefixEntityType ? site.client.entityType : ""}`
+
+
+  const pages = [
+    { name: '排出事業者', href: '/clients', current: false },
+    { name: clientName, href: '/clients/' + site.clientId, current: false },
+    { name: '事業所', href: '', current: true },
+  ]
+
   return (
     <div className="mx-auto max-w-lg">
-      <PageHeader title={"事業所"} />
-      <CardWithHeader
-        header={
-          <Link
-            href={"/clients/" + client.id}
-            className="font-bold text-base hover:underline"
-          >
-            {client.isPrefixEntityType ? client.entityType : ""}
-            {client.name}
-            {!client.isPrefixEntityType ? client.entityType : ""}
-          </Link>
-        }
-      >
+      <div className="pt-3 pb-10">
+        <Breadcrumbs pages={pages} />
+      </div>
+      <Card>
         <SiteDetail site={site} />
-      </CardWithHeader>
+      </Card>
     </div>
   );
 }
