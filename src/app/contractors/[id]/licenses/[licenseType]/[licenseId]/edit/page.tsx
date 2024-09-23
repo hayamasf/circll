@@ -17,6 +17,7 @@ export default async function Page({
   const { licenseType, licenseId } = params;
 
   let license;
+  let title; // ←これを追加？
   let formComponent;
 
   switch (licenseType) {

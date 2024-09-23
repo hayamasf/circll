@@ -21,21 +21,37 @@ export default async function IndustrialWasteLicenseDetail({
   if (license) {
     return (
       <>
-        <PageHeader title="許可情報" />
-        <Card>
+        <h2 className="flex py-3 font-semibold items-center">
           <Link
             className="hover:underline"
             href={"/contractors/" + license.contractorId}
           >
-            <h2>
-              {license.contractor.isPrefixEntityType &&
-                license.contractor.entityType}
-              {license.contractor.name}
-              {license.contractor.entityType &&
-                !license.contractor.isPrefixEntityType &&
-                license.contractor.entityType}
-            </h2>
+            {license.contractor.isPrefixEntityType &&
+              license.contractor.entityType}
+            {license.contractor.name}
+            {license.contractor.entityType &&
+              !license.contractor.isPrefixEntityType &&
+              license.contractor.entityType}
           </Link>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="h-4 w-4 font-normal text-gray-500"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m8.25 4.5 7.5 7.5-7.5 7.5"
+            />
+          </svg>
+          {"許可情報"}
+
+        </h2>
+
+        <Card>
           <div className="mt-2 grid gap-y-2">
             <div className="flex items-center justify-between">
               <h3 className="">
