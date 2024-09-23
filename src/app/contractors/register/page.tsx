@@ -5,7 +5,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 export default function Page() {
   const pages = [
     { name: '業者', href: '/contractors', current: false },
-    { name: '新規登録', href: '', current: true },
+    { name: '登録', href: '', current: true },
   ]
 
   return (
