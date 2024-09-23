@@ -18,7 +18,7 @@ export default function Breadcrumbs({ pages }: { pages: { name: string, href: st
             <div className="flex items-center">
               <ChevronRightIcon aria-hidden="true" className="h-5 w-5 flex-shrink-0 text-gray-400" />
               {page.href ? (<Link href={page.href} aria-current={page.current ? 'page' : undefined}
-                className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
+                className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 hover:underline">
                 {page.name}
               </Link>
               ) : (<span className='ml-4 text-sm font-medium text-gray-500'>{page.name}</span>)}
