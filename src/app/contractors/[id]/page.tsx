@@ -12,7 +12,6 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   const pages = [
     { name: '業者', href: '/contractors', current: false },
-    // { name: 'Project Nero', href: '#', current: true },
   ]
 
   const mswLicensesList = contractor
