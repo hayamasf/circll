@@ -16,9 +16,7 @@ export default async function Page({
 }) {
   const id = Number(params.id);
   const client = await getClientById(id);
-  const pages = [
-    { name: '排出事業者', href: '/clients', current: true },
-  ]
+  const pages = [{ name: "排出事業者", href: "/clients", current: true }];
 
   const offset = Number(searchParams.offset ?? 1);
   const limit = Number(searchParams.limit ?? 10);
@@ -28,7 +26,6 @@ export default async function Page({
       <div className="mx-auto max-w-2xl">
         <div className="pt-3 pb-10">
           <Breadcrumbs pages={pages} />
-
         </div>
         <LegalEntityProfile entity={client} />
         <div className="flex my-10 items-center justify-between">

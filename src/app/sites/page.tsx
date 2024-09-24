@@ -11,9 +11,7 @@ export default function Page({
   const offset = Number(searchParams.offset ?? 1);
   const limit = Number(searchParams.limit ?? 10);
 
-  const pages = [
-    { name: '事業所', href: '', current: true },
-  ]
+  const pages = [{ name: "事業所", href: "", current: true }];
 
   return (
     <div className="mx-auto max-w-2xl">

@@ -24,14 +24,13 @@ export default async function Page({
     return <div>事業所の登録がありません.</div>;
   }
 
-  const clientName = `${site.client?.isPrefixEntityType ? site.client.entityType : ""}${site.client?.name}${site.client?.entityType && !site.client.isPrefixEntityType ? site.client.entityType : ""}`
-
+  const clientName = `${site.client?.isPrefixEntityType ? site.client.entityType : ""}${site.client?.name}${site.client?.entityType && !site.client.isPrefixEntityType ? site.client.entityType : ""}`;
 
   const pages = [
-    { name: '排出事業者', href: '/clients', current: false },
-    { name: clientName, href: '/clients/' + site.clientId, current: false },
-    { name: '事業所', href: '', current: true },
-  ]
+    { name: "排出事業者", href: "/clients", current: false },
+    { name: clientName, href: "/clients/" + site.clientId, current: false },
+    { name: "事業所", href: "", current: true },
+  ];
 
   return (
     <div className="mx-auto max-w-lg">

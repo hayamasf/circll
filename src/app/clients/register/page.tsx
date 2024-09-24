@@ -4,9 +4,9 @@ import LegalEntityRegistrationForm from "@/components/LegalEntityRegistrationFor
 
 export default function Page() {
   const pages = [
-    { name: '排出事業者', href: '/clients', current: false },
-    { name: '登録', href: '', current: true },
-  ]
+    { name: "排出事業者", href: "/clients", current: false },
+    { name: "登録", href: "", current: true },
+  ];
 
   return (
     <div className="mx-auto max-w-sm">

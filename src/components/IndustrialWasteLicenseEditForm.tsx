@@ -57,14 +57,6 @@ export default function IndustrialWasteLicenseEditForm({
   return (
     <FormProvider {...methods}>
       <div>
-        <h2>
-          {license.contractor.isPrefixEntityType &&
-            license.contractor.entityType}
-          {license.contractor.name}
-          {license.contractor.entityType &&
-            !license.contractor.isPrefixEntityType &&
-            license.contractor.entityType}
-        </h2>
         <p className="text-sm">
           許可番号 第{" "}
           <span className="text-lg font-semibold">

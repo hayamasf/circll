@@ -1,5 +1,4 @@
-export default async function getPrefectureCityTown(postalCode:string) {
-  
+export default async function getPrefectureCityTown(postalCode: string) {
   const API_KEY = process.env.POSTCODEJP_API_KEY;
 
   try {

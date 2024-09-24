@@ -42,8 +42,8 @@ export default async function ClientsList({
                     <p className="mt-1 flex text-xs leading-5 text-gray-500">
                       {client.entityType &&
                         client.representativeTitle +
-                        " " +
-                        client.representativeName}
+                          " " +
+                          client.representativeName}
                       {client.tradeName && client.tradeName}
                     </p>
                   </div>

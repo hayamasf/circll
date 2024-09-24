@@ -5,6 +5,7 @@ import getMswLicenseById from "@/utils/getMswLicenseById";
 import IndustrialWasteLicenseEditForm from "@/components/IndustrialWasteLicenseEditForm";
 import getIndustrialWasteLicenseById from "@/utils/getIndustrialWasteLicenseById";
 import getIndustrialWasteCategories from "@/utils/getIndustrialWasteCategories";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default async function Page({
   params,
@@ -17,7 +18,7 @@ export default async function Page({
   const { licenseType, licenseId } = params;
 
   let license;
-  let title; // ←これを追加？
+  let breadcrumbs;
   let formComponent;
 
   switch (licenseType) {
@@ -27,7 +28,21 @@ export default async function Page({
       break;
     case "industrial-waste":
       license = await getIndustrialWasteLicenseById(Number(licenseId));
+      const contractorName = `${license?.contractor?.isPrefixEntityType ? license?.contractor.entityType : ""}${license?.contractor?.name}${license?.contractor?.entityType && !license.contractor.isPrefixEntityType ? license.contractor.entityType : ""}`;
+      const pages = [
+        { name: "業者", href: "/contractors", current: false },
+        {
+          name: contractorName || "",
+          href: `/contractors/${license?.contractorId}`,
+          current: false,
+        },
+        { name: "許可", href: "", current: false },
+        { name: "産業廃棄物", href: "", current: false },
+        { name: "編集", href: "", current: true },
+      ];
+
       const industrialWasteCategories = await getIndustrialWasteCategories();
+      breadcrumbs = <Breadcrumbs pages={pages} />;
       formComponent = (
         <IndustrialWasteLicenseEditForm
           license={license}
@@ -46,7 +61,7 @@ export default async function Page({
 
   return (
     <div className="mx-auto max-w-lg">
-      <PageHeader title={"許可情報の編集"} />
+      <div className="pt-3 pb-10">{breadcrumbs}</div>
       {formComponent}
     </div>
   );

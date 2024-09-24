@@ -17,15 +17,18 @@ export default async function IndustrialWasteLicenseDetail({
 }) {
   const license = await getIndustrialWasteLicenseById(id);
   const menuItems = [{ id: 1, text: "情報を更新", href: "./" + id + "/edit" }];
-  const contractoName = `${license?.contractor?.isPrefixEntityType ? license?.contractor.entityType : ""}${license?.contractor?.name}${license?.contractor?.entityType && !license.contractor.isPrefixEntityType ? license.contractor.entityType : ""}`
+  const contractoName = `${license?.contractor?.isPrefixEntityType ? license?.contractor.entityType : ""}${license?.contractor?.name}${license?.contractor?.entityType && !license.contractor.isPrefixEntityType ? license.contractor.entityType : ""}`;
 
   const pages = [
-    { name: '業者', href: '/contractors', current: false },
-    { name: contractoName || "", href: `/contractors/${license?.contractor.id}`, current: false },
+    { name: "業者", href: "/contractors", current: false },
+    {
+      name: contractoName || "",
+      href: `/contractors/${license?.contractor.id}`,
+      current: false,
+    },
     { name: "許可", href: "", current: false },
     { name: "産業廃棄物", href: "", current: false },
-  ]
-
+  ];
 
   if (license) {
     return (

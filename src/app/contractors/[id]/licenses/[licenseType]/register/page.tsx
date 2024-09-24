@@ -13,7 +13,7 @@ export default async function Page({
   const id = Number(params.id);
   const licenseType = params.licenseType;
   const contractor = await getContractorById(id);
-  const contractoName = `${contractor?.isPrefixEntityType ? contractor.entityType : ""}${contractor?.name}${contractor?.entityType && !contractor.isPrefixEntityType ? contractor.entityType : ""}`
+  const contractorName = `${contractor?.isPrefixEntityType ? contractor.entityType : ""}${contractor?.name}${contractor?.entityType && !contractor.isPrefixEntityType ? contractor.entityType : ""}`;
 
   if (!contractor) {
     return <div>業者の登録がありません.</div>;
@@ -23,12 +23,16 @@ export default async function Page({
     const industrialWasteCategories = await getIndustrialWasteCategories();
 
     const pages = [
-      { name: '業者', href: '/contractors', current: false },
-      { name: contractoName || "", href: `/contractors/${contractor.id}`, current: false },
+      { name: "業者", href: "/contractors", current: false },
+      {
+        name: contractorName || "",
+        href: `/contractors/${contractor.id}`,
+        current: false,
+      },
       { name: "許可", href: "", current: false },
       { name: "産業廃棄物", href: "", current: false },
       { name: "登録", href: "", current: true },
-    ]
+    ];
 
     return (
       <div className="mx-auto max-w-lg">
@@ -43,14 +47,17 @@ export default async function Page({
       </div>
     );
   } else if (licenseType === "msw") {
-
     const pages = [
-      { name: '業者', href: '/contractors', current: false },
-      { name: contractoName || "", href: `/contractors/${contractor.id}`, current: false },
+      { name: "業者", href: "/contractors", current: false },
+      {
+        name: contractorName || "",
+        href: `/contractors/${contractor.id}`,
+        current: false,
+      },
       { name: "許可", href: "", current: false },
       { name: "一般廃棄物", href: "", current: false },
       { name: "登録", href: "", current: true },
-    ]
+    ];
 
     return (
       <div className="mx-auto max-w-lg">
