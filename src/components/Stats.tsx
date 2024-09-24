@@ -9,7 +9,7 @@ const stats = [{ name: "Total Subscribers", stat: "71,897" }];
 export default function Stats() {
   return (
     <div>
-      <dl className="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-4">
+      <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-4">
         <ClientCounterCard />
         <SiteCounterCard />
         <ContractorCounterCard />
