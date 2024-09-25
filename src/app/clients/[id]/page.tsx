@@ -1,7 +1,6 @@
 import React from "react";
 import LegalEntityProfile from "@/components/LegalEntityProfile";
 import getClientById from "@/utils/getClientById";
-import PageHeader from "@/components/PageHeader";
 import LinkButton from "@/components/LinkButton";
 import SectionHeader from "@/components/SectionHeader";
 import Breadcrumbs from "@/components/Breadcrumbs";
