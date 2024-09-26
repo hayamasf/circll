@@ -28,7 +28,6 @@ export default function IndustrialWasteLicenseEditForm({
   license: IndustrialWasteLicenseWithRelations | null;
   industrialWasteCategories: IndustrialWasteCategory[];
 }) {
-  const arr = [{ id: 1 }, { id: 7 }, { id: 10 }, { id: 11 }]
   const methods = useForm({
     defaultValues: {
       contractorId: license?.contractorId,
@@ -40,7 +39,9 @@ export default function IndustrialWasteLicenseEditForm({
         ? formatDate(license?.expirationDate)
         : "",
       licenseUrl: license?.licenseUrl,
-      licensedCategories: license?.licensedCategories.map((category) => String(category.id)) || [],
+      licensedCategories:
+        license?.licensedCategories.map((category) => String(category.id)) ||
+        [],
     },
   });
 

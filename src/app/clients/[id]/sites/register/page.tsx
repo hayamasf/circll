@@ -4,19 +4,19 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import SiteRegistrationForm from "@/components/SiteRegistrationForm";
 
 export default async function Page({ params }: { params: { id: string } }) {
-
   const id = Number(params.id);
-  const client = await getClientById(id)
+  const client = await getClientById(id);
   const clientName = `${client?.isPrefixEntityType ? client.entityType : ""}${client?.name}${client?.entityType && !client.isPrefixEntityType ? client.entityType : ""}`;
 
-  const pages = [{ name: "排出事業者", href: "/clients", current: false },
-  { name: clientName, href: "/clients/" + client?.id, current: false },
-  { name: "事業所", href: "", current: false },
-  { name: "登録", href: "", current: true },
+  const pages = [
+    { name: "排出事業者", href: "/clients", current: false },
+    { name: clientName, href: "/clients/" + client?.id, current: false },
+    { name: "事業所", href: "", current: false },
+    { name: "登録", href: "", current: true },
   ];
 
   if (!client) {
-    return <div className="text-center">排出事業者が見当たりません.</div>
+    return <div className="text-center">排出事業者が見当たりません.</div>;
   }
 
   return (

@@ -12,9 +12,10 @@ export default async function Page({ params }: { params: { id: string } }) {
   const client = await getClientById(id);
 
   const clientName = `${client?.isPrefixEntityType ? client.entityType : ""}${client?.name}${client?.entityType && !client.isPrefixEntityType ? client.entityType : ""}`;
-  const pages = [{ name: "排出事業者", href: "/clients", current: false },
-  { name: clientName, href: "/clients/" + client?.id, current: false },
-  { name: "編集", href: "", current: true }
+  const pages = [
+    { name: "排出事業者", href: "/clients", current: false },
+    { name: clientName, href: "/clients/" + client?.id, current: false },
+    { name: "編集", href: "", current: true },
   ];
 
   if (client) {

@@ -56,7 +56,7 @@ export default function SiteEditForm({ site }: { site: Site }) {
 
   return (
     <FormProvider {...methods}>
-      <form className="mt-10" onSubmit={methods.handleSubmit(onSubmit)}>
+      <form className="" onSubmit={methods.handleSubmit(onSubmit)}>
         <div className="grid gap-y-8">
           <SiteInputs />
           <AddressInputs />
