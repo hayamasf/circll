@@ -14,20 +14,20 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   const mswLicensesList = contractor
     ? [
-      {
-        title: "一般廃棄物処理業許可",
-        content: <MswLicensesList contractorId={contractor?.id} />,
-      },
-    ]
+        {
+          title: "一般廃棄物処理業許可",
+          content: <MswLicensesList contractorId={contractor?.id} />,
+        },
+      ]
     : [];
 
   const industrialWasteLicensesList = contractor
     ? [
-      {
-        title: "産業廃棄物処理業許可",
-        content: <IndustrialWasteLicensesList contractorId={contractor.id} />,
-      },
-    ]
+        {
+          title: "産業廃棄物処理業許可",
+          content: <IndustrialWasteLicensesList contractorId={contractor.id} />,
+        },
+      ]
     : [];
 
   return (

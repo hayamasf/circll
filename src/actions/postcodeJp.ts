@@ -1,12 +1,14 @@
+"use server";
+
 export default async function getPrefectureCityTown(postalCode: string) {
   const API_KEY = process.env.POSTCODEJP_API_KEY;
 
   try {
     const response = await fetch(
-      `https://apis.postcode-jp.com/api/v5/postcodes/${postalCode}`,
+      "https://apis.postcode-jp.com/api/v6/postcodes/" + postalCode,
       {
         headers: {
-          Authorization: `Bearer ${API_KEY}`,
+          Authorization: "Bearer " + API_KEY,
         },
       },
     );
@@ -14,7 +16,6 @@ export default async function getPrefectureCityTown(postalCode: string) {
     if (!response.ok) {
       throw new Error("住所データの取得に失敗しました.");
     }
-
     const [data] = await response.json();
 
     if (!data) {
@@ -24,7 +25,7 @@ export default async function getPrefectureCityTown(postalCode: string) {
     const { pref, city, town } = data;
 
     return { pref, city, town };
-  } catch (error: unknown) {
+  } catch (error) {
     if (error instanceof Error) {
       console.error("エラーが発生しました.", error.message);
     } else {

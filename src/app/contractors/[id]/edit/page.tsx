@@ -15,12 +15,16 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   const pages = [
     { name: "業者", href: "/contractors", current: false },
-    { name: contractorName, href: "/contractors/" + contractor?.id, current: false },
+    {
+      name: contractorName,
+      href: "/contractors/" + contractor?.id,
+      current: false,
+    },
     { name: "編集", href: "", current: true },
   ];
 
   if (!contractor) {
-    return <div>業者が見つかりません.</div>
+    return <div>業者が見つかりません.</div>;
   }
 
   return (

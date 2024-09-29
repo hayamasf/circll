@@ -1,7 +1,9 @@
+"use client";
+
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { Address } from "@/types/types";
-import getPrefectureCityTown from "@/utils/getPrefectureCityTown";
+import getPrefectureCityTown from "@/actions/postcodeJp";
 
 export default function AddressInputs() {
   const {
@@ -33,16 +35,13 @@ export default function AddressInputs() {
       return alert("数字のみ7桁の郵便番号を入力してください.");
     }
 
-    try {
-      const prefectureCityTown = await getPrefectureCityTown(postalCode);
-      if (prefectureCityTown) {
-        setPrefectureCityTown(prefectureCityTown);
-      } else {
-        alert("郵便番号に該当する住所が見つかりませんでした.");
-      }
-    } catch (error) {
-      console.error("住所情報の取得に失敗しました.", error);
-      alert("住所情報の取得中にエラーが発生しました.");
+    const result = await getPrefectureCityTown(postalCode);
+    console.log(result);
+
+    if (result) {
+      setPrefectureCityTown(result);
+    } else {
+      alert("郵便番号に該当する住所が見つかりませんでした.");
     }
   };
 
