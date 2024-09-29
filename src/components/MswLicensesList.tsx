@@ -1,6 +1,5 @@
 import React from "react";
 
-import LinkButton from "./LinkButton";
 import getMswLicenses from "@/utils/getMswLicenses";
 import { formatDate } from "@/utils/dateUtils";
 import { PaperClipIcon } from "@heroicons/react/24/outline";
@@ -8,6 +7,7 @@ import { getDaysUntilExpiration } from "@/utils/dateUtils";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import EllipsisDropDownMenu from "./EllipsisDropDownMenu";
 
 export default async function MswLicensesList({
   contractorId,
@@ -30,6 +30,7 @@ export default async function MswLicensesList({
     );
   }
 
+
   return (
     <div className="grid gap-y-2">
       <div className="text-right">
@@ -44,6 +45,10 @@ export default async function MswLicensesList({
       <ul role="list" className="divide-y divide-gray-100">
         {licenses.map((license) => {
           const daysLeft = getDaysUntilExpiration(license.expirationDate);
+
+          const menuItems = [
+            { id: 1, text: "編集する", href: "/contractors/" + license.contractorId + "/licenses/msw/" + license.id + "/edit" }
+          ]
 
           return (
             <li
@@ -97,6 +102,7 @@ export default async function MswLicensesList({
                 >
                   <PaperClipIcon className="h-5 w-5 group-hover:border group-hover:border-gray-500 group-hover:rounded-md" />
                 </a>
+                <EllipsisDropDownMenu menuItems={menuItems} />
               </div>
             </li>
           );
