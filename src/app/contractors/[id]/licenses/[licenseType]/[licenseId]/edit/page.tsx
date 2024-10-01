@@ -18,18 +18,34 @@ export default async function Page({
   const { licenseType, licenseId } = params;
 
   let license;
+  let contractorName;
+  let pages
   let breadcrumbs;
   let formComponent;
 
   switch (licenseType) {
     case "msw":
       license = await getMswLicenseById(Number(licenseId));
-      formComponent = <MswLicenseEditForm />;
+      contractorName = `${license?.contractor?.isPrefixEntityType ? license?.contractor.entityType : ""}${license?.contractor?.name}${license?.contractor?.entityType && !license.contractor.isPrefixEntityType ? license.contractor.entityType : ""}`;
+      pages = [
+        { name: "業者", href: "/contractors", current: false },
+        {
+          name: contractorName || "",
+          href: `/contractors/${license?.contractorId}`,
+          current: false,
+        },
+        { name: "許可", href: "", current: false },
+        { name: "一般廃棄物", href: "", current: false },
+        { name: "編集", href: "", current: true },
+      ];
+      breadcrumbs = <Breadcrumbs pages={pages} />;
+      formComponent = <MswLicenseEditForm license={license} />;
+
       break;
     case "industrial-waste":
       license = await getIndustrialWasteLicenseById(Number(licenseId));
-      const contractorName = `${license?.contractor?.isPrefixEntityType ? license?.contractor.entityType : ""}${license?.contractor?.name}${license?.contractor?.entityType && !license.contractor.isPrefixEntityType ? license.contractor.entityType : ""}`;
-      const pages = [
+      contractorName = `${license?.contractor?.isPrefixEntityType ? license?.contractor.entityType : ""}${license?.contractor?.name}${license?.contractor?.entityType && !license.contractor.isPrefixEntityType ? license.contractor.entityType : ""}`;
+      pages = [
         { name: "業者", href: "/contractors", current: false },
         {
           name: contractorName || "",

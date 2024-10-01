@@ -3,8 +3,6 @@
 import React from "react";
 
 import { useForm, FormProvider } from "react-hook-form";
-import PrefectureMunicipalitySelect from "./PrefectureMunicipalitySelect";
-import RadioGroup from "./RadioGroup";
 import DateInput from "./DateInput";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
@@ -21,15 +19,12 @@ export default function MswLicenseEditForm({ license }: any) {
   const methods = useForm({
     defaultValues: {
       contractorId: license.contractorId,
-      prefectureId: license.prefectureId,
-      municipalityId: license.municipalityId,
       type: String(license.type),
       expirationDate: formatDate(license.expirationDate),
       licenseUrl: license.licenseUrl,
     },
   });
   const minDate = getTodayDate();
-  const defaultType = methods.watch("type");
 
   const onSubmit = async (formData: any) => {
     console.log(formData);
@@ -38,19 +33,14 @@ export default function MswLicenseEditForm({ license }: any) {
 
   return (
     <>
-      <div className="mt-2 mb-8">{""}</div>
+      <div className="pb-10">
+        { }
+        {license.type === 1 ? "収集運搬" : "処分"} 業許可
+      </div>
 
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid gap-y-10">
-            <RadioGroup
-              legendTitle={"業の種類"}
-              groupName={"type"}
-              options={options}
-              defaultValue={defaultType}
-              disabled={true}
-            />
-            <PrefectureMunicipalitySelect disabled={true} editForm={true} />
             <DateInput
               name={"expirationDate"}
               label={"許可期限"}
@@ -64,7 +54,7 @@ export default function MswLicenseEditForm({ license }: any) {
           </div>
           <div className="mt-10 grid gap-y-5">
             <SubmitButton
-              label="登録"
+              label="変更する"
               disabled={methods.formState.isSubmitting}
             />
             <CancelButton label="キャンセル" onClick={() => methods.reset()} />

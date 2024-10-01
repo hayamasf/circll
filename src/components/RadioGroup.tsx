@@ -12,7 +12,7 @@ export default function RadioGroup({
   legendTitle: string;
   groupName: string;
   options: RadioOption[];
-  defaultValue: string;
+  defaultValue?: string;
   disabled?: boolean;
 }) {
   const { register } = useFormContext();
