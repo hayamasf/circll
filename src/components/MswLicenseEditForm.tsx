@@ -19,7 +19,6 @@ export default function MswLicenseEditForm({ license }: any) {
   const methods = useForm({
     defaultValues: {
       contractorId: license.contractorId,
-      type: String(license.type),
       expirationDate: formatDate(license.expirationDate),
       licenseUrl: license.licenseUrl,
     },
@@ -33,9 +32,8 @@ export default function MswLicenseEditForm({ license }: any) {
 
   return (
     <>
-      <div className="pb-10">
-        { }
-        {license.type === 1 ? "収集運搬" : "処分"} 業許可
+      <div className="pb-10 font-semibold text-gray-800 text-base">
+        {license.municipality.name}<span className="text-sm text-gray-500 font-thin">の</span>{license.type === 1 ? "収集運搬" : "処分"}業
       </div>
 
       <FormProvider {...methods}>
