@@ -59,7 +59,6 @@ export default function LegalEntityRegistrationForm({
             <div className="grid gap-y-8">
               {type === "corporate" && <CorporateEntityInputs />}
               {type === "sole-proprietor" && <SoleProprietorInputs />}
-              <hr className="my-2" />
               <AddressInputs />
             </div>
             <div className="mt-10 grid gap-y-5">

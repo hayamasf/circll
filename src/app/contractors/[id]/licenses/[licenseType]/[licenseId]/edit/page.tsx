@@ -19,7 +19,7 @@ export default async function Page({
 
   let license;
   let contractorName;
-  let pages
+  let pages;
   let breadcrumbs;
   let formComponent;
 

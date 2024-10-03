@@ -9,7 +9,7 @@ export default function Page() {
   ];
 
   return (
-    <div className="mx-auto max-w-sm">
+    <div className="mx-auto max-w-lg">
       <Breadcrumbs pages={pages} />
       <LegalEntityRegistrationForm entity="contractor" />
     </div>

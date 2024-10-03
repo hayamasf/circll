@@ -30,7 +30,6 @@ export default async function MswLicensesList({
     );
   }
 
-
   return (
     <div className="grid gap-y-2">
       <div className="text-right">
@@ -47,8 +46,17 @@ export default async function MswLicensesList({
           const daysLeft = getDaysUntilExpiration(license.expirationDate);
 
           const menuItems = [
-            { id: 1, text: "編集する", href: "/contractors/" + license.contractorId + "/licenses/msw/" + license.id + "/edit" }
-          ]
+            {
+              id: 1,
+              text: "編集する",
+              href:
+                "/contractors/" +
+                license.contractorId +
+                "/licenses/msw/" +
+                license.id +
+                "/edit",
+            },
+          ];
 
           return (
             <li

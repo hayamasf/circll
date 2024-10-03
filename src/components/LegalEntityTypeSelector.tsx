@@ -5,14 +5,14 @@ import { UserIcon, BuildingOfficeIcon } from "@heroicons/react/24/outline";
 
 export default function LegalEntityTypeSelector({ type }: { type: string }) {
   return (
-    <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+    <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6">
       <Link
         href={"./register?type=corporate"}
         className={classNames(
           type === "corporate"
             ? "border-gray-500 border-2 bg-gray-100"
             : "border-gray-300 bg-white",
-          "flex items-center space-x-3 rounded-lg border px-6 py-5 shadow-sm hover:border-gray-400",
+          "flex items-center  space-x-3 rounded-lg border px-6 py-3 shadow-sm sm:col-span-3 hover:border-gray-400",
         )}
       >
         <BuildingOfficeIcon className="h-6 w-6" />
@@ -24,7 +24,7 @@ export default function LegalEntityTypeSelector({ type }: { type: string }) {
           type === "sole-proprietor"
             ? "border-gray-500 border-2 bg-gray-100"
             : "border-gray-300 bg-white",
-          "flex items-center space-x-3 rounded-lg border px-6 py-5 shadow-sm hover:border-gray-400",
+          "flex items-center space-x-3 rounded-lg border px-6 py-3 shadow-sm sm:col-span-3 hover:border-gray-400",
         )}
       >
         <UserIcon className="h-6 w-6" />
