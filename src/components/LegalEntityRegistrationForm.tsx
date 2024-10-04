@@ -56,7 +56,7 @@ export default function LegalEntityRegistrationForm({
       <FormProvider {...methods}>
         {type && (
           <form onSubmit={methods.handleSubmit(onSubmit)} className="mt-10">
-            <div className="grid gap-y-8">
+            <div>
               {type === "corporate" && <CorporateEntityInputs />}
               {type === "sole-proprietor" && <SoleProprietorInputs />}
               <AddressInputs />

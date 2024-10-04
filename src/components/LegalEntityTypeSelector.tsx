@@ -5,7 +5,7 @@ import { UserIcon, BuildingOfficeIcon } from "@heroicons/react/24/outline";
 
 export default function LegalEntityTypeSelector({ type }: { type: string }) {
   return (
-    <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6">
+    <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6">
       <Link
         href={"./register?type=corporate"}
         className={classNames(

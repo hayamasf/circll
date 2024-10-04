@@ -46,142 +46,151 @@ export default function AddressInputs() {
   };
 
   return (
-    <>
-      <div className="grid grid-cols-3 gap-x-1">
-        <div className="relative">
+    <div className="py-10 space-y-10 border-b border-gray-900/10">
+      <div className="grid gap-x-6 gap-y-8 grid-cols-6">
+        <div className="col-span-2">
           <label
             htmlFor="postalCode"
-            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            className="block text-sm font-medium leading-6 text-gray-900"
           >
             郵便番号
           </label>
-          <input
-            type="text"
-            id="postalCode"
-            {...register("postalCode", { required: "郵便番号は必須です" })}
-            maxLength={7}
-            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-            placeholder="1040032"
-          />
+          <div className="mt-2">
+            <input
+              id="postalCode"
+              type="text"
+              {...register("postalCode", { required: "郵便番号は必須です" })}
+              maxLength={7}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              placeholder="1040032"
+            />
+          </div>
+          {errors.postalCode?.message && (
+            <p className="text-xs text-red-500 p-1">
+              {errors.postalCode?.message}
+            </p>
+          )}
         </div>
-        <div className="col-span-2 ml-3 place-content-center">
+        <div className="col-span-2 place-content-end">
           <button
             type="button"
-            className="py-1.5 px-1 rounded-md shadow-lg bg-gray-800 text-white text-xs"
+            className="block w-full text-base rounded-md px-2 py-1.5 shadow-lg bg-gray-700 text-white ring-1 ring-inset"
             onClick={postalcodeToPrefectureCityTown}
           >
-            郵便番号→住所
+            〒 → 住所
           </button>
         </div>
-        {errors.postalCode?.message && (
-          <p className="text-xs text-red-500 p-1">
-            {errors.postalCode.message}
-          </p>
-        )}
       </div>
-      <div className="grid grid-cols-2 gap-x-1">
-        <div className="relative">
+
+      <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div className="sm:col-span-2">
           <label
             htmlFor="prefecture"
-            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            className="block text-sm font-medium leading-6 text-gray-900"
           >
             都道府県
           </label>
-          <input
-            type="text"
-            id="prefecture"
-            {...register("prefecture", { required: "必須" })}
-            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-            placeholder="東京都"
-            readOnly
-          />
+          <div className="mt-2">
+            <input
+              id="prefecture"
+              type="text"
+              {...register("prefecture", { required: "必須" })}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              placeholder="東京都"
+              readOnly={true}
+            />
+          </div>
           {errors.prefecture?.message && (
             <p className="text-xs text-red-500 p-1">
               {errors.prefecture.message}
             </p>
           )}
         </div>
-        <div className="relative">
+
+        <div className="sm:col-span-2">
           <label
             htmlFor="city"
-            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            className="block text-sm font-medium leading-6 text-gray-900"
           >
             市区町村
           </label>
-          <input
-            type="text"
-            id="city"
-            {...register("city", { required: "必須" })}
-            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-            placeholder="中央区"
-            readOnly
-          />
+          <div className="mt-2">
+            <input
+              id="city"
+              type="text"
+              {...register("city", { required: "必須" })}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              placeholder="中央区"
+              readOnly={true}
+            />
+          </div>
           {errors.city?.message && (
             <p className="text-xs text-red-500 p-1">{errors.city.message}</p>
           )}
         </div>
-      </div>
-      <div className="grid grid-cols-2 gap-x-1">
-        <div className="relative">
+
+        <div className="sm:col-span-2">
           <label
             htmlFor="town"
-            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            className="block text-sm font-medium leading-6 text-gray-900"
           >
             町域
           </label>
-          <input
-            type="text"
-            id="town"
-            {...register("town", { required: "必須" })}
-            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-            placeholder="八丁堀"
-          />
+          <div className="mt-2">
+            <input
+              id="town"
+              type="text"
+              {...register("town", { required: "必須" })}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              placeholder="八丁堀"
+            />
+          </div>
           {errors.town?.message && (
             <p className="text-xs text-red-500 p-1">{errors.town.message}</p>
           )}
         </div>
-        <div className="relative">
+      </div>
+
+      <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div className="sm:col-span-3">
           <label
             htmlFor="address"
-            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            className="block text-sm font-medium leading-6 text-gray-900"
           >
             丁目、番地以下
           </label>
-          <input
-            type="text"
-            id="address"
-            {...register("address", { required: "住所は必須です" })}
-            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-            placeholder="三丁目12番8号"
-          />
+          <div className="mt-2">
+            <input
+              id="address"
+              type="text"
+              {...register("address", { required: "住所は必須です" })}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              placeholder="三丁目12番8号"
+            />
+          </div>
           {errors.address?.message && (
             <p className="text-xs text-red-500 p-1">{errors.address.message}</p>
           )}
         </div>
-      </div>
-      <div className="relative">
-        <div className="flex justify-between">
+
+        <div className="sm:col-span-3">
           <label
             htmlFor="address2"
-            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
+            className="block text-sm font-medium leading-6 text-gray-900"
           >
-            ビル名など
+            ビル名など（オプショナル）
           </label>
-          <span
-            className="absolute -top-2 right-2 inline-block bg-white px-1 text-xs text-gray-900"
-            id="address2-optional"
-          >
-            （任意）
-          </span>
+          <div className="mt-2">
+            <input
+              id="address2"
+              type="text"
+              {...register("address2")}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              placeholder="HF八丁堀ビル"
+            />
+          </div>
         </div>
-        <input
-          type="text"
-          id="address2"
-          {...register("address2")}
-          className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-          placeholder="HF八丁堀ビル"
-        />
       </div>
-    </>
+    </div>
   );
 }
