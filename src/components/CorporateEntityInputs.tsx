@@ -16,7 +16,7 @@ export default function CorporateEntityInputs() {
   }, []);
 
   return (
-    <div className="space-y-10 border-b border-gray-900/10">
+    <div className="pb-10 space-y-10 border-b border-gray-900/10">
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div className="sm:col-span-3">
           <label
