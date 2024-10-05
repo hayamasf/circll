@@ -57,11 +57,13 @@ export default function SiteEditForm({ site }: { site: Site }) {
   return (
     <FormProvider {...methods}>
       <form className="" onSubmit={methods.handleSubmit(onSubmit)}>
-        <div className="grid gap-y-8">
+        <div className="">
           <SiteInputs />
           <AddressInputs />
-          <SubmitButton label="送信" disabled={!methods.formState.isDirty} />
-          <CancelButton label="キャンセル" onClick={() => methods.reset()} />
+          <div className="py-10 grid gap-y-5">
+            <SubmitButton label="送信" disabled={!methods.formState.isDirty} />
+            <CancelButton label="キャンセル" onClick={() => methods.reset()} />
+          </div>
         </div>
       </form>
     </FormProvider>

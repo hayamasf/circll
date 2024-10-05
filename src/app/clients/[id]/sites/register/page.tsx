@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <div className="mx-auto max-w-lg">
-      <div className="pt-3">
+      <div className="pt-3 pb-10">
         <Breadcrumbs pages={pages} />
       </div>
       <SiteRegistrationForm id={client?.id} />

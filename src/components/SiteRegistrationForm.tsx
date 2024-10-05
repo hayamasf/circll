@@ -36,10 +36,10 @@ export default function SiteRegistrationForm({ id }: { id: number }) {
 
   return (
     <FormProvider {...methods}>
-      <form className="mt-10" onSubmit={methods.handleSubmit(onSubmit)}>
-        <div className="grid gap-y-8">
-          <SiteInputs />
-          <AddressInputs />
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <SiteInputs />
+        <AddressInputs />
+        <div className="py-10 grid gap-y-5">
           <SubmitButton
             label="登録"
             disabled={methods.formState.isSubmitting}
