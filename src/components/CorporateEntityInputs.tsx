@@ -20,20 +20,30 @@ export default function CorporateEntityInputs() {
     <div className="pb-10 space-y-10 border-b border-gray-900/10">
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div className="sm:col-span-3">
-          <Select id="entityType" label="法人の種類" name="entityType" options={[
-            { value: "株式会社", label: "株式会社" },
-            { value: "有限会社", label: "有限会社" },
-            { value: "合同会社", label: "合同会社" },
-            { value: "合名会社", label: "合名会社" },
-            { value: "合資会社", label: "合資会社" },
-          ]} />
+          <Select
+            id="entityType"
+            label="法人の種類"
+            name="entityType"
+            options={[
+              { value: "株式会社", label: "株式会社" },
+              { value: "有限会社", label: "有限会社" },
+              { value: "合同会社", label: "合同会社" },
+              { value: "合名会社", label: "合名会社" },
+              { value: "合資会社", label: "合資会社" },
+            ]}
+          />
         </div>
 
         <div className="sm:col-span-3">
-          <Select id="isPrefixEntityType" label="法人格は名称の" name="isPrefixEntityType" options={[
-            { value: "true", label: "前" },
-            { value: "false", label: "後ろ" },
-          ]} />
+          <Select
+            id="isPrefixEntityType"
+            label="法人格は名称の"
+            name="isPrefixEntityType"
+            options={[
+              { value: true, label: "前" },
+              { value: false, label: "後ろ" },
+            ]}
+          />
         </div>
       </div>
 

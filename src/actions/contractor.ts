@@ -5,11 +5,12 @@ import { redirect } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@auth0/nextjs-auth0";
-import { LegalEntityFormData } from "@/types/types";
+// import { LegalEntityFormData } from "@/types/types";
 import convertToBoolean from "@/utils/convertToBoolean";
+import { Contractor,} from "@prisma/client";
 
 export async function createContractor(
-  formData: LegalEntityFormData,
+  formData: Contractor,
 ): Promise<void> {
   let isPrefixEntityType;
 
@@ -70,15 +71,20 @@ export async function createContractor(
   }
 }
 
-export async function updateContractor(formData: Partial<LegalEntityFormData>) {
+export async function updateContractor(formData: Contractor) {
   try {
     const id = formData.id;
     const session = await getSession();
     const userId = session?.user.sub;
+    let isPrefixEntityType;
 
-    if (typeof formData.isPrefixEntityType === "string") {
-      formData.isPrefixEntityType = formData.isPrefixEntityType === "true";
+    if (formData.isPrefixEntityType) {
+      isPrefixEntityType = convertToBoolean(formData.isPrefixEntityType);
     }
+
+    // if (typeof formData.isPrefixEntityType === "string") {
+    //   formData.isPrefixEntityType = formData.isPrefixEntityType === "true";
+    // }
 
     await prisma.contractor.update({
       where: { id: id },

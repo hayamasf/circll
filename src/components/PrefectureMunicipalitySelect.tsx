@@ -12,7 +12,12 @@ export default function PrefectureMunicipalitySelect({
   disabled?: boolean;
   editForm?: boolean;
 }) {
-  const { register, reset, watch, formState: { errors } } = useFormContext();
+  const {
+    register,
+    reset,
+    watch,
+    formState: { errors },
+  } = useFormContext();
 
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
   const [selectedPrefecture, setSelectedPrefecture] = useState<number | null>(
@@ -79,7 +84,9 @@ export default function PrefectureMunicipalitySelect({
           </select>
         </div>
         {errors.prefectureId && (
-          <p className="text-xs text-red-500 p-1">{errors.prefectureId.message as string}</p>
+          <p className="text-xs text-red-500 p-1">
+            {errors.prefectureId.message as string}
+          </p>
         )}
       </div>
       <div className="col-span-1">
@@ -106,7 +113,10 @@ export default function PrefectureMunicipalitySelect({
             ))}
           </select>
         </div>
-        {errors.municipalityId && (<p className="text-xs text-red-500 p-1">{errors.municipalityId.message as string}</p>
+        {errors.municipalityId && (
+          <p className="text-xs text-red-500 p-1">
+            {errors.municipalityId.message as string}
+          </p>
         )}
       </div>
     </div>

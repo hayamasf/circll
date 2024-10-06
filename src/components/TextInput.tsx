@@ -8,13 +8,16 @@ export default function TextInput({
   placeholder,
   validation,
 }: {
-  id: string
+  id: string;
   label: string;
   name: string;
   placeholder: string;
   validation?: RegisterOptions;
 }) {
-  const { register, formState: { errors } } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <>
@@ -34,7 +37,9 @@ export default function TextInput({
         />
       </div>
       {errors[name]?.message && (
-        <p className="text-xs text-red-500 p-1">{errors[name]?.message as string}</p>
+        <p className="text-xs text-red-500 p-1">
+          {errors[name]?.message as string}
+        </p>
       )}
     </>
     //     <div className="relative">
