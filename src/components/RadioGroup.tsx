@@ -18,11 +18,11 @@ export default function RadioGroup({
   const { register } = useFormContext();
 
   return (
-    <fieldset className="relative">
-      <legend className="absolute text-xs font-medium left-3.5 -top-2 leading-6 text-gray-900">
+    <fieldset>
+      <legend className="block text-sm font-medium leading-6 text-gray-900">
         {legendTitle}
       </legend>
-      <div className="mt-4 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
+      <div className="mt-2 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
         {options.map((option) => (
           <div key={option.id} className="flex items-center">
             <input
