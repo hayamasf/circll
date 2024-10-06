@@ -30,7 +30,7 @@ export type Address = {
 
 export type LegalEntityFormData = {
   entityType?: string | null;
-  isPrefixEntityType?: boolean | null;
+  isPrefixEntityType?: string | null;
   name: string;
   tradeName?: string | null;
   representativeTitle?: string | null;

@@ -21,7 +21,7 @@ export default function LegalEntityRegistrationForm({
   const methods = useForm<LegalEntityFormData>({
     defaultValues: {
       entityType: "株式会社",
-      isPrefixEntityType: true,
+      isPrefixEntityType: "true",
       name: "",
       representativeTitle: "",
       representativeName: "",
