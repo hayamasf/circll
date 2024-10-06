@@ -62,9 +62,11 @@ export default function MswLicenseEditForm({ license }: any) {
               min={minDate}
             /> */}
             <TextInput
+              id={"licenseUrl"}
               label={"許可証のURL"}
               name={"licenseUrl"}
-              placeholder={"https://www.example.com/license/copy.pdf"}
+              placeholder={""}
+              validation={{ required: "許可証のURLを入力してください." }}
             />
           </div>
           <div className="mt-10 grid gap-y-5">
