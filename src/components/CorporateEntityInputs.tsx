@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { LegalEntityFormData } from "@/types/types";
+import Select from "./Select";
 
 export default function CorporateEntityInputs() {
   const {
@@ -19,44 +20,20 @@ export default function CorporateEntityInputs() {
     <div className="pb-10 space-y-10 border-b border-gray-900/10">
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div className="sm:col-span-3">
-          <label
-            htmlFor="entityType"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            法人の種類
-          </label>
-          <div className="mt-2">
-            <select
-              id="entityType"
-              {...register("entityType")}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:max-w-xs sm:text-sm sm:leading-6"
-            >
-              <option value="株式会社">株式会社</option>
-              <option value="有限会社">有限会社</option>
-              <option value="合同会社">合同会社</option>
-              <option value="合名会社">合名会社</option>
-              <option value="合資会社">合資会社</option>
-            </select>
-          </div>
+          <Select id="entityType" label="法人の種類" name="entityType" options={[
+            { value: "株式会社", label: "株式会社" },
+            { value: "有限会社", label: "有限会社" },
+            { value: "合同会社", label: "合同会社" },
+            { value: "合名会社", label: "合名会社" },
+            { value: "合資会社", label: "合資会社" },
+          ]} />
         </div>
 
         <div className="sm:col-span-3">
-          <label
-            htmlFor="isPrefixEntityType"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            法人格は名称の
-          </label>
-          <div className="mt-2">
-            <select
-              id="isPrefixEntityType"
-              {...register("isPrefixEntityType")}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:max-w-xs sm:text-sm sm:leading-6"
-            >
-              <option value="true">前</option>
-              <option value="false">後ろ</option>
-            </select>
-          </div>
+          <Select id="isPrefixEntityType" label="法人格は名称の" name="isPrefixEntityType" options={[
+            { value: "true", label: "前" },
+            { value: "false", label: "後ろ" },
+          ]} />
         </div>
       </div>
 
