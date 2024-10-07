@@ -11,15 +11,15 @@ import SoleProprietorInputs from "./SoleProprietorInputs";
 import AddressInputs from "./AddressInputs";
 import { createClient } from "@/actions/client";
 import { createContractor } from "@/actions/contractor";
-import { LegalEntityFormData } from "@/types/types";
-import { Contractor, Client } from "@prisma/client";
+// import { LegalEntityFormData } from "@/types/types";
+import { Client, Contractor } from "@prisma/client";
 
 export default function LegalEntityRegistrationForm({
   entity,
 }: {
   entity: string;
 }) {
-  const methods = useForm<Contractor | Client>({
+  const methods = useForm<Client | Contractor>({
     defaultValues: {
       entityType: "株式会社",
       isPrefixEntityType: true,
@@ -36,7 +36,7 @@ export default function LegalEntityRegistrationForm({
     },
   });
 
-  const onSubmit = async (formData: Contractor | Client) => {
+  const onSubmit = async (formData: Client | Contractor) => {
     try {
       if (entity === "client") {
         const result = await createClient(formData);

@@ -71,15 +71,20 @@ export async function createClient(formData: LegalEntityFormData) {
   }
 }
 
-export async function updateClient(formData: Partial<Client>) {
+export async function updateClient(formData: Client) {
   try {
     const id = formData.id;
     const session = await getSession();
     const userId = session?.user.sub;
+    let isPrefixEntityType
 
-    if (typeof formData.isPrefixEntityType === "string") {
-      formData.isPrefixEntityType = formData.isPrefixEntityType === "true";
+    if (formData.isPrefixEntityType) {
+      isPrefixEntityType = convertToBoolean(formData.isPrefixEntityType);
     }
+
+    // if (typeof formData.isPrefixEntityType === "string") {
+    //   formData.isPrefixEntityType = formData.isPrefixEntityType === "true";
+    // }
 
     await prisma.client.update({
       where: { id: id },
