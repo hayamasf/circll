@@ -13,9 +13,9 @@ export default function TextInput({
   id: string;
   label: string;
   name: string;
-  type?: string
+  type?: string;
   placeholder: string;
-  required?: boolean
+  required?: boolean;
   validation?: RegisterOptions;
 }) {
   const {

@@ -52,7 +52,14 @@ export default function IndustrialWasteLicenseRegistrationForm({
               required={true}
             />
             <div>
-              <TextInput id="licenseUrl" label="許可証のURL" name="licenseUrl" type="url" placeholder="https://www.example.com/license/copy.pdf" validation={{ required: "URLを入力してください." }} />
+              <TextInput
+                id="licenseUrl"
+                label="許可証のURL"
+                name="licenseUrl"
+                type="url"
+                placeholder="https://www.example.com/license/copy.pdf"
+                validation={{ required: "URLを入力してください." }}
+              />
             </div>
             <IndustrialWasteItemCheckbox
               industrialWasteCategories={industrialWasteCategories}

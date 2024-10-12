@@ -11,6 +11,7 @@ import CancelButton from "./CancelButton";
 import getTodayDate from "@/utils/getTodayDate";
 import TextInput from "./TextInput";
 import { createLicense } from "@/actions/mswLicense";
+import DatePickerComponent from "./DatePickerComponent";
 
 const options = [
   { id: "1", title: "収集運搬" },
@@ -52,6 +53,15 @@ export default function MswLicenseRegistrationForm({ id }: { id: number }) {
               label={"許可期限"}
               min={minDate}
             />
+            <div>
+              <DatePickerComponent
+                id="expiryDate"
+                label="許可期限"
+                name="expiryDate"
+                control={methods.control}
+              />
+            </div>
+
             <div>
               <TextInput
                 id={"licenseUrl"}

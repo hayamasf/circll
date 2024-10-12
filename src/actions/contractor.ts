@@ -76,7 +76,9 @@ export async function updateContractor(formData: Partial<Contractor>) {
     const userId = session?.user.sub;
 
     if (typeof formData.isPrefixEntityType === "string") {
-      formData.isPrefixEntityType = convertToBoolean(formData.isPrefixEntityType);
+      formData.isPrefixEntityType = convertToBoolean(
+        formData.isPrefixEntityType,
+      );
     }
 
     await prisma.contractor.update({
