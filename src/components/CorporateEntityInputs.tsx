@@ -40,8 +40,8 @@ export default function CorporateEntityInputs() {
             label="法人格は名称の"
             name="isPrefixEntityType"
             options={[
-              { value: true, label: "前" },
-              { value: false, label: "後ろ" },
+              { value: "true", label: "前" },
+              { value: "false", label: "後ろ" },
             ]}
           />
         </div>

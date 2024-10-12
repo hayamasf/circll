@@ -71,20 +71,17 @@ export async function createClient(formData: LegalEntityFormData) {
   }
 }
 
-export async function updateClient(formData: Client) {
+export async function updateClient(formData: Partial<Client>) {
   try {
     const id = formData.id;
     const session = await getSession();
     const userId = session?.user.sub;
-    let isPrefixEntityType
 
-    if (formData.isPrefixEntityType) {
-      isPrefixEntityType = convertToBoolean(formData.isPrefixEntityType);
+    if (typeof formData.isPrefixEntityType === "string") {
+      formData.isPrefixEntityType = convertToBoolean(
+        formData.isPrefixEntityType,
+      );
     }
-
-    // if (typeof formData.isPrefixEntityType === "string") {
-    //   formData.isPrefixEntityType = formData.isPrefixEntityType === "true";
-    // }
 
     await prisma.client.update({
       where: { id: id },
@@ -94,7 +91,9 @@ export async function updateClient(formData: Client) {
       },
     });
 
+    // to be removed
     console.log(formData);
+
     return { success: true, message: "更新が成功しました." };
   } catch (error) {
     console.error("データの更新に失敗しました.", error);

@@ -10,16 +10,16 @@ import { LegalEntityFormData } from "@/types/types";
 import CorporateEntityInputs from "./CorporateEntityInputs";
 import SoleProprietorInputs from "./SoleProprietorInputs";
 import AddressInputs from "./AddressInputs";
+import { Client, Contractor } from "@prisma/client";
 
 export default function LegalEntityEditForm({
   entity,
   action,
 }: {
-  entity: LegalEntityFormData;
+  entity: Client | Contractor;
   action: (
-    data: Partial<LegalEntityFormData>,
+    formData: Partial<Client | Contractor>,
   ) => Promise<{ success: boolean; message: string }>;
-  // action: (formData: LegalEntity) => Promise<void>;
 }) {
   const router = useRouter();
 
@@ -27,7 +27,7 @@ export default function LegalEntityEditForm({
     defaultValues: {
       id: entity.id,
       entityType: entity.entityType,
-      isPrefixEntityType: entity.isPrefixEntityType,
+      isPrefixEntityType: String(entity.isPrefixEntityType),
       name: entity.name,
       representativeTitle: entity.representativeTitle,
       representativeName: entity.representativeName,
@@ -71,14 +71,13 @@ export default function LegalEntityEditForm({
 
   return (
     <FormProvider {...methods}>
-      <form className="" onSubmit={methods.handleSubmit(onSubmit)}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
         <div className="grid gap-y-8">
           {entity.entityType ? (
             <CorporateEntityInputs />
           ) : (
             <SoleProprietorInputs />
           )}
-          <hr className="my-2" />
           <AddressInputs />
         </div>
         <div className="mt-10 grid gap-y-5">
