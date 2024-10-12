@@ -8,6 +8,7 @@ import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 import getTodayDate from "@/utils/getTodayDate";
 import Input from "./Input";
+import TextInput from "./TextInput";
 import IndustrialWasteItemCheckbox from "./IndustrialWasteItemCheckbox";
 import { createLicense } from "@/actions/industrialWasteLicense";
 import { IndustrialWasteCategory } from "@prisma/client";
@@ -50,13 +51,9 @@ export default function IndustrialWasteLicenseRegistrationForm({
               min={minDate}
               required={true}
             />
-            <Input
-              label="許可証のURL"
-              name="licenseUrl"
-              type="url"
-              placeholder="https://www.example.com/license/copy.pdf"
-              required={true}
-            />
+            <div>
+              <TextInput id="licenseUrl" label="許可証のURL" name="licenseUrl" type="url" placeholder="https://www.example.com/license/copy.pdf" validation={{ required: "URLを入力してください." }} />
+            </div>
             <IndustrialWasteItemCheckbox
               industrialWasteCategories={industrialWasteCategories}
             />

@@ -59,6 +59,7 @@ export default function MswLicenseRegistrationForm({ id }: { id: number }) {
                 name={"licenseUrl"}
                 placeholder={"https://www.example.com/license/copy.pdf"}
                 validation={{ required: "許可証のURLを入力してください." }}
+                required={true}
               />
             </div>
           </div>
