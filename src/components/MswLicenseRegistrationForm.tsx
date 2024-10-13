@@ -48,16 +48,11 @@ export default function MswLicenseRegistrationForm({ id }: { id: number }) {
               defaultValue={methods.getValues("type")}
             />
             <PrefectureMunicipalitySelect />
-            <DateInput
-              name={"expirationDate"}
-              label={"許可期限"}
-              min={minDate}
-            />
             <div>
               <DatePickerComponent
-                id="expiryDate"
+                id="expirationDate"
                 label="許可期限"
-                name="expiryDate"
+                name="expirationDate"
                 control={methods.control}
               />
             </div>

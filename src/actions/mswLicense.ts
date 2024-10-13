@@ -6,7 +6,7 @@ import { MswLicense } from "@/types/types";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-export async function createLicense(data: MswLicense) {
+export async function createLicense(formData: MswLicense) {
   let newLicenseId: number | undefined;
 
   try {
@@ -17,27 +17,27 @@ export async function createLicense(data: MswLicense) {
       throw new Error("ユーザーIDを確認してください.");
     }
 
-    console.log(data);
+    console.log(formData);
 
     const newLicense = await prisma.mswLicense.create({
       data: {
         createdBy: userId,
-        contractorId: Number(data.contractorId),
-        municipalityId: Number(data.municipalityId),
-        type: Number(data.type),
-        expirationDate: new Date(data.expirationDate),
-        licenseUrl: data.licenseUrl,
+        contractorId: Number(formData.contractorId),
+        municipalityId: Number(formData.municipalityId),
+        type: Number(formData.type),
+        expirationDate: new Date(formData.expirationDate),
+        licenseUrl: formData.licenseUrl,
       },
     });
 
     newLicenseId = newLicense.id;
-    revalidatePath(`/contractors/${data.contractorId}`);
+    revalidatePath(`/contractors/${formData.contractorId}`);
   } catch (error) {
     console.error("データの登録に失敗しました.", error);
     throw new Error("データの登録に失敗しました.");
   } finally {
     if (newLicenseId) {
-      redirect(`/contractors/${data.contractorId}`);
+      redirect(`/contractors/${formData.contractorId}`);
     }
   }
 }
