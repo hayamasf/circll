@@ -48,13 +48,15 @@ export default function MswLicenseRegistrationForm({ id }: { id: number }) {
               defaultValue={methods.getValues("type")}
             />
             <PrefectureMunicipalitySelect />
-            <div>
-              <DatePickerComponent
-                id="expirationDate"
-                label="許可期限"
-                name="expirationDate"
-                control={methods.control}
-              />
+            <div className="grid grid-cols-2 gap-x-6">
+              <div className="col-span-2 sm:col-span-1">
+                <DatePickerComponent
+                  id="expirationDate"
+                  label="許可期限"
+                  name="expirationDate"
+                  control={methods.control}
+                />
+              </div>
             </div>
 
             <div>
