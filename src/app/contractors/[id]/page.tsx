@@ -31,7 +31,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     : [];
 
   return (
-    <div className="mx-auto max-w-xl">
+    <div className="mx-auto max-w-2xl">
       <div className="py-5">
         <Breadcrumbs pages={pages} />
       </div>
