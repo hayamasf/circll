@@ -18,6 +18,8 @@ export async function createLicense(
 ) {
   let newLicenseId: number | undefined;
 
+  console.log(formData);
+
   try {
     const session = await getSession();
     const userId = session?.user.sub;
@@ -26,9 +28,7 @@ export async function createLicense(
       throw new Error("ユーザーIDを確認してください.");
     }
 
-    console.log("----");
-    console.log(formData);
-    console.log("----");
+    // console.log(formData);
 
     const newLicense = await prisma.industrialWasteLicense.create({
       data: {

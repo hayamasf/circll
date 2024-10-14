@@ -3,10 +3,8 @@
 import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import IndustrialWasteLicenseNumberSelect from "./IndustrialWasteLicenseNumberSelect";
-import DateInput from "./DateInput";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
-import getTodayDate from "@/utils/getTodayDate";
 import TextInput from "./TextInput";
 import DatePickerComponent from "./DatePickerComponent";
 import IndustrialWasteItemCheckbox from "./IndustrialWasteItemCheckbox";
@@ -29,7 +27,7 @@ export default function IndustrialWasteLicenseRegistrationForm({
       contractorCode: "",
       expirationDate: "",
       licenseUrl: "",
-      licensedCategoris: [],
+      licensedCategories: [],
     },
   });
 
@@ -46,11 +44,6 @@ export default function IndustrialWasteLicenseRegistrationForm({
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid gap-y-10">
             <IndustrialWasteLicenseNumberSelect />
-            <DateInput
-              name={"expirationDate"}
-              label={"許可期限"}
-              required={true}
-            />
 
             <div className="grid grid-cols-2 gap-x-6">
               <div className="col-span-2 sm:col-span-1">
@@ -59,6 +52,7 @@ export default function IndustrialWasteLicenseRegistrationForm({
                   label="許可期限"
                   name="expirationDate"
                   minData={today}
+                  validation={{ required: "有効期限は必須です." }}
                   control={methods.control}
                 />
               </div>
@@ -72,6 +66,7 @@ export default function IndustrialWasteLicenseRegistrationForm({
                 type="url"
                 placeholder="https://www.example.com/license/copy.pdf"
                 validation={{ required: "URLを入力してください." }}
+                required={true}
               />
             </div>
             <IndustrialWasteItemCheckbox

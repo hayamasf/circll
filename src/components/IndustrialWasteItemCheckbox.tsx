@@ -18,9 +18,9 @@ export default function IndustrialWasteItemCheckbox({
         <legend className="text-base font-semibold leading-6 text-gray-900">
           産業廃棄物の品目
         </legend>
-        {errors.wasteItems?.message && (
+        {errors.licensedCategories?.message && (
           <p className="my-2 text-sm text-red-600">
-            {String(errors.wasteItems.message)}
+            {String(errors.licensedCategories.message)}
           </p>
         )}
 

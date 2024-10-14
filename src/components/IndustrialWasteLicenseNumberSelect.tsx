@@ -11,11 +11,11 @@ export default function IndustrialWasteLicenseNumberSelect() {
 
   return (
     <>
-      <fieldset className="relative">
-        <legend className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900">
+      <fieldset>
+        <legend className="block text-sm font-medium leading-6 text-gray-900">
           許可番号 ※11桁（東京都は10桁）の数字
         </legend>
-        <div className="flex border-0 px-1 py-1 ring-1 ring-inset ring-gray-300 rounded-md">
+        <div className="mt-2 flex border-0 py-0.5 px-1 ring-1 ring-inset ring-gray-300 rounded-md">
           <div className="">
             <label htmlFor="issuingAuthority" className="sr-only">
               都道府県/政令市番号
@@ -24,7 +24,7 @@ export default function IndustrialWasteLicenseNumberSelect() {
               id="issuingAuthority"
               {...register("issuingAuthority", { required: true })}
               required
-              className={`w-fit border-0 border-b text-gray-900 focus:ring-0 sm:text-sm`}
+              className={`w-fit border-0 text-gray-900 focus:ring-0 sm:text-sm`}
             >
               <option value="" disabled>
                 ---
@@ -44,7 +44,7 @@ export default function IndustrialWasteLicenseNumberSelect() {
               id="typeCode"
               {...register("typeCode", { required: true })}
               required
-              className={`w-fit border-0 border-b text-gray-900 focus:ring-0 sm:text-sm`}
+              className={`w-fit border-0 text-gray-900 focus:ring-0 sm:text-sm`}
             >
               <option value="" disabled>
                 -
@@ -64,7 +64,7 @@ export default function IndustrialWasteLicenseNumberSelect() {
               id="authorityCode"
               {...register("authorityCode", { required: true })}
               required
-              className={`w-fit border-0 border-b text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm`}
+              className={`w-fit border-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm`}
             >
               <option value="" disabled>
                 -
@@ -83,7 +83,7 @@ export default function IndustrialWasteLicenseNumberSelect() {
             <input
               type="text"
               id={""}
-              className={`w-full border-0 border-b text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm`}
+              className={`w-full border-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm`}
               placeholder={"6桁の数字"}
               minLength={6}
               maxLength={6}
