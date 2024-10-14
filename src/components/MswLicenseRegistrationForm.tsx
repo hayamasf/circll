@@ -29,7 +29,8 @@ export default function MswLicenseRegistrationForm({ id }: { id: number }) {
       licenseUrl: "",
     },
   });
-  const minDate = getTodayDate();
+
+  const today = new Date();
 
   const onSubmit = async (formData: any) => {
     console.log(formData);
@@ -54,6 +55,8 @@ export default function MswLicenseRegistrationForm({ id }: { id: number }) {
                   id="expirationDate"
                   label="許可期限"
                   name="expirationDate"
+                  minData={today}
+                  validation={{ required: "有効期限は必須です." }}
                   control={methods.control}
                 />
               </div>
@@ -64,6 +67,7 @@ export default function MswLicenseRegistrationForm({ id }: { id: number }) {
                 id={"licenseUrl"}
                 label={"許可証のURL"}
                 name={"licenseUrl"}
+                type="url"
                 placeholder={"https://www.example.com/license/copy.pdf"}
                 validation={{ required: "許可証のURLを入力してください." }}
                 required={true}

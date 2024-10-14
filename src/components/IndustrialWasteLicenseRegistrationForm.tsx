@@ -7,8 +7,8 @@ import DateInput from "./DateInput";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 import getTodayDate from "@/utils/getTodayDate";
-import Input from "./Input";
 import TextInput from "./TextInput";
+import DatePickerComponent from "./DatePickerComponent";
 import IndustrialWasteItemCheckbox from "./IndustrialWasteItemCheckbox";
 import { createLicense } from "@/actions/industrialWasteLicense";
 import { IndustrialWasteCategory } from "@prisma/client";
@@ -32,7 +32,8 @@ export default function IndustrialWasteLicenseRegistrationForm({
       licensedCategoris: [],
     },
   });
-  const minDate = getTodayDate();
+
+  const today = new Date();
 
   const onSubmit = async (formData: any) => {
     console.log(formData);
@@ -48,9 +49,21 @@ export default function IndustrialWasteLicenseRegistrationForm({
             <DateInput
               name={"expirationDate"}
               label={"許可期限"}
-              min={minDate}
               required={true}
             />
+
+            <div className="grid grid-cols-2 gap-x-6">
+              <div className="col-span-2 sm:col-span-1">
+                <DatePickerComponent
+                  id="expirationDate"
+                  label="許可期限"
+                  name="expirationDate"
+                  minData={today}
+                  control={methods.control}
+                />
+              </div>
+            </div>
+
             <div>
               <TextInput
                 id="licenseUrl"
