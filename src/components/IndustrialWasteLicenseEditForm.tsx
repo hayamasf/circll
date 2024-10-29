@@ -9,6 +9,7 @@ import {
 import { useForm, FormProvider } from "react-hook-form";
 import getTodayDate from "@/utils/getTodayDate";
 import { updateLicense } from "@/actions/industrialWasteLicense";
+import DatePickerComponent from "./DatePickerComponent";
 import DateInput from "./DateInput";
 import Input from "./Input";
 import IndustrialWasteItemCheckbox from "./IndustrialWasteItemCheckbox";
@@ -46,6 +47,7 @@ export default function IndustrialWasteLicenseEditForm({
   });
 
   const minDate = getTodayDate();
+  const today = new Date();
 
   const onSubmit = async (formData: any) => {
     console.log(formData);
@@ -79,6 +81,18 @@ export default function IndustrialWasteLicenseEditForm({
             min={minDate}
             required={true}
           />
+          <div className="grid grid-cols-2 gap-x-6">
+            <div className="col-span-2 sm:col-span-1">
+              <DatePickerComponent
+                id="expirationDate"
+                label="許可期限"
+                name="expirationDate"
+                minData={today}
+                validation={{ required: "有効期限は必須です." }}
+                control={methods.control}
+              />
+            </div>
+          </div>
           <Input
             label="許可証のURL"
             name="licenseUrl"
