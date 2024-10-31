@@ -55,7 +55,7 @@ export default function MswLicenseRegistrationForm({ id }: { id: number }) {
                   id="expirationDate"
                   label="許可期限"
                   name="expirationDate"
-                  minData={today}
+                  minDate={today}
                   validation={{ required: "有効期限は必須です." }}
                   control={methods.control}
                 />

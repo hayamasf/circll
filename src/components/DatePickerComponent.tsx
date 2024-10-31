@@ -47,7 +47,6 @@ export default function DatePickerComponent({
                   selected={field.value}
                   dateFormat={"yyyy年MM月dd日"}
                   required={!!validation?.required}
-
                   onChange={(date) => {
                     if (date) {
                       const adjustedDate = new Date(
@@ -141,7 +140,7 @@ export default function DatePickerComponent({
                   <p className="text-xs text-red-500 p-1">{error.message}</p>
                 )}
               </>
-            )
+            );
           }}
         />
       </div>
