@@ -75,19 +75,19 @@ export default function IndustrialWasteLicenseEditForm({
       </div>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <div className="mt-10 grid gap-y-10">
-          <DateInput
+          {/* <DateInput
             name={"expirationDate"}
             label={"許可期限"}
             min={minDate}
             required={true}
-          />
+          /> */}
           <div className="grid grid-cols-2 gap-x-6">
             <div className="col-span-2 sm:col-span-1">
               <DatePickerComponent
                 id="expirationDate"
                 label="許可期限"
                 name="expirationDate"
-                minData={today}
+                minDate={today}
                 validation={{ required: "有効期限は必須です." }}
                 control={methods.control}
               />
