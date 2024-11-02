@@ -46,7 +46,6 @@ export default function IndustrialWasteLicenseEditForm({
     },
   });
 
-  const minDate = getTodayDate();
   const today = new Date();
 
   const onSubmit = async (formData: any) => {

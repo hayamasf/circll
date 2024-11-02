@@ -2,25 +2,21 @@
 
 import React from "react";
 
-import { useForm, FormProvider, Controller } from "react-hook-form";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-// import DateInput from "./DateInput";
+import { useForm, FormProvider } from "react-hook-form";
+import DatePickerComponent from "./DatePickerComponent";
+import TextInput from "./TextInput";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
-import getTodayDate from "@/utils/getTodayDate";
-import TextInput from "./TextInput";
-import { formatDate } from "@/utils/dateUtils";
 
 export default function MswLicenseEditForm({ license }: any) {
   const methods = useForm({
     defaultValues: {
       contractorId: license.contractorId,
-      expirationDate: formatDate(license.expirationDate),
+      expirationDate: license.expirationDate,
       licenseUrl: license.licenseUrl,
     },
   });
-  const minDate = getTodayDate();
+  const today = new Date();
 
   const onSubmit = async (formData: any) => {
     console.log(formData);
@@ -38,41 +34,34 @@ export default function MswLicenseEditForm({ license }: any) {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid gap-y-10">
-            <Controller
-              name="expirationDate"
-              control={methods.control}
-              render={({ field }) => (
-                <div>
-                  <label
-                    htmlFor="expirationDate"
-                    className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
-                  >
-                    許可期限
-                  </label>
-                  <DatePicker
-                    className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
-                  />
-                </div>
-              )}
-            ></Controller>
-
-            {/* <DateInput
-              name={"expirationDate"}
-              label={"許可期限"}
-              min={minDate}
-            /> */}
-            <TextInput
-              id={"licenseUrl"}
-              label={"許可証のURL"}
-              name={"licenseUrl"}
-              placeholder={""}
-              validation={{ required: "許可証のURLを入力してください." }}
-            />
+            <div className="grid grid-cols-2 gap-x-6">
+              <div className="col-span-2 sm:col-span-1">
+                <DatePickerComponent
+                  id="expirationDate"
+                  label="許可期限"
+                  name="expirationDate"
+                  minDate={today}
+                  validation={{ required: "有効期限は必須です." }}
+                  control={methods.control}
+                />
+              </div>
+            </div>
+            <div>
+              <TextInput
+                id="licenseUrl"
+                label="許可証のURL"
+                name="licenseUrl"
+                type="url"
+                placeholder="https://www.example.com/license/copy.pdf"
+                validation={{ required: "URLを入力してください." }}
+                required={true}
+              />
+            </div>
           </div>
           <div className="mt-10 grid gap-y-5">
             <SubmitButton
               label="変更する"
-              disabled={methods.formState.isSubmitting}
+              disabled={methods.formState.isSubmitting || !methods.formState.isDirty}
             />
             <CancelButton label="キャンセル" onClick={() => methods.reset()} />
           </div>
