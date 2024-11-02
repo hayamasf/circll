@@ -11,7 +11,6 @@ import { updateLicense } from "@/actions/industrialWasteLicense";
 import DatePickerComponent from "./DatePickerComponent";
 import TextInput from "./TextInput";
 import IndustrialWasteItemCheckbox from "./IndustrialWasteItemCheckbox";
-import { formatDate } from "@/utils/dateUtils";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 
