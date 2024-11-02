@@ -44,7 +44,24 @@ export async function createLicense(formData: MswLicense) {
 
 export async function updateLicense(formData: Partial<MswLicense>) {
   try {
-    console.log(formData);
+    const { id, municipality, ...dataToUpdate } = formData;
+    if (!id) {
+      throw new Error("許可証のidがありません.");
+    }
+    const session = await getSession();
+    const userId = session?.user.sub;
+
+    console.log(dataToUpdate);
+
+    await prisma.mswLicense.update({
+      where: { id },
+      data: {
+        ...dataToUpdate,
+        updatedBy: userId,
+      },
+    });
+
+    return { success: true, message: "許可情報を更新しました." };
   } catch (error) {
     console.error(error);
   }
