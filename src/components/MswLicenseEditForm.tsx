@@ -7,6 +7,7 @@ import DatePickerComponent from "./DatePickerComponent";
 import TextInput from "./TextInput";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
+import { MswLicense } from "@prisma/client";
 
 export default function MswLicenseEditForm({ license }: any) {
   const methods = useForm({
@@ -18,8 +19,23 @@ export default function MswLicenseEditForm({ license }: any) {
   });
   const today = new Date();
 
-  const onSubmit = async (formData: any) => {
-    console.log(formData);
+  const onSubmit = async () => {
+    const { dirtyFields } = methods.formState;
+    const formData = methods.getValues() as Partial<MswLicense>;
+
+    const updatedData = Object.keys(dirtyFields).reduce(
+      (acc, key) => {
+        const typedKey = key as keyof MswLicense;
+        const value = formData[typedKey];
+        if (value !== null && value !== undefined) {
+          acc[typedKey] = value;
+        }
+        return acc;
+      },
+      {} as Record<keyof MswLicense, MswLicense[keyof MswLicense]>,
+    );
+
+    console.log(updatedData);
     // const result = await createLicense(formData);
   };
 
@@ -61,7 +77,9 @@ export default function MswLicenseEditForm({ license }: any) {
           <div className="mt-10 grid gap-y-5">
             <SubmitButton
               label="変更する"
-              disabled={methods.formState.isSubmitting || !methods.formState.isDirty}
+              disabled={
+                methods.formState.isSubmitting || !methods.formState.isDirty
+              }
             />
             <CancelButton label="キャンセル" onClick={() => methods.reset()} />
           </div>

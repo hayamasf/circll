@@ -60,19 +60,24 @@ export default function DatePickerComponent({
                     decreaseMonth,
                     increaseMonth,
                   }) => {
-                    const displayDate = date instanceof Date ? date : new Date(date);
+                    const displayDate =
+                      date instanceof Date ? date : new Date(date);
                     return (
                       <div className="flex justify-between items-center px-2">
-                        <button type="button" onClick={decreaseMonth}>&lt;</button>
+                        <button type="button" onClick={decreaseMonth}>
+                          &lt;
+                        </button>
                         <span className="text-base">
                           {displayDate.getFullYear()}
                           <span className="text-xs"> 年</span>
                           {displayDate.getMonth() + 1}
                           <span className="text-xs"> 月</span>
                         </span>
-                        <button type="button" onClick={increaseMonth}>&gt;</button>
+                        <button type="button" onClick={increaseMonth}>
+                          &gt;
+                        </button>
                       </div>
-                    )
+                    );
                   }}
                   // 以下は使用しない
                   // renderCustomHeader={({
