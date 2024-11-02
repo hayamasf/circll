@@ -7,9 +7,14 @@ import DatePickerComponent from "./DatePickerComponent";
 import TextInput from "./TextInput";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
-import { MswLicense } from "@prisma/client";
+import { MswLicense, Municipality } from "@prisma/client";
+import { updateLicense } from "@/actions/mswLicense";
 
-export default function MswLicenseEditForm({ license }: any) {
+export default function MswLicenseEditForm({
+  license,
+}: {
+  license: MswLicense & { municipality: Municipality };
+}) {
   const methods = useForm({
     defaultValues: {
       contractorId: license.contractorId,
@@ -32,11 +37,14 @@ export default function MswLicenseEditForm({ license }: any) {
         }
         return acc;
       },
-      {} as Record<keyof MswLicense, MswLicense[keyof MswLicense]>,
+      { id: license.id } as Record<
+        keyof MswLicense,
+        MswLicense[keyof MswLicense]
+      >,
     );
 
     console.log(updatedData);
-    // const result = await createLicense(formData);
+    const result = await updateLicense(updatedData as Partial<MswLicense>);
   };
 
   return (

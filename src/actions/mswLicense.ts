@@ -41,3 +41,11 @@ export async function createLicense(formData: MswLicense) {
     }
   }
 }
+
+export async function updateLicense(formData: Partial<MswLicense>) {
+  try {
+    console.log(formData);
+  } catch (error) {
+    console.error(error);
+  }
+}

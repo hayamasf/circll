@@ -26,6 +26,13 @@ export default async function Page({
   switch (licenseType) {
     case "msw":
       license = await getMswLicenseById(Number(licenseId));
+      if (!license) {
+        return (
+          <div className="mx-auto max-w-lg">
+            <p>該当の許可証がありません.</p>
+          </div>
+        );
+      }
       contractorName = `${license?.contractor?.isPrefixEntityType ? license?.contractor.entityType : ""}${license?.contractor?.name}${license?.contractor?.entityType && !license.contractor.isPrefixEntityType ? license.contractor.entityType : ""}`;
       pages = [
         { name: "業者", href: "/contractors", current: false },
