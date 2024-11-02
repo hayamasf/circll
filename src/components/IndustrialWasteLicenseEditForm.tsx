@@ -7,11 +7,9 @@ import {
   IndustrialWasteCategory,
 } from "@prisma/client";
 import { useForm, FormProvider } from "react-hook-form";
-import getTodayDate from "@/utils/getTodayDate";
 import { updateLicense } from "@/actions/industrialWasteLicense";
 import DatePickerComponent from "./DatePickerComponent";
-import DateInput from "./DateInput";
-import Input from "./Input";
+import TextInput from "./TextInput";
 import IndustrialWasteItemCheckbox from "./IndustrialWasteItemCheckbox";
 import { formatDate } from "@/utils/dateUtils";
 import SubmitButton from "./SubmitButton";
@@ -36,9 +34,7 @@ export default function IndustrialWasteLicenseEditForm({
       typeCode: license?.typeCode,
       authorityCode: license?.authorityCode,
       contractorCode: license?.contractorCode,
-      expirationDate: license?.expirationDate
-        ? formatDate(license?.expirationDate)
-        : "",
+      expirationDate: license?.expirationDate,
       licenseUrl: license?.licenseUrl,
       licensedCategories:
         license?.licensedCategories.map((category) => String(category.id)) ||
@@ -74,12 +70,6 @@ export default function IndustrialWasteLicenseEditForm({
       </div>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <div className="mt-10 grid gap-y-10">
-          {/* <DateInput
-            name={"expirationDate"}
-            label={"許可期限"}
-            min={minDate}
-            required={true}
-          /> */}
           <div className="grid grid-cols-2 gap-x-6">
             <div className="col-span-2 sm:col-span-1">
               <DatePickerComponent
@@ -92,13 +82,17 @@ export default function IndustrialWasteLicenseEditForm({
               />
             </div>
           </div>
-          <Input
-            label="許可証のURL"
-            name="licenseUrl"
-            type="url"
-            placeholder="https://www.example.com/license/copy.pdf"
-            required={true}
-          />
+          <div>
+            <TextInput
+              id="licenseUrl"
+              label="許可証のURL"
+              name="licenseUrl"
+              type="url"
+              placeholder="https://www.example.com/license/copy.pdf"
+              validation={{ required: "URLを入力してください." }}
+              required={true}
+            />
+          </div>
           <IndustrialWasteItemCheckbox
             industrialWasteCategories={industrialWasteCategories}
           />
