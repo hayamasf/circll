@@ -44,7 +44,7 @@ export async function createLicense(formData: MswLicense) {
 
 export async function updateLicense(formData: Partial<MswLicense>) {
   try {
-    const { id, municipality, ...dataToUpdate } = formData;
+    const { id, contractorId, municipality, ...dataToUpdate } = formData;
     if (!id) {
       throw new Error("許可証のidがありません.");
     }
@@ -59,7 +59,7 @@ export async function updateLicense(formData: Partial<MswLicense>) {
       },
     });
 
-    revalidatePath(`/contractors/${formData.contractorId}`);
+    revalidatePath(`/contractors/${contractorId}`);
   } catch (error) {
     console.error(error);
   } finally {

@@ -56,7 +56,7 @@ export default function IndustrialWasteLicenseEditForm({
         }
         return acc;
       },
-      { id: license?.id } as Record<
+      { id: license?.id, contractorId: license?.contractorId } as Record<
         keyof IndustrialWasteLicense,
         IndustrialWasteLicense[keyof IndustrialWasteLicense]
       >,

@@ -86,7 +86,7 @@ export async function updateLicense(
       },
     });
     revalidatePath(
-      `/contractors/${formData.contractorId}/licenses/industrial-waste/${id}`,
+      `/contractors/${contractorId}/licenses/industrial-waste/${id}`,
     );
     // return { success: true, message: "産業廃棄物処理業許可情報を更新しました." };
   } catch (error) {
