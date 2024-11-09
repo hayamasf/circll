@@ -48,7 +48,7 @@ export default async function MswLicensesList({
           const menuItems = [
             {
               id: 1,
-              text: "編集する",
+              text: "更新する",
               href:
                 "/contractors/" +
                 license.contractorId +

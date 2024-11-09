@@ -7,7 +7,6 @@ import { PaperClipIcon } from "@heroicons/react/24/outline";
 import IndustrialWasteCategoryList from "./IndustrialWasteCategoryList";
 import EllipsisDropDownMenu from "./EllipsisDropDownMenu";
 import Card from "./Card";
-import Link from "next/link";
 import Breadcrumbs from "./Breadcrumbs";
 
 export default async function IndustrialWasteLicenseDetail({
@@ -16,7 +15,7 @@ export default async function IndustrialWasteLicenseDetail({
   id: number;
 }) {
   const license = await getIndustrialWasteLicenseById(id);
-  const menuItems = [{ id: 1, text: "情報を更新", href: "./" + id + "/edit" }];
+  const menuItems = [{ id: 1, text: "更新する", href: "./" + id + "/edit" }];
   const contractoName = `${license?.contractor?.isPrefixEntityType ? license?.contractor.entityType : ""}${license?.contractor?.name}${license?.contractor?.entityType && !license.contractor.isPrefixEntityType ? license.contractor.entityType : ""}`;
 
   const pages = [

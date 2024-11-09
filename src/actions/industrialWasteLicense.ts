@@ -60,8 +60,38 @@ export async function createLicense(
   }
 }
 
-export async function updateLicense(formData: any) {
+export async function updateLicense(formData: Partial<IndustrialWasteLicenseWithRelations>) {
   try {
-    console.log(formData);
-  } catch (error) {}
+    const {id, contractorId, licensedCategories, ...dataToUpdate} = formData;
+    if(!id) {
+      throw new Error("許可証がありません.")
+    }
+    const session = await getSession();
+    const userId = session?.user.sub;
+
+    console.log("フォームデータ：", formData);
+
+    await prisma.industrialWasteLicense.update({
+      where: {id},
+      data: {
+        ...dataToUpdate,
+        updatedBy: userId,
+        ...(licensedCategories && {
+          licensedCategories: {
+            set: licensedCategories?.map((id) => (
+              {id: Number(id)}
+            ))
+          }
+        })
+      }
+    })
+    revalidatePath(`/contractors/${formData.contractorId}/licenses/industrial-waste/${id}`)
+    // return { success: true, message: "産業廃棄物処理業許可情報を更新しました." };
+
+  } catch (error) {
+    console.error("エラーです.データの更新に失敗しました.")
+    throw new Error("データの更新に失敗しました.")
+  } finally {
+    redirect(`/contractors/${formData.contractorId}/licenses/industrial-waste/${formData.id}`)
+  }
 }

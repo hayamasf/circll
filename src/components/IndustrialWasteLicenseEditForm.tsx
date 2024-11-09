@@ -43,10 +43,28 @@ export default function IndustrialWasteLicenseEditForm({
 
   const today = new Date();
 
-  const onSubmit = async (formData: any) => {
-    console.log(formData);
-    console.log("送信");
-    const result = await updateLicense(formData);
+  const onSubmit = async () => {
+    const { dirtyFields } = methods.formState;
+    const formData = methods.getValues() as Partial<IndustrialWasteLicense>;
+
+    const updatedData = Object.keys(dirtyFields).reduce(
+      (acc, key) => {
+        const typedKey = key as keyof IndustrialWasteLicense;
+        const value = formData[typedKey];
+        if (value !== null && value !== undefined) {
+          acc[typedKey] = value;
+        }
+        return acc;
+      },
+      { id: license?.id } as
+      Record<
+        keyof IndustrialWasteLicense,
+        IndustrialWasteLicense[keyof IndustrialWasteLicense]
+      >,
+    );
+
+    console.log(updatedData);
+    await updateLicense(updatedData as Partial<IndustrialWasteLicenseWithRelations>);
   };
 
   if (!license) {
