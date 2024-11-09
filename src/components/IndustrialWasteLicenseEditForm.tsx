@@ -56,15 +56,16 @@ export default function IndustrialWasteLicenseEditForm({
         }
         return acc;
       },
-      { id: license?.id } as
-      Record<
+      { id: license?.id } as Record<
         keyof IndustrialWasteLicense,
         IndustrialWasteLicense[keyof IndustrialWasteLicense]
       >,
     );
 
     console.log(updatedData);
-    await updateLicense(updatedData as Partial<IndustrialWasteLicenseWithRelations>);
+    await updateLicense(
+      updatedData as Partial<IndustrialWasteLicenseWithRelations>,
+    );
   };
 
   if (!license) {

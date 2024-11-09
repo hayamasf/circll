@@ -51,8 +51,6 @@ export async function updateLicense(formData: Partial<MswLicense>) {
     const session = await getSession();
     const userId = session?.user.sub;
 
-    console.log(dataToUpdate);
-
     await prisma.mswLicense.update({
       where: { id },
       data: {
@@ -61,8 +59,10 @@ export async function updateLicense(formData: Partial<MswLicense>) {
       },
     });
 
-    return { success: true, message: "許可情報を更新しました." };
+    revalidatePath(`/contractors/${formData.contractorId}`);
   } catch (error) {
     console.error(error);
+  } finally {
+    redirect(`/contractors/${formData.contractorId}`);
   }
 }

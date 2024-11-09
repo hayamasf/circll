@@ -37,14 +37,14 @@ export default function MswLicenseEditForm({
         }
         return acc;
       },
-      { id: license.id } as Record<
+      { id: license.id, contractorId: license.contractorId } as Record<
         keyof MswLicense,
         MswLicense[keyof MswLicense]
       >,
     );
 
     console.log(updatedData);
-    const result = await updateLicense(updatedData as Partial<MswLicense>);
+    await updateLicense(updatedData as Partial<MswLicense>);
   };
 
   return (
