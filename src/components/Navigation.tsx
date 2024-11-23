@@ -13,8 +13,59 @@ import { classNames } from "@/utils/classNames";
 import DesktopSidebar from "./DesktopSidebar";
 import Topbar from "./Topbar";
 
-import { navigationItems } from "./navigationItems";
-import { configItems } from "./configItems";
+import {
+  BuildingOfficeIcon,
+  BuildingStorefrontIcon,
+  TruckIcon,
+  HomeIcon,
+} from "@heroicons/react/24/outline";
+
+const navigationItems = [
+  { id: 1, name: "ホーム", href: "/", icon: HomeIcon, current: true },
+  // {
+  //   id: 2,
+  //   name: "排出事業者",
+  //   href: "/clients",
+  //   icon: BuildingOfficeIcon,
+  //   current: false,
+  // },
+  // {
+  //   id: 3,
+  //   name: "事業場",
+  //   href: "#",
+  //   icon: BuildingStorefrontIcon,
+  //   current: false,
+  // },
+  // {
+  //   id: 4,
+  //   name: "業者",
+  //   href: "/contractors",
+  //   icon: TruckIcon,
+  //   current: false,
+  // },
+];
+
+const configItems = [
+  {
+    id: 1,
+    name: "排出事業者",
+    href: "/clients",
+    current: false,
+  },
+  {
+    id: 2,
+    name: "事業所",
+    href: "/sites",
+    current: false,
+  },
+  {
+    id: 3,
+    name: "業者",
+    href: "/contractors",
+    current: false,
+  },
+];
+
 
 const Navigation = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
