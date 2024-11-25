@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.2.0",
-    "@headlessui/react": "^1.7.17",
+    "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.0.18",
     "@prisma/client": "^5.19.1",
     "class-variance-authority": "^0.7.0",
