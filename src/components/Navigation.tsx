@@ -5,23 +5,14 @@ import React, { Fragment, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import XMarkIcon from "@/app/icons/XMarkIcon";
-import { Cog6ToothIcon } from "@heroicons/react/24/outline";
-
-import Link from "next/link";
-import { classNames } from "@/utils/classNames";
-
-import DesktopSidebar from "./DesktopSidebar";
 import Topbar from "./Topbar";
 
-import {
-  BuildingOfficeIcon,
-  BuildingStorefrontIcon,
-  TruckIcon,
-  HomeIcon,
-} from "@heroicons/react/24/outline";
+import { HomeIcon } from "@heroicons/react/24/outline";
+
+import SidebarNavigation from "./SidebarNavigation";
 
 const navigationItems = [
-  { id: 1, name: "ホーム", href: "/", icon: HomeIcon, current: true },
+  { id: 1, name: "ホーム", href: "/", icon: HomeIcon },
   // {
   //   id: 2,
   //   name: "排出事業者",
@@ -45,34 +36,34 @@ const navigationItems = [
   // },
 ];
 
-const configItems = [
-  {
-    id: 1,
-    name: "排出事業者",
-    href: "/clients",
-    current: false,
-  },
-  {
-    id: 2,
-    name: "事業所",
-    href: "/sites",
-    current: false,
-  },
-  {
-    id: 3,
-    name: "業者",
-    href: "/contractors",
-    current: false,
-  },
-];
+// const configItems = [
+//   {
+//     id: 1,
+//     name: "排出事業者",
+//     href: "/clients",
+//   },
+//   {
+//     id: 2,
+//     name: "事業所",
+//     href: "/sites",
+//   },
+//   {
+//     id: 3,
+//     name: "業者",
+//     href: "/contractors",
+//   },
+// ];
 
-
-const Navigation = () => {
+export default function Navigation() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const currentPath = usePathname();
 
+  // const updatedNavigationItems = navigationItems.map((item) => ({ ...item, current: item.href === currentPath }))
+  // const updatedConfigItems = configItems.map((item) => ({ ...item, current: currentPath.startsWith(item.href) }))
+
   return (
     <>
+      {/* Sidebar for mobile */}
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -125,76 +116,7 @@ const Navigation = () => {
                     </button>
                   </div>
                 </Transition.Child>
-                {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
-                  <div className="flex h-16 shrink-0 items-center">
-                    <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                      alt="circll"
-                    />
-                  </div>
-                  <nav className="flex flex-1 flex-col">
-                    <ul role="list" className="flex flex-1 flex-col gap-y-7">
-                      <li>
-                        <ul role="list" className="-mx-2 space-y-1">
-                          {navigationItems.map((item) => (
-                            <li key={item.id}>
-                              <Link
-                                href={item.href}
-                                onClick={() => setSidebarOpen(false)}
-                                className={classNames(
-                                  item.current
-                                    ? "bg-gray-50 text-indigo-600"
-                                    : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
-                                  "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
-                                )}
-                              >
-                                <item.icon
-                                  className={classNames(
-                                    item.current
-                                      ? "text-emerald-600"
-                                      : "text-gray-400 group-hover:text-emerald-600",
-                                    "h-6 w-6 shrink-0",
-                                  )}
-                                  aria-hidden="true"
-                                />
-                                {item.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </li>
-                      <li>
-                        <div className="mb-3 text-sm flex font-semibold leading-6 text-gray-400">
-                          <Cog6ToothIcon
-                            className="h-6 w-6 shrink-0 mr-3"
-                            aria-hidden="true"
-                          />
-                          設定
-                        </div>
-                        <ul role="list" className="-mx-2 space-y-1">
-                          {configItems.map((item: any) => (
-                            <li key={item.id}>
-                              <Link
-                                href={item.href}
-                                onClick={() => setSidebarOpen(false)}
-                                className={classNames(
-                                  item.current
-                                    ? "bg-gray-50 text-gray-800"
-                                    : "text-gray-600 hover:text-gray-800 hover:bg-gray-50",
-                                  "block pl-11 rounded-md p-2 text-sm leading-6",
-                                )}
-                              >
-                                {item.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </li>{" "}
-                    </ul>
-                  </nav>
-                </div>
+                <SidebarNavigation />
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -202,15 +124,12 @@ const Navigation = () => {
       </Transition.Root>
 
       {/* Static sidebar for desktop */}
-      <DesktopSidebar
-        navigationItems={navigationItems}
-        configItems={configItems}
-      />
+      <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+        <SidebarNavigation />
+      </div>
 
       {/* Topbar */}
       <Topbar setSidebarOpen={setSidebarOpen} />
     </>
   );
-};
-
-export default Navigation;
+}
