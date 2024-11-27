@@ -13,7 +13,7 @@ const navigationItems = [
     name: "排出",
     children: [
       { id: 1, name: "事業者", href: "/clients" },
-      { id: 2, name: "事業所", href: "/clients/sites" },
+      { id: 2, name: "事業所", href: "/sites" },
     ],
   },
   { name: "業者", href: "/contractors" },
@@ -26,11 +26,15 @@ export default function SidebarNavigation() {
 
   const updatedNavigation = navigationItems.map((item) => ({
     ...item,
-    current: item.href === currentPath,
+    current: item.href
+      ? item.href === "/"
+        ? currentPath === "/"
+        : currentPath.startsWith(item.href)
+      : false,
     children: item.children
       ? item.children.map((child) => ({
           ...child,
-          current: child.href === currentPath,
+          current: currentPath.startsWith(child.href),
         }))
       : undefined,
   }));
