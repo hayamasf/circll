@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
+
+import { useWindowWidth } from "@/hooks/useWindowWidth";
+
 import { classNames } from "@/utils/classNames";
 
 const navigationItems = [
@@ -19,8 +21,13 @@ const navigationItems = [
   { name: "業者", href: "/contractors" },
 ];
 
-export default function SidebarNavigation() {
+export default function SidebarNavigation({
+  setSidebarOpen,
+}: {
+  setSidebarOpen?: (open: boolean) => void;
+}) {
   const currentPath = usePathname();
+  const width = useWindowWidth();
 
   const [openDisclosure, setOpenDisclosure] = useState<string | null>(null);
 
@@ -43,6 +50,12 @@ export default function SidebarNavigation() {
     setOpenDisclosure((prev) => (prev === itemName ? null : itemName));
   };
 
+  const handleLinkClick = () => {
+    if (width !== null && width < 1024 && setSidebarOpen) {
+      setSidebarOpen(false);
+    }
+  };
+
   return (
     <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
       <div className="flex h-16 shrink-0 items-center">
@@ -61,6 +74,7 @@ export default function SidebarNavigation() {
                   {!item.children ? (
                     <Link
                       href={item.href || "/"}
+                      onClick={handleLinkClick}
                       className={classNames(
                         item.current ? "bg-gray-50" : "hover:bg-gray-50",
                         "block rounded-md py-2 pl-10 pr-2 text-sm/6 font-semibold text-gray-700",
@@ -94,6 +108,7 @@ export default function SidebarNavigation() {
                             <li key={subItem.id}>
                               <Link
                                 href={subItem.href}
+                                onClick={handleLinkClick}
                                 className={classNames(
                                   subItem.current
                                     ? "bg-gray-50"

@@ -2,7 +2,6 @@
 
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
-import { usePathname } from "next/navigation";
 
 import XMarkIcon from "@/app/icons/XMarkIcon";
 import Topbar from "./Topbar";
@@ -11,55 +10,8 @@ import { HomeIcon } from "@heroicons/react/24/outline";
 
 import SidebarNavigation from "./SidebarNavigation";
 
-const navigationItems = [
-  { id: 1, name: "ホーム", href: "/", icon: HomeIcon },
-  // {
-  //   id: 2,
-  //   name: "排出事業者",
-  //   href: "/clients",
-  //   icon: BuildingOfficeIcon,
-  //   current: false,
-  // },
-  // {
-  //   id: 3,
-  //   name: "事業場",
-  //   href: "#",
-  //   icon: BuildingStorefrontIcon,
-  //   current: false,
-  // },
-  // {
-  //   id: 4,
-  //   name: "業者",
-  //   href: "/contractors",
-  //   icon: TruckIcon,
-  //   current: false,
-  // },
-];
-
-// const configItems = [
-//   {
-//     id: 1,
-//     name: "排出事業者",
-//     href: "/clients",
-//   },
-//   {
-//     id: 2,
-//     name: "事業所",
-//     href: "/sites",
-//   },
-//   {
-//     id: 3,
-//     name: "業者",
-//     href: "/contractors",
-//   },
-// ];
-
 export default function Navigation() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const currentPath = usePathname();
-
-  // const updatedNavigationItems = navigationItems.map((item) => ({ ...item, current: item.href === currentPath }))
-  // const updatedConfigItems = configItems.map((item) => ({ ...item, current: currentPath.startsWith(item.href) }))
 
   return (
     <>
@@ -116,7 +68,7 @@ export default function Navigation() {
                     </button>
                   </div>
                 </Transition.Child>
-                <SidebarNavigation />
+                <SidebarNavigation setSidebarOpen={setSidebarOpen} />
               </Dialog.Panel>
             </Transition.Child>
           </div>
