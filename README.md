@@ -47,6 +47,7 @@ Mode: session to DIRECT_URL
 npx prisma migrate dev --name init
 
 ## Data seeding
+npx ts-node prisma/seed.ts
 
 
 ## Deploy on Vercel
