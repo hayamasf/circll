@@ -43,6 +43,11 @@ Mode: session
 Mode: transaction to DATABASE_URL
 Mode: session to DIRECT_URL
 
+## To map the data model to the database schema
+npx prisma migrate dev --name init
+
+## Data seeding
+
 
 ## Deploy on Vercel
 
