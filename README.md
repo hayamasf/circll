@@ -36,19 +36,22 @@ Create a project at [https://supabase.com/dashboard/projects](https://supabase.c
 Copy and store database password.
 
 ### get the connection strings
+
 Mode: transaction
 Mode: session
 
 ### set the connection strings to the Environment Variables
+
 Mode: transaction to DATABASE_URL
 Mode: session to DIRECT_URL
 
 ## To map the data model to the database schema
+
 npx prisma migrate dev --name init
 
 ## Data seeding
-npx ts-node prisma/seed.ts
 
+npx ts-node prisma/seed.ts
 
 ## Deploy on Vercel
 

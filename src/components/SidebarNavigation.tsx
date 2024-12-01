@@ -10,15 +10,17 @@ import { useWindowWidth } from "@/hooks/useWindowWidth";
 import { classNames } from "@/utils/classNames";
 
 const navigationItems = [
-  { name: "ダッシュボード", href: "/" },
+  { id: 1, name: "ダッシュボード", href: "/" },
   {
+    id: 2,
     name: "排出",
     children: [
       { id: 1, name: "事業者", href: "/clients" },
       { id: 2, name: "事業所", href: "/sites" },
     ],
   },
-  { name: "業者", href: "/contractors" },
+  { id: 3, name: "業者", href: "/contractors" },
+  { id: 4, name: "契約", href: "/contracts" },
 ];
 
 export default function SidebarNavigation({
@@ -70,7 +72,7 @@ export default function SidebarNavigation({
           <li>
             <ul role="list" className="-mx-2 space-y-1">
               {updatedNavigation.map((item) => (
-                <li key={item.name}>
+                <li key={item.id}>
                   {!item.children ? (
                     <Link
                       href={item.href || "/"}
