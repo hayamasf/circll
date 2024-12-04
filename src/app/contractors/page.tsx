@@ -1,7 +1,6 @@
 import React from "react";
 import PageHeader from "@/components/PageHeader";
 import { PlusIcon } from "@heroicons/react/24/solid";
-import LinkButton from "@/components/LinkButton";
 import Loading from "../loading";
 import { Suspense } from "react";
 import ContractorsList from "@/components/ContractorsList";
@@ -23,7 +22,7 @@ export default function Page({
           href={"/contractors/register"}
           className="flex gap-x-2 items-center text-gray-900 px-2 py-1 rounded-md hover:bg-gray-100"
         >
-          <PlusIcon className="h-4 w-4" />
+          <PlusIcon className="h-4 w-4 text-gray-500" />
 
           <span className="text-sm font-semibold">登録する</span>
         </Link>
