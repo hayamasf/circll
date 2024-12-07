@@ -39,22 +39,24 @@ export default async function IndustrialWasteLicenseDetail({
           <div className="mt-2 grid gap-y-2">
             <div className="flex items-center justify-between">
               <h3 className="">
-                {getIndustrialWasteLicenseIssuingAuthorityName(
-                  license.issuingAuthority,
-                )}
-                <span className="text-xs">の</span>
                 産業廃棄物 {getIndustrialLicenseTypeName(license.typeCode)}
               </h3>
               <EllipsisDropDownMenu menuItems={menuItems} />
             </div>
             <p className="text-sm">
-              許可番号 第{" "}
+              <span className="text-lg font-semibold">
+                {getIndustrialWasteLicenseIssuingAuthorityName(
+                  license.issuingAuthority,
+                )}
+              </span>
+              {" "}
+              第{" "}
               <span className="text-lg font-semibold">
                 {license.issuingAuthority === 13
                   ? license.issuingAuthority
                   : license.issuingAuthority.toString().padStart(3, "0")}{" "}
                 {license.typeCode}
-                {license.authorityCode} {license.contractorCode}
+                {license.authorityCode} {license.contractorCode.toString().padStart(6, "0")}
               </span>
             </p>
             <p className="font-semibold">
