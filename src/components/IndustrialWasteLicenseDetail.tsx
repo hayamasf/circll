@@ -48,15 +48,15 @@ export default async function IndustrialWasteLicenseDetail({
                 {getIndustrialWasteLicenseIssuingAuthorityName(
                   license.issuingAuthority,
                 )}
-              </span>
-              {" "}
+              </span>{" "}
               第{" "}
               <span className="text-lg font-semibold">
                 {license.issuingAuthority === 13
                   ? license.issuingAuthority
                   : license.issuingAuthority.toString().padStart(3, "0")}{" "}
                 {license.typeCode}
-                {license.authorityCode} {license.contractorCode.toString().padStart(6, "0")}
+                {license.authorityCode}{" "}
+                {license.contractorCode.toString().padStart(6, "0")}
               </span>
             </p>
             <p className="font-semibold">

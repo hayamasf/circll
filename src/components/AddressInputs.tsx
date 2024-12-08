@@ -1,15 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { Address } from "@/types/types";
-import getPrefectureCityTown from "@/actions/postcodeJp";
+import { classNames } from "@/utils/classNames";
 
 export default function AddressInputs() {
   const {
     register,
     setValue,
-    getValues,
     formState: { errors },
   } = useFormContext<Address>();
 
@@ -27,22 +26,66 @@ export default function AddressInputs() {
     setValue("town", town);
   };
 
-  const postalcodeToPrefectureCityTown = async () => {
-    const postalCode = getValues("postalCode");
-    const isValidPostalCode = /^\d{7}$/.test(postalCode);
+  const [postalCode, setPostalCode] = useState<string>("");
+  const [isValidPostalCode, setIsValidPostalCode] = useState<boolean>(false);
+  const [buttonClicked, setButtonClicked] = useState<boolean>(false);
 
-    if (!isValidPostalCode) {
-      return alert("数字のみ7桁の郵便番号を入力してください.");
+  useEffect(() => {
+    setIsValidPostalCode(/^\d{7}$/.test(postalCode));
+  }, [postalCode]);
+
+  useEffect(() => {
+    const API_KEY = process.env.NEXT_PUBLIC_POSTCODEJP_API_KEY;
+
+    if (buttonClicked) {
+      const fetchPrefCityTown = async () => {
+        try {
+          const response = await fetch(
+            "https://apis.postcode-jp.com/api/v6/postcodes/" + postalCode,
+            {
+              headers: {
+                Authorization: "Bearer " + API_KEY,
+              },
+            },
+          );
+
+          if (!response.ok) {
+            throw new Error("住所データの取得に失敗しました.");
+          }
+
+          const [data] = await response.json();
+
+          if (!data) {
+            alert(
+              "該当の住所が見つかりませんでした.郵便番号を確認してください.",
+            );
+            throw new Error("住所情報が見つかりませんでした.");
+          }
+          const { pref, city, town } = data;
+
+          console.log("都道府県: ", pref);
+          console.log("市区町村: ", city);
+          console.log("町域: ", town);
+
+          setPrefectureCityTown({
+            pref,
+            city,
+            town,
+          });
+        } catch (error) {
+          if (error instanceof Error) {
+            console.error("エラーが発生しました.", error.message);
+          }
+        } finally {
+          setButtonClicked(false);
+        }
+      };
+      fetchPrefCityTown();
     }
+  }, [buttonClicked]);
 
-    const result = await getPrefectureCityTown(postalCode);
-    console.log(result);
-
-    if (result) {
-      setPrefectureCityTown(result);
-    } else {
-      alert("郵便番号に該当する住所が見つかりませんでした.");
-    }
+  const handleButtonClick = () => {
+    setButtonClicked(true);
   };
 
   return (
@@ -61,6 +104,7 @@ export default function AddressInputs() {
               type="text"
               {...register("postalCode", { required: "郵便番号は必須です" })}
               maxLength={7}
+              onChange={(e) => setPostalCode(e.target.value)}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               placeholder="1040032"
             />
@@ -74,8 +118,14 @@ export default function AddressInputs() {
         <div className="col-span-2 place-content-end">
           <button
             type="button"
-            className="block w-full text-base rounded-md px-2 py-1.5 shadow-lg bg-gray-700 text-white ring-1 ring-inset"
-            onClick={postalcodeToPrefectureCityTown}
+            className={classNames(
+              "block w-full text-base rounded-md px-2 py-1.5 shadow-lg bg-gray-700 text-white",
+              isValidPostalCode
+                ? "bg-gray-700 ring-1 ring-inset hover:bg-gray-800"
+                : "bg-gray-300 ring-0 cursor-not-allowed",
+            )}
+            onClick={handleButtonClick}
+            disabled={!isValidPostalCode}
           >
             〒 → 住所
           </button>
