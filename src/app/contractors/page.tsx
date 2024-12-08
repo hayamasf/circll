@@ -1,10 +1,9 @@
 import React from "react";
 import PageHeader from "@/components/PageHeader";
-import { PlusIcon } from "@heroicons/react/24/solid";
 import Loading from "../loading";
 import { Suspense } from "react";
 import ContractorsList from "@/components/ContractorsList";
-import Link from "next/link";
+import LinkToRegister from "@/components/LinkToRegister";
 
 export default function Page({
   searchParams,
@@ -18,14 +17,7 @@ export default function Page({
     <div className="mx-auto max-w-2xl">
       <div className="flex justify-between mb-10 items-center">
         <PageHeader title="業者" />
-        <Link
-          href={"/contractors/register"}
-          className="flex gap-x-2 items-center text-gray-900 px-2 py-1 rounded-md hover:bg-gray-100"
-        >
-          <PlusIcon className="h-4 w-4 text-gray-500" />
-
-          <span className="text-sm font-semibold">登録する</span>
-        </Link>
+        <LinkToRegister href={"/contractors/register"} />
       </div>
       <Suspense fallback={<Loading />}>
         <ContractorsList offset={offset} limit={limit} />

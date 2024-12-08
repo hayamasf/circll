@@ -7,6 +7,7 @@ import { PaperClipIcon } from "@heroicons/react/24/outline";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import { formatDate } from "@/utils/dateUtils";
+import LinkToRegister from "./LinkToRegister";
 import getIndustrialLicenseTypeName from "@/utils/getIndustrialWasteLicenseTypeName";
 import getIndustrialWasteLicenseIssuingAuthorityName from "@/utils/getIndustrialWasteLiceseIssuingAuthorityName";
 
@@ -33,19 +34,15 @@ export default async function IndustrialWasteLicensesList({
 
   return (
     <div className="grid gap-y-2">
-      <div className="text-right">
-        <Link
-          href={"./" + contractorId + "/licenses/industrial-waste/register"}
-          className="text-xs font-semibold border border-gray-500 p-1 rounded-md hover:bg-gray-200"
-        >
-          登録する
-        </Link>
-      </div>
-
       <ul role="list" className="divide-y divide-gray-100">
+        <li className="py-3 flex justify-center items-center hover:bg-gray-50">
+          <LinkToRegister
+            href={"./" + contractorId + "/licenses/industrial-waste/register"}
+          />
+        </li>
+
         {licenses.map((license) => {
           const daysLeft = getDaysUntilExpiration(license.expirationDate);
-
           return (
             <li
               key={license.id}
