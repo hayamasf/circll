@@ -1,6 +1,7 @@
 import React from "react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import PageHeader from "@/components/PageHeader";
+import ContractReistrationForm from "@/components/ContractRegistrationForm";
 
 export default function Page({
   searchParams,
@@ -31,15 +32,18 @@ export default function Page({
         return "収集運搬";
       case "disposal":
         return "処分";
+      default:
+        return "";
     }
   };
 
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="mx-auto max-w-xl">
       <div className="pt-3 mb-10">
         <Breadcrumbs pages={pages} />
       </div>
-      <PageHeader title={waste() + type()} />
+      <PageHeader title={waste() + " の " + type()} />
+      <ContractReistrationForm />
     </div>
   );
 }
