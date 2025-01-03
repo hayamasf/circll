@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
+import ClientSelectionModal from "./ClientSelectionModal";
 import SubmitAndCancelButtons from "./SubmitAndCancelButtons";
 
 export default function ContractReistrationForm() {
@@ -29,6 +30,11 @@ export default function ContractReistrationForm() {
             />
           </div>
         </div>
+        <ClientSelectionModal isOpen={methods.watch("isModalOpen")}
+          onClose={() => methods.setValue("isModalOpen", false)}
+          onSelect={(client) => {
+            methods.setValue("isModalOpen", false)
+          }} />
         <SubmitAndCancelButtons onSubmit={methods.handleSubmit(onSubmit)} />
       </form>
     </FormProvider>
