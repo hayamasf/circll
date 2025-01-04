@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Client } from "@prisma/client";
+import { getClientsByName } from "@/actions/client";
 
 export default function ClientSelectionModal({
   isOpen,
@@ -11,12 +12,23 @@ export default function ClientSelectionModal({
   onSelect: (client: Client) => void;
 }) {
   const [search, setSearch] = useState("");
-  const [clients, setClients] = useState([]);
-  const [filteredClients, setFilteredClients] = useState([])
+  const [clients, setClients] = useState<any>([]);
 
   useEffect(() => {
+    if (!isOpen || search.trim() === "") return;
 
-  })
+    const fetchFilteredClients = async (search: string) => {
+      const result = await getClientsByName(search);
+      setClients(result)
+    }
+    fetchFilteredClients(search)
+    console.log(clients)
+  }, [search, isOpen])
+
+
+  useEffect(() => {
+    console.log("クライアント一覧:", clients)
+  }, [clients])
 
   if (!isOpen) return null;
 
@@ -34,15 +46,15 @@ export default function ClientSelectionModal({
           />
         </div>
         <div className="max-h-60 overflow-y-auto">
-          {/* {filteredClients.map((client) => (
+          {clients.map((client: Client) => (
             <div
               key={client.id}
               onClick={() => onSelect(client)}
-              className="cursor-pointer px-4 py-2 hover:bg-gray-100"
+              className="cursor-pointer text-sm px-4 py-2 hover:bg-gray-100"
             >
               {client.name}
             </div>
-          ))} */}
+          ))}
         </div>
         <div className="flex justify-end p-4">
           <button onClick={onClose} className="rounded-md bg-gray-800 px-4 py-2 text-sm text-white">

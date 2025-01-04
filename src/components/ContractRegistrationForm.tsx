@@ -21,10 +21,11 @@ export default function ContractReistrationForm() {
           </label>
           <div className="mt-2">
             <input
-              id="clientId"
+              id="clientName"
               type="text"
-              {...methods.register("clientId")}
+              value={methods.watch("clientName")}
               onFocus={() => methods.setValue("isModalOpen", true)}
+              readOnly={true}
               placeholder="排出事業者を選択してください."
               className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6"
             />
@@ -33,6 +34,8 @@ export default function ContractReistrationForm() {
         <ClientSelectionModal isOpen={methods.watch("isModalOpen")}
           onClose={() => methods.setValue("isModalOpen", false)}
           onSelect={(client) => {
+            methods.setValue("clientName", client.name)
+            methods.setValue("clientId", client.id)
             methods.setValue("isModalOpen", false)
           }} />
         <SubmitAndCancelButtons onSubmit={methods.handleSubmit(onSubmit)} />

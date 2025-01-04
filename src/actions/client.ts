@@ -100,3 +100,20 @@ export async function updateClient(formData: Partial<Client>) {
     throw new Error("データの更新に失敗しました.");
   }
 }
+
+export async function getClientsByName(search: string) {
+
+  console.log("検索：", search)
+
+  const clients = await prisma.client.findMany({
+    where: {
+      name: {
+        contains: search,
+        mode: "insensitive",
+      },
+    },
+    select : {id: true, entityType: true, name: true},
+  })
+  console.log("検索結果：", clients)
+  return clients;
+}
