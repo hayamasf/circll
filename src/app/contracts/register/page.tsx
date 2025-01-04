@@ -1,13 +1,17 @@
 import React from "react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import PageHeader from "@/components/PageHeader";
+import getClients from "@/utils/getClients";
 import ContractReistrationForm from "@/components/ContractRegistrationForm";
 
-export default function Page({
+export default async function Page({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+
+  const clients = await getClients();
+
   const pages = [
     { name: "契約", href: "/contracts", current: false },
     { name: "登録", href: "", current: true },
@@ -43,7 +47,7 @@ export default function Page({
         <Breadcrumbs pages={pages} />
       </div>
       <PageHeader title={waste() + " の " + type()} />
-      <ContractReistrationForm />
+      <ContractReistrationForm clients={clients} />
     </div>
   );
 }
