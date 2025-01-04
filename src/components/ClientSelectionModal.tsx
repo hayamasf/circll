@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Client } from "@prisma/client";
+import { normalizeString } from "@/utils/normalizeString";
 import { formatEntityName } from "@/utils/formatEntityName";
 
 export default function ClientSelectionModal({
@@ -20,7 +21,7 @@ export default function ClientSelectionModal({
   // const [clients, setClients] = useState<any>([]);
 
   const filteredClients = clients.filter((client) =>
-    client.name.normalize("NFKC").includes(search.normalize("NFKC"))
+    normalizeString(client.name).includes(normalizeString(search))
   )
 
   if (!isOpen) return null;
