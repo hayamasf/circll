@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, } from "react";
+import React, { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { normalizeString } from "@/utils/normalizeString";
 
@@ -8,12 +8,15 @@ import SubmitAndCancelButtons from "./SubmitAndCancelButtons";
 import { formatEntityName } from "@/utils/formatEntityName";
 import { Client } from "@prisma/client";
 
-export default function ContractReistrationForm({ clients }: { clients: Client[] }) {
-
+export default function ContractReistrationForm({
+  clients,
+}: {
+  clients: Client[];
+}) {
   const methods = useForm<any>({
     defaultValues: {
       clientId: null,
-    }
+    },
   });
 
   const onSubmit = async (data: any) => console.log(data);
@@ -21,8 +24,8 @@ export default function ContractReistrationForm({ clients }: { clients: Client[]
   const [selectedClientName, setSelectedClientname] = useState("");
 
   const filteredClients = clients.filter((client) =>
-    normalizeString(client.name).includes(normalizeString(search))
-  )
+    normalizeString(client.name).includes(normalizeString(search)),
+  );
 
   return (
     <FormProvider {...methods}>
@@ -49,13 +52,15 @@ export default function ContractReistrationForm({ clients }: { clients: Client[]
           {search && filteredClients.length > 0 && (
             <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
               {filteredClients.map((client) => (
-                <div key={client.id}
+                <div
+                  key={client.id}
                   onClick={() => {
-                    methods.setValue("clientId", client.id)
-                    setSelectedClientname(formatEntityName(client))
-                    setSearch("")
+                    methods.setValue("clientId", client.id);
+                    setSelectedClientname(formatEntityName(client));
+                    setSearch("");
                   }}
-                  className="cursor-pointer px-4 py-2 text-sm hover:bg-gray-100">
+                  className="cursor-pointer px-4 py-2 text-sm hover:bg-gray-100"
+                >
                   {formatEntityName(client)}
                 </div>
               ))}

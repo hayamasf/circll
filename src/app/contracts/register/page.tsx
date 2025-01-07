@@ -9,7 +9,6 @@ export default async function Page({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-
   const clients = await getClients();
 
   const pages = [
