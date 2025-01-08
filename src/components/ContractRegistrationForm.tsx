@@ -21,7 +21,7 @@ export default function ContractReistrationForm({
 
   const onSubmit = async (data: any) => console.log(data);
   const [search, setSearch] = useState("");
-  const [selectedClientName, setSelectedClientname] = useState("");
+  const [selectedClientName, setSelectedClientName] = useState("");
 
   const filteredClients = clients.filter((client) =>
     normalizeString(client.name).includes(normalizeString(search)),
@@ -44,7 +44,13 @@ export default function ContractReistrationForm({
               value={search || selectedClientName}
               placeholder="排出事業者名で検索"
               className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6"
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                if (e.target.value === "") {
+                  setSelectedClientName("");
+                  methods.setValue("clientId", null)
+                }
+              }}
             />
           </div>
 
@@ -56,7 +62,7 @@ export default function ContractReistrationForm({
                   key={client.id}
                   onClick={() => {
                     methods.setValue("clientId", client.id);
-                    setSelectedClientname(formatEntityName(client));
+                    setSelectedClientName(formatEntityName(client));
                     setSearch("");
                   }}
                   className="cursor-pointer px-4 py-2 text-sm hover:bg-gray-100"
@@ -67,7 +73,14 @@ export default function ContractReistrationForm({
             </div>
           )}
         </div>
-        <SubmitAndCancelButtons onSubmit={methods.handleSubmit(onSubmit)} />
+        <SubmitAndCancelButtons
+          onCancel={() => {
+            methods.reset();
+            setSelectedClientName("");
+            setSearch("");
+          }
+          }
+          onSubmit={methods.handleSubmit(onSubmit)} />
       </form>
     </FormProvider>
   );

@@ -1,17 +1,17 @@
 import React from "react";
-import { useFormContext } from "react-hook-form";
 
 export default function SubmitAndCancelButtons({
   onSubmit,
+  onCancel,
 }: {
   onSubmit: () => void;
+  onCancel: () => void;
 }) {
-  const { reset } = useFormContext();
   return (
     <div className="mt-6 flex items-center justify-end gap-x-6">
       <button
         type="button"
-        onClick={() => reset()}
+        onClick={onCancel}
         className="rounded-md px-3 py-2 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100"
       >
         キャンセル
