@@ -43,11 +43,11 @@ export default async function Page({
   };
 
   return (
-    <div className="mx-auto max-w-xl">
+    <div className="mx-auto max-w-lg">
       <div className="pt-3 mb-10">
         <Breadcrumbs pages={pages} />
       </div>
-      <PageHeader title={waste() + " の " + type()} />
+      <PageHeader title={waste() + type() + "契約"} />
       <ContractReistrationForm clients={clients} contractors={contractors} />
     </div>
   );

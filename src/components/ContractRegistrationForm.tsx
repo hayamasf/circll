@@ -7,6 +7,8 @@ import { normalizeString } from "@/utils/normalizeString";
 import SubmitAndCancelButtons from "./SubmitAndCancelButtons";
 import { formatEntityName } from "@/utils/formatEntityName";
 import { Client, Contractor } from "@prisma/client";
+import DatePickerComponent from "./DatePickerComponent";
+import ToggleButton from "./ToggleButton";
 
 export default function ContractReistrationForm({
   clients,
@@ -19,6 +21,7 @@ export default function ContractReistrationForm({
     defaultValues: {
       clientId: null,
       contractorId: null,
+      isAutoRenew: true,
     },
     mode: "onSubmit",
   });
@@ -100,6 +103,7 @@ export default function ContractReistrationForm({
               </div>
             )}
           </div>
+
           <div className="relative">
             <label
               htmlFor="contractorName"
@@ -157,6 +161,34 @@ export default function ContractReistrationForm({
               </div>
             )}
           </div>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-8">
+            <div className="col-span-2 sm:col-span-1">
+              <DatePickerComponent
+                id="startDate"
+                label="契約開始日"
+                name="startDate"
+                validation={{ required: "契約開始日は必須です." }}
+                control={methods.control}
+              />
+            </div>
+            <div className="col-span-2 sm:col-span-1">
+              <DatePickerComponent
+                id="endDate"
+                label="契約終了日"
+                name="endDate"
+                validation={{ required: "契約終了日は必須です." }}
+                control={methods.control}
+              />
+            </div>
+
+          </div>
+
+          <ToggleButton
+            label="契約期間の自動更新"
+            description="自動更新しない場合はオフにしてください."
+            name="isAutoRenew"
+            defaultChecked={methods.getValues("isAutoRenew")}
+          />
         </div>
 
         <SubmitAndCancelButtons
