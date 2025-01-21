@@ -5,6 +5,7 @@ import Link from "next/link";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import SectionHeader from "@/components/SectionHeader";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import Tabs from "@/components/Tabs";
 import SitesList from "@/components/SitesList";
 
 export default async function Page({
@@ -21,6 +22,11 @@ export default async function Page({
   const offset = Number(searchParams.offset ?? 1);
   const limit = Number(searchParams.limit ?? 10);
 
+  const tabs = [
+    { name: "連絡先", href: "?tab=contacts", current: true },
+    { name: "JWNET情報", href: "?tab=jwnet-info", current: false },
+  ];
+
   if (client) {
     return (
       <div className="mx-auto max-w-2xl">
@@ -28,6 +34,10 @@ export default async function Page({
           <Breadcrumbs pages={pages} />
         </div>
         <LegalEntityProfile entity={client} />
+        <div className="my-10">
+          <Tabs tabs={tabs} />
+        </div>
+
         <div className="flex my-10 items-center justify-between">
           <SectionHeader title={"事業所一覧"} />
           <Link

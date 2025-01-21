@@ -180,7 +180,6 @@ export default function ContractReistrationForm({
                 control={methods.control}
               />
             </div>
-
           </div>
 
           <ToggleButton

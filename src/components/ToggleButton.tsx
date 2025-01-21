@@ -1,19 +1,35 @@
-'use client'
+"use client";
 
-import { useFormContext } from 'react-hook-form'
-import { Description, Field, Label, Switch } from '@headlessui/react'
+import { useFormContext } from "react-hook-form";
+import { Description, Field, Label, Switch } from "@headlessui/react";
 
-export default function ToggleButton(
-  { label, description, name, defaultChecked }: { label: string, description: string, name: string, defaultChecked: boolean }) {
-
+export default function ToggleButton({
+  label,
+  description,
+  name,
+  defaultChecked,
+}: {
+  label: string;
+  description: string;
+  name: string;
+  defaultChecked: boolean;
+}) {
   const { setValue, watch } = useFormContext();
-  const isChecked = watch(name) ?? defaultChecked
+  const isChecked = watch(name) ?? defaultChecked;
 
   return (
     <Field className="flex items-center gap-x-10">
-      <span className='flex flex-col'>
-        <Label as='span' passive className={"text-sm/6 font-medium text-gray-900"}>{label}</Label>
-        <Description as='span' className={"text-xs text-gray-500"}>{description}</Description>
+      <span className="flex flex-col">
+        <Label
+          as="span"
+          passive
+          className={"text-sm/6 font-medium text-gray-900"}
+        >
+          {label}
+        </Label>
+        <Description as="span" className={"text-xs text-gray-500"}>
+          {description}
+        </Description>
       </span>
 
       <Switch
@@ -27,7 +43,11 @@ export default function ToggleButton(
             aria-hidden="true"
             className="absolute inset-0 flex size-full items-center justify-center transition-opacity duration-200 ease-in group-data-[checked]:opacity-0 group-data-[checked]:duration-100 group-data-[checked]:ease-out"
           >
-            <svg fill="none" viewBox="0 0 12 12" className="size-3 text-gray-400">
+            <svg
+              fill="none"
+              viewBox="0 0 12 12"
+              className="size-3 text-gray-400"
+            >
               <path
                 d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2"
                 stroke="currentColor"
@@ -41,12 +61,16 @@ export default function ToggleButton(
             aria-hidden="true"
             className="absolute inset-0 flex size-full items-center justify-center opacity-0 transition-opacity duration-100 ease-out group-data-[checked]:opacity-100 group-data-[checked]:duration-200 group-data-[checked]:ease-in"
           >
-            <svg fill="currentColor" viewBox="0 0 12 12" className="size-3 text-gray-600">
+            <svg
+              fill="currentColor"
+              viewBox="0 0 12 12"
+              className="size-3 text-gray-600"
+            >
               <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
             </svg>
           </span>
         </span>
       </Switch>
     </Field>
-  )
+  );
 }
