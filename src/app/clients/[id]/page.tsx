@@ -1,9 +1,9 @@
 import React from "react";
 import LegalEntityProfile from "@/components/LegalEntityProfile";
 import getClientById from "@/utils/getClientById";
-import Link from "next/link";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import SectionHeader from "@/components/SectionHeader";
+// import Link from "next/link";
+// import { PlusIcon } from "@heroicons/react/24/outline";
+// import SectionHeader from "@/components/SectionHeader";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Tabs, TabItem } from "@/components/Tabs";
 import SitesList from "@/components/SitesList";
@@ -35,11 +35,11 @@ export default async function Page({
               <SitesList clientId={id} offset={offset} limit={limit} />
             </TabItem>
             <TabItem label="連絡先">それ</TabItem>
-            <TabItem label="JWNET情報">"JWNET"</TabItem>
+            <TabItem label="JWNET情報">JWNET</TabItem>
           </Tabs>
         </div>
 
-        <div className="flex my-10 items-center justify-between">
+        {/* <div className="flex my-10 items-center justify-between">
           <SectionHeader title={"事業所一覧"} />
           <Link
             href={id + "/sites/register"}
@@ -50,7 +50,7 @@ export default async function Page({
             <span className="text-sm font-semibold">登録する</span>
           </Link>
         </div>
-        <SitesList clientId={id} offset={offset} limit={limit} />
+        <SitesList clientId={id} offset={offset} limit={limit} /> */}
       </div>
     );
   }

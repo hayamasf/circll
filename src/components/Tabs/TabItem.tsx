@@ -8,5 +8,5 @@ export type TabItemProps = {
 };
 
 export function TabItem({ label, children }: TabItemProps) {
-  return <div>{children}</div>;
+  return <div className="my-10">{children}</div>;
 }

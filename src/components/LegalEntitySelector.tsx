@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { Client, Contractor } from "@prisma/client";
 import { classNames } from "@/utils/classNames";
 
 import CorporateEntityInputs from "./CorporateEntityInputs";
