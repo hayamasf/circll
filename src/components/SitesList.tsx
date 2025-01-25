@@ -4,6 +4,7 @@ import Link from "next/link";
 import Pagination from "./Pagination";
 import getSites from "@/utils/getSites";
 import getTotalSitesCount from "@/utils/getTotalSitesCount";
+import PlusButton from "./PlusButton";
 
 export default async function SitesList({
   offset,
@@ -19,7 +20,10 @@ export default async function SitesList({
   const totalPages = Math.ceil(totalSites / limit);
 
   if (sites.length === 0) {
-    return <p className="text-sm text-center">事業所の登録がありません.</p>;
+    return <Link href={clientId + "/sites/register"}
+      className="flex justify-center p-2 hover:bg-gray-50">
+      <PlusButton />
+    </Link>;
   } else {
     return (
       <>
@@ -65,6 +69,8 @@ export default async function SitesList({
             </li>
           ))}
         </ul>
+        <Link href={clientId + "/sites/register"} className="flex justify-center p-2 hover:bg-gray-50"><PlusButton /></Link>
+
         <Pagination
           currentPage={offset}
           limit={limit}
