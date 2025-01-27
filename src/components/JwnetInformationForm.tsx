@@ -1,21 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import SubmitAndCancelButtons from "./SubmitAndCancelButtons";
+import { useForm, Controller } from "react-hook-form";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 type JwnetInformationProps = {
-  JwnetId: string;
+  jwnetId: string;
 }
 
 export default function JwnetInformationForm() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { register, handleSubmit, formState: { errors } } = useForm<JwnetInformationProps>();
+  const { control, register, handleSubmit, watch, formState: { errors, isValid } } = useForm<JwnetInformationProps>({
+    mode: "onChange",
+  });
 
   const onSubmit = async (formData: any) => {
     await console.log(formData)
   }
+
+  const jwnetIdValue = watch("jwnetId")
 
   return (
     <div className="flex p-4 place-content-center">
@@ -42,7 +45,7 @@ export default function JwnetInformationForm() {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="rounded-full p-1 bg-white text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   <span className="sr-only">Close</span>
                   <XMarkIcon aria-hidden="true" className="size-6" />
@@ -51,54 +54,45 @@ export default function JwnetInformationForm() {
               <div className="mt-2 max-w-xl text-sm text-gray-500">
                 <p>加入者番号（数字7桁）を入力してください.</p>
               </div>
-              <form className="mt-5 sm:flex sm:items-center">
+              <form className="mt-5 sm:flex sm:items-center" onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-full sm:max-w-xs">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    aria-label="Email"
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  <Controller
+                    name="jwnetId"
+                    control={control}
+                    rules={{
+                      required: true,
+                      pattern: {
+                        value: /^[0-9]{7}$/,
+                        message: "",
+                      },
+                    }}
+
+                    render={({ field }) => (
+                      <input
+                        {...field}
+                        type="text"
+                        id="jwnetId"
+                        maxLength={7}
+                        placeholder="1234567"
+                        aria-label="jwnetId"
+                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6"
+                      />
+                    )}
+
                   />
                 </div>
                 <button
                   type="submit"
-                  className="mt-3 text-nowrap inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:ml-3 sm:mt-0 sm:w-auto"
+                  disabled={!isValid}
+                  className={`mt-3 text-nowrap inline-flex w-full items-center justify-center rounded-md px-3 py-2 text-sm font-semibold shadow-sm
+                      sm:w-auto sm:ml-3 sm:mt-0 ${isValid ? "bg-gray-600 text-white hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                      : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
                 >
                   保存
                 </button>
               </form>
             </div>
           </div>
-          {/* <div className="bg-white p-6 rounded-lg">
-            <form>
-              <div className="">
-                <label htmlFor="JwnetId" className="block text-sm text-gray-800">
-                  JWNET加入者番号（7桁）
-                </label>
-                <input
-                  id="JwnetId"
-                  type="text"
-                  maxLength={7}
-                  {...register("JwnetId", {
-                    required: "入力必須",
-                    pattern: {
-                      value: /^[0-9]{7}$/,
-                      message: "加入者番号は数字7桁です."
-                    }
-                  })}
-                  className="mt-2 border border-gray-300 rounded-lg px-3 py-2 w-full"
-                />
-              </div>
-              {errors.JwnetId && (
-                <p className="text-sm text-red-500 mt-1">
-                  {errors.JwnetId.message}
-                </p>
-              )}
-              <SubmitAndCancelButtons onCancel={() => setIsModalOpen(false)} onSubmit={handleSubmit(onSubmit)} />
-            </form>
-          </div> */}
         </div>
       )}
     </div>
