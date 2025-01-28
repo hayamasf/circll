@@ -5,6 +5,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { Tabs, TabItem } from "@/components/Tabs";
 import SitesList from "@/components/SitesList";
 import JwnetInformationForm from "@/components/JwnetInformationForm";
+import getClientJwnetId from "@/utils/getClientJwnetId";
 
 export default async function Page({
   params,
@@ -13,8 +14,10 @@ export default async function Page({
   params: { id: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+
   const id = Number(params.id);
   const client = await getClientById(id);
+  const jwnetId = await getClientJwnetId(id);
   const pages = [{ name: "排出事業者", href: "/clients", current: true }];
 
   const offset = Number(searchParams.offset ?? 1);
@@ -32,7 +35,7 @@ export default async function Page({
             <TabItem label="事業所">
               <SitesList clientId={id} offset={offset} limit={limit} />
             </TabItem>
-            <TabItem label="JWNET情報"><JwnetInformationForm /></TabItem>
+            <TabItem label="JWNET情報"><JwnetInformationForm jwnetId={jwnetId} /></TabItem>
           </Tabs>
         </div>
       </div>

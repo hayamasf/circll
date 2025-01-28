@@ -8,9 +8,9 @@ type JwnetInformationProps = {
   jwnetId: string;
 }
 
-export default function JwnetInformationForm() {
+export default function JwnetInformationForm({ jwnetId }: { jwnetId?: number }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { control, register, handleSubmit, watch, formState: { errors, isValid } } = useForm<JwnetInformationProps>({
+  const { control, register, handleSubmit, watch, formState: { isValid } } = useForm<JwnetInformationProps>({
     mode: "onChange",
   });
 
@@ -23,14 +23,12 @@ export default function JwnetInformationForm() {
   return (
     <div className="flex p-4 place-content-center">
       <div className="flex items-center space-x-4">
-        <label className="text-sm text-gray-800">加入者番号</label>
-        <input
-          type="text"
-          value={1234567}
-          disabled
-          size={10}
-          className="border border-gray-300 rounded-md px-3 py-2 bg-gray-100 text-sm text-right"
-        />
+        <span className="text-sm text-gray-800">
+          加入者番号
+        </span>
+        <span className="border border-gray-300 rounded-md pl-3 pr-20 py-1.5 bg-gray-100 text-sm">
+          {jwnetId ? jwnetId : "登録なし"}
+        </span>
         <button type="button"
           onClick={() => setIsModalOpen(true)}
           className="text-sm text-blue-700 font-semibold">編集する</button>
@@ -78,7 +76,6 @@ export default function JwnetInformationForm() {
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6"
                       />
                     )}
-
                   />
                 </div>
                 <button
