@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 
 export default async function getClientJwnetId(clientId: number) {
-  const jwnetId = 0
+  const jwnetId = 1234567
   try {
     return jwnetId
   } catch (error) {

@@ -1,16 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, } from "react-hook-form";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 type JwnetInformationProps = {
   jwnetId: string;
 }
 
-export default function JwnetInformationForm({ jwnetId }: { jwnetId?: number }) {
+export default function JwnetInformationForm({ label, jwnetId }: { label: string, jwnetId?: number }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { control, register, handleSubmit, watch, formState: { isValid } } = useForm<JwnetInformationProps>({
+  const { register, handleSubmit, watch, formState: { isValid } } = useForm<JwnetInformationProps>({
     mode: "onChange",
   });
 
@@ -18,13 +18,13 @@ export default function JwnetInformationForm({ jwnetId }: { jwnetId?: number }) 
     await console.log(formData)
   }
 
-  const jwnetIdValue = watch("jwnetId")
+  // const jwnetIdValue = watch("jwnetId")
 
   return (
     <div className="flex p-4 place-content-center">
       <div className="flex items-center space-x-4">
         <span className="text-sm text-gray-800">
-          加入者番号
+          {label}
         </span>
         <span className="border border-gray-300 rounded-md pl-3 pr-20 py-1.5 bg-gray-100 text-sm">
           {jwnetId ? jwnetId : "登録なし"}
@@ -54,28 +54,20 @@ export default function JwnetInformationForm({ jwnetId }: { jwnetId?: number }) 
               </div>
               <form className="mt-5 sm:flex sm:items-center" onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-full sm:max-w-xs">
-                  <Controller
-                    name="jwnetId"
-                    control={control}
-                    rules={{
+                  <input
+                    type="text"
+                    id="jwnetId"
+                    {...register("jwnetId", {
                       required: true,
                       pattern: {
                         value: /^[0-9]{7}$/,
                         message: "",
-                      },
-                    }}
-
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type="text"
-                        id="jwnetId"
-                        maxLength={7}
-                        placeholder="1234567"
-                        aria-label="jwnetId"
-                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6"
-                      />
-                    )}
+                      }
+                    })}
+                    maxLength={7}
+                    placeholder="1234567"
+                    aria-label="jwnetId"
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6"
                   />
                 </div>
                 <button

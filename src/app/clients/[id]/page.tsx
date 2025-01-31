@@ -35,7 +35,7 @@ export default async function Page({
             <TabItem label="事業所">
               <SitesList clientId={id} offset={offset} limit={limit} />
             </TabItem>
-            <TabItem label="JWNET情報"><JwnetInformationForm jwnetId={jwnetId} /></TabItem>
+            <TabItem label="JWNET情報"><JwnetInformationForm label="加入者番号(排出事業者)" jwnetId={jwnetId} /></TabItem>
           </Tabs>
         </div>
       </div>
