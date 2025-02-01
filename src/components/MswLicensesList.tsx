@@ -1,46 +1,25 @@
 import React from "react";
 
-import getMswLicenses from "@/utils/getMswLicenses";
 import { formatDate } from "@/utils/dateUtils";
+import { MswLicense, Municipality } from "@prisma/client";
 import { PaperClipIcon } from "@heroicons/react/24/outline";
 import { getDaysUntilExpiration } from "@/utils/dateUtils";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import EllipsisDropDownMenu from "./EllipsisDropDownMenu";
+import PlusButton from "./PlusButton";
 
 export default async function MswLicensesList({
+  licenses,
   contractorId,
 }: {
+  licenses: (MswLicense & { municipality: Municipality })[];
   contractorId: number;
 }) {
-  const licenses = await getMswLicenses(contractorId);
-
-  if (licenses.length === 0) {
-    return (
-      <div className="text-sm text-center">
-        <Link
-          href={"./" + contractorId + "/licenses/msw/register"}
-          className="font-bold hover:underline"
-        >
-          登録
-        </Link>
-        する.
-      </div>
-    );
-  }
 
   return (
-    <div className="grid gap-y-2">
-      <div className="text-right">
-        <Link
-          href={"./" + contractorId + "/licenses/msw/register"}
-          className="text-xs font-semibold p-1 border border-gray-500 rounded-md hover:bg-gray-200"
-        >
-          登録する
-        </Link>
-      </div>
-
+    <div className="grid gap-y-5">
       <ul role="list" className="divide-y divide-gray-100">
         {licenses.map((license) => {
           const daysLeft = getDaysUntilExpiration(license.expirationDate);
@@ -61,7 +40,7 @@ export default async function MswLicensesList({
           return (
             <li
               key={license.id}
-              className="relative flex justify-between gap-x-6 py-3"
+              className="px-2 relative flex justify-between gap-x-6 py-3 hover:bg-gray-50"
             >
               <div className="flex min-w-0 gap-x-4">
                 <div className="min-w-0 flex-auto">
@@ -115,6 +94,12 @@ export default async function MswLicensesList({
             </li>
           );
         })}
+        <li className="px-2 relative flex justify-between gap-x-6 py-3 hover:bg-gray-50">
+          <Link href={"./" + contractorId + "/licenses/msw/register"} className="flex mx-auto">
+            <PlusButton />
+          </Link>
+        </li>
+
       </ul>
     </div>
   );

@@ -21,7 +21,7 @@ export default function JwnetInformationForm({ label, jwnetId }: { label: string
   // const jwnetIdValue = watch("jwnetId")
 
   return (
-    <div className="flex p-4 place-content-center">
+    <div className="flex p-4">
       <div className="flex items-center space-x-4">
         <span className="text-sm text-gray-800">
           {label}
