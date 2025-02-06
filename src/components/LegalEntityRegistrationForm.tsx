@@ -5,13 +5,11 @@ import { useForm, FormProvider } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
 import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
-import LegalEntityTypeSelector from "./LegalEntityTypeSelector";
 import CorporateEntityInputs from "./CorporateEntityInputs";
 import SoleProprietorInputs from "./SoleProprietorInputs";
 import AddressInputs from "./AddressInputs";
 import { createClient } from "@/actions/client";
 import { createContractor } from "@/actions/contractor";
-// import { LegalEntityFormData } from "@/types/types";
 import { Client, Contractor } from "@prisma/client";
 
 export default function LegalEntityRegistrationForm({
@@ -53,10 +51,9 @@ export default function LegalEntityRegistrationForm({
 
   return (
     <>
-      <LegalEntityTypeSelector type={type} />
       <FormProvider {...methods}>
         {type && (
-          <form onSubmit={methods.handleSubmit(onSubmit)} className="mt-10">
+          <form onSubmit={methods.handleSubmit(onSubmit)} className="mt-4">
             <div>
               {type === "corporate" && <CorporateEntityInputs />}
               {type === "sole-proprietor" && <SoleProprietorInputs />}
