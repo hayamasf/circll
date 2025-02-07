@@ -69,7 +69,10 @@ export default async function SitesList({
             </li>
           ))}
         </ul>
-        <Link href={clientId + "/sites/register"} className="flex justify-center p-2 hover:bg-gray-50"><PlusButton /></Link>
+        {clientId &&
+          (<Link href={clientId + "/sites/register"} className="flex justify-center p-2 hover:bg-gray-50"><PlusButton /></Link>
+          )
+        }
 
         <Pagination
           currentPage={offset}
