@@ -14,9 +14,17 @@ export default function Page({
   const limit = Number(searchParams.limit ?? 10);
 
   const menuItems = [
-    { id: 1, href: "/contractors/register?type=corporate", text: "会社など法人" },
-    { id: 2, href: "/contractors/register?type=sole-proprietor", text: "個人事業者" },
-  ]
+    {
+      id: 1,
+      href: "/contractors/register?type=corporate",
+      text: "会社など法人",
+    },
+    {
+      id: 2,
+      href: "/contractors/register?type=sole-proprietor",
+      text: "個人事業者",
+    },
+  ];
 
   return (
     <div className="mx-auto max-w-2xl">

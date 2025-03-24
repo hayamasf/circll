@@ -15,8 +15,12 @@ export default function Page({
 
   const menuItems = [
     { id: 1, href: "/clients/register?type=corporate", text: "会社など法人" },
-    { id: 2, href: "/clients/register?type=sole-proprietor", text: "個人事業者" },
-  ]
+    {
+      id: 2,
+      href: "/clients/register?type=sole-proprietor",
+      text: "個人事業者",
+    },
+  ];
 
   return (
     <div className="mx-auto max-w-2xl">

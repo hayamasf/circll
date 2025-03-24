@@ -1,7 +1,10 @@
 import React from "react";
 
 import Link from "next/link";
-import { IndustrialWasteLicense, IndustrialWasteCategory } from "@prisma/client";
+import {
+  IndustrialWasteLicense,
+  IndustrialWasteCategory,
+} from "@prisma/client";
 import { getDaysUntilExpiration } from "@/utils/dateUtils";
 import { PaperClipIcon } from "@heroicons/react/24/outline";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
@@ -16,7 +19,9 @@ export default async function IndustrialWasteLicensesList({
   licenses,
   contractorId,
 }: {
-  licenses: (IndustrialWasteLicense & { licensedCategories: IndustrialWasteCategory[] })[]
+  licenses: (IndustrialWasteLicense & {
+    licensedCategories: IndustrialWasteCategory[];
+  })[];
   contractorId: number;
 }) {
   return (
@@ -82,7 +87,10 @@ export default async function IndustrialWasteLicensesList({
           );
         })}
         <li className="px-2 relative flex justify-between gap-x-6 py-3 hover:bg-gray-50">
-          <Link href={"./" + contractorId + "/licenses/industrial-waste/register"} className="flex mx-auto">
+          <Link
+            href={"./" + contractorId + "/licenses/industrial-waste/register"}
+            className="flex mx-auto"
+          >
             <PlusButton />
           </Link>
         </li>

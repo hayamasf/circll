@@ -9,5 +9,5 @@ export default function PlusButton() {
     >
       <PlusIcon aria-hidden="true" className="h-5 w-5" />
     </button>
-  )
+  );
 }

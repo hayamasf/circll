@@ -34,13 +34,13 @@ const menuSections = [
       },
     ],
   },
-  {
-    id: 3,
-    items: [
-      { id: 1, text: "専ら物", href: "#" },
-      { id: 2, text: "売買契約", href: "#" },
-    ],
-  },
+  // {
+  //   id: 3,
+  //   items: [
+  //     { id: 1, text: "専ら物", href: "#" },
+  //     { id: 2, text: "売買契約", href: "#" },
+  //   ],
+  // },
 ];
 
 export default function Page() {
@@ -48,10 +48,7 @@ export default function Page() {
     <div className="mx-auto max-w-2xl">
       <div className="flex justify-between mb-10 items-center">
         <PageHeader title="契約" />
-        <DropdownNavigationMenu
-          title="契約を登録する"
-          menuSections={menuSections}
-        />
+        <DropdownNavigationMenu menuSections={menuSections} />
       </div>
 
       <Suspense fallback={<Loading />}>内容</Suspense>

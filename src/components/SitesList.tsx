@@ -20,10 +20,14 @@ export default async function SitesList({
   const totalPages = Math.ceil(totalSites / limit);
 
   if (sites.length === 0) {
-    return <Link href={clientId + "/sites/register"}
-      className="flex justify-center p-2 hover:bg-gray-50">
-      <PlusButton />
-    </Link>;
+    return (
+      <Link
+        href={clientId + "/sites/register"}
+        className="flex justify-center p-2 hover:bg-gray-50"
+      >
+        <PlusButton />
+      </Link>
+    );
   } else {
     return (
       <>
@@ -69,10 +73,14 @@ export default async function SitesList({
             </li>
           ))}
         </ul>
-        {clientId &&
-          (<Link href={clientId + "/sites/register"} className="flex justify-center p-2 hover:bg-gray-50"><PlusButton /></Link>
-          )
-        }
+        {clientId && (
+          <Link
+            href={clientId + "/sites/register"}
+            className="flex justify-center p-2 hover:bg-gray-50"
+          >
+            <PlusButton />
+          </Link>
+        )}
 
         <Pagination
           currentPage={offset}

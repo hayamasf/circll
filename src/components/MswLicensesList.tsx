@@ -17,7 +17,6 @@ export default async function MswLicensesList({
   licenses: (MswLicense & { municipality: Municipality })[];
   contractorId: number;
 }) {
-
   return (
     <div className="grid gap-y-5">
       <ul role="list" className="divide-y divide-gray-100">
@@ -95,11 +94,13 @@ export default async function MswLicensesList({
           );
         })}
         <li className="px-2 relative flex justify-between gap-x-6 py-3 hover:bg-gray-50">
-          <Link href={"./" + contractorId + "/licenses/msw/register"} className="flex mx-auto">
+          <Link
+            href={"./" + contractorId + "/licenses/msw/register"}
+            className="flex mx-auto"
+          >
             <PlusButton />
           </Link>
         </li>
-
       </ul>
     </div>
   );

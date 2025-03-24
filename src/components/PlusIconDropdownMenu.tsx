@@ -1,23 +1,31 @@
-import { Label, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import {
+  Label,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from "@headlessui/react";
 import { PlusIcon } from "@heroicons/react/20/solid";
-import Link from 'next/link';
+import Link from "next/link";
 
 type menuItem = {
   id: number;
   href: string;
   text: string;
-}
+};
 
-export default function PlusIconDropdownMenu(
-  { menuItems }: { menuItems: menuItem[] }
-) {
+export default function PlusIconDropdownMenu({
+  menuItems,
+}: {
+  menuItems: menuItem[];
+}) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <MenuButton className="flex p-1 items-center rounded-full bg-gray-600 text-white hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-100">
           <span className="sr-only">Open options</span>
 
-          <PlusIcon aria-hidden="true" className='size-5' />
+          <PlusIcon aria-hidden="true" className="size-5" />
         </MenuButton>
       </div>
 
@@ -35,9 +43,7 @@ export default function PlusIconDropdownMenu(
                 {item.text}
               </Link>
             </MenuItem>
-          )
-
-          )}
+          ))}
           {/* <MenuItem>
             <Link
               href="#"
@@ -54,9 +60,8 @@ export default function PlusIconDropdownMenu(
               個人事業
             </Link>
           </MenuItem> */}
-
         </div>
       </MenuItems>
     </Menu>
-  )
+  );
 }

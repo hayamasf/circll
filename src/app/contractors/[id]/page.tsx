@@ -39,15 +39,20 @@ export default async function Page({ params }: { params: { id: string } }) {
                 </div>
                 <div className="pt-5">
                   <h3 className="py-3 text-sm font-semibold">産業廃棄物</h3>
-                  <IndustrialWasteLicensesList contractorId={id} licenses={industrialWasteLicenses} />
+                  <IndustrialWasteLicensesList
+                    contractorId={id}
+                    licenses={industrialWasteLicenses}
+                  />
                 </div>
               </TabItem>
               <TabItem label="JWNET情報">
-                <JwnetInformationForm label="加入者番号(収集運搬業者)" jwnetId={1234511} />
+                <JwnetInformationForm
+                  label="加入者番号(収集運搬業者)"
+                  jwnetId={1234511}
+                />
               </TabItem>
             </Tabs>
           </div>
-
         </>
       ) : (
         "該当する業者が見つかりません..."
