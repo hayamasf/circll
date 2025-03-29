@@ -10,6 +10,8 @@ import { Client, Contractor } from "@prisma/client";
 import DatePickerComponent from "./DatePickerComponent";
 import ToggleButton from "./ToggleButton";
 
+import { createContract } from "@/actions/contract";
+
 export default function ContractReistrationForm({
   clients,
   contractors,
@@ -26,8 +28,9 @@ export default function ContractReistrationForm({
     mode: "onSubmit",
   });
 
-  const onSubmit = async (data: any) => {
-    console.log(data);
+  const onSubmit = async (formData: any) => {
+    console.log(formData);
+    await createContract(formData)
   }
 
   const [clientSearch, setClientSearch] = useState("");
