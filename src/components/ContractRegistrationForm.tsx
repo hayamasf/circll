@@ -26,7 +26,10 @@ export default function ContractReistrationForm({
     mode: "onSubmit",
   });
 
-  const onSubmit = async (data: any) => console.log(data);
+  const onSubmit = async (data: any) => {
+    console.log(data);
+  }
+
   const [clientSearch, setClientSearch] = useState("");
   const [contractorSearch, setContractorSearch] = useState("");
   const [selectedClientName, setSelectedClientName] = useState("");
@@ -161,16 +164,7 @@ export default function ContractReistrationForm({
               </div>
             )}
           </div>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-8">
-            <div className="col-span-2 sm:col-span-1">
-              <DatePickerComponent
-                id="startDate"
-                label="契約開始日"
-                name="startDate"
-                validation={{ required: "契約開始日は必須です." }}
-                control={methods.control}
-              />
-            </div>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-8 items-end">
             <div className="col-span-2 sm:col-span-1">
               <DatePickerComponent
                 id="endDate"
@@ -180,14 +174,17 @@ export default function ContractReistrationForm({
                 control={methods.control}
               />
             </div>
+            <div className="col-span-2 sm:col-span-1">
+              <ToggleButton
+                label="契約期間の自動更新"
+                description="しない場合はオフにする"
+                name="isAutoRenew"
+                defaultChecked={methods.getValues("isAutoRenew")}
+              />
+
+            </div>
           </div>
 
-          <ToggleButton
-            label="契約期間の自動更新"
-            description="自動更新しない場合はオフにしてください."
-            name="isAutoRenew"
-            defaultChecked={methods.getValues("isAutoRenew")}
-          />
         </div>
 
         <SubmitAndCancelButtons

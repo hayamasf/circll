@@ -18,7 +18,7 @@ export default function ToggleButton({
   const isChecked = watch(name) ?? defaultChecked;
 
   return (
-    <Field className="flex items-center gap-x-10">
+    <Field className="flex items-center gap-x-10 justify-start sm:justify-between">
       <span className="flex flex-col">
         <Label
           as="span"
