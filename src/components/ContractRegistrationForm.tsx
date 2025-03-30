@@ -15,15 +15,21 @@ import { createContract } from "@/actions/contract";
 export default function ContractReistrationForm({
   clients,
   contractors,
+  waste,
+  type,
 }: {
   clients: Client[];
   contractors: Contractor[];
+  waste: string;
+  type: string;
 }) {
   const methods = useForm<any>({
     defaultValues: {
       clientId: null,
       contractorId: null,
       isAutoRenew: true,
+      waste: waste,
+      type: type,
     },
     mode: "onSubmit",
   });
@@ -189,7 +195,6 @@ export default function ContractReistrationForm({
           </div>
 
         </div>
-
         <SubmitAndCancelButtons
           onCancel={() => {
             methods.reset();

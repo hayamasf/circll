@@ -8,7 +8,7 @@ import ContractReistrationForm from "@/components/ContractRegistrationForm";
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string };
 }) {
   const clients = await getClients();
   const contractors = await getContractors();
@@ -18,8 +18,11 @@ export default async function Page({
     { name: "登録", href: "", current: true },
   ];
 
-  const waste = () => {
-    switch (searchParams.waste) {
+  const waste = searchParams.waste
+  const type = searchParams.type
+
+  const titleWaste = () => {
+    switch (waste) {
       case "msw":
         return "一般廃棄物";
       case "industrial":
@@ -29,8 +32,8 @@ export default async function Page({
     }
   };
 
-  const type = () => {
-    switch (searchParams.type) {
+  const titleType = () => {
+    switch (type) {
       case "treatment":
         return "処理";
       case "transportation":
@@ -47,8 +50,8 @@ export default async function Page({
       <div className="pt-3 mb-10">
         <Breadcrumbs pages={pages} />
       </div>
-      <PageHeader title={waste() + type() + "契約"} />
-      <ContractReistrationForm clients={clients} contractors={contractors} />
+      <PageHeader title={titleWaste() + titleType() + "契約"} />
+      <ContractReistrationForm clients={clients} contractors={contractors} waste={waste} type={type} />
     </div>
   );
 }
