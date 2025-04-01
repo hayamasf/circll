@@ -31,6 +31,7 @@ model Contractor {
   address2            String?
   mswLicenses         MswLicense[]
   industrialWasteLicenses IndustrialWasteLicense[]
+  industrialWasteContracts IndustrialWasteContract[]
 }
 
 model Client {
@@ -52,6 +53,7 @@ model Client {
   address             String
   address2            String?
   sites               Site[]
+  industrialWasteContracts IndustrialWasteContract[]
 }
 
 model Site {
@@ -125,4 +127,22 @@ model IndustrialWasteLicense {
   licensedCategories  IndustrialWasteCategory[]
 
   @@unique([issuingAuthority, typeCode, authorityCode, contractorCode])
+}
+
+enum ContractType {
+  transportation
+  disposal
+}
+
+model IndustrialWasteContract {
+  id                Int @id @default(autoincrement())
+  createdAt         DateTime @default(now())
+  createdBy         String
+  clientId          Int
+  client            Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  contractorId      Int
+  contractor        Contractor @relation(fields: [contractorId], references: [id], onDelete: Cascade)
+  type              ContractType
+  endDate           DateTime @db.Date
+  isAutoRenew       Boolean
 }
