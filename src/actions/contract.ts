@@ -2,16 +2,8 @@
 
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@auth0/nextjs-auth0";
+import { WasteContractFormData } from "@/types/types";
 
-type WasteContractFormData = {
-  createdBy: String;
-  clientId: number;
-  contractorId: number;
-  type: "transportation" | "disposal";
-  endDate: Date;
-  isAutoRenew: boolean;
-  waste: string;
-}
 
 export async function createContract(formData: WasteContractFormData) {
   try {

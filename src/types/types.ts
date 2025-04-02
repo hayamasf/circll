@@ -114,3 +114,13 @@ export type IndustrialWasteLicense = {
   licenseUrl: string;
   wasteItems: WasteItem[];
 };
+
+export type WasteContractFormData = {
+  createdBy: String;
+  clientId: number;
+  contractorId: number;
+  type: "transportation" | "disposal";
+  endDate: Date;
+  isAutoRenew: boolean;
+  waste: string;
+}
