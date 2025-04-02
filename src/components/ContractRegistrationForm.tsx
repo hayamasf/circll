@@ -36,8 +36,8 @@ export default function ContractReistrationForm({
 
   const onSubmit = async (formData: any) => {
     console.log(formData);
-    await createContract(formData)
-  }
+    await createContract(formData);
+  };
 
   const [clientSearch, setClientSearch] = useState("");
   const [contractorSearch, setContractorSearch] = useState("");
@@ -190,10 +190,8 @@ export default function ContractReistrationForm({
                 name="isAutoRenew"
                 defaultChecked={methods.getValues("isAutoRenew")}
               />
-
             </div>
           </div>
-
         </div>
         <SubmitAndCancelButtons
           onCancel={() => {

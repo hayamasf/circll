@@ -123,4 +123,4 @@ export type WasteContractFormData = {
   endDate: Date;
   isAutoRenew: boolean;
   waste: string;
-}
+};

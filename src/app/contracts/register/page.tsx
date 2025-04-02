@@ -18,8 +18,8 @@ export default async function Page({
     { name: "登録", href: "", current: true },
   ];
 
-  const waste = searchParams.waste
-  const type = searchParams.type
+  const waste = searchParams.waste;
+  const type = searchParams.type;
 
   const titleWaste = () => {
     switch (waste) {
@@ -51,7 +51,12 @@ export default async function Page({
         <Breadcrumbs pages={pages} />
       </div>
       <PageHeader title={titleWaste() + titleType() + "契約"} />
-      <ContractReistrationForm clients={clients} contractors={contractors} waste={waste} type={type} />
+      <ContractReistrationForm
+        clients={clients}
+        contractors={contractors}
+        waste={waste}
+        type={type}
+      />
     </div>
   );
 }
