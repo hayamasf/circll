@@ -25,7 +25,7 @@ export default async function Page({
     switch (waste) {
       case "msw":
         return "一般廃棄物";
-      case "industrial":
+      case "industrial-waste":
         return "産業廃棄物";
       default:
         return "";

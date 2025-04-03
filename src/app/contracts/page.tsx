@@ -25,12 +25,12 @@ const menuSections = [
       {
         id: 1,
         text: "産業廃棄物収集運搬",
-        href: "/contracts/register?waste=industrial&type=transportation",
+        href: "/contracts/register?waste=industrial-waste&type=transportation",
       },
       {
         id: 2,
         text: "産業廃棄物処分",
-        href: "/contracts/register?waste=industrial&type=disposal",
+        href: "/contracts/register?waste=industrial-waste&type=disposal",
       },
     ],
   },
