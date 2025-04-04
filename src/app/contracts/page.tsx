@@ -2,6 +2,8 @@ import React, { Suspense } from "react";
 import PageHeader from "@/components/PageHeader";
 import Loading from "../loading";
 import DropdownNavigationMenu from "@/components/DropdownNavigationMenu";
+import ContractTable from "@/components/ContractTable";
+import getIndustrialWasteContracts from "@/utils/getIndustrialWasteContracts";
 
 const menuSections = [
   {
@@ -43,7 +45,9 @@ const menuSections = [
   // },
 ];
 
-export default function Page() {
+export default async function Page() {
+  const industrialWasteContracts = await getIndustrialWasteContracts();
+
   return (
     <div className="mx-auto max-w-2xl">
       <div className="flex justify-between mb-10 items-center">
@@ -51,7 +55,9 @@ export default function Page() {
         <DropdownNavigationMenu menuSections={menuSections} />
       </div>
 
-      <Suspense fallback={<Loading />}>内容</Suspense>
+      <Suspense fallback={<Loading />}>
+        <ContractTable title="産業廃棄物" contracts={industrialWasteContracts} />
+      </Suspense>
     </div>
   );
 }

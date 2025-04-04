@@ -3,6 +3,8 @@
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@auth0/nextjs-auth0";
 import { WasteContractFormData } from "@/types/types";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createContract(formData: WasteContractFormData) {
   let newContract;
@@ -28,15 +30,12 @@ export async function createContract(formData: WasteContractFormData) {
       });
     }
 
-    if (formData.waste === "msw") {
-      console.log("産廃");
-    }
-
-    console.log(formData);
+    revalidatePath("/contracts")
   } catch (error) {
     console.error("データの登録に失敗しました.", error);
     throw new Error("データの登録に失敗しました.");
   } finally {
     console.log("finally");
+    redirect("/contracts")
   }
 }
