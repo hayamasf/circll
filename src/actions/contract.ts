@@ -30,12 +30,12 @@ export async function createContract(formData: WasteContractFormData) {
       });
     }
 
-    revalidatePath("/contracts")
+    revalidatePath("/contracts");
   } catch (error) {
     console.error("データの登録に失敗しました.", error);
     throw new Error("データの登録に失敗しました.");
   } finally {
     console.log("finally");
-    redirect("/contracts")
+    redirect("/contracts");
   }
 }

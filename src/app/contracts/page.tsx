@@ -2,8 +2,9 @@ import React, { Suspense } from "react";
 import PageHeader from "@/components/PageHeader";
 import Loading from "../loading";
 import DropdownNavigationMenu from "@/components/DropdownNavigationMenu";
-import ContractTable from "@/components/ContractTable";
+import IndustrialWasteContractsList from "@/components/IndustrialWasteContractsList";
 import getIndustrialWasteContracts from "@/utils/getIndustrialWasteContracts";
+import { Tabs, TabItem } from "@/components/Tabs";
 
 const menuSections = [
   {
@@ -56,7 +57,18 @@ export default async function Page() {
       </div>
 
       <Suspense fallback={<Loading />}>
-        <ContractTable title="産業廃棄物" contracts={industrialWasteContracts} />
+        <Tabs>
+          <TabItem label="産業廃棄物">
+            <IndustrialWasteContractsList />
+          </TabItem>
+
+          <TabItem label="一般廃棄物">
+            <p>これ</p>
+          </TabItem>
+        </Tabs>
+        {/* <ContractsList /> */}
+
+        {/* <ContractTable title="産業廃棄物" contracts={industrialWasteContracts} /> */}
       </Suspense>
     </div>
   );
