@@ -33,10 +33,10 @@ export default async function Page({ params }: { params: { id: string } }) {
                 <p>これ</p>
               </TabItem>
               <TabItem label="許可情報">
-                <div className="border-b pb-5">
+                {/* <div className="border-b pb-5">
                   <h3 className="py-3 text-sm font-semibold">一般廃棄物</h3>
                   <MswLicensesList licenses={mswLicenses} contractorId={id} />
-                </div>
+                </div> */}
                 <div className="pt-5">
                   <h3 className="py-3 text-sm font-semibold">産業廃棄物</h3>
                   <IndustrialWasteLicensesList
