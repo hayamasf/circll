@@ -7,21 +7,21 @@ import getIndustrialWasteContracts from "@/utils/getIndustrialWasteContracts";
 import { Tabs, TabItem } from "@/components/Tabs";
 
 const menuSections = [
-  {
-    id: 1,
-    items: [
-      {
-        id: 1,
-        text: "一般廃棄物処理",
-        href: "/contracts/register?waste=msw&type=treatment",
-      },
-      {
-        id: 2,
-        text: "一般廃棄物処分",
-        href: "/contracts/register?waste=msw&type=disposal",
-      },
-    ],
-  },
+  // {
+  //   id: 1,
+  //   items: [
+  //     {
+  //       id: 1,
+  //       text: "一般廃棄物処理",
+  //       href: "/contracts/register?waste=msw&type=treatment",
+  //     },
+  //     {
+  //       id: 2,
+  //       text: "一般廃棄物処分",
+  //       href: "/contracts/register?waste=msw&type=disposal",
+  //     },
+  //   ],
+  // },
   {
     id: 2,
     items: [
@@ -62,8 +62,8 @@ export default async function Page() {
             <IndustrialWasteContractsList />
           </TabItem>
 
-          <TabItem label="一般廃棄物">
-            <p>これ</p>
+          <TabItem label="">
+            <p></p>
           </TabItem>
         </Tabs>
         {/* <ContractsList /> */}
