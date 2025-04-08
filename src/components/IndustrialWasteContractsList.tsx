@@ -3,6 +3,7 @@ import React from "react";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import getIndustrialWasteContracts from "@/utils/getIndustrialWasteContracts";
 import { formatDate } from "@/utils/dateUtils";
+import { formatEntityName } from "@/utils/formatEntityName";
 
 export default async function IndustrialWasteContractsList() {
   const contracts = await getIndustrialWasteContracts();
@@ -19,11 +20,11 @@ export default async function IndustrialWasteContractsList() {
                 <p className="text-sm/6 text-gray-900">
                   <a href={"/contracts/" + contract.id}>
                     <span className="absolute inset-x-0 -top-px bottom-0" />
-                    {contract.client.name}
+                    {formatEntityName(contract.client)}
                   </a>
                 </p>
                 <p className="mt-1 flex text-sm/6 text-gray-900">
-                  {contract.contractor.name}
+                  {formatEntityName(contract.contractor)}
                 </p>
               </div>
             </div>
