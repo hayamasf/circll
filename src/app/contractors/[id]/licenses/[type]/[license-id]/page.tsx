@@ -5,15 +5,15 @@ import IndustrialWasteLicenseDetail from "@/components/IndustrialWasteLicenseDet
 export default async function Page({
   params,
 }: {
-  params: { licenseType: string; licenseId: string };
+  params: { type: "msw" | "industrial-waste";["license-id"]: string };
 }) {
-  const licenseType = params.licenseType;
-  const licenseId = Number(params.licenseId);
+  const type = params.type;
+  const licenseId = Number(params["license-id"]);
 
   return (
     <div className="mx-auto max-w-lg">
-      {licenseType === "msw" && <MswLicenseDetail id={licenseId} />}
-      {licenseType === "industrial-waste" && (
+      {type === "msw" && <MswLicenseDetail id={licenseId} />}
+      {type === "industrial-waste" && (
         <IndustrialWasteLicenseDetail id={licenseId} />
       )}
     </div>

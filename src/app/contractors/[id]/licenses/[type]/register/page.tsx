@@ -8,10 +8,10 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 export default async function Page({
   params,
 }: {
-  params: { id: string; licenseType: "msw" | "industrial-waste" };
+  params: { id: string; type: "msw" | "industrial-waste" };
 }) {
   const id = Number(params.id);
-  const licenseType = params.licenseType;
+  const type = params.type;
   const contractor = await getContractorById(id);
   const contractorName = `${contractor?.isPrefixEntityType ? contractor.entityType : ""}${contractor?.name}${contractor?.entityType && !contractor.isPrefixEntityType ? contractor.entityType : ""}`;
 
@@ -19,7 +19,7 @@ export default async function Page({
     return <div>業者の登録がありません.</div>;
   }
 
-  if (licenseType === "industrial-waste") {
+  if (type === "industrial-waste") {
     const industrialWasteCategories = await getIndustrialWasteCategories();
 
     const pages = [
@@ -46,7 +46,7 @@ export default async function Page({
         />
       </div>
     );
-  } else if (licenseType === "msw") {
+  } else if (type === "msw") {
     const pages = [
       { name: "業者", href: "/contractors", current: false },
       {

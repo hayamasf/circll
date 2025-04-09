@@ -11,11 +11,12 @@ export default async function Page({
   params,
 }: {
   params: {
-    licenseType: string;
-    licenseId: string;
+    type: string;
+    ["license-id"]: string;
   };
 }) {
-  const { licenseType, licenseId } = params;
+  const type = params.type
+  const licenseId = params["license-id"]
 
   let license;
   let contractorName;
@@ -23,7 +24,7 @@ export default async function Page({
   let breadcrumbs;
   let formComponent;
 
-  switch (licenseType) {
+  switch (type) {
     case "msw":
       license = await getMswLicenseById(Number(licenseId));
       if (!license) {
