@@ -15,8 +15,8 @@ export default async function Page({
     ["license-id"]: string;
   };
 }) {
-  const type = params.type
-  const licenseId = params["license-id"]
+  const type = params.type;
+  const licenseId = params["license-id"];
 
   let license;
   let contractorName;

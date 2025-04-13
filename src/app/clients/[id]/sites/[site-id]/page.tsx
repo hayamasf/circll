@@ -7,9 +7,9 @@ import SiteDetail from "@/components/SiteDetail";
 export default async function Page({
   params,
 }: {
-  params: { id: string; siteId: string };
+  params: { id: string; ["site-id"]: string };
 }) {
-  const siteId = Number(params.siteId);
+  const siteId = Number(params["site-id"]);
 
   let site;
 

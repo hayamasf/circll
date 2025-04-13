@@ -5,7 +5,7 @@ import IndustrialWasteLicenseDetail from "@/components/IndustrialWasteLicenseDet
 export default async function Page({
   params,
 }: {
-  params: { type: "msw" | "industrial-waste";["license-id"]: string };
+  params: { type: "msw" | "industrial-waste"; ["license-id"]: string };
 }) {
   const type = params.type;
   const licenseId = Number(params["license-id"]);
