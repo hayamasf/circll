@@ -71,6 +71,7 @@ model Site {
   town              String
   address           String
   address2          String?
+  industrialWasteContracts  IndustrialWasteContract[]
 }
 
 model Prefecture {
@@ -145,4 +146,5 @@ model IndustrialWasteContract {
   type              ContractType
   endDate           DateTime @db.Date
   isAutoRenew       Boolean
+  sites             Site[]
 }
