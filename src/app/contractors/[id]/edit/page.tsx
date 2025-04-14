@@ -6,7 +6,8 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { Suspense } from "react";
 import Loading from "@/app/loading";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const id = Number(params.id);
   // await new Promise((resolve) => setTimeout(resolve, 3000));
 

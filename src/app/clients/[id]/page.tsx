@@ -7,13 +7,14 @@ import SitesList from "@/components/SitesList";
 import JwnetInformationForm from "@/components/JwnetInformationForm";
 import getClientJwnetId from "@/utils/getClientJwnetId";
 
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ id: string }>;
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  }
+) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const id = Number(params.id);
   const client = await getClientById(id);
   const jwnetId = await getClientJwnetId(id);

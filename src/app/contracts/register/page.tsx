@@ -5,11 +5,12 @@ import getClients from "@/utils/getClients";
 import getContractors from "@/utils/getContractors";
 import ContractReistrationForm from "@/components/ContractRegistrationForm";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
-}) {
+export default async function Page(
+  props: {
+    searchParams: Promise<{ [key: string]: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const clients = await getClients();
   const contractors = await getContractors();
 

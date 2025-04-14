@@ -3,7 +3,8 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import ChevronDownIcon from "@/app/icons/ChevronDownIcon";
-import { useUser } from "@auth0/nextjs-auth0/client";
+// import { auth0 } from "@/lib/auth0";
+// import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 import Image from "next/image";
 import { classNames } from "@/utils/classNames";
@@ -15,14 +16,16 @@ const userNavigation: UserNavigationItem[] = [
   { id: 2, name: "ログアウト", href: "/api/auth/logout" },
 ];
 
-const ProfileDropdown = () => {
-  const { user } = useUser();
+export default async function ProfileDropdown() {
+  // const session = await auth0.getSession();
+  // const user = session?.user
+  // const { user } = useUser();
 
   return (
     <Menu as="div" className="relative">
       <Menu.Button className="-m-1.5 flex items-center p-1.5">
         <span className="sr-only">ユーザーメニューを開く</span>
-        <div>
+        {/* <div>
           {user?.picture && (
             <Image
               src={user.picture}
@@ -32,8 +35,8 @@ const ProfileDropdown = () => {
               height={32}
             />
           )}
-        </div>
-        <span className="hidden lg:flex lg:items-center">
+        </div> */}
+        {/* <span className="hidden lg:flex lg:items-center">
           <span
             className="ml-4 text-sm font-semibold leading-6 text-gray-900"
             aria-hidden="true"
@@ -44,7 +47,7 @@ const ProfileDropdown = () => {
             className="ml-2 h-5 w-5 text-gray-400"
             ariaHidden={true}
           />
-        </span>
+        </span> */}
       </Menu.Button>
       <Transition
         as={Fragment}
@@ -75,6 +78,4 @@ const ProfileDropdown = () => {
       </Transition>
     </Menu>
   );
-};
-
-export default ProfileDropdown;
+}

@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
-import { UserProvider } from "@auth0/nextjs-auth0/client";
+// import { auth0 } from "@/lib/auth0"
 import Navigation from "@/components/Navigation";
 
 import { Inter as FontSans } from "next/font/google";
@@ -16,32 +16,33 @@ export const metadata: Metadata = {
   description: "サークル - circll 資源物・廃棄物関連業務の管理アプリケーション",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // const session = await auth0.getSession();
+
   return (
     // <html lang="ja" className="h-full">
     <html lang="ja">
+
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
         )}
       >
-        <UserProvider>
-          <div>
-            <Navigation />
-            <div className="lg:pl-72">
-              <main className="py-10">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                  {children}
-                </div>
-              </main>
-            </div>
+        <div>
+          <Navigation />
+          <div className="lg:pl-72">
+            <main className="py-10">
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                {children}
+              </div>
+            </main>
           </div>
-        </UserProvider>
+        </div>
       </body>
     </html>
   );

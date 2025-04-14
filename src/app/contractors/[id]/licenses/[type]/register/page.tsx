@@ -5,11 +5,12 @@ import getIndustrialWasteCategories from "@/utils/getIndustrialWasteCategories";
 import getContractorById from "@/utils/getContractorById";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
-export default async function Page({
-  params,
-}: {
-  params: { id: string; type: "msw" | "industrial-waste" };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ id: string; type: "msw" | "industrial-waste" }>;
+  }
+) {
+  const params = await props.params;
   const id = Number(params.id);
   const type = params.type;
   const contractor = await getContractorById(id);

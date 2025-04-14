@@ -3,11 +3,12 @@ import PageHeader from "@/components/PageHeader";
 import getContractById from "@/utils/getContractById";
 import IndustrialWasteContractDetail from "@/components/IndustrialWasteContractDetail";
 
-export default async function Page({
-  params,
-}: {
-  params: { type: string; id: number };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ type: string; id: number }>;
+  }
+) {
+  const params = await props.params;
   const type = params.type;
   const id = Number(params.id);
   const contract = await getContractById(type, id);

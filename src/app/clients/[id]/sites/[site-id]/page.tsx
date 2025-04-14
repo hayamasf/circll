@@ -4,11 +4,12 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Card from "@/components/Card";
 import SiteDetail from "@/components/SiteDetail";
 
-export default async function Page({
-  params,
-}: {
-  params: { id: string; ["site-id"]: string };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ id: string; ["site-id"]: string }>;
+  }
+) {
+  const params = await props.params;
   const siteId = Number(params["site-id"]);
 
   let site;

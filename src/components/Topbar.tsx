@@ -4,7 +4,7 @@ import Bars3Icon from "@/app/icons/Bars3Icon";
 import BellIcon from "@/app/icons/BellIcon";
 import MagnifyingGlassIcon from "@/app/icons/MagnifyingGlassIcon";
 
-import ProfileDropdown from "./ProfileDropdown";
+// import ProfileDropdown from "./ProfileDropdown";
 
 export default function Topbar({
   setSidebarOpen,
@@ -59,7 +59,7 @@ export default function Topbar({
             />
 
             {/* Profile dropdown */}
-            <ProfileDropdown />
+            {/* <ProfileDropdown /> */}
           </div>
         </div>
       </div>

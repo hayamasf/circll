@@ -3,7 +3,8 @@ import getClientById from "@/utils/getClientById";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import SiteRegistrationForm from "@/components/SiteRegistrationForm";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const id = Number(params.id);
   const client = await getClientById(id);
   const clientName = `${client?.isPrefixEntityType ? client.entityType : ""}${client?.name}${client?.entityType && !client.isPrefixEntityType ? client.entityType : ""}`;

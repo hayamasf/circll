@@ -7,14 +7,15 @@ import getIndustrialWasteLicenseById from "@/utils/getIndustrialWasteLicenseById
 import getIndustrialWasteCategories from "@/utils/getIndustrialWasteCategories";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
-export default async function Page({
-  params,
-}: {
-  params: {
-    type: string;
-    ["license-id"]: string;
-  };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{
+      type: string;
+      ["license-id"]: string;
+    }>;
+  }
+) {
+  const params = await props.params;
   const type = params.type;
   const licenseId = params["license-id"];
 
