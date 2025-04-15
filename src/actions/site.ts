@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { getSession } from "@auth0/nextjs-auth0";
+// import { getSession } from "@auth0/nextjs-auth0";
 import { Site } from "@/types/types";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
@@ -10,18 +10,18 @@ export async function createSite(data: Site) {
   let newSiteId: number | undefined;
 
   try {
-    const session = await getSession();
-    const userId = session?.user.sub;
+    // const session = await getSession();
+    // const userId = session?.user.sub;
 
-    if (!userId) {
-      throw new Error("ユーザーIDを確認してください.");
-    }
+    // if (!userId) {
+    //   throw new Error("ユーザーIDを確認してください.");
+    // }
 
     console.log(data);
 
     const newSite = await prisma.site.create({
       data: {
-        createdBy: userId,
+        createdBy: "",
         clientId: data.clientId,
         name: data.name,
         postalCode: data.postalCode,
@@ -47,14 +47,14 @@ export async function createSite(data: Site) {
 export async function updateSite(data: Partial<Site>) {
   try {
     const id = data.id;
-    const session = await getSession();
-    const userId = session?.user.sub;
+    // const session = await getSession();
+    // const userId = session?.user.sub;
 
     await prisma.site.update({
       where: { id },
       data: {
         ...data,
-        updatedBy: userId,
+        updatedBy: "",
       },
     });
 

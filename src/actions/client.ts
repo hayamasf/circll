@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
-import { getSession } from "@auth0/nextjs-auth0";
+// import { getSession } from "@auth0/nextjs-auth0";
 import convertToBoolean from "@/utils/convertToBoolean";
 import { Client } from "@prisma/client";
 import { LegalEntityFormData } from "@/types/types";
@@ -26,16 +26,16 @@ export async function createClient(formData: LegalEntityFormData) {
   let newClientId: number | undefined;
 
   try {
-    const session = await getSession();
-    const userId = session?.user.sub;
+    // const session = await getSession();
+    // const userId = session?.user.sub;
 
-    if (!userId) {
-      throw new Error("ユーザーIDを確認してください.");
-    }
+    // if (!userId) {
+    //   throw new Error("ユーザーIDを確認してください.");
+    // }
 
     const newClient = await prisma.client.create({
       data: {
-        createdBy: userId,
+        createdBy: "",
         ...(formData.entityType && { entityType: formData.entityType }),
         ...(formData.isPrefixEntityType && {
           isPrefixEntityType: isPrefixEntityType,
@@ -74,8 +74,8 @@ export async function createClient(formData: LegalEntityFormData) {
 export async function updateClient(formData: Partial<Client>) {
   try {
     const id = formData.id;
-    const session = await getSession();
-    const userId = session?.user.sub;
+    // const session = await getSession();
+    // const userId = session?.user.sub;
 
     if (typeof formData.isPrefixEntityType === "string") {
       formData.isPrefixEntityType = convertToBoolean(
@@ -87,7 +87,7 @@ export async function updateClient(formData: Partial<Client>) {
       where: { id: id },
       data: {
         ...formData,
-        updatedBy: userId,
+        updatedBy: "",
       },
     });
 

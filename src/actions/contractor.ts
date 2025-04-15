@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
-import { getSession } from "@auth0/nextjs-auth0";
+// import { getSession } from "@auth0/nextjs-auth0";
 // import { LegalEntityFormData } from "@/types/types";
 import convertToBoolean from "@/utils/convertToBoolean";
 import { Contractor } from "@prisma/client";
@@ -26,16 +26,16 @@ export async function createContractor(formData: Contractor): Promise<void> {
   let newContractorId: number | undefined;
 
   try {
-    const session = await getSession();
-    const userId = session?.user.sub;
+    // const session = await getSession();
+    // const userId = session?.user.sub;
 
-    if (!userId) {
-      throw new Error("ユーザーIDを確認してください.");
-    }
+    // if (!userId) {
+    //   throw new Error("ユーザーIDを確認してください.");
+    // }
 
     const newContractor = await prisma.contractor.create({
       data: {
-        createdBy: userId,
+        createdBy: "",
         ...(formData.entityType && { entityType: formData.entityType }),
         ...(formData.isPrefixEntityType && {
           isPrefixEntityType: isPrefixEntityType,
@@ -72,8 +72,8 @@ export async function createContractor(formData: Contractor): Promise<void> {
 export async function updateContractor(formData: Partial<Contractor>) {
   try {
     const id = formData.id;
-    const session = await getSession();
-    const userId = session?.user.sub;
+    // const session = await getSession();
+    // const userId = session?.user.sub;
 
     if (typeof formData.isPrefixEntityType === "string") {
       formData.isPrefixEntityType = convertToBoolean(
@@ -85,7 +85,7 @@ export async function updateContractor(formData: Partial<Contractor>) {
       where: { id: id },
       data: {
         ...formData,
-        updatedBy: userId,
+        updatedBy: "",
       },
     });
 

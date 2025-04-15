@@ -1,6 +1,6 @@
 "use server";
 
-import { getSession } from "@auth0/nextjs-auth0";
+// import { getSession } from "@auth0/nextjs-auth0";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
@@ -21,18 +21,18 @@ export async function createLicense(
   console.log(formData);
 
   try {
-    const session = await getSession();
-    const userId = session?.user.sub;
+    // const session = await getSession();
+    // const userId = session?.user.sub;
 
-    if (!userId) {
-      throw new Error("ユーザーIDを確認してください.");
-    }
+    // if (!userId) {
+    //   throw new Error("ユーザーIDを確認してください.");
+    // }
 
     // console.log(formData);
 
     const newLicense = await prisma.industrialWasteLicense.create({
       data: {
-        createdBy: userId,
+        createdBy: "",
         contractorId: Number(formData.contractorId),
         issuingAuthority: Number(formData.issuingAuthority),
         typeCode: Number(formData.typeCode),
@@ -68,8 +68,8 @@ export async function updateLicense(
     if (!id) {
       throw new Error("許可証がありません.");
     }
-    const session = await getSession();
-    const userId = session?.user.sub;
+    // const session = await getSession();
+    // const userId = session?.user.sub;
 
     console.log("フォームデータ：", formData);
 
@@ -77,7 +77,7 @@ export async function updateLicense(
       where: { id },
       data: {
         ...dataToUpdate,
-        updatedBy: userId,
+        updatedBy: "",
         ...(licensedCategories && {
           licensedCategories: {
             set: licensedCategories?.map((id) => ({ id: Number(id) })),
