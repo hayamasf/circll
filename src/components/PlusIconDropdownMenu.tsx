@@ -22,7 +22,7 @@ export default function PlusIconDropdownMenu({
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <MenuButton className="flex p-1 items-center rounded-full bg-gray-600 text-white hover:bg-gray-400 focus:outline-hidden focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+        <MenuButton className="flex p-1 items-center rounded-full cursor-pointer bg-gray-600 text-white hover:bg-gray-400 focus:outline-hidden focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-100">
           <span className="sr-only">Open options</span>
 
           <PlusIcon aria-hidden="true" className="size-5" />
