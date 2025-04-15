@@ -12,7 +12,7 @@ export default function Breadcrumbs({
         <li>
           <div>
             <Link href={"/"} className="text-gray-400 hover:text-gray-500">
-              <HomeIcon aria-hidden="true" className="h-5 w-5 flex-shrink-0" />
+              <HomeIcon aria-hidden="true" className="h-5 w-5 shrink-0" />
               <span className="sr-only">Home</span>
             </Link>
           </div>
@@ -22,7 +22,7 @@ export default function Breadcrumbs({
             <div className="flex items-center">
               <ChevronRightIcon
                 aria-hidden="true"
-                className="h-5 w-5 flex-shrink-0 text-gray-400"
+                className="h-5 w-5 shrink-0 text-gray-400"
               />
               {page.href ? (
                 <Link

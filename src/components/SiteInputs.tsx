@@ -23,7 +23,7 @@ export default function SiteInputs() {
               id="name"
               type="text"
               {...register("name", { required: "事業所名は必須です" })}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               placeholder="奄美大島支店"
             />
           </div>
@@ -45,7 +45,7 @@ export default function SiteInputs() {
     //     type="text"
     //     id="name"
     //     {...register("name", { required: "事業所名は必須です" })}
-    //     className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
+    //     className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6`}
     //     placeholder="東京中央営業所"
     //   />
     //   {errors.name?.message && (

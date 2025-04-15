@@ -6,7 +6,7 @@ export default async function ClientCounterCard() {
   const count = await getTotalClientsCount();
 
   return (
-    <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+    <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow-sm sm:p-6">
       <dt className="truncate text-sm font-medium text-gray-500">
         {"排出事業者"}
       </dt>

@@ -8,7 +8,7 @@ export default function CardWithHeader({
   children: React.ReactNode;
 }) {
   return (
-    <div className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">
+    <div className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm">
       <div className="px-4 py-5 sm:px-6">{header}</div>
       <div className="px-4 py-5 sm:p-6">{children}</div>
     </div>

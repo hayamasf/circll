@@ -12,7 +12,7 @@ export default function LegalEntityTypeSelector({ type }: { type: string }) {
           type === "corporate"
             ? "border-gray-500 border-2 bg-gray-100"
             : "border-gray-300 bg-white",
-          "flex items-center  space-x-3 rounded-lg border px-6 py-3 shadow-sm sm:col-span-3 hover:border-gray-400",
+          "flex items-center  space-x-3 rounded-lg border px-6 py-3 shadow-xs sm:col-span-3 hover:border-gray-400",
         )}
       >
         <BuildingOfficeIcon className="h-6 w-6" />
@@ -24,7 +24,7 @@ export default function LegalEntityTypeSelector({ type }: { type: string }) {
           type === "sole-proprietor"
             ? "border-gray-500 border-2 bg-gray-100"
             : "border-gray-300 bg-white",
-          "flex items-center space-x-3 rounded-lg border px-6 py-3 shadow-sm sm:col-span-3 hover:border-gray-400",
+          "flex items-center space-x-3 rounded-lg border px-6 py-3 shadow-xs sm:col-span-3 hover:border-gray-400",
         )}
       >
         <UserIcon className="h-6 w-6" />

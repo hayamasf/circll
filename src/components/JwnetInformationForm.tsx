@@ -48,7 +48,7 @@ export default function JwnetInformationForm({
       </div>
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white shadow sm:rounded-lg">
+          <div className="bg-white shadow-sm sm:rounded-lg">
             <div className="px-4 py-5 sm:p-6">
               <div className="flex items-center justify-between">
                 <h3 className="text-base font-semibold text-gray-900">
@@ -58,7 +58,7 @@ export default function JwnetInformationForm({
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="rounded-full p-1 bg-white text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="rounded-full p-1 bg-white text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   <span className="sr-only">Close</span>
                   <XMarkIcon aria-hidden="true" className="size-6" />
