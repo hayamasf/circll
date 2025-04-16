@@ -5,11 +5,9 @@ import { Suspense } from "react";
 import ContractorsList from "@/components/ContractorsList";
 import PlusIconDropdownMenu from "@/components/PlusIconDropdownMenu";
 
-export default async function Page(
-  props: {
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-  }
-) {
+export default async function Page(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   const searchParams = await props.searchParams;
   const offset = Number(searchParams.offset ?? 1);
   const limit = Number(searchParams.limit ?? 10);

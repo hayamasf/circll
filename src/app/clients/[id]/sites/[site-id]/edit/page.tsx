@@ -6,7 +6,9 @@ import getSiteById from "@/utils/getSiteById";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import SiteEditForm from "@/components/SiteEditForm";
 
-export default async function Page(props: { params: Promise<{ siteId: string }> }) {
+export default async function Page(props: {
+  params: Promise<{ siteId: string }>;
+}) {
   const params = await props.params;
   const siteId = Number(params.siteId);
   const site = await getSiteById(siteId);

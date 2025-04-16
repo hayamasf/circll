@@ -26,7 +26,6 @@ export default async function RootLayout({
   return (
     // <html lang="ja" className="h-full">
     <html lang="ja">
-
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
