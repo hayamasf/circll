@@ -1,8 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
-// import { auth0 } from "@/lib/auth0"
-import Navigation from "@/components/Navigation";
+// import Navigation from "@/components/Navigation";
 
 import { Inter as FontSans } from "next/font/google";
 
@@ -21,10 +20,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const session = await auth0.getSession();
-
   return (
-    // <html lang="ja" className="h-full">
     <html lang="ja">
       <body
         className={cn(
@@ -32,16 +28,16 @@ export default async function RootLayout({
           fontSans.variable,
         )}
       >
-        <div>
+        {/* <div>
           <Navigation />
           <div className="lg:pl-72">
             <main className="py-10">
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                {children}
-              </div>
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"> */}
+        {children}
+        {/* </div>
             </main>
           </div>
-        </div>
+        </div> */}
       </body>
     </html>
   );
