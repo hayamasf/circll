@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
-// import Navigation from "@/components/Navigation";
 
 import { Inter as FontSans } from "next/font/google";
 
@@ -28,16 +27,7 @@ export default async function RootLayout({
           fontSans.variable,
         )}
       >
-        {/* <div>
-          <Navigation />
-          <div className="lg:pl-72">
-            <main className="py-10">
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"> */}
         {children}
-        {/* </div>
-            </main>
-          </div>
-        </div> */}
       </body>
     </html>
   );

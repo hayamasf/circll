@@ -1,4 +1,4 @@
-import { login, signup } from './actions'
+import { login, signup } from "./actions";
 
 export default function Page() {
   return (
@@ -18,7 +18,10 @@ export default function Page() {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form action="#" method="POST" className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
+              <label
+                htmlFor="email"
+                className="block text-sm/6 font-medium text-gray-900"
+              >
                 メールアドレス
               </label>
               <div className="mt-2">
@@ -35,11 +38,17 @@ export default function Page() {
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
+                <label
+                  htmlFor="password"
+                  className="block text-sm/6 font-medium text-gray-900"
+                >
                   パスワード
                 </label>
                 <div className="text-sm">
-                  <a href="#" className="font-semibold text-blue-600 hover:text-blue-500">
+                  <a
+                    href="#"
+                    className="font-semibold text-blue-600 hover:text-blue-500"
+                  >
                     パスワードをお忘れの方
                   </a>
                 </div>
@@ -56,14 +65,16 @@ export default function Page() {
               </div>
             </div>
 
-            <div className='mt-10'>
+            <div className="mt-10">
               <button
                 formAction={login}
                 className="flex w-full justify-center cursor-pointer rounded-md bg-gray-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
               >
                 ログイン
               </button>
-              <button formAction={signup} className='mt-12'>Sign up</button>
+              <button formAction={signup} className="mt-12">
+                Sign up
+              </button>
             </div>
           </form>
 
@@ -76,9 +87,8 @@ export default function Page() {
         </div>
       </div>
     </>
-  )
+  );
 }
-
 
 // export default function LoginPage() {
 //   return (
