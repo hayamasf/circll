@@ -1,4 +1,4 @@
-import { login, signup } from "./actions";
+import { signIn } from "./actions";
 import Link from "next/link";
 
 export default function Page() {
@@ -68,7 +68,7 @@ export default function Page() {
             <div className="mt-10">
               <button
                 tabIndex={3}
-                formAction={login}
+                formAction={signIn}
                 className="flex w-full justify-center cursor-pointer rounded-md bg-gray-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
               >
                 ログイン

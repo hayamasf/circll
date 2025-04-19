@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -45,6 +46,11 @@ export default function Page() {
               </button>
             </div>
           </form>
+          <div className="flex mt-8">
+            <Link href={"/sign-in"} className="mx-auto text-sm font-semibold text-blue-600 hover:text-blue-500 hover:underline">
+              ログインはこちら
+            </Link>
+          </div>
         </div>
       </div>
     </>
