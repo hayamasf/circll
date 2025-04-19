@@ -1,4 +1,5 @@
 import { login, signup } from "./actions";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -29,6 +30,7 @@ export default function Page() {
                   id="email"
                   name="email"
                   type="email"
+                  tabIndex={1}
                   required
                   autoComplete="email"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
@@ -45,12 +47,9 @@ export default function Page() {
                   パスワード
                 </label>
                 <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-blue-600 hover:text-blue-500"
-                  >
+                  <Link href={"/reset-password"} className="font-semibold text-blue-600 hover:text-blue-500">
                     パスワードをお忘れの方
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-2">
@@ -58,6 +57,7 @@ export default function Page() {
                   id="password"
                   name="password"
                   type="password"
+                  tabIndex={2}
                   required
                   autoComplete="current-password"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6"
@@ -67,23 +67,17 @@ export default function Page() {
 
             <div className="mt-10">
               <button
+                tabIndex={3}
                 formAction={login}
                 className="flex w-full justify-center cursor-pointer rounded-md bg-gray-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
               >
                 ログイン
               </button>
-              <button formAction={signup} className="mt-12">
+              {/* <button formAction={signup} className="mt-12">
                 Sign up
-              </button>
+              </button> */}
             </div>
           </form>
-
-          {/* <p className="mt-10 text-center text-sm/6 text-gray-500">
-            Not a member?{' '}
-            <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-              Start a 14 day free trial
-            </a>
-          </p> */}
         </div>
       </div>
     </>
