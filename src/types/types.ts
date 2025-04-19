@@ -13,12 +13,6 @@ export type ConfigItem = {
   current: boolean;
 };
 
-export type UserNavigationItem = {
-  id: number;
-  name: string;
-  href: string;
-};
-
 export type Address = {
   postalCode: string;
   prefecture: string;
