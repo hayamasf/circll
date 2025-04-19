@@ -1,6 +1,15 @@
 import React from "react";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
-export default function Page() {
+export default async function Page() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getUser();
+
+  if (error || !data?.user) {
+    redirect("/login");
+  }
+
   return (
     <div className="mx-auto max-w-2xl">
       <div className="px-4 sm:px-0">
@@ -18,7 +27,7 @@ export default function Page() {
               メールアドレス
             </dt>
             <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              hayama@example.com
+              {data.user?.email}
             </dd>
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
