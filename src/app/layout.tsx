@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
+import { Toaster } from "sonner";
 
 import { Inter as FontSans } from "next/font/google";
 
@@ -28,6 +29,7 @@ export default async function RootLayout({
         )}
       >
         {children}
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   );
