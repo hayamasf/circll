@@ -47,7 +47,7 @@ export default function Page() {
                   パスワード
                 </label>
                 <div className="text-sm">
-                  <Link href={"/reset-password"} className="text-sm font-semibold text-blue-600 hover:text-blue-500 hover:underline">
+                  <Link href={"/forgot-password"} className="text-sm font-semibold text-blue-600 hover:text-blue-500 hover:underline">
                     パスワードをお忘れの方
                   </Link>
                 </div>
