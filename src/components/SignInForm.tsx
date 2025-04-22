@@ -17,7 +17,10 @@ export default function SignInForm() {
 
       <form action="#" method="POST" className="space-y-6">
         <div>
-          <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
+          <label
+            htmlFor="email"
+            className="block text-sm/6 font-medium text-gray-900"
+          >
             メールアドレス
           </label>
           <div className="mt-2">
@@ -34,7 +37,10 @@ export default function SignInForm() {
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
+          <label
+            htmlFor="password"
+            className="block text-sm/6 font-medium text-gray-900"
+          >
             パスワード
           </label>
           <div className="mt-2">
@@ -88,7 +94,10 @@ export default function SignInForm() {
           </div> */}
 
           <div className="text-sm/6">
-            <Link href={"/forgot-password"} className="font-semibold text-blue-600 hover:text-blue-500">
+            <Link
+              href={"/forgot-password"}
+              className="font-semibold text-blue-600 hover:text-blue-500"
+            >
               パスワードをお忘れの方
             </Link>
           </div>
@@ -164,5 +173,5 @@ export default function SignInForm() {
         </a> */}
       </p>
     </>
-  )
+  );
 }

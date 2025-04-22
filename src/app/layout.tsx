@@ -21,7 +21,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja">
+    <html lang="ja" className="h-full bg-gray-50">
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",

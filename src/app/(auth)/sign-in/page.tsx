@@ -20,7 +20,7 @@ export default function Page() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 // export default function LoginPage() {

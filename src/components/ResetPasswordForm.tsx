@@ -4,7 +4,11 @@ import React, { use } from "react";
 import { useForm } from "react-hook-form";
 
 export default function ResetPasswordForm() {
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
   return (
     <form action="#" method="POST" className="space-y-6">
