@@ -15,5 +15,5 @@ export async function sendResetPasswordEmail(formData: FormData) {
     throw new Error("メール送信に失敗しました.");
   }
 
-  redirect("/reset-password");
+  redirect("/forgot-password/confirmation");
 }
