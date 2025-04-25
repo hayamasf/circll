@@ -1,36 +1,25 @@
 "use client";
 
 import React from "react";
-import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const schema = z
-  .object({
-    newPassword: z
-      .string()
-      .min(8, { message: "8文字以上で設定して下さい." })
-      .regex(/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]*$/, {
-        message: "英字と数字の両方を含めて下さい.",
-      }),
-    confirmPassword: z.string(),
-  })
-  .refine((formData) => formData.newPassword === formData.confirmPassword, {
-    message: "パスワードが一致しません.",
-    path: ["confirmPassword"],
-  });
-
-type FormData = z.infer<typeof schema>;
+import { updateUser } from "@/actions/auth";
+import {
+  resetPasswordSchema,
+  ResetPasswordFormValues,
+} from "@/schemas/resetPasswordSchema";
 
 export default function ResetPasswordForm() {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
+  } = useForm<ResetPasswordFormValues>({
+    resolver: zodResolver(resetPasswordSchema),
+  });
 
-  const onSubmit = async (formData: FormData) => {
-    console.log(formData);
+  const onSubmit = async (formData: ResetPasswordFormValues) => {
+    await updateUser(formData);
   };
 
   return (

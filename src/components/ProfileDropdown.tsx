@@ -1,14 +1,24 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useActionState } from "react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import Image from "next/image";
-import { logout } from "@/app/(authenticated)/logout/actions";
+import { signOut } from "@/actions/auth";
+import { toast } from "sonner";
+import { SignOutFormState } from "@/actions/auth";
+
+const initialState: SignOutFormState = { message: null };
 
 export default function ProfileDropdown() {
-  // const session = await auth0.getSession();
-  // const user = session?.user
-  // const { user } = useUser();
+  const [state, formAction] = useActionState(signOut, initialState);
+
+  useEffect(() => {
+    if (state?.message) {
+      toast.error(state.message);
+    }
+  }, [state?.message]);
 
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -35,7 +45,7 @@ export default function ProfileDropdown() {
               ユーザー情報
             </Link>
           </MenuItem>
-          <form action={logout}>
+          <form action={formAction}>
             <MenuItem>
               <button
                 type="submit"

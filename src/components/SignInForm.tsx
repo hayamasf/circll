@@ -1,21 +1,11 @@
 import React from "react";
 import Link from "next/link";
-
-// import { signIn } from "./actions";
+import { signIn } from "@/actions/auth";
 
 export default function SignInForm() {
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-50">
-        <body class="h-full">
-        ```
-      */}
-
-      <form action="#" method="POST" className="space-y-6">
+      <form action={signIn} className="space-y-6">
         <div>
           <label
             htmlFor="email"
