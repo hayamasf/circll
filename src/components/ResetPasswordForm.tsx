@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateUser } from "@/actions/auth";
@@ -8,6 +8,7 @@ import {
   resetPasswordSchema,
   ResetPasswordFormValues,
 } from "@/schemas/resetPasswordSchema";
+import { toast } from "sonner";
 
 export default function ResetPasswordForm() {
   const {
@@ -19,11 +20,23 @@ export default function ResetPasswordForm() {
   });
 
   const onSubmit = async (formData: ResetPasswordFormValues) => {
-    await updateUser(formData);
+    const result = await updateUser(formData);
+
+    if (result.success) {
+      toast.success(
+        result.message ?? "パスワード変更完了!ログイン画面に移動します.",
+      );
+
+      setTimeout(() => {
+        window.location.href = "/sign-in";
+      }, 2000);
+    } else {
+      toast.error(result.message ?? "パスワードの更新に失敗しました.");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} method="POST" className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div>
         <label
           htmlFor="newPassword"

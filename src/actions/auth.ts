@@ -26,6 +26,7 @@ export async function signIn(formData: FormData) {
   return { success: true };
 }
 
+// パスワード更新用のメール送信
 export async function sendResetPasswordEmail(formData: FormData) {
   const email = formData.get("email") as string;
   const supabase = await createClient();
@@ -42,6 +43,7 @@ export async function sendResetPasswordEmail(formData: FormData) {
   redirect("/forgot-password/confirmation");
 }
 
+// パスワードの更新
 export async function updateUser(formData: ResetPasswordFormValues) {
   const supabase = await createClient();
 
@@ -49,7 +51,16 @@ export async function updateUser(formData: ResetPasswordFormValues) {
 
   console.log(data);
 
-  // const { error } = await supabase.auth.updateUser({})
+  const { error } = await supabase.auth.updateUser(data);
+
+  if (error) {
+    return { success: false, message: error.message };
+  }
+
+  return {
+    success: true,
+    message: "パスワード変更完了!ログイン画面に移動します.",
+  };
 }
 
 // ログアウト
