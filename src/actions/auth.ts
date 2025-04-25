@@ -1,7 +1,6 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { ResetPasswordFormValues } from "@/schemas/resetPasswordSchema";
 
@@ -14,8 +13,6 @@ export async function signIn(formData: FormData) {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
   };
-
-  console.log(data);
 
   const { error } = await supabase.auth.signInWithPassword(data);
 
@@ -49,8 +46,6 @@ export async function updateUser(formData: ResetPasswordFormValues) {
 
   const data = { password: formData.newPassword };
 
-  console.log(data);
-
   const { error } = await supabase.auth.updateUser(data);
 
   if (error) {
@@ -73,12 +68,12 @@ export async function signOut(_prevState: {
 }): Promise<SignOutFormState> {
   const supabase = await createClient();
 
-  //   const { error } = await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
 
-  //   if(error) {
-  //     console.error("ログアウトエラー:", error.message);
+    if(error) {
+      console.error("ログアウトエラー:", error.message);
   return { message: "ログアウトに失敗しました." };
-  //   }
+    }
 
-  //   redirect("/sign-in");
+    redirect("/sign-in");
 }
