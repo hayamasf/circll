@@ -20,11 +20,10 @@ export async function signIn(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    redirect("/error");
+    console.error(error.message);
+    return { error: error.message };
   }
-
-  revalidatePath("/", "layout");
-  redirect("/");
+  return { success: true };
 }
 
 export async function sendResetPasswordEmail(formData: FormData) {
