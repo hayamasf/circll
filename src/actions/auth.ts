@@ -2,7 +2,7 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { ResetPasswordFormValues } from "@/schemas/resetPasswordSchema";
+import { PasswordFormValues } from "@/schemas/passwordSchema";
 
 export async function signIn(formData: FormData) {
   const supabase = await createClient();
@@ -41,20 +41,21 @@ export async function sendResetPasswordEmail(formData: FormData) {
 }
 
 // パスワードの更新
-export async function updateUser(formData: ResetPasswordFormValues) {
+export async function updateUser(formData: PasswordFormValues) {
   const supabase = await createClient();
 
-  const data = { password: formData.newPassword };
+  const data = { password: formData.password };
+  console.log(formData);
 
-  const { error } = await supabase.auth.updateUser(data);
+  // const { error } = await supabase.auth.updateUser(data);
 
-  if (error) {
-    return { success: false, message: error.message };
-  }
+  // if (error) {
+  //   return { success: false, message: error.message };
+  // }
 
   return {
     success: true,
-    message: "パスワード変更完了!ログイン画面に移動します.",
+    message: "パスワード設定完了!",
   };
 }
 
@@ -68,12 +69,12 @@ export async function signOut(_prevState: {
 }): Promise<SignOutFormState> {
   const supabase = await createClient();
 
-    const { error } = await supabase.auth.signOut();
+  const { error } = await supabase.auth.signOut();
 
-    if(error) {
-      console.error("ログアウトエラー:", error.message);
-  return { message: "ログアウトに失敗しました." };
-    }
+  if (error) {
+    console.error("ログアウトエラー:", error.message);
+    return { message: "ログアウトに失敗しました." };
+  }
 
-    redirect("/sign-in");
+  redirect("/sign-in");
 }

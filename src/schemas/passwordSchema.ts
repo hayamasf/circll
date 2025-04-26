@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-export const resetPasswordSchema = z
+export const passwordSchema = z
   .object({
-    newPassword: z
+    password: z
       .string()
       .min(8, { message: "8文字以上で設定して下さい." })
       .regex(/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]*$/, {
@@ -10,9 +10,9 @@ export const resetPasswordSchema = z
       }),
     confirmPassword: z.string(),
   })
-  .refine((formData) => formData.newPassword === formData.confirmPassword, {
+  .refine((formData) => formData.password === formData.confirmPassword, {
     message: "パスワードが一致しません.",
     path: ["confirmPassword"],
   });
 
-export type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;
+export type PasswordFormValues = z.infer<typeof passwordSchema>;

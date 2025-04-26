@@ -17,10 +17,10 @@ export default function Page() {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
           <h2 className="text-center text-lg font-bold tracking-tight text-gray-900">
-            新しいパスワードを設定して下さい
+            パスワードを設定して下さい
           </h2>
           <div className="pt-8">
-            <PasswordForm redirectPath="/sign-in" />
+            <PasswordForm redirectPath="/" />
           </div>
         </div>
       </div>
