@@ -47,11 +47,11 @@ export async function updateUser(formData: PasswordFormValues) {
   const data = { password: formData.password };
   console.log(formData);
 
-  // const { error } = await supabase.auth.updateUser(data);
+  const { error } = await supabase.auth.updateUser(data);
 
-  // if (error) {
-  //   return { success: false, message: error.message };
-  // }
+  if (error) {
+    return { success: false, message: error.message };
+  }
 
   return {
     success: true,
