@@ -1,6 +1,6 @@
 import React from "react";
 import PageHeader from "@/components/PageHeader";
-import Loading from "../loading";
+import Loading from "../../loading";
 import { Suspense } from "react";
 import ContractorsList from "@/components/ContractorsList";
 import PlusIconDropdownMenu from "@/components/PlusIconDropdownMenu";

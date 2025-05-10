@@ -22,7 +22,7 @@ export default async function ContractorsList({
 
   return (
     <>
-      <ul role="list" className="divide-y divide-gray-100">
+      <ul role="list" className="divide-y divide-gray-100 bg-white">
         {contractors.map((contractor) => (
           <li key={contractor.id} className="relative py-5 hover:bg-gray-50">
             <div className="sm:px-6 lg:px-8">
@@ -42,8 +42,8 @@ export default async function ContractorsList({
                     <p className="mt-1 flex text-xs leading-5 text-gray-500">
                       {contractor.entityType &&
                         contractor.representativeTitle +
-                          " " +
-                          contractor.representativeName}
+                        " " +
+                        contractor.representativeName}
                       {contractor.tradeName && contractor.tradeName}
                     </p>
                   </div>
