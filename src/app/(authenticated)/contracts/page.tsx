@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import PageHeader from "@/components/PageHeader";
-import Loading from "../loading";
+import Loading from "../../loading";
 import DropdownNavigationMenu from "@/components/DropdownNavigationMenu";
 import IndustrialWasteContractsList from "@/components/IndustrialWasteContractsList";
 import getIndustrialWasteContracts from "@/utils/getIndustrialWasteContracts";
@@ -50,7 +50,7 @@ export default async function Page() {
   const industrialWasteContracts = await getIndustrialWasteContracts();
 
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="bg-white px-3 mx-auto max-w-2xl">
       <div className="flex justify-between mb-10 items-center">
         <PageHeader title="契約" />
         <DropdownNavigationMenu menuSections={menuSections} />
