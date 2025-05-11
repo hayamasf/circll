@@ -16,7 +16,7 @@ const navigationItems = [
     name: "排出",
     children: [
       { id: 1, name: "事業者", href: "/clients" },
-      { id: 2, name: "事業所", href: "/sites" },
+      { id: 2, name: "事業所", href: "/clients/sites" },
     ],
   },
   { id: 3, name: "業者", href: "/contractors" },

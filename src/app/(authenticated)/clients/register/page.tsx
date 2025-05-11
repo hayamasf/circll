@@ -9,7 +9,7 @@ export default function Page() {
   ];
 
   return (
-    <div className="mx-auto max-w-lg">
+    <div className="bg-white px-3 mx-auto max-w-lg">
       <div className="pt-3 pb-10">
         <Breadcrumbs pages={pages} />
       </div>
