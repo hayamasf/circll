@@ -42,9 +42,9 @@ export default function SidebarNavigation({
       : false,
     children: item.children
       ? item.children.map((child) => ({
-          ...child,
-          current: currentPath.startsWith(child.href),
-        }))
+        ...child,
+        current: currentPath.startsWith(child.href),
+      }))
       : undefined,
   }));
 
@@ -88,17 +88,21 @@ export default function SidebarNavigation({
                     <div>
                       <button
                         onClick={() => handleDisclosureToggle(item.name)}
-                        className={classNames(
-                          item.current ? "bg-gray-50" : "hover:bg-gray-50",
-                          "group flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700",
-                        )}
+                        className={
+                          "group flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700 hover:cursor-pointer"
+                        }
+
+                      // className={classNames(
+                      //   item.current ? "bg-gray-50" : "hover:bg-gray-50",
+                      //   "group flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700 hover:cursor-pointer",
+                      // )}
                       >
                         <ChevronRightIcon
                           aria-hidden="true"
                           className={classNames(
                             "size-5 shrink-0 text-gray-400 group-hover:text-gray-500",
                             openDisclosure === item.name &&
-                              "rotate-90 text-gray-500",
+                            "rotate-90 text-gray-500",
                           )}
                         />
 

@@ -12,7 +12,7 @@ export default async function page(props: {
   const limit = Number(searchParams.limit ?? 10);
 
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="bg-white px-3 mx-auto max-w-2xl">
       <div className="flex justify-between mb-10 items-center">
         <PageHeader title="排出事業所" />
       </div>
