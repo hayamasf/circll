@@ -8,7 +8,7 @@ export default function AuthenticatedLayout({
   return (
     <div>
       <Navigation />
-      <div className="lg:pl-72">
+      <div className="bg-white lg:pl-72">
         <main className="py-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             {children}

@@ -21,7 +21,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
   }
 
   return (
-    <div className="mx-auto max-w-lg">
+    <div className="mx-auto max-w-xl">
       <div className="pt-3 pb-10">
         <Breadcrumbs pages={pages} />
       </div>
