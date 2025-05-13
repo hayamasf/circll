@@ -5,11 +5,10 @@ import { Suspense } from "react";
 import PageHeader from "@/components/PageHeader";
 
 export default async function page(props: {
-  params: Promise<{ id: string }>, searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const params = await props.params;
+
   const searchParams = await props.searchParams;
-  const id = Number(params.id);
   const offset = Number(searchParams.offset ?? 1);
   const limit = Number(searchParams.limit ?? 10);
 
@@ -19,7 +18,7 @@ export default async function page(props: {
         <PageHeader title="排出事業所" />
       </div>
       <Suspense fallback={<div>Loading...</div>}>
-        <SitesList offset={offset} limit={limit} clientId={id} />
+        <SitesList offset={offset} limit={limit} />
       </Suspense>
     </div>
   );

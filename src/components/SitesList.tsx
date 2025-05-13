@@ -19,7 +19,7 @@ export default async function SitesList({
   const totalSites = await getTotalSitesCount(clientId);
   const totalPages = Math.ceil(totalSites / limit);
 
-  if (sites.length === 0) {
+  if (sites.length === 0 && clientId) {
     return (
       <Link
         href={clientId + "/sites/register"}

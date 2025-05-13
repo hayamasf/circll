@@ -5,7 +5,7 @@ export default function PlusButton() {
   return (
     <button
       type="button"
-      className="rounded-full bg-gray-600 p-1.5 text-white shadow-xs hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+      className="rounded-full bg-gray-600 p-1.5 text-white shadow-xs hover:bg-gray-400 hover:cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
     >
       <PlusIcon aria-hidden="true" className="h-5 w-5" />
     </button>

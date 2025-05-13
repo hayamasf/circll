@@ -7,10 +7,10 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import SiteEditForm from "@/components/SiteEditForm";
 
 export default async function Page(props: {
-  params: Promise<{ siteId: string }>;
+  params: Promise<{ "site-id": string }>;
 }) {
   const params = await props.params;
-  const siteId = Number(params.siteId);
+  const siteId = Number(params["site-id"]);
   const site = await getSiteById(siteId);
 
   if (!site) {
