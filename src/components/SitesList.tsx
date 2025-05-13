@@ -31,7 +31,7 @@ export default async function SitesList({
   } else {
     return (
       <>
-        <ul role="list" className="divide-y divide-gray-100">
+        <ul role="list" className="bg-white divide-y divide-gray-100">
           {sites.map((site) => (
             <li key={site.id} className="relative py-5 hover:bg-gray-50">
               <div className="px-2 sm:px-4 lg:px-6">
