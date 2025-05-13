@@ -25,7 +25,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
       <div className="pt-3 pb-10">
         <Breadcrumbs pages={pages} />
       </div>
-      <SiteRegistrationForm id={id} />
+      <SiteRegistrationForm id={client.id} />
     </div>
   );
 }
