@@ -105,7 +105,7 @@ export default function AddressInputs() {
               {...register("postalCode", { required: "郵便番号は必須です" })}
               maxLength={7}
               onChange={(e) => setPostalCode(e.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               placeholder="1040032"
             />
           </div>
@@ -145,7 +145,7 @@ export default function AddressInputs() {
               id="prefecture"
               type="text"
               {...register("prefecture", { required: "必須" })}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               placeholder="東京都"
               readOnly={true}
             />
@@ -169,7 +169,7 @@ export default function AddressInputs() {
               id="city"
               type="text"
               {...register("city", { required: "必須" })}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               placeholder="中央区"
               readOnly={true}
             />
@@ -191,7 +191,7 @@ export default function AddressInputs() {
               id="town"
               type="text"
               {...register("town", { required: "必須" })}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               placeholder="八丁堀"
             />
           </div>
@@ -214,7 +214,7 @@ export default function AddressInputs() {
               id="address"
               type="text"
               {...register("address", { required: "住所は必須です" })}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               placeholder="三丁目12番8号"
             />
           </div>
@@ -235,7 +235,7 @@ export default function AddressInputs() {
               id="address2"
               type="text"
               {...register("address2")}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               placeholder="HF八丁堀ビル"
             />
           </div>
