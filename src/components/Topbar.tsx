@@ -8,8 +8,10 @@ import ProfileDropdown from "./ProfileDropdown";
 
 export default function Topbar({
   setSidebarOpen,
+  displayName,
 }: {
   setSidebarOpen: (isOpen: boolean) => void;
+  displayName: string;
 }) {
   return (
     <div className="lg:pl-72">
@@ -59,7 +61,7 @@ export default function Topbar({
             />
 
             {/* Profile dropdown */}
-            <ProfileDropdown />
+            <ProfileDropdown displayName={displayName} />
           </div>
         </div>
       </div>

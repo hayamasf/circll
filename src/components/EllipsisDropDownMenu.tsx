@@ -2,7 +2,13 @@
 
 import React, { Fragment } from "react";
 import Link from "next/link";
-import { Menu, MenuButton, MenuItems, MenuItem, Transition } from "@headlessui/react";
+import {
+  Menu,
+  MenuButton,
+  MenuItems,
+  MenuItem,
+  Transition,
+} from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { classNames } from "@/utils/classNames";
 
@@ -44,10 +50,12 @@ export default function EllipsisDropDownMenu({
                 key={item.id}
                 as={Link}
                 href={item.href}
-                className={({ focus }) => classNames(
-                  focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                  "flex px-4 py-2 text-sm",
-                )}
+                className={({ focus }) =>
+                  classNames(
+                    focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                    "flex px-4 py-2 text-sm",
+                  )
+                }
               >
                 <span>{item.text}</span>
 

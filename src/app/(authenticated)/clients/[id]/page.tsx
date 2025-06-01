@@ -6,7 +6,10 @@ import { Tabs, TabItem } from "@/components/Tabs";
 import SitesList from "@/components/SitesList";
 import JwnetInformationForm from "@/components/JwnetInformationForm";
 
-export default async function Page(props: { params: Promise<{ id: string }>, searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+export default async function Page(props: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   const params = await props.params;
   const searchParams = await props.searchParams;
   const id = Number(params.id);

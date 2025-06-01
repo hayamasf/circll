@@ -10,7 +10,7 @@ import { HomeIcon } from "@heroicons/react/24/outline";
 
 import SidebarNavigation from "./SidebarNavigation";
 
-export default function Navigation() {
+export default function Navigation({ displayName }: { displayName: string }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -81,7 +81,7 @@ export default function Navigation() {
       </div>
 
       {/* Topbar */}
-      <Topbar setSidebarOpen={setSidebarOpen} />
+      <Topbar setSidebarOpen={setSidebarOpen} displayName={displayName} />
     </>
   );
 }

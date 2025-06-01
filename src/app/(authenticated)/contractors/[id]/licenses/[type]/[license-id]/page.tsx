@@ -3,7 +3,7 @@ import MswLicenseDetail from "@/components/MswLicenseDetail";
 import IndustrialWasteLicenseDetail from "@/components/IndustrialWasteLicenseDetail";
 
 export default async function Page(props: {
-  params: Promise<{ type: "msw" | "industrial-waste";["license-id"]: string }>;
+  params: Promise<{ type: "msw" | "industrial-waste"; ["license-id"]: string }>;
 }) {
   const params = await props.params;
   const type = params.type;

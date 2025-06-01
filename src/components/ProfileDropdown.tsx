@@ -11,7 +11,11 @@ import { SignOutFormState } from "@/actions/auth";
 
 const initialState: SignOutFormState = { message: null };
 
-export default function ProfileDropdown() {
+export default function ProfileDropdown({
+  displayName,
+}: {
+  displayName: string;
+}) {
   const [state, formAction] = useActionState(signOut, initialState);
 
   useEffect(() => {
@@ -24,7 +28,7 @@ export default function ProfileDropdown() {
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900  hover:bg-gray-50 hover:cursor-pointer">
-          hayama
+          {displayName}
           <ChevronDownIcon
             aria-hidden="true"
             className="-mr-1 size-5 text-gray-400"

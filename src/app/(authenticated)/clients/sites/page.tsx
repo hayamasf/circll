@@ -7,7 +7,6 @@ import PageHeader from "@/components/PageHeader";
 export default async function page(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-
   const searchParams = await props.searchParams;
   const offset = Number(searchParams.offset ?? 1);
   const limit = Number(searchParams.limit ?? 10);

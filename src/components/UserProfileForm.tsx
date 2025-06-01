@@ -5,7 +5,10 @@ import SubmitAndCancelButtons from "./SubmitAndCancelButtons";
 import { userProfileUpdate } from "@/actions/user";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userProfileSchema, UserProfileFormData } from "@/schemas/userProfileSchema";
+import {
+  userProfileSchema,
+  UserProfileFormData,
+} from "@/schemas/userProfileSchema";
 
 const onCancel = () => {
   console.log("cancel");
@@ -13,12 +16,23 @@ const onCancel = () => {
 
 const onSubmit = async (formData: UserProfileFormData) => {
   console.log(formData);
-  await userProfileUpdate(formData)
+  await userProfileUpdate(formData);
 };
 
-export default function UserProfileForm() {
-  const { register, handleSubmit, formState: { errors }, } = useForm<UserProfileFormData>({
-    resolver: zodResolver(userProfileSchema)
+export default function UserProfileForm({
+  displayName,
+}: {
+  displayName: string;
+}) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserProfileFormData>({
+    resolver: zodResolver(userProfileSchema),
+    defaultValues: {
+      displayName,
+    },
   });
   return (
     <form>
@@ -37,12 +51,16 @@ export default function UserProfileForm() {
             className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:max-w-xs sm:text-sm/6"
           />
         </div>
-        {errors.displayName?.message &&
+        {errors.displayName?.message && (
           <p className="text-xs text-red-500 p-1">
             {errors.displayName?.message}
-          </p>}
+          </p>
+        )}
       </div>
-      <SubmitAndCancelButtons onCancel={onCancel} onSubmit={handleSubmit(onSubmit)} />
+      <SubmitAndCancelButtons
+        onCancel={onCancel}
+        onSubmit={handleSubmit(onSubmit)}
+      />
     </form>
   );
 }
