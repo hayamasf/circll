@@ -1,5 +1,4 @@
 import { getCurrentUser } from "@/utils/getCurrentUser";
-import { prisma } from "@/lib/prisma";
 import Navigation from "@/components/Navigation";
 
 export default async function AuthenticatedLayout({

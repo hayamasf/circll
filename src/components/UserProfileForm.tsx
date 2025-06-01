@@ -9,15 +9,8 @@ import {
   userProfileSchema,
   UserProfileFormData,
 } from "@/schemas/userProfileSchema";
-
-const onCancel = () => {
-  console.log("cancel");
-};
-
-const onSubmit = async (formData: UserProfileFormData) => {
-  console.log(formData);
-  await userProfileUpdate(formData);
-};
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function UserProfileForm({
   displayName,
@@ -34,6 +27,24 @@ export default function UserProfileForm({
       displayName,
     },
   });
+
+  const onCancel = () => {
+    console.log("cancel");
+  };
+
+  const router = useRouter();
+
+  const onSubmit = async (formData: UserProfileFormData) => {
+    const result = await userProfileUpdate(formData);
+
+    if (result.success) {
+      toast.success("プロフィールを更新しました.");
+      router.refresh();
+    } else {
+      toast.error(result.message)
+    }
+  };
+
   return (
     <form>
       <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">

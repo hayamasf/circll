@@ -4,7 +4,7 @@ import { userProfileSchema } from "@/schemas/userProfileSchema";
 import { createClient } from "@/utils/supabase/server";
 import { prisma } from "@/lib/prisma";
 
-export async function userProfileUpdate(formData: unknown) {
+export async function userProfileUpdate(formData: unknown): Promise< | {success: true} | {success: false; message: string}> {
   try {
     const supabase = await createClient();
 
@@ -28,8 +28,10 @@ export async function userProfileUpdate(formData: unknown) {
     const { displayName } = result.data;
 
     await prisma.user.update({ where: { id: user.id }, data: { displayName } });
+
+    return {success: true}
   } catch (error) {
     console.error("プロフィールの更新に失敗しました.", error);
-    throw new Error("プロフィールの更新に失敗しました.");
+    return {success: false, message: "プロフィールの更新に失敗しました."}
   }
 }
