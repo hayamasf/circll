@@ -2,6 +2,8 @@ import React from "react";
 import PageHeader from "@/components/PageHeader";
 import getContractById from "@/utils/getContractById";
 import IndustrialWasteContractDetail from "@/components/IndustrialWasteContractDetail";
+import getSitesByClientId from "@/utils/getSitesByClientId";
+import ContractSitesForm from "@/components/ContractSitesForm";
 
 export default async function Page(props: {
   params: Promise<{ type: string; id: number }>;
@@ -11,13 +13,23 @@ export default async function Page(props: {
   const id = Number(params.id);
   const contract = await getContractById(type, id);
 
+  if (!contract || typeof contract === "string") {
+    return (<div>対象の契約が見つかりません.</div>)
+  }
+
+  const sites = await getSitesByClientId(contract.client.id)
+
   return (
     <div className="mx-auto max-w-2xl">
       <div className="flex justify-between mb-8 items-center">
         <PageHeader title="契約内容" />
       </div>
       {contract ? (
-        <IndustrialWasteContractDetail contract={contract} />
+        <div className="grid gap-y-5">
+          <IndustrialWasteContractDetail contract={contract} />
+          <ContractSitesForm sites={sites} />
+        </div>
+
       ) : (
         "対象の契約が見つかりません."
       )}
