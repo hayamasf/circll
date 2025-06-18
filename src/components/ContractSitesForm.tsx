@@ -5,24 +5,31 @@ import Card from "./Card";
 export default async function ContractSitesForm({ sites }: { sites: Site[] }) {
   return (
     <Card>
-      <div className="mt-2 grid gap-y-2">
-        <div className="mb-7 flex items-center justify-between">
-          <h4 className="font-semibold">
-            対象の事業所
-          </h4>
-        </div>
-        <div className="text-sm grid gap-y-2">
+      <div className="mb-7 flex items-center justify-between">
+        <h4 className="font-semibold">
+          対象の事業所
+        </h4>
+      </div>
+      <fieldset>
+        <legend className="sr-only">契約対象の事業所</legend>
+        <div className="space-y-5 text-sm">
           {sites.map((site) => (
-            <div key={site.id} className="relative flex items-start py-4 gap-x-4">
-              <div className="flex h-6 items-center">
-                <input type="checkbox" id={String(site.id)} value={site.id} className="h-4 w-4 rounded border-gray-300 focus:ring-0 checked:text-gray-800" />
+            <div key={site.id} className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                id={String(site.id)}
+                value={site.id}
+                className="h-4 w-4 rounded border-gray-200 text-blue-600 focus:ring-1"
+              />
+              <div className="text-sm leading-6">
+                <label htmlFor={String(site.id)} className="font-medium text-gray-800">
+                  {site.name}
+                </label>
               </div>
-              <label htmlFor={String(site.id)} className="select-none font-medium text-gray-900"
-              >{site.name}</label>
             </div>
           ))}
         </div>
-      </div>
+      </fieldset>
     </Card>
   )
 }
