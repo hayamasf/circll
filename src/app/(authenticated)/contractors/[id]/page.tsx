@@ -6,6 +6,7 @@ import { Tabs, TabItem } from "@/components/Tabs";
 import JwnetInformationForm from "@/components/JwnetInformationForm";
 import getMswLicenses from "@/utils/getMswLicenses";
 import { getIndustrialWasteLicenses } from "@/utils/getIndustrialWasteLicenses";
+import IndustrialWasteTreatmentSitesList from "@/components/IndustrialWasteTreatmentSitesList";
 
 import MswLicensesList from "@/components/MswLicensesList";
 import IndustrialWasteLicensesList from "@/components/IndustrialWasteLicensesList";
@@ -32,6 +33,9 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
             <Tabs>
               <TabItem label="事業所">
                 <p>これ</p>
+              </TabItem>
+              <TabItem label="処分事業場">
+                <IndustrialWasteTreatmentSitesList />
               </TabItem>
               <TabItem label="許可情報">
                 {/* <div className="border-b pb-5">

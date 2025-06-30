@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 import PageHeader from "@/components/PageHeader";
+import Loading from "@/app/loading";
 import getContractById from "@/utils/getContractById";
 import IndustrialWasteContractDetail from "@/components/IndustrialWasteContractDetail";
 import getSitesByClientId from "@/utils/getSitesByClientId";
@@ -24,14 +25,16 @@ export default async function Page(props: {
       <div className="flex justify-between mb-8 items-center">
         <PageHeader title="契約内容" />
       </div>
-      {contract ? (
-        <div className="grid gap-y-5">
-          <IndustrialWasteContractDetail contract={contract} />
-          <ContractSitesForm contractId={contract.id} sites={sites} />
-        </div>
-      ) : (
-        "対象の契約が見つかりません."
-      )}
+      <Suspense fallback={<Loading />} >
+        {contract ? (
+          <div className="grid gap-y-5">
+            <IndustrialWasteContractDetail contract={contract} />
+            <ContractSitesForm contractId={contract.id} sites={sites} />
+          </div>
+        ) : (
+          "対象の契約が見つかりません."
+        )}
+      </Suspense>
     </div>
   );
 }

@@ -34,13 +34,11 @@ export default function AddressInputs() {
     setPostalCode(value)
 
     if (/^\d{7}$/.test(value)) {
-      console.log("郵便番号", value)
 
       try {
         const res = await fetch("/api/postcodeJP?postalcode=" + value);
         const data = await res.json();
         const { pref, city, town } = data
-        console.log(data)
 
         if (pref && city && town) {
           setPrefectureCityTown({ pref, city, town })
