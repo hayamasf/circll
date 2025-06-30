@@ -14,10 +14,10 @@ export default async function Page(props: {
   const contract = await getContractById(type, id);
 
   if (!contract || typeof contract === "string") {
-    return (<div>対象の契約が見つかりません.</div>)
+    return <div>対象の契約が見つかりません.</div>;
   }
 
-  const sites = await getSitesByClientId(contract.client.id)
+  const sites = await getSitesByClientId(contract.client.id);
 
   return (
     <div className="mx-auto max-w-2xl">
@@ -27,9 +27,8 @@ export default async function Page(props: {
       {contract ? (
         <div className="grid gap-y-5">
           <IndustrialWasteContractDetail contract={contract} />
-          <ContractSitesForm sites={sites} />
+          <ContractSitesForm contractId={contract.id} sites={sites} />
         </div>
-
       ) : (
         "対象の契約が見つかりません."
       )}

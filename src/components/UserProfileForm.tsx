@@ -41,7 +41,7 @@ export default function UserProfileForm({
       toast.success("プロフィールを更新しました.");
       router.refresh();
     } else {
-      toast.error(result.message)
+      toast.error(result.message);
     }
   };
 

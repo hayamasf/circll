@@ -5,15 +5,15 @@ export default async function getContractById(type: string, id: number) {
     if (type === "industrial-waste") {
       const contract = await prisma.industrialWasteContract.findUnique({
         where: { id },
-        include: { 
+        include: {
           client: {
             include: {
               sites: true,
             },
-          }, 
+          },
           contractor: true,
           sites: true,
-         },
+        },
       });
       return contract;
     } else if (type === "msw") {

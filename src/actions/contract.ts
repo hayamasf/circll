@@ -5,6 +5,8 @@ import { prisma } from "@/lib/prisma";
 import { WasteContractFormData } from "@/types/types";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { ContractSitesFormData } from "@/schemas/contractSitesSchema";
+import { number } from "zod";
 
 export async function createContract(formData: WasteContractFormData) {
   let newContract;
@@ -37,5 +39,28 @@ export async function createContract(formData: WasteContractFormData) {
   } finally {
     console.log("finally");
     redirect("/contracts");
+  }
+}
+
+export async function updateIndustrialWasteContractSites(
+  contractId: number,
+  formData: string[],
+) {
+  try {
+    const siteIds = formData.map(Number);
+
+    console.log(contractId, siteIds);
+
+    await prisma.industrialWasteContract.update({
+      where: { id: contractId },
+      data: {
+        sites: {
+          set: [],
+          connect: siteIds.map((id) => ({ id })),
+        },
+      },
+    });
+  } catch (error) {
+    console.error("データの更新に失敗しました.", error);
   }
 }
