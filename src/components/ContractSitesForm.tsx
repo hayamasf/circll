@@ -11,32 +11,44 @@ import {
 } from "@/schemas/contractSitesSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateIndustrialWasteContractSites } from "@/actions/contract";
+import { toast } from "sonner";
 
 export default function ContractSitesForm({
   contractId,
   sites,
+  selectedSiteIds,
 }: {
   contractId: number;
   sites: Site[];
+  selectedSiteIds: number[];
 }) {
   const {
     register,
     handleSubmit,
     formState: { errors, isDirty },
+    reset,
     watch,
   } = useForm<ContractSitesFormData>({
     resolver: zodResolver(contractSitesSchema),
     defaultValues: {
-      siteIds: [],
+      siteIds: selectedSiteIds.map(String),
     },
   });
 
-  const selectedSiteIds = watch("siteIds");
-  const isDisabled = !isDirty || selectedSiteIds.length === 0;
+  const watchedSiteIds = watch("siteIds");
+  const isDisabled = !isDirty || watchedSiteIds.length === 0;
 
   const onSubmit = async (formData: ContractSitesFormData) => {
-    console.log(formData);
-    await updateIndustrialWasteContractSites(contractId, formData.siteIds);
+    const result = await updateIndustrialWasteContractSites(
+      contractId,
+      formData.siteIds,
+    );
+    if (result.success) {
+      toast.success("契約対象事業所を更新しました!");
+      reset(formData);
+    } else {
+      toast.error(result.message || "契約対象事業所の更新に失敗しました...");
+    }
   };
 
   return (

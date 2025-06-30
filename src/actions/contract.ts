@@ -60,7 +60,9 @@ export async function updateIndustrialWasteContractSites(
         },
       },
     });
+    return { success: true };
   } catch (error) {
     console.error("データの更新に失敗しました.", error);
+    return { success: false, message: "更新に失敗しました." };
   }
 }

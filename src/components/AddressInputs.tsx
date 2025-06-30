@@ -31,25 +31,22 @@ export default function AddressInputs() {
 
   const handlePostalCodeChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setPostalCode(value)
+    setPostalCode(value);
 
     if (/^\d{7}$/.test(value)) {
-
       try {
         const res = await fetch("/api/postcodeJP?postalcode=" + value);
         const data = await res.json();
-        const { pref, city, town } = data
+        const { pref, city, town } = data;
 
         if (pref && city && town) {
-          setPrefectureCityTown({ pref, city, town })
+          setPrefectureCityTown({ pref, city, town });
         }
-
       } catch (error) {
-        console.error("住所取得エラー", error)
+        console.error("住所取得エラー", error);
       }
-
     }
-  }
+  };
 
   return (
     <div className="py-10 space-y-10 border-b border-gray-900/10">

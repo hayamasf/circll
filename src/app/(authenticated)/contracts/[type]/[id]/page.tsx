@@ -19,17 +19,22 @@ export default async function Page(props: {
   }
 
   const sites = await getSitesByClientId(contract.client.id);
+  const selectedSiteIds = contract.sites?.map((site) => site.id) ?? [];
 
   return (
     <div className="mx-auto max-w-2xl">
       <div className="flex justify-between mb-8 items-center">
         <PageHeader title="契約内容" />
       </div>
-      <Suspense fallback={<Loading />} >
+      <Suspense fallback={<Loading />}>
         {contract ? (
           <div className="grid gap-y-5">
             <IndustrialWasteContractDetail contract={contract} />
-            <ContractSitesForm contractId={contract.id} sites={sites} />
+            <ContractSitesForm
+              contractId={contract.id}
+              sites={sites}
+              selectedSiteIds={selectedSiteIds}
+            />
           </div>
         ) : (
           "対象の契約が見つかりません."
