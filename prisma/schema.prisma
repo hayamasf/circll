@@ -40,6 +40,7 @@ model Contractor {
   mswLicenses         MswLicense[]
   industrialWasteLicenses IndustrialWasteLicense[]
   industrialWasteContracts IndustrialWasteContract[]
+  jwnetInformation    JwnetInformation?
 }
 
 model Client {
@@ -62,6 +63,7 @@ model Client {
   address2            String?
   sites               Site[]
   industrialWasteContracts IndustrialWasteContract[]
+  jwnetInformation    JwnetInformation?
 }
 
 model Site {
@@ -80,6 +82,7 @@ model Site {
   address           String
   address2          String?
   industrialWasteContracts  IndustrialWasteContract[]
+  jwnetInformation    JwnetInformation?
 }
 
 model Prefecture {
@@ -155,4 +158,20 @@ model IndustrialWasteContract {
   endDate           DateTime @db.Date
   isAutoRenew       Boolean
   sites             Site[]
+}
+
+model JwnetInformation {
+  id                Int @ id @default(autoincrement())
+  createdAt         DateTime @default(now())
+  createdBy         String
+  updatedAt         DateTime @updatedAt
+  updatedBy         String?
+  jwnetId           String @unique
+  ediKey            String?
+  clientId          Int? @unique
+  contractorId      Int? @unique
+  siteId            Int? @unique
+  client            Client? @relation(fields: [clientId], references: [id])
+  contractor        Contractor? @relation(fields: [contractorId], references: [id])
+  site              Site? @ relation(fields: [siteId], references: [id])
 }
