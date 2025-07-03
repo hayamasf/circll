@@ -3,10 +3,10 @@ import LegalEntityProfile from "@/components/LegalEntityProfile";
 import getContractorById from "@/utils/getContractorById";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Tabs, TabItem } from "@/components/Tabs";
-import JwnetInformationForm from "@/components/JwnetInformationForm";
 import getMswLicenses from "@/utils/getMswLicenses";
 import { getIndustrialWasteLicenses } from "@/utils/getIndustrialWasteLicenses";
 import IndustrialWasteTreatmentSitesList from "@/components/IndustrialWasteTreatmentSitesList";
+import JwnetInformationTable from "@/components/JwnetInformationTable";
 
 import MswLicensesList from "@/components/MswLicensesList";
 import IndustrialWasteLicensesList from "@/components/IndustrialWasteLicensesList";
@@ -51,10 +51,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
                 </div>
               </TabItem>
               <TabItem label="JWNET情報">
-                <JwnetInformationForm
-                  label="加入者番号(収集運搬業者)"
-                  jwnetId={1234511}
-                />
+                <JwnetInformationTable />
               </TabItem>
             </Tabs>
           </div>

@@ -4,7 +4,7 @@ import getClientById from "@/utils/getClientById";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { Tabs, TabItem } from "@/components/Tabs";
 import SitesList from "@/components/SitesList";
-import JwnetInformationForm from "@/components/JwnetInformationForm";
+import JwnetInformationTable from "@/components/JwnetInformationTable";
 
 export default async function Page(props: {
   params: Promise<{ id: string }>;
@@ -33,10 +33,7 @@ export default async function Page(props: {
                 <SitesList offset={offset} limit={limit} clientId={id} />
               </TabItem>
               <TabItem label="JWNET情報">
-                <JwnetInformationForm
-                  label="加入者番号(収集運搬業者)"
-                  jwnetId={1234511}
-                />
+                <JwnetInformationTable />
               </TabItem>
             </Tabs>
           </div>
