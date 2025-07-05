@@ -22,21 +22,21 @@ export type Address = {
   address2?: string | null;
 };
 
-export type LegalEntityFormData = {
-  entityType?: string | null;
-  isPrefixEntityType?: string | boolean | null;
-  name: string;
-  tradeName?: string | null;
-  representativeTitle?: string | null;
-  representativeName?: string | null;
-  postalCode: string;
-  prefecture: string;
-  city: string;
-  town: string;
-  address: string;
-  address2?: string | null;
-  [key: string]: any;
-};
+// export type LegalEntityFormData = {
+//   entityType?: string | null;
+//   isPrefixEntityType?: string | boolean | null;
+//   name: string;
+//   tradeName?: string | null;
+//   representativeTitle?: string | null;
+//   representativeName?: string | null;
+//   postalCode: string;
+//   prefecture: string;
+//   city: string;
+//   town: string;
+//   address: string;
+//   address2?: string | null;
+//   [key: string]: any;
+// };
 
 export type Site = {
   id: number;

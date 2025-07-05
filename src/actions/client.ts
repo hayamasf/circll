@@ -4,10 +4,10 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
-// import { getSession } from "@auth0/nextjs-auth0";
 import convertToBoolean from "@/utils/convertToBoolean";
 import { Client } from "@prisma/client";
-import { LegalEntityFormData } from "@/types/types";
+
+import { LegalEntitySchema, LegalEntityFormData } from "@/schemas/legalEntitySchema";
 
 export async function createClient(formData: LegalEntityFormData) {
   let isPrefixEntityType;
