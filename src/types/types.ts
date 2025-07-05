@@ -40,7 +40,7 @@ export type LegalEntityFormData = {
 
 export type Site = {
   id: number;
-  clientId: number;
+  clientId: number | null;
   createdAt: Date;
   createdBy: string;
   updatedAt: Date;
