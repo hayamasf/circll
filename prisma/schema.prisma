@@ -37,6 +37,7 @@ model Contractor {
   town                String
   address             String
   address2            String?
+  sites               Site[]
   mswLicenses         MswLicense[]
   industrialWasteLicenses IndustrialWasteLicense[]
   industrialWasteContracts IndustrialWasteContract[]
@@ -72,8 +73,10 @@ model Site {
   createdBy         String
   updatedAt         DateTime @updatedAt
   updatedBy         String?
-  clientId          Int
-  client            Client @relation(fields: [clientId], references: [id])
+  clientId          Int?
+  contractorId      Int?
+  client            Client? @relation(fields: [clientId], references: [id])
+  contractor        Contractor? @relation(fields: [contractorId], references: [id])
   name              String
   postalCode        String
   prefecture        String
