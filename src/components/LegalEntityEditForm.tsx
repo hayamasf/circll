@@ -6,7 +6,7 @@ import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 import { useRouter } from "next/navigation";
 
-import { LegalEntityFormData } from "@/types/types";
+import { LegalEntityFormData } from "@/schemas/legalEntitySchema";
 import CorporateEntityInputs from "./CorporateEntityInputs";
 import SoleProprietorInputs from "./SoleProprietorInputs";
 import AddressInputs from "./AddressInputs";
@@ -27,7 +27,7 @@ export default function LegalEntityEditForm({
     defaultValues: {
       id: entity.id,
       entityType: entity.entityType,
-      isPrefixEntityType: String(entity.isPrefixEntityType),
+      isPrefixEntityType: entity.isPrefixEntityType ?? null,
       name: entity.name,
       representativeTitle: entity.representativeTitle,
       representativeName: entity.representativeName,
@@ -42,13 +42,15 @@ export default function LegalEntityEditForm({
   });
 
   const getDirtyFieldValues = () => {
-    const dirtyFieldValues: Record<string, string> = {};
-    Object.keys(methods.formState.dirtyFields).forEach((fieldName) => {
-      if (methods.formState.dirtyFields[fieldName]) {
-        dirtyFieldValues[fieldName] = methods.getValues(fieldName);
-      }
-    });
+    const dirtyFields = methods.formState.dirtyFields;
+    const values = methods.getValues();
+    const dirtyFieldValues: Record<string, any> = {};
 
+    (Object.keys(dirtyFields) as Array<keyof LegalEntityFormData>).forEach((key) => {
+      if (dirtyFields[key]) {
+        dirtyFieldValues[key] = values[key];
+      }
+    })
     return dirtyFieldValues;
   };
 
