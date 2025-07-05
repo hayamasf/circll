@@ -2,8 +2,8 @@
 
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { LegalEntityFormData } from "@/types/types";
 import Select from "./Select";
+import { LegalEntityFormData } from "@/schemas/legalEntitySchema";
 
 export default function CorporateEntityInputs() {
   const {
