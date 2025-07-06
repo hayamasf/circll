@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { LegalEntityFormData } from "@/types/types";
+import { LegalEntityFormData } from "@/schemas/legalEntitySchema";
 
 export default function SoleProprietorInputs() {
   const {
@@ -14,8 +14,8 @@ export default function SoleProprietorInputs() {
   useEffect(() => {
     unregister("entityType");
     unregister("isPrefixEntityType");
-    unregister("title");
-    unregister("representative");
+    unregister("representativeTitle");
+    unregister("representativeName");
   }, []);
 
   return (
