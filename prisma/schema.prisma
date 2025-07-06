@@ -170,7 +170,7 @@ model JwnetInformation {
   updatedAt         DateTime @updatedAt
   updatedBy         String?
   jwnetId           String @unique
-  ediKey            String?
+  ediKey            String? @unique
   clientId          Int? @unique
   contractorId      Int? @unique
   siteId            Int? @unique
