@@ -7,7 +7,10 @@ import { prisma } from "@/lib/prisma";
 import convertToBoolean from "@/utils/convertToBoolean";
 import { Client } from "@prisma/client";
 
-import { LegalEntitySchema, LegalEntityFormData } from "@/schemas/legalEntitySchema";
+import {
+  LegalEntitySchema,
+  LegalEntityFormData,
+} from "@/schemas/legalEntitySchema";
 
 export async function createClient(formData: LegalEntityFormData) {
   let isPrefixEntityType;

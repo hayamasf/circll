@@ -1,15 +1,27 @@
 "use client";
 
 import React from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Card from "./Card";
 import SubmitButton from "./SubmitButton";
 import { JwnetInformationFormData } from "@/schemas/jwnetInformationSchema";
+import { updateJwnetInformation } from "@/actions/jwnetInformation";
+
+type EntityType = "client" | "contractor" | "unknown";
 
 export default function JwnetInformationForm() {
   const pathName = usePathname();
-  const isContractor = pathName.includes("/contractors/")
+  const params = useParams();
+
+  const getEntityType = (pathName: string): EntityType => {
+    if (pathName.startsWith("/clients/")) return "client";
+    if (pathName.startsWith("/contractors")) return "contractor";
+    return "unknown";
+  };
+
+  const entityType = getEntityType(pathName);
+  const id = Number(params?.id);
 
   const {
     register,
@@ -24,12 +36,24 @@ export default function JwnetInformationForm() {
   const ediKeyValue = watch("ediKey") || "";
 
   const isJwnetIdValid = jwnetIdValue.length === 7;
-  const isEdiKeyValid = isContractor || ediKeyValue.length === 8;
+  const isEdiKeyValid = entityType !== "client" || ediKeyValue.length === 8;
 
   const isDisabled = !isDirty || !isJwnetIdValid || !isEdiKeyValid;
 
   const onSubmit = async (formData: JwnetInformationFormData) => {
-    console.log(formData);
+    if (!id) {
+      console.error("IDが取得できませんでした.");
+      return;
+    }
+
+    const dataToSubmit = {
+      ...formData,
+      ...(entityType === "client" && { clientId: id }),
+      ...(entityType === "contractor" && { contractorId: id }),
+    };
+
+    console.log(dataToSubmit);
+    await updateJwnetInformation(dataToSubmit);
   };
 
   return (
@@ -37,7 +61,10 @@ export default function JwnetInformationForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col sm:flex-row items-end gap-y-4 sm:gap-y-0 sm:gap-x-4">
           <div className="w-full sm:w-1/3">
-            <label htmlFor="jwnet-id" className="block text-sm/6 font-medium text-gray-900">
+            <label
+              htmlFor="jwnet-id"
+              className="block text-sm/6 font-medium text-gray-700"
+            >
               加入者番号/ID
             </label>
             <div className="mt-2">
@@ -50,9 +77,12 @@ export default function JwnetInformationForm() {
               />
             </div>
           </div>
-          {!isContractor &&
+          {entityType === "client" && (
             <div className="w-full sm:w-1/3">
-              <label htmlFor="edi-key" className="block text-sm/6 font-medium text-gray-900">
+              <label
+                htmlFor="edi-key"
+                className="block text-sm/6 font-medium text-gray-700"
+              >
                 EDIキー
               </label>
               <div className="mt-2">
@@ -65,7 +95,7 @@ export default function JwnetInformationForm() {
                 />
               </div>
             </div>
-          }
+          )}
 
           <div className="w-full sm:w-auto self-end flex justify-end">
             <SubmitButton label="保存" disabled={isDisabled} />

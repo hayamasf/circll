@@ -6,6 +6,8 @@ export const jwnetInformationBaseSchema = z.object({
   clientId: z.number().int().optional(),
   contractorId: z.number().int().optional(),
   siteId: z.number().int().optional(),
-})
+});
 
-export type JwnetInformationFormData = z.infer<typeof jwnetInformationBaseSchema>
+export type JwnetInformationFormData = z.infer<
+  typeof jwnetInformationBaseSchema
+>;

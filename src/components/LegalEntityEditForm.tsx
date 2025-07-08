@@ -46,11 +46,13 @@ export default function LegalEntityEditForm({
     const values = methods.getValues();
     const dirtyFieldValues: Record<string, any> = {};
 
-    (Object.keys(dirtyFields) as Array<keyof LegalEntityFormData>).forEach((key) => {
-      if (dirtyFields[key]) {
-        dirtyFieldValues[key] = values[key];
-      }
-    })
+    (Object.keys(dirtyFields) as Array<keyof LegalEntityFormData>).forEach(
+      (key) => {
+        if (dirtyFields[key]) {
+          dirtyFieldValues[key] = values[key];
+        }
+      },
+    );
     return dirtyFieldValues;
   };
 
