@@ -41,7 +41,7 @@ model Contractor {
   mswLicenses         MswLicense[]
   industrialWasteLicenses IndustrialWasteLicense[]
   industrialWasteContracts IndustrialWasteContract[]
-  jwnetInformation    JwnetInformation?
+  jwnetInformation    JwnetInformation[]
 }
 
 model Client {
@@ -64,7 +64,7 @@ model Client {
   address2            String?
   sites               Site[]
   industrialWasteContracts IndustrialWasteContract[]
-  jwnetInformation    JwnetInformation?
+  jwnetInformation    JwnetInformation[]
 }
 
 model Site {
@@ -85,7 +85,7 @@ model Site {
   address           String
   address2          String?
   industrialWasteContracts  IndustrialWasteContract[]
-  jwnetInformation    JwnetInformation?
+  jwnetInformation    JwnetInformation[]
 }
 
 model Prefecture {
@@ -171,10 +171,11 @@ model JwnetInformation {
   updatedBy         String?
   jwnetId           String @unique
   ediKey            String? @unique
-  clientId          Int? @unique
-  contractorId      Int? @unique
-  siteId            Int? @unique
+  clientId          Int?
+  contractorId      Int?
+  siteId            Int?
   client            Client? @relation(fields: [clientId], references: [id])
   contractor        Contractor? @relation(fields: [contractorId], references: [id])
   site              Site? @ relation(fields: [siteId], references: [id])
+  @@unique([clientId, siteId])
 }
