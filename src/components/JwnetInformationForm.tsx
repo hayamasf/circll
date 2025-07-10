@@ -6,7 +6,8 @@ import { useForm } from "react-hook-form";
 import Card from "./Card";
 import SubmitButton from "./SubmitButton";
 import { JwnetInformationFormData } from "@/schemas/jwnetInformationSchema";
-import { updateJwnetInformation } from "@/actions/jwnetInformation";
+import { createOrUpdateJwnetInformation } from "@/actions/jwnetInformation";
+import { toast } from "sonner";
 
 type EntityType = "client" | "contractor" | "unknown";
 
@@ -28,9 +29,7 @@ export default function JwnetInformationForm() {
     handleSubmit,
     watch,
     formState: { errors, isDirty },
-  } = useForm<JwnetInformationFormData>({
-    mode: "onChange",
-  });
+  } = useForm<JwnetInformationFormData>();
 
   const jwnetIdValue = watch("jwnetId") || "";
   const ediKeyValue = watch("ediKey") || "";
@@ -53,7 +52,13 @@ export default function JwnetInformationForm() {
     };
 
     console.log(dataToSubmit);
-    await updateJwnetInformation(dataToSubmit);
+    const result = await createOrUpdateJwnetInformation(dataToSubmit);
+
+    if (result.success) {
+      toast.success(result.message)
+    } else {
+      toast.error(result.message)
+    }
   };
 
   return (
