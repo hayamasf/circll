@@ -20,37 +20,40 @@ export async function createOrUpdateJwnetInformation(submittedData:JwnetInformat
 
   const { clientId, contractorId, siteId, jwnetId, ediKey } = submittedData;
 
-  let existing;
-
-  if (clientId !== undefined) {
-    existing = await prisma.jwnetInformation.findUnique({where: {clientId}})
-  } else if (contractorId !== undefined) {
-    existing = await prisma.jwnetInformation.findUnique({where : {contractorId}})
-  } else if (siteId !== undefined) {
-    existing = await prisma.jwnetInformation.findUnique({where: {siteId}})
-  } else {
+  if (!clientId && !contractorId) {
     return {
       success: false,
-      message: "対象EntityのIdが指定されていません."
+      message: "clientIdもしくはcontractorIdが必要です."
     }
   }
 
   try {
+
+    if (clientId !== undefined) {
+    const existing = await prisma.jwnetInformation.findFirst({
+      where: {
+        clientId,
+        siteId: siteId ?? null,
+      },
+    });
     if (existing) {
-    await prisma.jwnetInformation.update({
-      where: {id: existing.id},
-      data: {
+      await prisma.jwnetInformation.update({
+        where: {
+          id: existing.id,
+        },
+        data: {
         jwnetId,
         updatedBy: user.id,
         ...(ediKey !== undefined && { ediKey }),
-      }
-    })
+        }
+      });
     return {
       success: true,
       message: "JWNET情報を更新しました."
-    }
-  } else {
-    await prisma.jwnetInformation.create({
+    };
+  }
+  } 
+  await prisma.jwnetInformation.create({
       data: {
         jwnetId,
         ...(ediKey !== undefined && { ediKey }),
@@ -64,10 +67,15 @@ export async function createOrUpdateJwnetInformation(submittedData:JwnetInformat
     return {
       success: true,
       message: "JWNET情報を新規登録しました."
-    }
-  }
-  } catch (error) {
+    };
+  } catch (error: any) {
     console.error("データベースの処理中にエラー:", error);
+    if (error.code === "P2002") {
+      return {
+        success: false,
+        message: "このJWNET IDはすでに存在します."
+      }
+    }
     return {
       success: false,
       message: "データの保存中にエラーが発生しました."
