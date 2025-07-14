@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { usePathname, useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Card from "./Card";
@@ -11,7 +11,11 @@ import { toast } from "sonner";
 
 type EntityType = "client" | "contractor" | "unknown";
 
-export default function JwnetInformationForm() {
+export default function JwnetInformationForm({
+  jwnetInformation,
+}: {
+  jwnetInformation?: JwnetInformationFormData;
+}) {
   const pathName = usePathname();
   const params = useParams();
 
@@ -27,9 +31,24 @@ export default function JwnetInformationForm() {
   const {
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors, isDirty },
-  } = useForm<JwnetInformationFormData>();
+  } = useForm<JwnetInformationFormData>({
+    defaultValues: {
+      jwnetId: "",
+      ediKey: "",
+    },
+  });
+
+  useEffect(() => {
+    if (jwnetInformation) {
+      reset({
+        jwnetId: jwnetInformation.jwnetId ?? "",
+        ediKey: jwnetInformation.ediKey ?? "",
+      })
+    }
+  }, [jwnetInformation, reset])
 
   const jwnetIdValue = watch("jwnetId") || "";
   const ediKeyValue = watch("ediKey") || "";

@@ -7,6 +7,7 @@ import getMswLicenses from "@/utils/getMswLicenses";
 import { getIndustrialWasteLicenses } from "@/utils/getIndustrialWasteLicenses";
 import IndustrialWasteTreatmentSitesList from "@/components/IndustrialWasteTreatmentSitesList";
 import JwnetInformationForm from "@/components/JwnetInformationForm";
+import { getJwnetInformationByContractorId } from "@/utils/jwentInformation";
 
 import MswLicensesList from "@/components/MswLicensesList";
 import IndustrialWasteLicensesList from "@/components/IndustrialWasteLicensesList";
@@ -18,6 +19,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
   const mswLicenses = await getMswLicenses(id);
   const industrialWasteLicenses = await getIndustrialWasteLicenses(id);
+  const jwnetInformation = await getJwnetInformationByContractorId(id)
 
   const pages = [{ name: "業者", href: "/contractors", current: false }];
 
@@ -48,7 +50,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
                 </div>
               </TabItem>
               <TabItem label="JWNET情報">
-                <JwnetInformationForm />
+                <JwnetInformationForm jwnetInformation={jwnetInformation} />
               </TabItem>
             </Tabs>
           </div>
