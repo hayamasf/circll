@@ -17,7 +17,7 @@ export default async function Page(props: {
   const contractor = await getClientById(id);
   const offset = Number(searchParams.offset ?? 1);
   const limit = Number(searchParams.limit ?? 10);
-  const jwnetInformation = await getJwnetInformationByClientId(id)
+  const jwnetInformation = await getJwnetInformationByClientId(id);
 
   const pages = [{ name: "排出事業者", href: "/clients", current: false }];
 
@@ -35,7 +35,9 @@ export default async function Page(props: {
                 <SitesList offset={offset} limit={limit} clientId={id} />
               </TabItem>
               <TabItem label="JWNET情報">
-                <JwnetInformationForm jwnetInformation={jwnetInformation ?? undefined} />
+                <JwnetInformationForm
+                  jwnetInformation={jwnetInformation ?? undefined}
+                />
               </TabItem>
             </Tabs>
           </div>

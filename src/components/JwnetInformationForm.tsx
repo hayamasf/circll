@@ -46,9 +46,9 @@ export default function JwnetInformationForm({
       reset({
         jwnetId: jwnetInformation.jwnetId ?? "",
         ediKey: jwnetInformation.ediKey ?? "",
-      })
+      });
     }
-  }, [jwnetInformation, reset])
+  }, [jwnetInformation, reset]);
 
   const jwnetIdValue = watch("jwnetId") || "";
   const ediKeyValue = watch("ediKey") || "";
@@ -74,9 +74,9 @@ export default function JwnetInformationForm({
     const result = await createOrUpdateJwnetInformation(dataToSubmit);
 
     if (result.success) {
-      toast.success(result.message)
+      toast.success(result.message);
     } else {
-      toast.error(result.message)
+      toast.error(result.message);
     }
   };
 
