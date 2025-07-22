@@ -7,5 +7,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
   const id = Number(params.id);
   const jwnetInformation = await getJwnetInformationByClientId(id);
 
-  return <JwnetInformationForm jwnetInformation={jwnetInformation} />;
+  return (
+    <JwnetInformationForm jwnetInformation={jwnetInformation} />
+  )
 }

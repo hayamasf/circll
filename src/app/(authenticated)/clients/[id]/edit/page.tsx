@@ -7,26 +7,27 @@ import { updateClient } from "@/actions/client";
 export default async function Page(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const id = Number(params.id);
-
   // await new Promise((resolve) => setTimeout(resolve, 3000));
 
   const client = await getClientById(id);
 
-  const clientName = `${client?.isPrefixEntityType ? client.entityType : ""}${client?.name}${client?.entityType && !client.isPrefixEntityType ? client.entityType : ""}`;
-  const pages = [
-    { name: "排出事業者", href: "/clients", current: false },
-    { name: clientName, href: "/clients/" + client?.id, current: false },
-    { name: "編集", href: "", current: true },
-  ];
-
   if (client) {
+    const clientName = `${client?.isPrefixEntityType ? client.entityType : ""}${client?.name}${client?.entityType && !client.isPrefixEntityType ? client.entityType : ""}`;
+    const pages = [
+      { name: "排出事業者", href: "/clients", current: false },
+      { name: clientName, href: "", current: false },
+      { name: "編集", href: "", current: true },
+    ];
+
     return (
-      <div className="mx-auto max-w-lg">
-        <div className="pt-3 pb-10">
+      <>
+        <div className="py-6">
           <Breadcrumbs pages={pages} />
         </div>
-        <LegalEntityEditForm entity={client} action={updateClient} />
-      </div>
+        <div className="mx-auto max-w-lg">
+          <LegalEntityEditForm entity={client} action={updateClient} />
+        </div>
+      </>
     );
   }
 }

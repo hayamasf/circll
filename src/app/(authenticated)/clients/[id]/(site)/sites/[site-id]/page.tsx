@@ -1,11 +1,10 @@
 import React from "react";
 import getSiteById from "@/utils/getSiteById";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import Card from "@/components/Card";
 import SiteDetail from "@/components/SiteDetail";
 
 export default async function Page(props: {
-  params: Promise<{ id: string; ["site-id"]: string }>;
+  params: Promise<{ id: string;["site-id"]: string }>;
 }) {
   const params = await props.params;
   const siteId = Number(params["site-id"]);
@@ -32,13 +31,8 @@ export default async function Page(props: {
   ];
 
   return (
-    <div className="mx-auto max-w-lg">
-      <div className="pt-3 pb-10">
-        <Breadcrumbs pages={pages} />
-      </div>
-      <Card>
-        <SiteDetail site={site} />
-      </Card>
-    </div>
+    <Card>
+      <SiteDetail site={site} />
+    </Card>
   );
 }
