@@ -15,19 +15,20 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
     const clientName = `${client?.isPrefixEntityType ? client.entityType : ""}${client?.name}${client?.entityType && !client.isPrefixEntityType ? client.entityType : ""}`;
     const pages = [
       { name: "排出事業者", href: "/clients", current: false },
-      { name: clientName, href: "", current: false },
+      { name: clientName, href: "/clients/" + id, current: false },
       { name: "編集", href: "", current: true },
     ];
 
     return (
-      <>
-        <div className="py-6">
+      <div className="mx-auto max-w-2xl">
+        <div className="mt-6 mb-10">
           <Breadcrumbs pages={pages} />
         </div>
         <div className="mx-auto max-w-lg">
           <LegalEntityEditForm entity={client} action={updateClient} />
         </div>
-      </>
+
+      </div>
     );
   }
 }

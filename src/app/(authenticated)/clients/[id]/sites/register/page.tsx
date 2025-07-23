@@ -1,13 +1,23 @@
 import React from "react";
 import getClientById from "@/utils/getClientById";
+import { formatEntityName } from "@/utils/formatEntityName";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import SiteRegistrationForm from "@/components/SiteRegistrationForm";
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
-  const params = await props.params;
+  const params = await props.params
   const id = Number(params.id);
-  const client = await getClientById(id);
-  const clientName = `${client?.isPrefixEntityType ? client.entityType : ""}${client?.name}${client?.entityType && !client.isPrefixEntityType ? client.entityType : ""}`;
+  const client = await getClientById(id)
+
+  if (!client) {
+    return (
+      <div className="mx-auto max-w-2xl py-5">
+        該当の事業者が見つかりません...
+      </div>
+    )
+  }
+
+  const clientName = formatEntityName(client)
 
   const pages = [
     { name: "排出事業者", href: "/clients", current: false },
@@ -16,16 +26,16 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
     { name: "登録", href: "", current: true },
   ];
 
-  if (!client) {
-    return <div className="text-center">排出事業者が見当たりません.</div>;
-  }
-
   return (
-    <div className="mx-auto max-w-xl">
-      <div className="pt-3 pb-10">
+    <div className="mx-auto max-w-2xl">
+      <div className="mt-6 mb-10">
         <Breadcrumbs pages={pages} />
       </div>
-      <SiteRegistrationForm id={client.id} />
+      <div className="mx-auto max-w-lg">
+        <SiteRegistrationForm id={id} />
+      </div>
     </div>
-  );
+  )
+
+
 }
