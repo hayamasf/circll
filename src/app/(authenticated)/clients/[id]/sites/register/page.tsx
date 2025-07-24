@@ -5,19 +5,19 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import SiteRegistrationForm from "@/components/SiteRegistrationForm";
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
-  const params = await props.params
+  const params = await props.params;
   const id = Number(params.id);
-  const client = await getClientById(id)
+  const client = await getClientById(id);
 
   if (!client) {
     return (
       <div className="mx-auto max-w-2xl py-5">
         該当の事業者が見つかりません...
       </div>
-    )
+    );
   }
 
-  const clientName = formatEntityName(client)
+  const clientName = formatEntityName(client);
 
   const pages = [
     { name: "排出事業者", href: "/clients", current: false },
@@ -35,7 +35,5 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
         <SiteRegistrationForm id={id} />
       </div>
     </div>
-  )
-
-
+  );
 }

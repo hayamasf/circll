@@ -6,7 +6,7 @@ import Card from "@/components/Card";
 import SiteDetail from "@/components/SiteDetail";
 
 export default async function Page(props: {
-  params: Promise<{ ["site-id"]: string }>
+  params: Promise<{ ["site-id"]: string }>;
 }) {
   const params = await props.params;
   const siteId = Number(params["site-id"]);
@@ -14,16 +14,16 @@ export default async function Page(props: {
   const site = await getSiteById(siteId);
 
   if (!site) {
-    return <div className="mx-auto max-w-2xl">該当の事業所がありません...</div>
+    return <div className="mx-auto max-w-2xl">該当の事業所がありません...</div>;
   }
 
-  const client = site.client
+  const client = site.client;
   const clientName = client ? formatEntityName(client) : "不明な事業者";
 
   const pages = [
     { name: "排出事業者", href: "/clients", current: false },
     { name: clientName, href: "/clients/" + site.clientId, current: false },
-    { name: site.name, href: "", current: false, },
+    { name: site.name, href: "", current: false },
   ];
 
   return (
@@ -35,5 +35,5 @@ export default async function Page(props: {
         <SiteDetail site={site} />
       </Card>
     </div>
-  )
+  );
 }

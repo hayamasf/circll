@@ -27,7 +27,6 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
         <div className="mx-auto max-w-lg">
           <LegalEntityEditForm entity={client} action={updateClient} />
         </div>
-
       </div>
     );
   }

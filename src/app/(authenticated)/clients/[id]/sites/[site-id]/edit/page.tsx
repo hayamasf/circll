@@ -4,16 +4,18 @@ import { formatEntityName } from "@/utils/formatEntityName";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import SiteEditForm from "@/components/SiteEditForm";
 
-export default async function Page(props: { params: Promise<{ "site-id": string }> }) {
-  const params = await props.params
-  const siteId = Number(params["site-id"])
-  const site = await getSiteById(siteId)
+export default async function Page(props: {
+  params: Promise<{ "site-id": string }>;
+}) {
+  const params = await props.params;
+  const siteId = Number(params["site-id"]);
+  const site = await getSiteById(siteId);
 
   if (!site) {
-    return <div className="mx-auto max-w-2xl">該当の事業所がありません...</div>
+    return <div className="mx-auto max-w-2xl">該当の事業所がありません...</div>;
   }
 
-  const client = site.client
+  const client = site.client;
   const clientName = client ? formatEntityName(client) : "不明な事業者";
 
   const pages = [
@@ -36,5 +38,5 @@ export default async function Page(props: { params: Promise<{ "site-id": string 
         <SiteEditForm site={site} />
       </div>
     </div>
-  )
+  );
 }
