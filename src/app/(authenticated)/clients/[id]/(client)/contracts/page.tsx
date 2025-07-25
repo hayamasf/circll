@@ -15,11 +15,13 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
   }
 
   return (
-    <Link
-      href={"/clients/" + id + "/contracts/register"}
-      className="flex justify-center"
-    >
-      <PlusButton iconClassName="h-4 w-4" />
-    </Link>
+    <div>
+      <div className="flex justify-between px-3">
+        <h3>契約一覧</h3>
+        <Link href={"/clients/" + id + "/contracts/register"}>
+          <PlusButton iconClassName="h-4 w-4" />
+        </Link>
+      </div>
+    </div>
   );
 }
