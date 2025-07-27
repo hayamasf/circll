@@ -1,29 +1,33 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-// import { getSession } from "@auth0/nextjs-auth0";
-import { WasteContractFormData } from "@/types/types";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { ContractSitesFormData } from "@/schemas/contractSitesSchema";
-import { number } from "zod";
 import { ContractFormData } from "@/schemas/contractSchema";
+import { createClient } from "@/utils/supabase/server";
 
 export async function createContract(formData: ContractFormData) {
   let newContract;
 
   try {
-    // const session = await getSession();
-    // const userId = session?.user.sub;
 
-    // if (!userId) {
-    //   throw new Error("ユーザーIDを確認してください.");
-    // }
+    const supabase = await createClient();
+
+    const {
+      data: {user},
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      console.error("ユーザーが認証されていません.")
+      throw new Error("認証されていません.")
+    }
 
     if (formData.waste === "industrial-waste") {
       newContract = await prisma.industrialWasteContract.create({
         data: {
-          createdBy: "",
+          createdBy: user.id,
           clientId: formData.clientId,
           contractorId: formData.contractorId,
           type: formData.type,
