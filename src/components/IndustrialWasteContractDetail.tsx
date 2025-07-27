@@ -25,7 +25,7 @@ export default async function IndustrialWasteContractDetail({
           <h3 className="font-semibold">
             産業廃棄物処理委託（
             {contract.type === "transportation" && "収集運搬"}
-            {contract.type === "disposal" && "処分"}）
+            {contract.type === "treatment" && "処分"}）
           </h3>
           <EllipsisDropDownMenu menuItems={menuItems} />
         </div>
