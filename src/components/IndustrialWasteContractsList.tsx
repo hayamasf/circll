@@ -32,7 +32,7 @@ export default async function IndustrialWasteContractsList() {
                   <div className="flex flex-col items-end">
                     <p className="text-sm leading-6 text-gray-900">
                       {contract.type === "transportation" && "収集運搬"}
-                      {contract.type === "disposal" && "処分"}
+                      {contract.type === "treatment" && "処分"}
                     </p>
                   </div>
                 </div>
