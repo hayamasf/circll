@@ -9,8 +9,10 @@ import { formatEntityName } from "@/utils/formatEntityName";
 import { Contractor } from "@prisma/client";
 import DatePickerComponent from "./DatePickerComponent";
 import ToggleButton from "./ToggleButton";
+import { contractSchema, ContractFormData } from "@/schemas/contractSchema";
 
 import { createContract } from "@/actions/contract";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function ClientContractReistrationForm({
   clientId,
@@ -20,21 +22,22 @@ export default function ClientContractReistrationForm({
 }: {
   clientId: number;
   contractors: Contractor[];
-  waste: string;
-  type: string;
+  waste: "msw" | "industrial-waste";
+  type: "transportation" | "treatment";
 }) {
   const methods = useForm<any>({
+    resolver: zodResolver(contractSchema),
     defaultValues: {
       clientId,
-      contractorId: null,
+      contractorId: undefined,
       isAutoRenew: true,
-      waste: waste,
-      type: type,
+      waste,
+      type,
     },
     mode: "onSubmit",
   });
 
-  const onSubmit = async (formData: any) => {
+  const onSubmit = async (formData: ContractFormData) => {
     console.log(formData);
     await createContract(formData);
   };
@@ -62,9 +65,7 @@ export default function ClientContractReistrationForm({
             <div className="mt-2">
               <input
                 type="hidden"
-                {...methods.register("contractorId", {
-                  required: "者者を選択してください.",
-                })}
+                {...methods.register("contractorId",)}
               />
               <input
                 id="contractorName"

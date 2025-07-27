@@ -7,8 +7,9 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { ContractSitesFormData } from "@/schemas/contractSitesSchema";
 import { number } from "zod";
+import { ContractFormData } from "@/schemas/contractSchema";
 
-export async function createContract(formData: WasteContractFormData) {
+export async function createContract(formData: ContractFormData) {
   let newContract;
 
   try {

@@ -146,7 +146,7 @@ model IndustrialWasteLicense {
 
 enum ContractType {
   transportation
-  disposal
+  treatment
 }
 
 model IndustrialWasteContract {

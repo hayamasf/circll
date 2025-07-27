@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { PlusIcon } from "@heroicons/react/20/solid";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 type MenuItemType = {
   id: number;
@@ -26,7 +25,7 @@ export default function DropdownNavigationMenu({
         <MenuButton className="flex p-1 items-center rounded-full cursor-pointer bg-gray-600 text-white hover:bg-gray-400 focus:outline-hidden focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-100">
           <span className="sr-only">Open options</span>
 
-          <PlusIcon aria-hidden="true" className="size-5" />
+          <PlusIcon aria-hidden="true" className="size-4" />
         </MenuButton>
       </div>
 
