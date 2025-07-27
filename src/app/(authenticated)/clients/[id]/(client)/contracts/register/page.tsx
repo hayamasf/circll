@@ -43,7 +43,17 @@ export default async function Page(
     }
   }
 
+  function isWasteType(value: string | undefined) {
+    return value === "msw" || value === "industrial-waste"
+  }
 
+  function isContractType(value: string | undefined) {
+    return value === "transportation" || value === "treatment"
+  }
+
+  if (!isWasteType(waste) || !isContractType(type)) {
+    return <div>パラメータが不正です.</div>
+  }
 
   if (!client) {
     return (
