@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import getClientById from "@/utils/getClientById";
 import DropdownNavigationMenu from "@/components/DropdownNavigationMenu";
+import ContractsByClient from "@/components/ContractsByClient";
 
 const menuSections = [
   // {
@@ -64,6 +65,9 @@ export default async function Page(props:
       <div className="flex justify-between px-3">
         <h3>契約一覧</h3>
         <DropdownNavigationMenu menuSections={menuSections} />
+      </div>
+      <div>
+        <ContractsByClient clientId={id} />
       </div>
     </div>
   );

@@ -40,7 +40,7 @@ model Contractor {
   sites               Site[]
   mswLicenses         MswLicense[]
   industrialWasteLicenses IndustrialWasteLicense[]
-  industrialWasteContracts IndustrialWasteContract[]
+  contracts           Contract[]
   jwnetInformation    JwnetInformation[]
 }
 
@@ -63,7 +63,7 @@ model Client {
   address             String
   address2            String?
   sites               Site[]
-  industrialWasteContracts IndustrialWasteContract[]
+  ontracts            Contract[]
   jwnetInformation    JwnetInformation[]
 }
 
@@ -84,18 +84,20 @@ model Site {
   town              String
   address           String
   address2          String?
-  industrialWasteContracts  IndustrialWasteContract[]
-  jwnetInformation    JwnetInformation[]
+  contracts          Contract[]
+  jwnetInformation   JwnetInformation[]
 }
 
 model Prefecture {
   id         Int    @id
+  code       String @unique
   name       String
   municipalities  Municipality[]
 }
 
 model Municipality {
-  id              Int     @id
+  id              Int     @id @default(autoincrement())
+  code            String  @unique
   prefectureId    Int
   prefecture Prefecture @relation(fields: [prefectureId], references: [id], onDelete: Cascade)
   name            String
@@ -121,6 +123,7 @@ model MswLicense {
 
 model IndustrialWasteCategory {
   id            Int @id
+  code          String @unique
   name          String
   industrialWasteLicenses IndustrialWasteLicense[]
 }
@@ -144,12 +147,17 @@ model IndustrialWasteLicense {
   @@unique([issuingAuthority, typeCode, authorityCode, contractorCode])
 }
 
+enum ContractItem {
+  msw
+  industrialWaste
+}
+
 enum ContractType {
   transportation
   treatment
 }
 
-model IndustrialWasteContract {
+model Contract {
   id                Int @id @default(autoincrement())
   createdAt         DateTime @default(now())
   createdBy         String
@@ -157,7 +165,8 @@ model IndustrialWasteContract {
   client            Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
   contractorId      Int
   contractor        Contractor @relation(fields: [contractorId], references: [id], onDelete: Cascade)
-  type              ContractType
+  contractItem      ContractItem
+  contractType      ContractType
   endDate           DateTime @db.Date
   isAutoRenew       Boolean
   sites             Site[]
