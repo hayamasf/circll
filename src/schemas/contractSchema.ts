@@ -8,10 +8,10 @@ export const contractSchema = z.object({
     .nullable()
     .refine((val) => val !== null, { message: "業者を選択してください。" }),
   isAutoRenew: z.boolean(),
-  waste: z.enum(["msw", "industrial-waste"],{
+  contractItem: z.enum(["msw", "industrialWaste"],{
     required_error: "廃棄物の種類が必要です."
   }),
-  type: z.enum(["transportation", "treatment"],{
+  contractType: z.enum(["transportation", "treatment"],{
     required_error: "契約の種類が必要です."
   }),
   endDate: z.union([z.string(), z.date()])

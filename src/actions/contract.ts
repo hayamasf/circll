@@ -24,13 +24,14 @@ export async function createContract(formData: ContractFormData) {
       throw new Error("認証されていません.")
     }
 
-    if (formData.waste === "industrial-waste") {
-      newContract = await prisma.industrialWasteContract.create({
+    if (formData.contractItem === "industrialWaste") {
+      newContract = await prisma.contract.create({
         data: {
           createdBy: user.id,
           clientId: formData.clientId,
           contractorId: formData.contractorId,
-          type: formData.type,
+          contractItem: formData.contractItem,
+          contractType: formData.contractType,
           endDate: formData.endDate,
           isAutoRenew: formData.isAutoRenew,
         },
@@ -56,7 +57,7 @@ export async function updateIndustrialWasteContractSites(
 
     console.log(contractId, siteIds);
 
-    await prisma.industrialWasteContract.update({
+    await prisma.contract.update({
       where: { id: contractId },
       data: {
         sites: {
