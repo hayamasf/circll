@@ -116,7 +116,7 @@ model MswLicense {
   municipality      Municipality @relation(fields: [municipalityId], references: [id])
   type              Int
   expirationDate    DateTime  @db.Date
-  licenseUrl        String
+  licenseUrl        String?
 
   @@unique([contractorId, municipalityId, type])
 }
@@ -141,7 +141,7 @@ model IndustrialWasteLicense {
   authorityCode     Int
   contractorCode    Int
   expirationDate    DateTime  @db.Date
-  licenseUrl        String
+  licenseUrl        String?
   licensedCategories  IndustrialWasteCategory[]
 
   @@unique([issuingAuthority, typeCode, authorityCode, contractorCode])

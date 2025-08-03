@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 export default async function getContractById(type: string, id: number) {
   try {
     if (type === "industrial-waste") {
-      const contract = await prisma.industrialWasteContract.findUnique({
+      const contract = await prisma.contract.findUnique({
         where: { id },
         include: {
           client: {
