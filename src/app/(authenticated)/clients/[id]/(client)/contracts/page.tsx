@@ -44,11 +44,10 @@ const menuSections = [
   // },
 ];
 
-export default async function Page(props:
-  {
-    params: Promise<{ id: string }>,
-    searchParams: Promise<{ [key: string]: string }>
-  }) {
+export default async function Page(props: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string }>;
+}) {
   const params = await props.params;
 
   const id = Number(params.id);

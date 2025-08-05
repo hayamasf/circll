@@ -11,17 +11,16 @@ export async function createContract(formData: ContractFormData) {
   let newContract;
 
   try {
-
     const supabase = await createClient();
 
     const {
-      data: {user},
+      data: { user },
       error: authError,
     } = await supabase.auth.getUser();
 
     if (authError || !user) {
-      console.error("ユーザーが認証されていません.")
-      throw new Error("認証されていません.")
+      console.error("ユーザーが認証されていません.");
+      throw new Error("認証されていません.");
     }
 
     if (formData.contractItem === "industrialWaste") {

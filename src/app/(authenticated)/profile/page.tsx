@@ -38,7 +38,7 @@ export default async function Page() {
             </div>
           </div>
         </div>
-        <UserProfileForm displayName={currentUser.displayName} />
+        <UserProfileForm displayName={currentUser?.displayName} />
       </div>
     </div>
   );

@@ -46,30 +46,32 @@ async function main() {
   // const municipalities: Municipality[] = JSON.parse(municipalitiesData);
 
   await Promise.all(
-    prefectures.map((prefecture)=>
-    prisma.prefecture.upsert({
-      where: {id: prefecture.id},
-      update: {},
-      create: {
-        id: prefecture.id,
-        code: prefecture.code,
-        name: prefecture.name,
-      }
-    }))
-  )
+    prefectures.map((prefecture) =>
+      prisma.prefecture.upsert({
+        where: { id: prefecture.id },
+        update: {},
+        create: {
+          id: prefecture.id,
+          code: prefecture.code,
+          name: prefecture.name,
+        },
+      }),
+    ),
+  );
 
   await Promise.all(
-    categories.map((category)=> 
-    prisma.industrialWasteCategory.upsert({
-      where: {id: category.id},
-      update: {},
-      create: {
-        id: category.id,
-        code: category.code,
-        name: category.name,
-      }
-    }))
-  )
+    categories.map((category) =>
+      prisma.industrialWasteCategory.upsert({
+        where: { id: category.id },
+        update: {},
+        create: {
+          id: category.id,
+          code: category.code,
+          name: category.name,
+        },
+      }),
+    ),
+  );
 
   // for (const prefecture of prefectures) {
   //   await prisma.prefecture.upsert({
@@ -97,7 +99,9 @@ async function main() {
 }
 
 main()
-  .then(() => {prisma.$disconnect()})
+  .then(() => {
+    prisma.$disconnect();
+  })
   .catch(async (e) => {
     console.error(e);
     await prisma.$disconnect();

@@ -9,8 +9,8 @@ export async function getCurrentUser() {
   } = await supabase.auth.getUser();
 
   if (userError || !user) {
-    console.warn("auth.user取得に失敗", userError)
-    return null
+    console.warn("auth.user取得に失敗", userError);
+    return null;
   }
 
   const { data: userProfile, error: profileError } = await supabase
@@ -20,8 +20,8 @@ export async function getCurrentUser() {
     .single();
 
   if (profileError || !userProfile) {
-    console.warn("Userテーブルから取得失敗", profileError)
-    return null
+    console.warn("Userテーブルから取得失敗", profileError);
+    return null;
   }
   return {
     ...userProfile,

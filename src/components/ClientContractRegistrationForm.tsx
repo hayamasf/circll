@@ -63,10 +63,7 @@ export default function ClientContractReistrationForm({
               業者
             </label>
             <div className="mt-2">
-              <input
-                type="hidden"
-                {...methods.register("contractorId",)}
-              />
+              <input type="hidden" {...methods.register("contractorId")} />
               <input
                 id="contractorName"
                 type="text"

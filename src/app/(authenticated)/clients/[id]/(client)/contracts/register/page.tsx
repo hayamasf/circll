@@ -4,15 +4,12 @@ import getClientById from "@/utils/getClientById";
 import ClientContractReistrationForm from "@/components/ClientContractRegistrationForm";
 import getContractors from "@/utils/getContractors";
 
-export default async function Page(
-  props:
-    {
-      params: Promise<{ id: string }>,
-      searchParams: Promise<{ [key: string]: string }>
-    }) {
-
+export default async function Page(props: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string }>;
+}) {
   const params = await props.params;
-  const searchParams = await props.searchParams
+  const searchParams = await props.searchParams;
 
   const id = Number(params.id);
   const client = await getClientById(id);
@@ -24,35 +21,35 @@ export default async function Page(
   const titleWaste = () => {
     switch (waste) {
       case "msw":
-        return "一廃"
+        return "一廃";
       case "industrial-waste":
-        return "産廃"
+        return "産廃";
       default:
-        return ""
+        return "";
     }
-  }
+  };
 
   const titleType = () => {
     switch (type) {
       case "transportation":
-        return "収運"
+        return "収運";
       case "treatment":
-        return "処分"
+        return "処分";
       default:
-        return ""
+        return "";
     }
-  }
+  };
 
   function isWasteType(value: string | undefined) {
-    return value === "msw" || value === "industrial-waste"
+    return value === "msw" || value === "industrial-waste";
   }
 
   function isContractType(value: string | undefined) {
-    return value === "transportation" || value === "treatment"
+    return value === "transportation" || value === "treatment";
   }
 
   if (!isWasteType(waste) || !isContractType(type)) {
-    return <div>パラメータが不正です.</div>
+    return <div>パラメータが不正です.</div>;
   }
 
   if (!client) {
