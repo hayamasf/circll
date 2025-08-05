@@ -7,6 +7,7 @@ import { PaperClipIcon } from "@heroicons/react/24/outline";
 import IndustrialWasteCategoryList from "./IndustrialWasteCategoryList";
 import EllipsisDropDownMenu from "./EllipsisDropDownMenu";
 import Card from "./Card";
+import { formatEntityName } from "@/utils/formatEntityName";
 import Breadcrumbs from "./Breadcrumbs";
 
 export default async function IndustrialWasteLicenseDetail({
@@ -16,12 +17,12 @@ export default async function IndustrialWasteLicenseDetail({
 }) {
   const license = await getIndustrialWasteLicenseById(id);
   const menuItems = [{ id: 1, text: "更新する", href: "./" + id + "/edit" }];
-  const contractoName = `${license?.contractor?.isPrefixEntityType ? license?.contractor.entityType : ""}${license?.contractor?.name}${license?.contractor?.entityType && !license.contractor.isPrefixEntityType ? license.contractor.entityType : ""}`;
+  const contractorName = `${license?.contractor?.isPrefixEntityType ? license?.contractor.entityType : ""}${license?.contractor?.name}${license?.contractor?.entityType && !license.contractor.isPrefixEntityType ? license.contractor.entityType : ""}`;
 
   const pages = [
     { name: "業者", href: "/contractors", current: false },
     {
-      name: contractoName || "",
+      name: contractorName || "",
       href: `/contractors/${license?.contractor.id}`,
       current: false,
     },
@@ -63,15 +64,18 @@ export default async function IndustrialWasteLicenseDetail({
               {formatDate(license.expirationDate)}
               <span className="font-normal"> まで</span>
             </p>
-            <a
-              href={license.licenseUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-x-2 group"
-            >
-              <PaperClipIcon className="h-5 w-5 group-hover:rounded-md group-hover:border group-hover:border-gray-500" />
-              <p className="text-sm group-hover:underline">許可証の写し</p>
-            </a>
+            {license.licenseUrl &&
+              <a
+                href={license.licenseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-x-2 group"
+              >
+                <PaperClipIcon className="h-5 w-5 group-hover:rounded-md group-hover:border group-hover:border-gray-500" />
+                <p className="text-sm group-hover:underline">許可証の写し</p>
+              </a>
+            }
+
           </div>
           <div className="my-5">
             <IndustrialWasteCategoryList
