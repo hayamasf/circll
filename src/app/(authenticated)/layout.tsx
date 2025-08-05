@@ -10,7 +10,7 @@ export default async function AuthenticatedLayout({
 
   try {
     const currentUser = await getCurrentUser();
-    displayName = currentUser.displayName;
+    displayName = currentUser?.displayName ?? "ゲスト";
   } catch (error) {
     console.error("ユーザー取得に失敗しました.", error);
   }

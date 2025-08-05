@@ -8,12 +8,9 @@ export async function getCurrentUser() {
     error: userError,
   } = await supabase.auth.getUser();
 
-  if (userError) {
-    throw new Error("ユーザー情報の取得に失敗しました.");
-  }
-
-  if (!user) {
-    throw new Error("該当するユーザーがいません.");
+  if (userError || !user) {
+    console.warn("auth.user取得に失敗", userError)
+    return null
   }
 
   const { data: userProfile, error: profileError } = await supabase
@@ -22,8 +19,9 @@ export async function getCurrentUser() {
     .eq("id", user.id)
     .single();
 
-  if (profileError) {
-    throw new Error("プロフィール情報の取得に失敗しました.");
+  if (profileError || !userProfile) {
+    console.warn("Userテーブルから取得失敗", profileError)
+    return null
   }
   return {
     ...userProfile,

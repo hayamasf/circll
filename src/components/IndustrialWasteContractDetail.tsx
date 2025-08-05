@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./Card";
-import { Client, Contractor, IndustrialWasteContract } from "@prisma/client";
+import { Client, Contractor, Contract } from "@prisma/client";
 import EllipsisDropDownMenu from "./EllipsisDropDownMenu";
 import { formatEntityName } from "@/utils/formatEntityName";
 import { formatDate } from "@/utils/dateUtils";
@@ -9,7 +9,7 @@ import { ArrowPathIcon } from "@heroicons/react/24/outline";
 export default async function IndustrialWasteContractDetail({
   contract,
 }: {
-  contract: IndustrialWasteContract & {
+  contract: Contract & {
     client: Client;
     contractor: Contractor;
   };
@@ -24,8 +24,8 @@ export default async function IndustrialWasteContractDetail({
         <div className="mb-7 flex items-center justify-between">
           <h3 className="font-semibold">
             産業廃棄物処理委託（
-            {contract.type === "transportation" && "収集運搬"}
-            {contract.type === "treatment" && "処分"}）
+            {contract.contractType === "transportation" && "収集運搬"}
+            {contract.contractType === "treatment" && "処分"}）
           </h3>
           <EllipsisDropDownMenu menuItems={menuItems} />
         </div>
