@@ -80,14 +80,16 @@ export default async function MswLicensesList({
                       : formatDate(license.expirationDate) + "まで"}
                   </p>
                 </div>
-                <a
-                  href={license.licenseUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative inline-block group ml-5"
-                >
-                  <PaperClipIcon className="h-5 w-5 group-hover:border group-hover:border-gray-500 group-hover:rounded-md" />
-                </a>
+                {license.licenseUrl ? (
+                  <a
+                    href={license.licenseUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative inline-block group ml-5"
+                  >
+                    <PaperClipIcon className="h-5 w-5 group-hover:border group-hover:border-gray-500 group-hover:rounded-md" />
+                  </a>
+                ) : null}
                 <EllipsisDropDownMenu menuItems={menuItems} />
               </div>
             </li>
