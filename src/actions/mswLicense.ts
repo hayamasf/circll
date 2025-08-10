@@ -2,26 +2,31 @@
 
 // import { getSession } from "@auth0/nextjs-auth0";
 import { prisma } from "@/lib/prisma";
-import { MswLicense } from "@/types/types";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import type { MswLicense } from "@prisma/client";
+import { MswLicenseFormData } from "@/schemas/mswLicenseSchema";
+import { createClient } from "@/utils/supabase/server";
 
-export async function createLicense(formData: MswLicense) {
+export async function createMswLicense(formData: MswLicenseFormData) {
   let newLicenseId: number | undefined;
 
   try {
-    // const session = await getSession();
-    // const userId = session?.user.sub;
+    const supabase = await createClient();
 
-    // if (!userId) {
-    //   throw new Error("ユーザーIDを確認してください.");
-    // }
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
 
-    console.log(formData);
+    if (authError || !user) {
+      console.error("ユーザーが認証されていません.");
+      throw new Error("認証されていません.");
+    }
 
     const newLicense = await prisma.mswLicense.create({
       data: {
-        createdBy: "",
+        createdBy: user.id,
         contractorId: Number(formData.contractorId),
         municipalityId: Number(formData.municipalityId),
         type: Number(formData.type),
@@ -42,27 +47,48 @@ export async function createLicense(formData: MswLicense) {
   }
 }
 
-export async function updateLicense(formData: Partial<MswLicense>) {
-  try {
-    const { id, contractorId, municipality, ...dataToUpdate } = formData;
-    if (!id) {
-      throw new Error("許可証のidがありません.");
-    }
-    // const session = await getSession();
-    // const userId = session?.user.sub;
+export type MswLicenseUpdateInput = Partial<
+  Pick<MswLicense, "expirationDate" | "licenseUrl">
+> &
+  Pick<MswLicense, "id" | "contractorId">;
 
-    await prisma.mswLicense.update({
-      where: { id },
-      data: {
-        ...dataToUpdate,
-        updatedBy: "",
-      },
-    });
+export async function updateLicense(input: MswLicenseUpdateInput) {
+  const { id, contractorId, ...rest } = input;
 
-    revalidatePath(`/contractors/${contractorId}`);
-  } catch (error) {
-    console.error(error);
-  } finally {
-    redirect(`/contractors/${formData.contractorId}`);
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    console.error("ユーザーが認証されていません.");
+    throw new Error("認証されていません.");
   }
+
+  if (!id) {
+    throw new Error("許可証のidがありません.");
+  }
+
+  const dataToUpdate: { expirationDate?: Date; licenseUrl?: string | null } =
+    {};
+
+  if (rest.expirationDate instanceof Date) {
+    dataToUpdate.expirationDate = rest.expirationDate;
+  }
+
+  if (typeof rest.licenseUrl === "string") {
+    dataToUpdate.licenseUrl = rest.licenseUrl;
+  }
+
+  await prisma.mswLicense.update({
+    where: { id },
+    data: {
+      ...dataToUpdate,
+      updatedBy: user.id,
+    },
+  });
+  revalidatePath(`/contractors/${contractorId}`);
+  redirect(`/contractors/${contractorId}`);
 }

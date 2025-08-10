@@ -64,7 +64,7 @@ export default async function IndustrialWasteLicenseDetail({
               {formatDate(license.expirationDate)}
               <span className="font-normal"> まで</span>
             </p>
-            {license.licenseUrl &&
+            {license.licenseUrl && (
               <a
                 href={license.licenseUrl}
                 target="_blank"
@@ -74,8 +74,7 @@ export default async function IndustrialWasteLicenseDetail({
                 <PaperClipIcon className="h-5 w-5 group-hover:rounded-md group-hover:border group-hover:border-gray-500" />
                 <p className="text-sm group-hover:underline">許可証の写し</p>
               </a>
-            }
-
+            )}
           </div>
           <div className="my-5">
             <IndustrialWasteCategoryList

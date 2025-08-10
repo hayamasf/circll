@@ -10,8 +10,13 @@ import SubmitButton from "./SubmitButton";
 import CancelButton from "./CancelButton";
 import getTodayDate from "@/utils/getTodayDate";
 import TextInput from "./TextInput";
-import { createLicense } from "@/actions/mswLicense";
+import { createMswLicense } from "@/actions/mswLicense";
 import DatePickerComponent from "./DatePickerComponent";
+import {
+  mswLicenseSchema,
+  MswLicenseFormData,
+} from "@/schemas/mswLicenseSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const options = [
   { id: "1", title: "収集運搬" },
@@ -19,11 +24,12 @@ const options = [
 ];
 
 export default function MswLicenseRegistrationForm({ id }: { id: number }) {
-  const methods = useForm({
+  const methods = useForm<MswLicenseFormData>({
+    resolver: zodResolver(mswLicenseSchema),
     defaultValues: {
       contractorId: id,
-      prefectureId: "",
-      municipalityId: "",
+      prefectureId: null,
+      municipalityId: null,
       type: "1",
       expirationDate: "",
       licenseUrl: "",
@@ -32,9 +38,9 @@ export default function MswLicenseRegistrationForm({ id }: { id: number }) {
 
   const today = new Date();
 
-  const onSubmit = async (formData: any) => {
+  const onSubmit = async (formData: MswLicenseFormData) => {
     console.log(formData);
-    const result = await createLicense(formData);
+    const result = await createMswLicense(formData);
   };
 
   return (
@@ -69,8 +75,8 @@ export default function MswLicenseRegistrationForm({ id }: { id: number }) {
                 name={"licenseUrl"}
                 type="url"
                 placeholder={"https://www.example.com/license/copy.pdf"}
-                validation={{ required: "許可証のURLを入力してください." }}
-                required={true}
+                // validation={{ required: "許可証のURLを入力してください." }}
+                // required={true}
               />
             </div>
           </div>

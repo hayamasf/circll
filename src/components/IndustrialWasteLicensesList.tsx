@@ -74,8 +74,7 @@ export default async function IndustrialWasteLicensesList({
                     )}
                   </p>
                 </div>
-                {
-                  license.licenseUrl &&
+                {license.licenseUrl && (
                   <a
                     href={license.licenseUrl}
                     target="_blank"
@@ -84,7 +83,7 @@ export default async function IndustrialWasteLicensesList({
                   >
                     <PaperClipIcon className="h-5 w-5 group-hover:border group-hover:border-gray-500 group-hover:rounded-md" />
                   </a>
-                }
+                )}
               </div>
             </li>
           );

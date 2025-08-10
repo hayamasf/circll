@@ -19,32 +19,68 @@ export default function MswLicenseEditForm({
     defaultValues: {
       contractorId: license.contractorId,
       expirationDate: license.expirationDate,
-      licenseUrl: license.licenseUrl,
+      licenseUrl: license.licenseUrl ?? "",
     },
   });
   const today = new Date();
 
+  type updatable = Pick<MswLicense, "expirationDate" | "licenseUrl">;
+  type UpdateInput = Partial<updatable> &
+    Pick<MswLicense, "id" | "contractorId">;
+
   const onSubmit = async () => {
     const { dirtyFields } = methods.formState;
-    const formData = methods.getValues() as Partial<MswLicense>;
 
-    const updatedData = Object.keys(dirtyFields).reduce(
-      (acc, key) => {
-        const typedKey = key as keyof MswLicense;
-        const value = formData[typedKey];
-        if (value !== null && value !== undefined) {
-          acc[typedKey] = value;
-        }
-        return acc;
-      },
-      { id: license.id, contractorId: license.contractorId } as Record<
-        keyof MswLicense,
-        MswLicense[keyof MswLicense]
-      >,
-    );
+    const raw = methods.getValues() as {
+      expirationDate?: Date | string | null;
+      licenseUrl?: string | null;
+    };
 
-    console.log(updatedData);
-    await updateLicense(updatedData as Partial<MswLicense>);
+    const updated: Partial<updatable> = {};
+
+    if (dirtyFields.expirationDate) {
+      const v = raw.expirationDate;
+      if (v instanceof Date) updated.expirationDate = v;
+      else if (typeof v === "string" && v !== "") {
+        updated.expirationDate = new Date(v);
+      }
+    }
+
+    if (dirtyFields.licenseUrl) {
+      const v = raw.licenseUrl;
+      if (typeof v === "string" && v.trim() !== "") {
+        updated.licenseUrl = v.trim();
+      }
+    }
+
+    const payload: UpdateInput = {
+      id: license.id,
+      contractorId: license.contractorId,
+      ...updated,
+    };
+
+    // const formData = methods.getValues() as Partial<MswLicense>;
+
+    // const updatedData = Object.keys(dirtyFields).reduce(
+    //   (acc, key) => {
+    //     const typedKey = key as keyof MswLicense;
+    //     let value = formData[typedKey];
+
+    //     if (value !== undefined && value !== null) {
+    //       acc[typedKey] = value;
+    //     } else if (typedKey === "licenseUrl" && value === null) {
+    //       acc[typedKey] = undefined as any
+    //     }
+    //     return acc;
+    //   },
+    //   { id: license.id, contractorId: license.contractorId } as Record<
+    //     keyof MswLicense,
+    //     MswLicense[keyof MswLicense]
+    //   >,
+    // );
+
+    console.log(payload);
+    await updateLicense(payload);
   };
 
   return (
