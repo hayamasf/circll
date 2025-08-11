@@ -6,11 +6,9 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import convertToBoolean from "@/utils/convertToBoolean";
 import { Client } from "@prisma/client";
+import { createClient as createSubapaseClient } from "@/utils/supabase/server";
 
-import {
-  LegalEntitySchema,
-  LegalEntityFormData,
-} from "@/schemas/legalEntitySchema";
+import { LegalEntityFormData } from "@/schemas/legalEntitySchema";
 
 export async function createClient(formData: LegalEntityFormData) {
   let isPrefixEntityType;
@@ -29,16 +27,21 @@ export async function createClient(formData: LegalEntityFormData) {
   let newClientId: number | undefined;
 
   try {
-    // const session = await getSession();
-    // const userId = session?.user.sub;
+    const supabase = await createSubapaseClient();
 
-    // if (!userId) {
-    //   throw new Error("ユーザーIDを確認してください.");
-    // }
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      console.error("ユーザーが認証されていません.");
+      throw new Error("認証されていません.");
+    }
 
     const newClient = await prisma.client.create({
       data: {
-        createdBy: "",
+        createdBy: user.id,
         ...(formData.entityType && { entityType: formData.entityType }),
         ...(formData.isPrefixEntityType && {
           isPrefixEntityType: isPrefixEntityType,
@@ -77,8 +80,19 @@ export async function createClient(formData: LegalEntityFormData) {
 export async function updateClient(formData: Partial<Client>) {
   try {
     const id = formData.id;
-    // const session = await getSession();
-    // const userId = session?.user.sub;
+
+    const supabase = await createSubapaseClient();
+
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      console.error("ユーザーが認証されていません.");
+      throw new Error("認証されていません.");
+    }
+
 
     if (typeof formData.isPrefixEntityType === "string") {
       formData.isPrefixEntityType = convertToBoolean(
@@ -90,7 +104,7 @@ export async function updateClient(formData: Partial<Client>) {
       where: { id: id },
       data: {
         ...formData,
-        updatedBy: "",
+        updatedBy: user.id,
       },
     });
 
