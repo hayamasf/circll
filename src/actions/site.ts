@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-// import { getSession } from "@auth0/nextjs-auth0";
+import { createClient } from "@/utils/supabase/server";
 import { Site } from "@/types/types";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
@@ -10,18 +10,21 @@ export async function createSite(data: Site) {
   let newSiteId: number | undefined;
 
   try {
-    // const session = await getSession();
-    // const userId = session?.user.sub;
+    const supabase = await createClient();
 
-    // if (!userId) {
-    //   throw new Error("ユーザーIDを確認してください.");
-    // }
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
 
-    console.log(data);
+    if (authError || !user) {
+      console.error("ユーザーが認証されていません.");
+      throw new Error("認証されていません.");
+    }
 
     const newSite = await prisma.site.create({
       data: {
-        createdBy: "",
+        createdBy: user.id,
         clientId: data.clientId,
         name: data.name,
         postalCode: data.postalCode,
@@ -47,14 +50,24 @@ export async function createSite(data: Site) {
 export async function updateSite(data: Partial<Site>) {
   try {
     const id = data.id;
-    // const session = await getSession();
-    // const userId = session?.user.sub;
+
+    const supabase = await createClient();
+
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      console.error("ユーザーが認証されていません.");
+      throw new Error("認証されていません.");
+    }
 
     await prisma.site.update({
       where: { id },
       data: {
         ...data,
-        updatedBy: "",
+        updatedBy: user.id,
       },
     });
 

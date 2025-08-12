@@ -11,9 +11,9 @@ export default async function ContractsByClient({
   const contracts = await getContractsByClientId(clientId);
 
   return (
-    <div>
+    <div className="py-8">
       {contracts.length === 0 ? (
-        <p>契約が登録されていません.</p>
+        <p className="flex justify-center">契約が登録されていません.</p>
       ) : (
         <ul role="list" className="mt-6 divide-y divide-gray-100">
           {contracts.map((contract) => (

@@ -93,7 +93,6 @@ export async function updateClient(formData: Partial<Client>) {
       throw new Error("認証されていません.");
     }
 
-
     if (typeof formData.isPrefixEntityType === "string") {
       formData.isPrefixEntityType = convertToBoolean(
         formData.isPrefixEntityType,
@@ -107,9 +106,6 @@ export async function updateClient(formData: Partial<Client>) {
         updatedBy: user.id,
       },
     });
-
-    // to be removed
-    console.log(formData);
 
     return { success: true, message: "更新が成功しました." };
   } catch (error) {

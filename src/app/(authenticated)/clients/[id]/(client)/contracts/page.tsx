@@ -60,7 +60,7 @@ export default async function Page(props: {
   }
 
   return (
-    <div>
+    <div className="">
       <div className="flex justify-between px-3">
         <h3>契約一覧</h3>
         <DropdownNavigationMenu menuSections={menuSections} />
